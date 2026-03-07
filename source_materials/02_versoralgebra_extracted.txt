@@ -1,0 +1,4566 @@
+# EXTRACTED TEXT FROM: 02_versoralgebra.pdf
+# Extraction Date: 2025-06-02 13:40:43
+# Total Pages: 151
+# Total Characters: 97,014
+
+================================================================================
+
+
+
+--- PAGE 1 ---
+
+ 
+ 
+ 
+  
+
+
+--- PAGE 2 ---
+
+2 
+ericpdollard.com                 emediap ress.com   
+ 
+ 
+ 
+Versor Algebra  
+As Applied To Polyphase Power Systems 
+ 
+ 
+ 
+ 
+Written by  
+ 
+Eric P. Dollard  
+  
+ 
+ 
+ 
+ 
+ 
+Published by  
+A&P Electronic Media  
+Spokane, Washington 
+ 
+
+--- PAGE 3 ---
+
+3 
+ericpdollard.com                 emediap ress.com  Cover Layout:    Aaron Murakami  
+       A&P Electronic Media  
+       Spokane, Washington  
+ 
+ Front Cover Image:  Aaron Murakami  
+Interior Images by:  Eric Dollard and Jeff Moe  
+    Version 1.0   Released , March  22, 2015 
+     
+Copyright 2015 -  Eric P. Dollard  
+Publisher’s Copyright 2015 – A&P Electronic Media  
+ 
+All Rights Reserved, Worldwide.  No part of this publication may be translated into a foreign language or reproduced, stored in an electronic retrieval system, or transmitted in any form, or by any means, without the prior, wri tten permission of the copyright 
+holders or the publisher.  Unauthorized copying or translating of this digital file is prohibited by International Law.  
+  Digital Edition Published by:   A&P Electronic Media  
+         PO Box 10029  
+         Spokane, WA 99209  
+         
+http://www.emediapress.com/  
+  
+First Edition:  
+First Printing: March  22, 2015 
+Digital Format: PDF File  
+50,000 authorized Downloads  
+ 
+ 
+
+--- PAGE 4 ---
+
+4 
+ericpdollard.com                 emediap ress.com  Newsletter  
+ 
+ 
+  
+Before doing anything else, make sure to sign up for the free E nergy 
+Times newsletter at 
+http://www.emediapress.com/energytimes.php .  It 
+looks like this:  
+ 
+ 
+ 
+ 
+  
+ 
+ 
+ 
+  
+
+
+--- PAGE 5 ---
+
+5 
+ericpdollard.com                 emediap ress.com   
+Foreword  
+ 
+ 
+The purpose of this volume is to establish the theoretical basis for an advanced system of imaginary numbers that are capable of representing 
+poly -phase, rotating electric waves with a terminology that is consistent 
+with the earlier four quadrant theory of alternating electric waves , and 
+consistent with the established symbols of elect rical engineering . 
+ Building on the foundations laid by Oliver Heaviside, Alexander 
+MacFarlane, Charles Steinmetz, Arthur Kennelly , Charles Forte scue and 
+others , the author extends the mathematical expression of imaginary 
+numbers into the realm of sequence  algebra . 
+ 
+The author's previous work titled The Four Quadrant Representation of 
+Electricity lays the foundation for the understanding of alternating and 
+rotating electric waves  in their real world condition as an energy 
+propagation that both rotates and progresses either forward or backward.  
+The current work builds on this initial model to create mathematical 
+expressions for the generalized poly-phase energy propagation of three  
+phases and above.  
+ 
+A & P Electronic Media  
+  
+ 
+ 
+ 
+  
+  
+
+--- PAGE 6 ---
+
+6 
+ericpdollard.com                 emediap ress.com  Table of Contents  
+ 
+ 
+Chapter One  - Principles of Imaginary Exponents and Logarithms  
+ 
+ (1)  Introduction                  Page 7  
+ 
+ (2)  Fundamentals of Exponents           Page 10 
+ 
+ (3)  The Log Base Epsilon             Page 13 
+ 
+ (4)  The Powers of Epsilon             Page 16 
+ 
+ (5)  Imaginary Exponents, ℎ           Page 18 
+ 
+ (6)  Hyperbolic Functions             Page 23 
+ 
+ (7)  Imaginary Exponents,  𝑗𝑗           Page 32 
+ 
+ (8)  Contrary Rotation & Sequences          Page 42 
+  (9)  Circular Functions              Page 67 
+  (10) Multipolar Exponential Functions         Page 71 
+ 
+ (11) Tripolar Exponential Functions          Page 82 
+  
+Chapter Two  - System of Symmetrical Components  
+ 
+ (1)  The "Fortescue Method"            Page 91 
+ 
+ (2)  The General Equations               Page 111   
+  
+
+--- PAGE 7 ---
+
+7 
+ericpdollard.com                 emediap ress.com   
+Chapter One  
+ 
+Principles of Imaginary Exponents and Logarithms  
+ 
+[1]  Introduction  
+ 
+(1)  In the previous writing, The Four Quadrant Representation of 
+Electricity , a considerable portion was devoted to Versor Algebra and the 
+distinction between the alternating and the rotating electric wave. The 
+primary objective was to establish an understanding of the Tesla polyphase 
+power system, or what some call his “Magnetic Vortex”. This was 
+presented in a qualitative manner, mostly pictorial. What follows is a 
+quantitative and rigorous treatment of this subject. It will reach to the outer 
+limits of mathematics, the realm of what are called Imaginary Numbers. 
+Cartesian coordinates will be lost sight of. This will finalize into 
+engineering application, through what is known as the Method of 
+Symmetrical Components. Unlike other works on this subject, here a solid 
+theoretical base will be established for this method of polyphase analysis.  
+ 
+Nikola Tesla himself never provided a theoretical basis for his work, this 
+was left for others. Most notable in establishing a theoretical basis for 
+alternating current was Charles  Proteus Steinmetz. In his writings a solid 
+alternating current theory was established, this founded upon Pythagoras 
+and Descartes. However, the work of Steinmetz was directed into 
+alternating electric waves with little attention given to rotating electric 
+waves. Steinmetz did not take the next step into a polyphase the ory, in part 
+because the theory of rotating electric waves exits outside the realm of the Cartesian coordinate system, which has served as the arch form of his A.C. writings. An entirely new form of mathematics is required in order to 
+establish a functiona l polyphase theory.  
+ 
+  
+
+--- PAGE 8 ---
+
+8 
+ericpdollard.com                 emediap ress.com   
+ 
+(2)  A complication exists with regard to Steinmetz in his indistinction 
+between a vector and a versor. Oliver Heaviside had warned of this distinction, but he did not write a parable on the matter. Mathematics took 
+a distinctly ve ctoral turn, with Heaviside as its champion. Steinmetz 
+carried on from here. The only interest in versor algebra was that of 
+Alexander MacFarlane. In the minds of the vectoralists, versors were seen 
+as an outgrowth of quaternion s, a failed system of mathem atics.  
+ 
+Another complication in developing a working polyphase theory is the versor positions cannot be given in Cartesian coordinates, such as x and y, 
+latitude and longitude, etc. Most polyphase systems are also not 
+rectangular, they are triangular or he xagonal. A three phase system is 
+triangular and requires nine coordinates for a mathematical description. The number of coordinates increases as the square of the number of phases. Common mathematics falls short in providing a usable expression for 
+represe nting polyphase electric waves. This deficiency is inherent in the 
+very foundations of mathematics and mathematicians have become content with it, however, electrical engineers cannot. This evokes the philosophy of 
+Oliver Heaviside; mathematics is an exper imental science. It is modeled 
+upon physical observation, not petrified mathematical theory.  
+ The complications present themselves in an inability to solve equations that 
+are higher than the second degree. Higher orders cannot be resolved into 
+plus or minu s. Mathematics, and the human mind engendering it, are 
+intrinsically bipolar. This condition finds a symbolic expression in the 
+proposition put before Eve in the Garden of Eden. This is Good vs. Evil, 
+Positive vs. Negative, Ones vs. Zeros, Us vs. Them, it is a bottomless pit. In 
+accord, the common notions o f electricity are also bipolar.  
+ 
+  
+
+--- PAGE 9 ---
+
+9 
+ericpdollard.com                 emediap ress.com   
+ 
+(3)  The mathematics that has become the basis for electric wave theory is 
+founded in part on the ideas of Newton in England and L eibn itz in 
+Germany. Their ideas dealt with rates of change and accumulation, 
+becoming known as differential and integral calculus respectively. These ideas did not get off to a good start, however. Isaac Newton was a severe 
+paranoid, obviating any cooperative interaction. He would often conceal or 
+deliberately confuse his work. Those he knew constantly pressed him to 
+publish his important ideas, only to be met with rebuke for their efforts. 
+Newton would obsessively attack anyone who worked on ideas that paralleled his own, and even attack those who had inspired the notions he 
+held. Notable to be attacked was Leibnitz in Germany. This in turn evoked 
+nationalistic positions which further impaired the mathematical developments.  
+ 
+It can verily be stated that, in pa rt, today’s mathematics is the deformed 
+child of a rabid paranoid. This in tandem with a Biblical curse upon mankind, the path to developing an extended mathematics for polyphase 
+theory will be a difficult one.  
+ 
+Important first steps in resolving this und esirable condition were taken by 
+Oliver Heaviside, a Prometheus of mathematics. His methodologies were 
+not received well in the Halls of Academia, but were eagerly taken up by 
+Charles  Steinmetz and Arthur Kennelly. Out of the minds of these 
+individuals gre w modern electrical engineering, but also with their 
+limitations. It is NOT  a finality. As Heaviside stated, “There is no finality, 
+not even with Maxwell”, but the illusion of finality is constantly put before 
+us. Ideas must continue to advance, extending known mathematics to 
+provide a deeper understanding of electric waves.  
+ 
+  
+
+--- PAGE 10 ---
+
+10 
+ericpdollard.com                 emediap ress.com  [2]  Fundamentals of Exponents  
+ 
+(1)  The work of Arthur Kennelly demonstrated that considerable 
+simplification in expressing electric waves mathematically was to be obtained by utili zing functions derived from the Nap ierian logarithmic 
+base epsilon. These are known as the Hyperbolic Functions. The log base 
+epsilon exhibits a unifying character when expressing rates of change. It is 
+important that these ideas be completely understood b efore pro gressing 
+into polyphase theory.  
+ 
+The condition that allows for a logarithmic expression of electric waves is found in that a rate of variation of an electric quantity is dependent at any 
+moment on the quantity of electricity at that moment. Magnitude 
+determines the rate at which it varies, the larger the magnitude, the greater 
+the ra te of change of that magnitude.  
+ 
+This can be given a common expression. Let us say that you have 1000 
+dollars in the bank at the beginning of the month, and there best be some 
+left at the end of the month. You begin to spend the money at a certain rate 
+in dollars per day, paying important bills. A week later you find that only 
+500 dollars is left in the bank. Accordingly, your rate of expenditure is reduced in reaction t o the diminished funds. The end of the next weeks 
+leaves 333 dollars in the bank, the funds still are going too fast. In reaction, the rate of expenditure is further reduced. The end of the third week leaves 
+250 dollars in the bank and the reaction is to e ven further reduce the rate of 
+expenditure. At the end of the month 200 is left in the bank.  
+ Your rate of expenditure decreased in proportion to the amount of money 
+in the bank, the weekly remainder establishing a geometric regression, one 
+half, one third, one fourth, leaving one fifth, or 20 percent of the initial 
+money at the start of the period. At that rate of expenditure, w hich varies 
+with the amount in the bank, leaves onl y 20 percent of the amount, 200  
+  
+
+--- PAGE 11 ---
+
+11 
+ericpdollard.com                 emediap ress.com   
+dollars , at the beginning of the second  month. The third month then begins 
+with 40 dollars. Only after an infinite number of months is nothing left in 
+the bank. This relation can be expr essed in a mathematical form by : 
+ 
+ 
+A=an A0                                                    (1)  
+ Where:  
+ 
+A0  is the beginning amount  
+ 
+A  is the amount at the moment  
+ 
+a  is the ratio of the end of month amount, to the beginning of the  
+  month amount, over a logarithmic period of one month  
+ 
+n  is the number of months  
+  
+Substituting the bank analog into this expression gives for the fir st month:  
+ 
+200 =0.21 x 1000                                            (2)  
+ 
+ 
+And for the second month:  
+ 
+40=0.22 x 1000                                            ( 3) 
+ 
+ 
+The fundamental fo rm of this relation is given by : 
+ 
+γ=𝛼𝛼𝑛𝑛                                                     (4) 
+  
+
+--- PAGE 12 ---
+
+12 
+ericpdollard.com                 emediap ress.com   
+Where the number of (monthly) periods, n, is called the logarithm of 
+gamma (
+ ) to base  alpha  (α). Base α  constitutes a geometric ratio, a pure 
+numeric.  
+ 
+Electricity and its rates of variation operate in accord with this kind of exponential function. For the bank analog the rates were incremental, 
+based upon human emotion, etc. For the natural decrement of electricity the function is continuous. The log bas e is a comparison, or ratio of 
+magnitudes, devoid of the dimensions of these magnitudes. The log base is a number in  the Pythagorean understanding.  
+ 
+ 
+  
+
+--- PAGE 13 ---
+
+13 
+ericpdollard.com                 emediap ress.com  [3]  The Log Base Epsilon  (Є) 
+ 
+Two important geometric ratios exist in the mathematics of electricity. One 
+ratio is Pi (π), the ratio of the circumference to the diameter of a circle. No 
+matter what the size (magnitude) of the circle the numerical value of Pi is 
+always the same, because it is a ratio. The other important geometric ratio is the Napierian Log  Base Epsilon. This ratio represents the “natural” 
+variation between the beginning and the end of one unit  logarithmic 
+period. The word na tural will require explanation.  
+ 
+As it was with Pi , Epsilon is the same numerical value, regardless of the 
+magnitude i n variation. Both ratios are irrational numbers, extending to an 
+infinite number of decimal places. They are “never -ending” numbers and 
+must be exp ressed in infinite series form.  
+ The geometric ratio Epsilon finds its origin in the Newton -Leibnitz 
+mathemat ics. It has the very unique property in that the rate of change in 
+the variation it describes, also is the rate at which that rate of variation, is in 
+variation, continuing through the rates of rates, etc.  When applied to the 
+processes of calculus, in differentiation or integration, the identity of the 
+ratio Epsilon remains unaltered.  
+ This geometric ratio Epsilon is expressed in algebraic form by the use of:  
+  
+𝛼𝛼=�1+1
+𝑛𝑛�𝑛𝑛
+                                                (5)  
+  For the condition that n goes to infinity, this becomes:  
+  
+Є=�1+1
+∞�∞
+                                                     (6) 
+ 
+
+--- PAGE 14 ---
+
+14 
+ericpdollard.com                 emediap ress.com   
+It is not a workable expression for determining the numerical value of 
+Epsilon, it only shows how it came into being. Epsilon can be evaluated 
+from the infinite series expression given by:  
+ 
+ 
+Є= 1
+0!+1
+1!+1
+2!+1
+3!+1
+4!+1
+5!+⋯ ∞                    (7)  
+ 
+ 
+Where it is:  
+ 
+0!=1 3!=1·2·3=6  
+   
+1!=1 4!=1·2·3·4=24 (8) 
+   
+2!=1·2=2 5!=1·2·3·4·5=120   
+ 
+           𝑁𝑁!=(𝑁𝑁)∙(𝑁𝑁−1)∙(𝑁𝑁−2)∙(𝑁𝑁−3)∙(𝑒𝑒𝑒𝑒𝑒𝑒) 
+  
+N! is called a factorial number. The use of zero factorial, 0!, may be objected 
+to. It is used here only as a place holder in the infinite series, expressing a 
+term of zero order. Otherwise zero factorial is a meaningless symbol.  
+ 
+Substituting the numerical values into the series gives the expression for 
+Epsilon as : 
+ 
+Є=1+ 1
+1+12+16+1
+24+1
+120+⋯ ∞                           ( 9) 
+ 
+ It can be seen that Epsilon is an infinite series of diminishing fractions. At 
+infinity the fraction is infinitesimal. This is known as a convergent s eries.  
+ 
+
+--- PAGE 15 ---
+
+15 
+ericpdollard.com                 emediap ress.com  From this infinite series the numerical value of Epsilon can be derived by 
+the summation of the fractions, this to an accuracy dependent on the 
+number of terms in the series that are utilized. Its value to a high degree of 
+accuracy is 2.718281828459045…. It is of interest to note that a repetiti ve 
+pattern exists: ….18281828…. For calculating purposes it is of sufficient 
+accuracy to give Epsilon as: 2.718.  
+ 
+The geometric ratio  of Pi to a high degree of accuracy is 
+3.1415926353897323. It is of interes t to examine the infinite series 
+expression for Pi in order to better understand the application of the 
+infinite series and how it will be utilized later. The serie s expression for Pi 
+is given by:  
+ 
+𝜋𝜋=4�1
+2−1
+3∙23+1
+5∙25+1
+7∙27±⋯∞� +   
+(10) 
+ 4�1
+3−1
+3∙33+1
+5∙35+1
+7∙37±⋯∞� 
+ 
+ 
+This can be reduced to:  
+ 
+ 
+𝜋𝜋
+4=[(𝑢𝑢)+(𝜈𝜈)]                                           ( 11) 
+ 
+ 
+Where u represents the powers of two series, and ν represents the powers 
+of three series. Pi over four represents an angle of 45 degrees in exponential 
+expressions. Oliver Heaviside made extensive use of the infinite series 
+form, known as transcendentals.  
+  
+  
+
+--- PAGE 16 ---
+
+16 
+ericpdollard.com                 emediap ress.com  [4]  The Powers of Epsilon 
+ 
+Consider Epsilon r aised to its first power, as in:  
+  
+Є1= Є 
+(12) 
+Є=2.718  
+ 
+ 
+By the laws of exponents Epsilon to its first power is Epsilon. In 
+mathematical form this states that in one logarithmic period, represented by the first power, the initial amplitude has grown to  2.718 times its initial 
+value.  
+ 
+Now consider Epsi lon raised to its second power:  
+ 
+ 
+Є2=(2.718 )2=7.389                                     (13 ) 
+ 
+ 
+This mathematical form states that in two logarithmic periods, the second 
+power, the amplitude has grown to 7.389 times its original value, and it has 
+grown to 2.718  times  the amplitude at the beginning of the second 
+logarithmic period. Hence, in each logarithmic period the amplitude grows 
+to 2.718 times its value at the beginning of that period. Epsilon raised to 
+any positive power expresses a rate of growth, this compounding upon 
+itself.  
+ 
+  
+
+--- PAGE 17 ---
+
+17 
+ericpdollard.com                 emediap ress.com  The infinite series expression for Epsilon to the first power is given by : 
+ 
+ 
+Є1=10
+0!+11
+1!+12
+2!+13
+3!+14
+4!+15
+5!+⋯∞             (14 ) 
+ 
+or 
+ 
+Є1=1
+1+11+12+16+1
+24+1
+120+⋯∞               (15 ) 
+ 
+ The infinite series expression for Epsilon to the second power is given by:  
+  
+Є2=20
+0!+21
+1!+22
+2!+23
+3!+24
+4!+25
+5!+⋯∞          (16 ) 
+ 
+or 
+ 
+Є2=1
+1+21+42+86+1624+32
+120+⋯∞            (17 ) 
+ 
+ 
+  
+
+--- PAGE 18 ---
+
+18 
+ericpdollard.com                 emediap ress.com  [5]  Imaginary Exponents , 𝒉𝒉 
+ 
+Epsilon can also be raised, or lowered, to a negative power. It is however that negative numbers are also imaginary numbers. Imaginary numbers 
+exist outside the realm of numeration, or counting. Involving Epsilon with 
+imaginary exponents gives rise to an important set of mathematical 
+functions. Some of these functions are well known, such as the sine and the 
+cosine functions. Lesser known are the sinh and the cosh  functions. Other 
+functions are unacknowledged, but will be developed in t he following line 
+of reasoning.  
+ 
+It was shown in The Four Quadrant Representation of Electricity  that two 
+imaginaries are pos sible, one is the D.C. operator:  
+ 
+ 
+ℎ𝑛𝑛=+11
+2, ℎ2=+1 
+ 
+(18) 
+h=−1,             ℎ1=−1 
+ 
+ 
+the other is the A.C. operator:  
+ 
+𝑗𝑗𝑛𝑛=−11
+2 , 𝑗𝑗1=+𝑗𝑗 
+ 
+(19) 
+𝑗𝑗=+𝑗𝑗 ,              𝑗𝑗3=−𝑗𝑗 
+ 
+ 
+Consider Epsilon raised to an imaginary power ℎ, or negative one, as given 
+in: 
+ 
+Єℎ=Є−1                                                   (20)  
+
+--- PAGE 19 ---
+
+19 
+ericpdollard.com                 emediap ress.com   
+By the laws of exponents any ratio to the negative one power i s the 
+reciprocal of that ratio:  
+ 
+Є−1=1
+Є=Єℎ 
+ 
+ 
+1
+Є=1
+2.718                                              ( 21) 
+ 
+ 
+1
+Є=0.368  
+ 
+ 
+In this relation the amplitude has decayed to 36.8 percent of its starting value in one logarithmic period.  
+  
+Taking Epsilon to the negative two  power gives:  
+ 
+ 
+Є−2=1
+Є2=Є2ℎ 
+  
+1
+Є2=1
+(2.718 )2                                          ( 22) 
+ 
+ 
+1
+7.389=0.135  
+  
+
+--- PAGE 20 ---
+
+20 
+ericpdollard.com                 emediap ress.com   
+In this relation the amplitude has decayed to 13.5 percent of its starting 
+value in two logarithmic periods, or that it has decayed to 36.8 percent of 
+its value at the start of the logarithmic period two. In each logarithmic 
+period that follows the amplitude decays another 36.8 percent. After an 
+infinite number of logarithmic periods the amplitude is diminished to an infinitesimal value.  
+ 
+In actual electrical activity Epsilon to a positive power is a condition of 
+runaway growth, a condition seldom encountered in practice. Epsilon to a 
+negative power represents the periods of charge and discharge encountered in the electrical activity of energy readjustment. The 
+electrostatic condenser, or capacitor, serves as an example. The capacity of 
+the condenser storing electric charge is expressed in Farads, as the letter, C. 
+The conductance of the leakage draining the condenser is expressed in 
+Siemens , as the letter G. The rate in per seconds that the conductance 
+drains the condenser is given by the ratio of the capacitance  to the 
+conductance . For one Siemens draining one Farad, the rate of drainage will 
+be one Neper per second. A Neper is a unit decrement from an initial value 
+of 100 percent to a final value of 36.8 percent over one logarithmic period, 
+one second in this unit case. This can be expressed by:  
+ 
+ 
+𝜙𝜙=Є−𝑛𝑛𝜙𝜙0                                                (23 ) 
+ 
+𝑛𝑛=𝐶𝐶
+𝐺𝐺 
+  
+
+--- PAGE 21 ---
+
+21 
+ericpdollard.com                 emediap ress.com  ϕ₀ is the initial qu antity of electric charge, n is the rate of leakage over one 
+unit logarithmic period, and ϕ is the remaini ng charge at the end of one 
+logarithmic  period. For an initial charge of 100 percent, the relations are 
+given in:  
+ 
+𝜙𝜙=1
+Є 100 % · 𝜙𝜙0 
+ 
+ 
+𝜙𝜙=Є−1 100 % · 𝜙𝜙0                                          (24 ) 
+  
+𝜙𝜙=36.8% · 𝜙𝜙0 
+  
+At the end of one logarithmic period, one second in this case, the quantity 
+of electricity in the condenser has decayed to 36.8 percent, the rest has been consumed by the conductance. The r ate of discharge is then one Neper per 
+second. The log base Epsilon identifies the Neper. One Farad into one Siemens discharges to a unit Epsilon fraction in one second. The geometric 
+ratio Epsilon is hence the “natural” rate of change for electrical const ants of 
+unit value, dielectric and magnetic.  
+ Since it is one over Epsilon that expressed electrical rates of charge and 
+discharge, this would recommend that this should b e its own log base, base 
+0.368:  
+  
+1
+Є=𝜂𝜂                                               (25 ) 
+ 
+ 
+  
+
+--- PAGE 22 ---
+
+22 
+ericpdollard.com                 emediap ress.com   
+Thus, the expression for condenser discharge is given by:  
+ 
+ 
+𝜙𝜙=𝜂𝜂𝑛𝑛𝜙𝜙0                                              (26 ) 
+ 
+ 
+Here Eta is the new log base of 0.368. Eta can be called a “natural percen t”, 
+36.8 percent, or one Neper.   
+
+--- PAGE 23 ---
+
+23 
+ericpdollard.com                 emediap ress.com  [6]  Hyperbolic Functions  
+ 
+The infinite series expression for Epsilon to the negative one power is given 
+by: 
+ 
+Є−1=−10
+0!+−11
+1!+−12
+2!+−13
+3!+−14
+4!+−15
+5!+⋯∞         (27 ) 
+ 
+ 
+And for Epsilon to the negative two power:  
+ 
+ 
+Є−2=−20
+0!+−21
+1!+−22
+2!+−23
+3!+−24
+4!+−25
+5!+⋯∞         (28 ) 
+  
+For any negative power it is given by:  
+ 
+ 
+Є−𝛿𝛿=−𝛿𝛿0
+0!+−𝛿𝛿1
+1!+−𝛿𝛿2
+2!+−𝛿𝛿3
+3!+−𝛿𝛿4
+4!+−𝛿𝛿5
+5!+⋯∞        (29 ) 
+  The imaginary character of the negative exponent introduces a unique 
+condition in the series expression, it becomes divided into a pair of real and 
+imaginary parts. The fundamental expression to the imaginary operator ℎ  
+is: 
+ 
+Єℎ𝑛𝑛                                                      (30)  
+ 
+ 
+The exponent n determines if ℎ  becomes a positive power, n equal zero, or 
+a negative power, n equal one. In this expression n can be called a hyper -
+logarithm of base Epsilon to the ℎ  power.   
+
+--- PAGE 24 ---
+
+24 
+ericpdollard.com                 emediap ress.com   
+When n equals one the relation is given by:  
+ 
+ 
+Єℎ=Є−1=1
+Є                                                ( 31) 
+ 
+ 
+And when n equals zero the relation is given by:  
+ 
+ 
+Є1= Є                                                   ( 32) 
+  
+The imaginary ℎ goes through a sequence of reversals as the order of the 
+exponent progresses through the infinite series, the relations given in:  
+ 
+ 
+ℎ0, ℎ1,  ℎ2, ℎ3,  ℎ4,  ℎ5 
+ 
+Sequence  
+  
+ℎ0=1, ℎ3=ℎ 
+ 
+ℎ1=ℎ,         ℎ4=1                                        (33 ) 
+ 
+ℎ2=1, ℎ5=ℎ 
+ 
+1, ℎ, 1, ℎ , 1, ℎ  
+ 
+Sequence  
+ 
+  
+
+--- PAGE 25 ---
+
+25 
+ericpdollard.com                 emediap ress.com  Since ℎ is negative one, the sequence of reversals is plus, minus, plus, 
+minus, plus, minus, etc. Substituting  
+ 
+ 
+ℎ = −1                                                 (34 ) 
+ 
+ 
+and expressing the relation in power of negative one is given in:  
+ 
+−10=1,   −13=ℎ 
+  
+−11=ℎ,   −14=1 
+ 
+ 
+−12=1,   −15=ℎ 
+  
+(35) 
+  
+−10=+1,  −13=−1 
+ 
+ 
+−11=−1,  −14=+1 
+ 
+ 
+−12=+1,  −15=−1 
+  
++1, -1, +1, - 1, +1, - 1 
+ 
+Sequence  
+  
+
+--- PAGE 26 ---
+
+26 
+ericpdollard.com                 emediap ress.com   
+This factors into even and odd terms, shown in:  
+ 
+ 
+−10=1,   −11=ℎ 
+ 
+ 
+−12=1,   −13=ℎ                                  (36) 
+  
+−14=1,   −15=ℎ 
+ 
+ 
+The even terms are real, the odd terms are imaginary. The imaginary ℎ 
+arrives at its imaginary condition in that it is odd, a half step between i n the 
+sequence of alternations.  
+ 
+ 
+Substituting the resolved powers of ℎ into the infinite series expression for 
+Epsilon to the ℎ power gives:  
+ 
+ 
+Єℎ=1
+0!+ℎ
+1!+1
+2!+ℎ
+3!+1
+4!+ℎ
+5!+⋯              (37 ) 
+ 
+ In terms of negative one , it is: 
+  
+Є−1=1
+0!−1
+1!+1
+2!−1
+3!+1
+4!−1
+5!+⋯              (38 ) 
+ 
+ 
+  
+
+--- PAGE 27 ---
+
+27 
+ericpdollard.com                 emediap ress.com   
+Separating the infinite series expression into its  even and odd components 
+gives:  
+ 
+ 
+Єℎ=�ℎ0
+0!+ℎ2
+2!+ℎ4
+4!+⋯ ∞�    +    �ℎ1
+1!+ℎ3
+3!+ℎ5
+5!+⋯ ∞�         (39 ) 
+ 
+ Factoring positive and negative terms gives, in terms of plus and minus 
+one: 
+  
+Є−1=�1
+0!+1
+2!+1
+4!+⋯ ∞�    −    �1
+1!+1
+3!+1
+5!+⋯ ∞�          (40)  
+ 
+ A similar division can exist for Epsilon to the positive one power:
+ 
+ 
+ 
+Є+1=�1
+0!+1
+2!+1
+4!+⋯ ∞�     +    �1
+1!+1
+3!+1
+5!+⋯ ∞�          ( 41) 
+  
+The only distinction in these divisions involving Epsilon to a negative or 
+positive exponent is a minus or a plus sign between the divided even and 
+odd infinite series expressions.  
+ 
+ 
+Let the even, or real, infinite series expression be represented by the factor 
+Alpha:  
+ 
+𝛼𝛼=1
+0!+1
+2!+1
+4!+⋯∞                                     ( 42) 
+   
+
+--- PAGE 28 ---
+
+28 
+ericpdollard.com                 emediap ress.com   
+And let the odd,  or imaginary, infinite series expression be represented by 
+the factor Beta:  
+ 
+ 
+𝛽𝛽=1
+1!+1
+3!+1
+5!+⋯∞                                      (43 ) 
+ 
+ 
+The symbolic relationship between these two factors is:  
+  
+𝛼𝛼+ℎ𝑛𝑛𝛽𝛽 
+(44) 
+𝑛𝑛=0,1 
+ 
+ 
+And in exponents of Epsilon, it gives:  
+ 
+ 
+𝛼𝛼+ℎ0𝛽𝛽=𝛼𝛼+𝛽𝛽                                      (45 ) 
+ 
+ 
+𝛼𝛼+ℎ1𝛽𝛽=𝛼𝛼−𝛽𝛽                                      (46 ) 
+  
+ 
+Note that a constraint on Alpha and Beta exists:  
+ 
+ 
+𝛼𝛼2−𝛽𝛽2=1                                           (47 ) 
+ 
+ 
+  
+
+--- PAGE 29 ---
+
+29 
+ericpdollard.com                 emediap ress.com   
+The even factor is always positive, with either positive or negative 
+exponents of Epsilon. The odd factor is positive or negative, dependent on 
+if the exponent of Epsilon is positive or negative. The factors in the relation:  
+ 
+ 
+𝛼𝛼−𝛽𝛽                                                     (48 ) 
+  are said to be conjugate to the factors in the relation:  
+  
+𝛼𝛼+𝛽𝛽                                                     (49 ) 
+  
+Rearranging terms yields the expressions for the pair of factors, Alpha and 
+Beta:  
+  
+𝛼𝛼=Є+1+Є−1
+2                                                     (50)  
+  
+𝛽𝛽=Є+1−Є−1
+2                                                     ( 51) 
+  
+These expressions are for exponents of unit value:  
+ 
+ 
+|+1|=1 
+ 
+(52)  
+|−1|=1 
+  
+
+--- PAGE 30 ---
+
+30 
+ericpdollard.com                 emediap ress.com   
+The expressions for the factors Alpha and Beta for any value, positive or 
+negative, of the exponents of Epsilon is given by:  
+  
+𝛼𝛼=Є+𝛿𝛿+Є−𝛿𝛿
+2                                              ( 53) 
+ 
+ 
+𝛽𝛽=Є+𝛿𝛿−Є−𝛿𝛿
+2                                              ( 54) 
+  
+It can be recognized these give:  
+ 
+ 
+𝛼𝛼=cosh 𝛿𝛿 
+ 
+(55) 
+𝛽𝛽=sinh 𝛿𝛿 
+  
+By substitution this gives:  
+  
+Є+𝛿𝛿=cosh 𝛿𝛿+sinh 𝛿𝛿                                       (56 ) 
+  
+Є−𝛿𝛿=cosh 𝛿𝛿−sinh 𝛿𝛿                                       (57 ) 
+ 
+ 
+  
+
+--- PAGE 31 ---
+
+31 
+ericpdollard.com                 emediap ress.com   
+The infinite series expressions are thus:  
+ 
+ 
+cosh 𝛿𝛿=𝛿𝛿0
+0!+𝛿𝛿2
+2!+𝛿𝛿4
+4!+⋯∞                               (5 8) 
+ 
+ 
+sinh 𝛿𝛿=𝛿𝛿1
+1!+𝛿𝛿3
+3!+𝛿𝛿5
+5!+⋯∞                                (5 9) 
+  
+ 
+Hereby the two fundamental functions of bipolar direct current 
+transmission are derived from the log base Epsilon to the imaginary, 
+ℎ, 
+power. While it may seem the long way around, since most texts arrive at 
+this on one page, these steps involved are of importance when polyphase functions are developed.  
+  
+
+--- PAGE 32 ---
+
+32 
+ericpdollard.com                 emediap ress.com  [7]  Imaginary Exponents,  𝒋𝒋 
+ 
+Thus far, it has been shown that the natural log ba se Epsilon, when raised 
+to an imaginary power, produces a complimentary pair of infinite series 
+expressions. This condition is the result of the imaginary ℎ giving positive 
+and negative reversals, it is bi-polar and hence a pair of expressions or 
+functions . 
+ This process can be carried one step further by raising the log base Epsilon 
+to the imaginary, 
+𝑗𝑗 power:  
+ 
+Є𝑗𝑗                                                         (60)  
+ 
+ 
+It is customary in this process to define the imaginary 𝑗𝑗 as a duo -binary 
+operator:  
+ 
+ 
+𝑗𝑗=√−1 
+ 
+𝑗𝑗𝑛𝑛=−11
+2 
+(61) 
+𝑗𝑗1=+𝑗𝑗 
+ 
+𝑗𝑗3=−𝑗𝑗 
+ 
+ 
+This expression has only two roots since it is a second order expressi on, the 
+two missing roots are:  
+  
+𝑗𝑗0   &   𝑗𝑗2                                                  ( 62) 
+  
+
+--- PAGE 33 ---
+
+33 
+ericpdollard.com                 emediap ress.com   
+They are absent in a duo -binary form of expressing the imaginary 𝑗𝑗. This 
+can lead to a misunderstanding with regard to Epsilon raised to the 
+imaginary power 𝑗𝑗. 
+ 
+By definition the imaginary 𝑗𝑗 is a quaternary operator, the result of a fourth 
+order expression, this is given by:  
+ 
+ 
++11
+4=𝑗𝑗𝑛𝑛 
+ 
+ 
+𝑗𝑗0=+1, 𝑗𝑗1=+𝑗𝑗                                        ( 63) 
+ 
+ 
+𝑗𝑗2=−1, 𝑗𝑗3=−𝑗𝑗 
+  
+And….  
+ 
+𝑗𝑗4=𝑗𝑗0=+1 
+ 
+(64) 
+𝑗𝑗2=ℎ1=−1 
+ 
+ 
+These can be expressed in other terms  as in:  
+ 
+ 
+𝑗𝑗3=−𝑗𝑗=ℎ𝑗𝑗=𝑘𝑘                                            (65 ) 
+  
+  
+
+--- PAGE 34 ---
+
+34 
+ericpdollard.com                 emediap ress.com   
+Here the imaginary 𝑘𝑘 is a contrapuntal operator which rotates in direction 
+opposite to the imaginary 𝑗𝑗. The resultant product of the two operations is 
+given in:  
+ 
+𝑗𝑗𝑘𝑘=+1                                                (66 ) 
+ 
+ 
+This product results in a cancellat ion of the contrary operations.  
+ 
+The distinction between the duo -binary and the quaternary forms and the 
+use of contrary operators will become important in the develo pment of 
+polyphase mathematics.  
+ 
+The infinite series expression for Epsilon to the imaginary 𝑗𝑗 power is:  
+ 
+ 
+Є𝑗𝑗=𝑗𝑗0
+0!+𝑗𝑗1
+1!+𝑗𝑗2
+2!+𝑗𝑗3
+3!+𝑗𝑗4
+4!+𝑗𝑗5
+5!+⋯∞                (67 ) 
+  
+The powers of the imaginary 
+𝑗𝑗 give:  
+ 
+ 
+𝑗𝑗0=+1, 𝑗𝑗1=+1·𝑗𝑗 
+(68)   
+𝑗𝑗2=−1, 𝑗𝑗3=−1·𝑗𝑗 
+  
+𝑗𝑗4=+1, 𝑗𝑗5=+1·𝑗𝑗 
+ 
+   
+
+--- PAGE 35 ---
+
+35 
+ericpdollard.com                 emediap ress.com   
+Substituting these values into the infinite series expression gives:  
+ 
+ 
+Є𝑗𝑗=1
+0!+𝑗𝑗
+1!−1
+2!−𝑗𝑗
+3!+1
+4!+𝑗𝑗
+5!−⋯∞ 
+ 
+(69) 
+ 
++1     +𝑗𝑗    −1    −𝑗𝑗    +1    +𝑗𝑗… 
+ 
+Sequence  
+ 
+ 
+The series of resolved imaginaries is then:  
+  
++1,  +𝑗𝑗,  -1,  -𝑗𝑗,  +1,  +𝑗𝑗….                             (70)  
+ 
+ 
+ 
+For comparison, the sequence for Epsilon to the ℎ power is:  
+ 
+ 
++1,  -1,  +1,  -1,  +1,  -1                                ( 71) 
+    
+
+--- PAGE 36 ---
+
+36 
+ericpdollard.com                 emediap ress.com  Substituting into the infinite series expression the following:  
+ 
+ 
++1=1 
+ 
+ 
+−1=ℎ                                                   ( 72) 
+  
+−𝑗𝑗=𝑘𝑘 
+  
+And utilizing a greater number of terms in the series gives:  
+ 
+ 
+Є𝑗𝑗=1
+0!+𝑗𝑗
+1!+ℎ
+2!+𝑘𝑘
+3!+1
+4!+𝑗𝑗
+5!+ 
+(73) 
+ℎ
+6!+𝑘𝑘
+7!+1
+8!+𝑗𝑗
+9!+ℎ
+10!+𝑘𝑘
+11!+⋯∞ 
+ 
+  
+1,   𝑗𝑗,   ℎ,   𝑘𝑘,   1,   𝑗𝑗,   ℎ,   𝑘𝑘,   1,   𝑗𝑗,   ℎ,   𝑘𝑘,… 
+ 
+Sequence  
+  
+The sequence in this series is:  
+ 
+ 
+1,   𝑗𝑗,   ℎ,   𝑘𝑘,   1,   𝑗𝑗,   ℎ,   𝑘𝑘 ….                        (74 ) 
+   
+
+--- PAGE 37 ---
+
+37 
+ericpdollard.com                 emediap ress.com   
+Here exists a cyclic order of imaginaries in what is called a positive 
+sequence. Where it is that the ℎ series sequence is an alternating sequence, 
+the 𝑗𝑗 series is a rotating sequence.  
+ 
+ 
+ 
+Grouping of like terms gives rise to four distinct infinite series expressions:  
+  
+ 
+Є𝑗𝑗=�1
+0!−1
+4!+1
+8!+⋯∞�    +    �𝑗𝑗
+1!−𝑗𝑗
+5!+𝑗𝑗
+9!+⋯∞�    + 
+ 
+(75) 
+ 
+�ℎ
+2!−ℎ
+6!+ℎ
+10!+⋯∞�    +    �𝑘𝑘
+3!−𝑘𝑘
+7!+𝑘𝑘
+11!+⋯∞� 
+  
+ 
+The grouping of the 
+ℎ terms gave rise to two distinct infinite series 
+expressions, and it has been customary to confine the 𝑗𝑗 terms into two 
+expressions;  duo-binary. The quaternary expression of Epsilon to the 
+imaginary 𝑗𝑗 power is not considered in texts on the subject. However, the 
+quaternary form is the basis for polyphase mathematics.  
+ 
+  
+
+--- PAGE 38 ---
+
+38 
+ericpdollard.com                 emediap ress.com   
+Factoring the imaginaries out of the  four infinite series, and putting each 
+series into symbolic form gives:  
+ 
+ 
+1(𝑢𝑢)=�1
+0!−1
+4!+1
+8!+⋯∞�1 
+ 
+ 
+𝑗𝑗(𝑥𝑥)=�1
+1!−1
+5!+1
+9!+⋯∞�𝑗𝑗 
+(76) 
+ 
+ℎ(𝜈𝜈)=�1
+2!−1
+6!+1
+10!+⋯∞�ℎ 
+ 
+ 
+𝑘𝑘(𝑦𝑦)=�1
+3!−1
+7!+1
+11!+⋯∞�𝑘𝑘 
+  
+ 
+The complex symbolic expression is:  
+ 
+ 
+Є𝑗𝑗=1(𝜇𝜇)+𝑗𝑗(𝑥𝑥)+ℎ(𝜈𝜈)+𝑘𝑘(𝑦𝑦)                             (77 ) 
+  
+For comparison the complex symbolic expression for exponent 
+ℎ is: 
+ 
+ 
+Єℎ=1𝛼𝛼+ℎ𝛽𝛽                                             (78 ) 
+ 
+  
+
+--- PAGE 39 ---
+
+39 
+ericpdollard.com                 emediap ress.com  The imaginary 𝑗𝑗 gives rise to four factors, u, ν, x, and y, the imaginary ℎ 
+gives rise to two factors, Alpha and Beta.  
+ 
+In the duo -binary form, two sequence imaginaries are reduced to:  
+  
+ℎ=−1 
+(79) 
+𝑘𝑘=−𝑗𝑗 
+ 
+ 
+Accordingly, the expression for Epsilon to the 𝑗𝑗 gives:  
+ 
+ 
+Є𝑗𝑗=[(𝑢𝑢)−(𝜈𝜈)]+𝑗𝑗[(𝑥𝑥)−(𝑦𝑦)]                          (80)  
+  
+Substituting  
+ 
+𝑎𝑎=[(𝑢𝑢)−(𝜈𝜈)] 
+(81)  
+𝑏𝑏=[(𝑥𝑥)−(𝑦𝑦)] 
+ 
+ 
+into the expression gives:  
+  
+Є𝑗𝑗=𝑎𝑎+𝑗𝑗𝑏𝑏                                              ( 82) 
+ 
+where  a constraint exists:  
+  
+𝑎𝑎2+𝑏𝑏2=1                                           ( 82a) 
+  
+
+--- PAGE 40 ---
+
+40 
+ericpdollard.com                 emediap ress.com   
+This duo -binary form neglects the factors : 
+ 
+ 
+−𝑎𝑎=[(𝜈𝜈)−(𝑢𝑢)] 
+ 
+ 
+−𝑏𝑏=[(𝑦𝑦)−(𝑥𝑥)]                                          (83 ) 
+  
+−𝑎𝑎−𝑗𝑗𝑏𝑏 
+ 
+ 
+ 
+In an infinite series form of expression the factors 𝑎𝑎 and 𝑏𝑏 are given as:  
+ 
+ 
+𝑎𝑎=�1
+0!−1
+2!+1
+4!+⋯∞�                                 (8 4) 
+  
+𝑏𝑏=�1
+1!−1
+3!+1
+5!+⋯∞�                                 (8 5) 
+  
+ 
+The factors 
+𝑎𝑎 and 𝑏𝑏 are here given for Epsilon to a unit value exponent:  
+ 
+ 
+|𝑗𝑗|=1                                                   (86 ) 
+  
+  
+
+--- PAGE 41 ---
+
+41 
+ericpdollard.com                 emediap ress.com   
+For any magnitude of exponent involving the imaginary 𝑗𝑗, the infinite 
+series expression becomes:  
+ 
+ 
+Є𝑗𝑗𝑗𝑗=(𝑗𝑗𝑗𝑗)0
+0!+(𝑗𝑗𝑗𝑗)1
+1!+(𝑗𝑗𝑗𝑗)2
+2!+(𝑗𝑗𝑗𝑗)3
+3!+(𝑗𝑗𝑗𝑗)4
+4!+(𝑗𝑗𝑗𝑗)5
+5!+⋯∞ 
+ 
+(87) 
+ 
+Є𝑗𝑗𝑗𝑗=1
+0!+𝑗𝑗𝑗𝑗1
+1!−𝑗𝑗2
+2!+𝑗𝑗𝑗𝑗3
+3!+𝑗𝑗4
+4!+𝑗𝑗𝑗𝑗5
+5!−⋯∞ 
+ 
+ 
+ 
+Separating real and imaginary terms gives ris e to a pair of infinite series:  
+  
+Є𝑗𝑗𝑗𝑗=+1�1−𝑗𝑗2
+2!+𝑗𝑗4
+4!−⋯∞�   +   𝑗𝑗�𝑗𝑗−𝑗𝑗3
+3!+𝑗𝑗5
+5!−⋯∞�      (88 ) 
+  
+In complex symbolic form, it is:  
+  
+Є𝑗𝑗𝑗𝑗=𝑎𝑎+𝑗𝑗𝑏𝑏                                             (89 ) 
+ 
+ 
+  
+
+--- PAGE 42 ---
+
+42 
+ericpdollard.com                 emediap ress.com  [8]  Contrary Rotation & Sequences  
+ 
+The complimentary imaginary exponential expression for Epsilon to the 
+imaginary 𝑗𝑗 power is Epsilon to the imaginary negative 𝑗𝑗 power:  
+ 
+ 
+Є−𝑗𝑗                                                     (90)  
+  
+In order to evaluate this exponential exp ression the term “negative 
+𝑗𝑗” 
+needs to be examined. This examination will also serve as an exercise in t he 
+working of versor operators.  
+ 
+The imaginary unit 𝑗𝑗 is derived from the fourth root of positive one, this 
+gives four roots:  
+ 
+𝑗𝑗0     𝑗𝑗1 
+(91)  
+𝑗𝑗2     𝑗𝑗3 
+ 
+ 
+This fourth root can be divided into a pair of square (second) roots:  
+ 
+ 
+ 
+ +11
+2  
++11
+4  =   & (92) 
+ −11
+2  
+   
+  
+
+--- PAGE 43 ---
+
+43 
+ericpdollard.com                 emediap ress.com   
+These relations establish the duo -binary for m. The four roots are given as: 
+ 
+ 
+ 
+ ℎ0=+1  
++11
+2  =            & (93) 
+ ℎ1=−1  
+ 
+ 
+ 
+ 𝑗𝑗1=+𝑗𝑗  
+−11
+2 =         & (94) 
+ 𝑗𝑗3=−𝑗𝑗  
+  
+ 
+It is given here that it is , by: 
+ 
+ 
+𝑗𝑗3=−𝑗𝑗                                                    (95 ) 
+ 
+ 
+and s ince it is , by: 
+ 
+ 
+ℎ=−1                                                    (96 ) 
+ 
+ 
+   
+
+--- PAGE 44 ---
+
+44 
+ericpdollard.com                 emediap ress.com   
+then negative 𝑗𝑗 can be expressed as:  
+ 
+ 
+−𝑗𝑗=ℎ𝑗𝑗                                                    (97 ) 
+ 
+ 
+These relations are important in determining the even powers of 𝑗𝑗 in the 
+infinite series expression of Epsilon to the negative 𝑗𝑗 power.  
+ 
+It could be considered that factoring out the negative one in the negative 𝑗𝑗: 
+ 
+ 
+−𝑗𝑗=−1·𝑗𝑗                                                    (98 ) 
+  
+Would provide the resolved second power, an  even power, into the correct 
+result. Since it is , by: 
+  
+𝑗𝑗2=−1                                                    (99 ) 
+ 
+ 
+The factored terms would yield:  
+ 
+ 
+−1·𝑗𝑗2=(−1)·(−1)=+1                                (100 ) 
+ 
+ 
+However, this is not correct. This can confuse the results of resolving the 
+even powers of 𝑗𝑗. This is in need of explanation.  
+ 
+  
+
+--- PAGE 45 ---
+
+45 
+ericpdollard.com                 emediap ress.com   
+The negative sign is a shorthand for the imaginary ℎ: 
+ 
+ 
+ (−) = ℎ                                               (101 ) 
+ 
+ 
+Several ways are possible to resolve negative 𝑗𝑗, one is its  inversion 
+properties:  
+ 
+−𝑗𝑗=1
+𝑗𝑗 
+ 
+ 
+1
+𝑗𝑗=𝑗𝑗−1                                              (102 ) 
+ 
+ 
+−𝑗𝑗=𝑗𝑗−1 
+  
+Note this imaginary 
+𝑗𝑗 has the distinction of equating subtraction and 
+division . Squaring the inversion gives:  
+ 
+ 
+                                       (103 ) 
+  
+ 
+  
+
+
+--- PAGE 46 ---
+
+46 
+ericpdollard.com                 emediap ress.com  And since it is, by:  
+ 
+ 
+ 𝑗𝑗2=− 𝑗𝑗2                                             (104 ) 
+ 
+ 
+Substitution gives:  
+ 
+ 
+−𝑗𝑗2=1
+𝑗𝑗2 
+ 
+ 
+1
+𝑗𝑗2=1
+−1 
+                                             (105 ) 
+ 
+ 
+1
+−1=−1 
+  
+Hen ce, it is here established that, by:  
+  
+−𝑗𝑗2=−1                                           (106 ) 
+  
+That the square of negative 
+𝑗𝑗 is negative one. It should be noted that the 
+square of positive 𝑗𝑗 is also negative one:  
+ 
+ 
++𝑗𝑗2=−1                                           (107 ) 
+  
+
+--- PAGE 47 ---
+
+47 
+ericpdollard.com                 emediap ress.com   
+Thus it is:  
+ 
+ 
+−𝑗𝑗2=+𝑗𝑗2                                           (108 ) 
+ 
+ 
+The imaginary positive 𝑗𝑗 squared and the imaginary negative 𝑗𝑗 squared 
+have their crossing point, in contrary rotation, at negative one, or ℎ, by: 
+ 
+ 
+−1=ℎ                                           (109 ) 
+  
+
+--- PAGE 48 ---
+
+48 
+ericpdollard.com                 emediap ress.com  This is shown in : 
+ 
+ 
+ (110 ) 
+ 
+ 
+ 
+Another way to go about resolving negative 𝑗𝑗 squared is to use the 
+imaginary ℎ: 
+ 
+(−)=ℎ 
+(111 ) 
+ 
+−𝑗𝑗=ℎ𝑗𝑗 
+  
+
+
+--- PAGE 49 ---
+
+49 
+ericpdollard.com                 emediap ress.com   
+Squaring gives:  
+ 
+(ℎ𝑗𝑗)2=ℎ2·𝑗𝑗2                                           (112 ) 
+  
+And it is:  
+ 
+ℎ2=+1 
+(113 ) 
+𝑗𝑗2=−1 
+ 
+ 
+Substituting these terms gives:  
+ 
+ 
+ℎ2·𝑗𝑗2=(+1)·(−1) 
+ 
+(114 ) 
+ 
+(+1)·(−1)=−1 
+  
+Hence:  
+ 
+ 
+−𝑗𝑗2=−1                                                 (115 ) 
+ 
+ 
+ 
+Thus it is established that negative 𝑗𝑗 squared is negative one.  
+ 
+  
+
+--- PAGE 50 ---
+
+50 
+ericpdollard.com                 emediap ress.com   
+In terms of polyphase mathematics, negative 𝑗𝑗 can be resolved through 
+application of the contrary or counter -rotational operator 𝑘𝑘: 
+ 
+ 
+𝑘𝑘=ℎ𝑗𝑗 
+ 
+(116 ) 
+𝑘𝑘=−𝑗𝑗 
+  
+
+--- PAGE 51 ---
+
+51 
+ericpdollard.com                 emediap ress.com  The use of this counter -rotational imaginary can be demonstra ted in a four 
+quadrant form by:  
+ 
+ 
+(117 )  
+
+
+--- PAGE 52 ---
+
+52 
+ericpdollard.com                 emediap ress.com   
+Four distinct imaginaries exist in this representation:  
+ 
+ 
+1  𝑗𝑗 
+(118 ) 
+ℎ  𝑘𝑘 
+ 
+ 
+The number one here is given as the reference imaginary, and is  not to be 
+regarded as a real number in this situation. One is here an imaginary of zero order. The two imaginaries, 1 and ℎ, are in alternation, the two 
+imaginaries, 𝑗𝑗 and 𝑘𝑘, are in  a quadrature alternation. In tandem , these two 
+alternations give rise to rotation.  
+ 
+ 
+ 
+In the process of resolving the even powers of positive 
+𝑗𝑗, the four quadr ant 
+representation is given in the image sequence on the next page : 
+ 
+  
+
+--- PAGE 53 ---
+
+53 
+ericpdollard.com                 emediap ress.com   
+ 
+(119 )  
+
+
+--- PAGE 54 ---
+
+54 
+ericpdollard.com                 emediap ress.com   
+The first power of 𝑗𝑗 represents the first step to position one, the second 
+power of 𝑗𝑗 is the second step to position two. This position is also negative 
+one, hence:  
+ 
+ 
+𝑗𝑗2=−1                                                (120 ) 
+ 
+ 
+
+--- PAGE 55 ---
+
+55 
+ericpdollard.com                 emediap ress.com  In the process of resolving the even powers of negative 𝑗𝑗, the fo ur quadrant 
+representations is:  
+ 
+ 
+ 
+(121 ) 
+
+
+--- PAGE 56 ---
+
+56 
+ericpdollard.com                 emediap ress.com  The first power of 𝑘𝑘 represents the first step to position one, the second 
+power of 𝑘𝑘 is the second step to position two. Position two is equivalent to 
+negative one, hence:  
+ 
+ 
+𝑘𝑘2=−1                                               (122 ) 
+  
+However, it is given:  
+  
+𝑘𝑘2=−𝑗𝑗2                                              (123 ) 
+ 
+ Therefore:  
+  
+𝑗𝑗2=−1                                               (124 ) 
+ 
+𝑗𝑗2=𝑘𝑘2 
+ 
+ 
+Hence established is that the imaginary 𝑘𝑘 squared is equal to negative one, 
+and thus negative 𝑗𝑗 squared is equal to negative one.  
+ 
+ 
+   
+
+--- PAGE 57 ---
+
+57 
+ericpdollard.com                 emediap ress.com   
+The inter -relation between the imaginary 𝑘𝑘 and the imaginary 𝑗𝑗 is given by:  
+ 
+ 
+𝑘𝑘0=𝑗𝑗0=1 
+ 
+𝑘𝑘3=𝑗𝑗1=−𝑘𝑘 
+(125 ) 
+𝑘𝑘2=𝑗𝑗2=−1 
+ 
+𝑘𝑘1=𝑗𝑗3=𝑘𝑘 
+ 
+Forward  Sequence  
+  
+ 
+And the inter -relation between the imaginary 
+𝑗𝑗 and the imaginary 𝑘𝑘 is 
+given by:  
+ 
+ 
+𝑗𝑗0=𝑘𝑘0=1 
+ 
+𝑗𝑗3=𝑘𝑘1=−𝑗𝑗 
+(126 ) 
+𝑗𝑗2=𝑘𝑘2=−1 
+ 
+𝑗𝑗1=𝑘𝑘3=𝑗𝑗 
+ 
+Reverse  Sequence  
+  
+  
+
+--- PAGE 58 ---
+
+58 
+ericpdollard.com                 emediap ress.com   
+A resolution of negative 𝑗𝑗 squared is given by powers of the root of the 
+unit:  
+ 
+−11
+2= +𝑗𝑗,   -𝑗𝑗 
+ 
+ 
+ 
+(127 ) 
+  
+−12
+2 = −11 
+ 
+ 
+−11 =  −1   
+ 
+  
+This establishes the resolution of the even powers of the imaginary 
+𝑗𝑗 in the 
+infinite series expression for Epsilon to the imaginary negative 𝑗𝑗 power:  
+ 
+ 
+−𝑗𝑗2=−1 
+ 
+−𝑗𝑗4=+1 
+(128 ) 
+−𝑗𝑗6=−1 
+ 
+−𝑗𝑗8=+1 
+ 
+etc. 
+ 
+  
+
+
+--- PAGE 59 ---
+
+59 
+ericpdollard.com                 emediap ress.com   
+With the understanding gained in resolving the even powers of the 
+imaginary negative 𝑗𝑗, and the use of the contrary imaginary 𝑘𝑘 , it is possible 
+to correctly evaluate the infinite series expression for Epsilon to the negative 𝑗𝑗 power. It is given by:  
+ 
+ 
+Є−𝑗𝑗=−𝑗𝑗0
+0!+−𝑗𝑗1
+1!+−𝑗𝑗2
+2!+−𝑗𝑗3
+3!+−𝑗𝑗4
+4!+−𝑗𝑗5
+5!+ 
+ 
+(129 ) 
+−𝑗𝑗6
+6!+−𝑗𝑗7
+7!+−𝑗𝑗8
+8!+−𝑗𝑗9
+9!+−𝑗𝑗10
+10!+−𝑗𝑗11
+11!+⋯∞ 
+ 
+ 
+ 
+ 
+Є−𝑗𝑗=1
+0!+𝑘𝑘
+1!+ℎ
+2!+𝑗𝑗
+3!+1
+4!+𝑘𝑘
+5!+ 
+ 
+(130 ) 
+ℎ
+6!+𝑗𝑗
+7!+1
+8!+𝑘𝑘
+9!+ℎ
+10!+𝑗𝑗
+11!+⋯∞ 
+ 
+  
+The components of the series are:  
+  
+1,   𝑘𝑘,   ℎ,   𝑗𝑗,   1,   𝑘𝑘,   ℎ,   𝑗𝑗….                        (131 ) 
+ 
+ 
+  
+
+--- PAGE 60 ---
+
+60 
+ericpdollard.com                 emediap ress.com   
+For comparison the components of the series for Epsilon to the positive 𝑗𝑗 
+power are:  
+  
+1,   𝑗𝑗,   ℎ,   𝑘𝑘,   1,   𝑗𝑗,   ℎ,   𝑘𝑘….                        (132 ) 
+ 
+ 
+ 
+The comparison is shown in:  
+ 
+ 
+ 
+Reverse Sequence  
+ 
+1,   𝑘𝑘,   ℎ,   𝑗𝑗,   1,   𝑘𝑘,   ℎ,   𝑗𝑗,   etc. 
+ (133 ) 
+ 
+ 
+ 
+ 
+Forward Sequence  
+ 
+1,   𝑗𝑗,   ℎ,   𝑘𝑘,   1,   𝑗𝑗,   ℎ,   𝑘𝑘,   etc  (134) 
+ 
+ 
+ 
+ 
+
+--- PAGE 61 ---
+
+61 
+ericpdollard.com                 emediap ress.com  Where the components for the positive imaginary exponent progress 
+forward in a positive sequence, the components for the negative imaginary 
+exponent progress reverse in a negative sequence. Note that the 
+imaginaries 1 and ℎ are un -changed in either series.  The comparisons are 
+shown in:  
+ 
+ 
+             Forward Sequence        Reverse Sequence  
+ 
+ Start 0   1 · 1 =   1 
+ 
+ Step  1  𝑗𝑗 · 𝑘𝑘 =   1 
+  Step  2  ℎ · ℎ =   1 
+ 
+ Step  3  𝑘𝑘 · 𝑗𝑗 =   1 
+ 
+ Step  4  1 · 1 =   1 
+  Step  5  𝑗𝑗 · 𝑘𝑘 =   1 
+ 
+ Step  6  ℎ · ℎ =   1 
+ 
+ Step  7  𝑘𝑘 · 𝑗𝑗 =   1 
+ 
+ etc. ∞  etc. =   1 
+ 
+       Canonic Sequence Chart  
+ (135 ) 
+   
+
+--- PAGE 62 ---
+
+62 
+ericpdollard.com                 emediap ress.com   
+Grouping the like terms of the infinite series expression for Epsilon to the 
+negative 𝑗𝑗 power gives:  
+  
+Є−𝑗𝑗=�1
+0!+1
+4!+1
+  8!+⋯∞�                         
+(136 ) 
+ +�𝑘𝑘
+1!+𝑘𝑘
+5!+𝑘𝑘
+  9!+⋯∞� 
++�ℎ
+2!+ℎ
+6!+ℎ
+10!+⋯∞� 
++�𝑗𝑗
+3!+𝑗𝑗
+7!+𝑗𝑗
+11!+⋯∞� 
+  
+ 
+ 
+  
+
+--- PAGE 63 ---
+
+63 
+ericpdollard.com                 emediap ress.com   
+Factoring out the imaginaries and putting the series expressions in 
+symbolic form gives: 
+ 
+ 
+1(𝑢𝑢)=�1
+0!+1
+4!+1
+  8!+⋯∞�  1 (137) 
+   
+𝑘𝑘(𝑥𝑥)=�1
+1!+1
+5!+1
+  9!+⋯∞�  𝑘𝑘 (138) 
+   
+ℎ(𝜈𝜈)=�1
+2!+1
+6!+1
+10!+⋯∞�  ℎ (139) 
+   
+𝑗𝑗(𝑦𝑦)=�1
+3!+1
+7!+1
+11!+⋯∞�  𝑗𝑗 (140 ) 
+ 
+  
+The complex s ymbolic expression is given as:  
+  
+Є−𝑗𝑗=1(𝑢𝑢)+𝑘𝑘(𝑥𝑥)+ℎ(𝜈𝜈)+𝑗𝑗(𝑦𝑦)                      (141 ) 
+ 
+ 
+Є+𝑗𝑗=1(𝑢𝑢)+𝑗𝑗(𝑥𝑥)+ℎ(𝜈𝜈)+𝑘𝑘(𝑦𝑦)                      (14 2) 
+  
+  
+
+--- PAGE 64 ---
+
+64 
+ericpdollard.com                 emediap ress.com   
+Substituting into the negative expression:  
+ 
+ 
+ℎ=−1 
+ 
+(143 ) 
+𝑘𝑘=−𝑗𝑗 
+ 
+ 
+Gives the expression for Epsilon to the negative 𝑗𝑗 as: 
+ 
+ 
+Є−𝑗𝑗=1[(𝑢𝑢)−(𝜈𝜈)]−𝑗𝑗[(𝑥𝑥)−(𝑦𝑦)]                       (144 ) 
+  
+Substituting:  
+ 
+Real Factor  
+ 
+(145 ) 𝑎𝑎=[(𝑢𝑢)−(𝜈𝜈)] 
+ 
+ 
+Imaginary Factor  
+ 
+𝑏𝑏=[(𝑥𝑥)−(𝑦𝑦)] 
+  gives the f undamental symbolic expression:  
+  
+Є−𝑗𝑗=𝑎𝑎−𝑗𝑗𝑏𝑏                                          (146 ) 
+   
+
+--- PAGE 65 ---
+
+65 
+ericpdollard.com                 emediap ress.com   
+This is in a duo -binary form and neglects the factors:  
+ 
+ 
+−𝑎𝑎=[(𝜈𝜈)−(𝑢𝑢)] 
+(147 ) 
+−𝑏𝑏=[(𝑦𝑦)−(𝑥𝑥)] 
+ 
+ 
+Hence established is two duo -binary relations, that for Epsilon to a positive 
+imaginary 𝑗𝑗: 
+ 
+Є+𝑗𝑗=𝑎𝑎+𝑗𝑗𝑏𝑏                                          (148 ) 
+  
+And that for Epsilon to a negative imaginary 
+𝑗𝑗: 
+ 
+ 
+Є−𝑗𝑗=𝑎𝑎−𝑗𝑗𝑏𝑏                                          (149 ) 
+  
+The factor 
+𝑎𝑎 remains unchanged between the positive exponential and the 
+negative exponential, but the factor b  reverses between the positive 
+exponential and the negative exponential. The negative exponential 
+relation of factors:  
+ 
+𝑎𝑎−𝑗𝑗𝑏𝑏                                                 (150 ) 
+ 
+ 
+Is said to be the conjugate of the positive exponential relation of factors:  
+ 
+ 
+𝑎𝑎+𝑗𝑗𝑏𝑏                                                 (151 ) 
+  
+
+--- PAGE 66 ---
+
+66 
+ericpdollard.com                 emediap ress.com   
+Conjugate relations are equal in magnitude but are in opposition  to each 
+other with r egard to direction or rotation.  
+ 
+ 
+Rearranging terms in the expressions for 𝑎𝑎 gives:  
+ 
+ 
+𝑎𝑎=Є+𝑗𝑗+Є−𝑗𝑗
+2                                            (152 ) 
+  
+And for 
+𝑏𝑏 gives:  
+ 
+ 
+𝑏𝑏=Є+𝑗𝑗−Є−𝑗𝑗
+2                                            (153 ) 
+  
+ 
+ 
+  
+
+--- PAGE 67 ---
+
+67 
+ericpdollard.com                 emediap ress.com  [9]  Circular Functions    
+ 
+Thus far the factors have been for unit imaginary exponents:  
+  
+|+𝑗𝑗|=1 
+ 
+(154 ) 
+|−𝑗𝑗|=1 
+ 
+ 
+The expression for an  imaginary of any magnitude is given by:  
+ 
+ 
+ 
+𝑎𝑎=Є+𝑗𝑗𝑗𝑗+Є−𝑗𝑗𝑗𝑗
+2                                          (155 ) 
+  
+ 
+𝑏𝑏=Є+𝑗𝑗𝑗𝑗−Є−𝑗𝑗𝑗𝑗
+2                                          (156 ) 
+  
+ It can be recognized that the real factor represents the exponential 
+expression for a circular cosine function:  
+  
+ 
+Є+𝑗𝑗𝑗𝑗+Є−𝑗𝑗𝑗𝑗
+2=cos𝑗𝑗                                     (157 ) 
+    
+
+--- PAGE 68 ---
+
+68 
+ericpdollard.com                 emediap ress.com   
+And the imaginary factor represents the exponential expressio n for a 
+circular sine function:  
+ 
+ 
+Є+𝑗𝑗𝑗𝑗−Є−𝑗𝑗𝑗𝑗
+2=sin𝑗𝑗                                       (158 ) 
+ 
+ 
+ Rearranging terms gives the positive imaginary power as:  
+  
+Є+𝑗𝑗𝑗𝑗=cos𝑗𝑗+𝑗𝑗sin𝑗𝑗                                   (159 ) 
+   
+And the negative imaginary power as:  
+  
+Є−𝑗𝑗𝑗𝑗=cos𝑗𝑗−𝑗𝑗sin𝑗𝑗                                  (160 ) 
+ 
+ 
+ 
+It must be recognized that Epsilon to the plus or minus 𝑗𝑗 power is a fourth 
+order expression, since 𝑗𝑗 is defined from the fourth root of positive one. 
+The duo -binary form omits two roots, these are:  
+ 
+ 
+−Є+𝑗𝑗𝑗𝑗=−cos𝑗𝑗−𝑗𝑗sin𝑗𝑗                                (1 61) 
+ 
+ 
+−Є−𝑗𝑗𝑗𝑗=−cos𝑗𝑗+𝑗𝑗sin𝑗𝑗                                (1 62) 
+  
+
+--- PAGE 69 ---
+
+69 
+ericpdollard.com                 emediap ress.com   
+These negative expressions are always tacitly assumed, the imaginary ℎ  is 
+neglected  in trigonometric operations. In terms of ℎ, the like terms are 
+given as:  
+ 
+ℎ0cos𝑗𝑗+𝑗𝑗1 sin𝑗𝑗 
+ 
+(163 ) 
+ℎ1cos𝑗𝑗+𝑗𝑗3 sin𝑗𝑗 
+  
+& 
+  
+ℎ0cos𝑗𝑗+𝑗𝑗3 sin𝑗𝑗 
+ 
+(164 ) 
+ℎ1cos𝑗𝑗+𝑗𝑗1 sin𝑗𝑗 
+ 
+ 
+Resolving the powers of ℎ and 𝑗𝑗 into sequence imaginaries gives:  
+ 
+ 
+ℎ0cos𝑗𝑗+𝑗𝑗 sin𝑗𝑗 
+ 
+ 
+ℎ1cos𝑗𝑗+𝑘𝑘sin𝑗𝑗 
+ 
+(165 ) 
+ℎ0cos𝑗𝑗+𝑘𝑘sin𝑗𝑗 
+  
+ℎ1cos𝑗𝑗+𝑗𝑗sin𝑗𝑗 
+  
+
+--- PAGE 70 ---
+
+70 
+ericpdollard.com                 emediap ress.com  This establishes the four quadrant representation of the cosine and sine 
+functions. In terms of the factors 𝑎𝑎 and 𝑏𝑏, it is given as:  
+ 
+ 
+1𝑎𝑎+𝑗𝑗𝑏𝑏 
+ 
+ℎ𝑎𝑎+𝑘𝑘𝑏𝑏 
+(166 ) 
+1𝑎𝑎+𝑘𝑘𝑏𝑏 
+ 
+ℎ𝑎𝑎+𝑗𝑗𝑏𝑏 
+ 
+ 
+The duo -binary form of expression and its cosine and sine functions are the 
+fundamental functions of bi -polar alternating current transmission, just as 
+the cosh  and ℎ functions are the fundamental functions for bi -polar direct 
+current transmission. The duo -binary imaginary is derived from: 
+  
+−11
+2                                                     (167 ) 
+ 
+ 
+It is a second order expression with two roots, cosine and sine.  The 
+meaning of these functions must be extended in order to provide the fundamental functions for quadrapolar rotating current transmission. This 
+relates to the four primary functions:  
+ 
+ 
+(u), (ν), (x), and ( y)                                  (168 ) 
+ 
+ This  will be expanded upon later.  
+  
+
+--- PAGE 71 ---
+
+71 
+ericpdollard.com                 emediap ress.com  [10]  Multipolar Exponential Functions  
+ 
+(1)  The previous section built upon binary, duo -binary, and upon 
+quaternary, imaginary exponents of the log base Epsilon. The binary 
+imaginary ℎ gave the hyperbolic functions cosh  and sinh, bi -polar 
+functions of plus and minus. The duo -binary imaginary 𝑗𝑗 gave the circular 
+functions cosine and sine, bi-polar functions of plus 𝑗𝑗 and minus 𝑗𝑗. 
+Incorporating the imaginary ℎ into these two functions gives the requisite 
+four functions of the quadrapolar exponent 𝑗𝑗 of Epsilon.  
+ 
+Four imaginaries are required in quaternary representation, this in 
+distinction to the single imaginary ℎ in binary representation, and the 
+single imaginary 𝑗𝑗 in duo -binary representation. The four quaternary 
+imaginaries are:  
+ 
+1,   𝑗𝑗,   ℎ,   𝑘𝑘                                            (16 9) 
+ 
+ 
+Multiple imaginaries are a distinct feature of polyphase mathematics. 
+These are a system of operators which form a symmetrical coordinate system. The imaginaries are sequence operators, which represent the 
+rotational phase sequences of a polyphase system. In the quaternary form 
+the imaginaries represent a four phase system, its operators are defined as:  
+  
+1, The zero sequence operator  
+ 
+𝑗𝑗, The positive sequence operator  
+(170 ) 
+ℎ, The alternating sequence operator  
+ 
+𝑘𝑘, The negative sequence operator  
+ 
+ 
+
+--- PAGE 72 ---
+
+72 
+ericpdollard.com                 emediap ress.com   
+The zero sequence is non -rotational and it is uni-directional. It is that 
+component existing outside the elect romagnetic boundary condition.  
+ 
+The positive sequence is rotational  and in a forward, or positive direction.  
+ 
+The alternating sequence is non-rotational, it is bidirectional reversals, or 
+alternations.  
+ 
+The negative sequence is rotational and in a reverse, or negative direction.  
+ 
+Higher order polyphase systems  engender higher order sequence operators 
+which will be developed later. More development is required in order to understand the full meaning of these important terms.  
+   
+
+--- PAGE 73 ---
+
+73 
+ericpdollard.com                 emediap ress.com  (2)  Four distinct functions are derived from the subdivision of the 
+infinite series expression for Epsilon to a quaternary imaginary power. 
+Each function is its own infinite series expression, as is the infinite series 
+for Epsilon, but do not serve as a log base. The infinite series expressions of 
+the quaternary exponential are given by:  
+ 
+ 
+(𝑢𝑢)=+1�1
+0!+1
+4!−1
+8!+1
+12!+⋯∞� 
+ 
+ 
+(𝑥𝑥)=+1�1
+1!+1
+5!−1
+9!+1
+13!+⋯∞� 
+ 
+(171 ) 
+(𝜈𝜈)=+1�1
+2!+1
+6!−1
+10!+1
+14!+⋯∞� 
+ 
+ 
+(𝑦𝑦)=+1�1
+3!+1
+7!−1
+11!+1
+15!+⋯∞� 
+ 
+ These derived infinite series expressions and the functions they represent 
+are not numerical values, unlike the series for Epsilon.  They are not log 
+bases, for example:  
+ 
+ 
+(𝑢𝑢)=1
+0!+1
+4!+1
+8!+1
+12!+⋯∞                     (172 ) 
+  
+ 
+  
+
+--- PAGE 74 ---
+
+74 
+ericpdollard.com                 emediap ress.com   
+Evaluating the series numerically to the most significant figures gives:  
+ 
+ 
+𝑢𝑢=1+1
+24 + …   
+ 
+ 
+4!=24                                                    (173 ) 
+  
+𝑢𝑢=1.040  
+  
+The numerical value is 0.040. The square of this value is:  
+ 
+ 
+𝑢𝑢2=(1.040 )2 
+(174 ) 
+𝑢𝑢2=(1.082 ) 
+ 
+ 
+For the  square of the function it is:  
+ 
+ 
+(𝑢𝑢)2                                                   (175 ) 
+ 
+ 
+Substituting the powers of two into the infinite series for ( 𝑢𝑢) gives:  
+ 
+ 
+𝑢𝑢2=20
+0!+24
+4!+28
+8!+212
+12!+⋯∞                         (176 ) 
+ 
+  
+
+--- PAGE 75 ---
+
+75 
+ericpdollard.com                 emediap ress.com   
+Evaluating this series numerically to the most significant figures gives:  
+ 
+ 
+(𝑢𝑢)2=1+16
+24+256
+40,000+⋯ 
+ 
+ 
+(𝑢𝑢)2=1.673                                               (177 ) 
+ 
+ 
+𝑢𝑢2=1.081  
+ 
+ 
+ Hence:  
+ 
+𝑢𝑢2≠(𝑢𝑢)2                                              (178 ) 
+   
+Performing the same operations with the log base Epsilon, its numerical 
+value is given by:  
+ 
+Є=1+1
+1+12+16+1
+24+etc.                            (17 9) 
+ 
+ 
+This numerical value squared is:  
+  
+Є=2.718  
+(180 ) 
+Є2=(2.718 )2=7.389  
+  
+
+--- PAGE 76 ---
+
+76 
+ericpdollard.com                 emediap ress.com  The square of Epsilon as a function is:  
+ 
+ 
+(Є)2=20
+0!+21
+1!+22
+2!+etc. 
+ 
+ 
+(Є)2=1
+1+21+42+etc.                                 (1 81) 
+ 
+ 
+(Є)2=7.389  
+ 
+Hence it is  given:  
+ 
+Є2=(Є)2                                             (182 ) 
+  
+(3)  The four functions (
+u), (x), (ν), and ( y), operate in a manner similar to 
+the four functions cosine, sine, cosh , and sinh. It is however the geometric 
+interpretation remains undefined, and it is outside the realm of Cartesian 
+coordinates. The manner in which to write expressions using these 
+functions is the same as that for the more common functions:  
+ 
+cosh δ,   cos θ  
+(183 ) 
+sinh δ,   sin θ  
+ 
+Thus written in the form:  
+ 
+(𝑢𝑢)δ , (ν)θ  
+  (184 ) 
+(x)δ , (y)θ   
+  
+
+--- PAGE 77 ---
+
+77 
+ericpdollard.com                 emediap ress.com   
+This can be related to the more common duo -binary form, in the 
+expressions:  
+ 
+ 
+(𝑎𝑎)=[(𝑢𝑢)−(𝜈𝜈)]                                           (185 ) 
+ 
+ 
+(𝑏𝑏)=[(𝑥𝑥)−(𝑦𝑦)]                                           (186 ) 
+  
+These in a symbolic expression as:  
+  
+(𝑎𝑎)𝑗𝑗=cos𝑗𝑗                                             (187 ) 
+  
+(𝑏𝑏)𝑗𝑗=sin𝑗𝑗                                              (188 ) 
+  
+The cosine and sine functions are given by the shorthand sym bols (a) and 
+(b) respectively.  
+ 
+The four functions (
+𝑢𝑢), (x), (ν), and ( y), provide a basis for a four phase 
+mathematics. The two common functions, cosine and sine are incomplete 
+in themselves since they are interlinked with the common cosh and sinh 
+functions. In a quaternary relationshi p four functions are required, and in 
+duo-binary form cos, sin, cosh, and sinh provide four functions, but not in 
+a manner directly ap plicable to four phase systems.  
+ 
+  
+
+--- PAGE 78 ---
+
+78 
+ericpdollard.com                 emediap ress.com   
+The functions of a four phase rotating electric wave are provided by:  
+ 
+ 
+(𝑢𝑢)𝑗𝑗=�𝑗𝑗0
+0!+𝑗𝑗4
+4!+𝑗𝑗8
+8!+𝑗𝑗12
+12!+⋯∞� 
+ 
+ 
+(𝑥𝑥)𝑗𝑗=�𝑗𝑗1
+1!+𝑗𝑗5
+5!+𝑗𝑗9
+9!+𝑗𝑗13
+13!+⋯∞� 
+(189 ) 
+ 
+(𝜈𝜈)𝑗𝑗=�𝑗𝑗2
+2!+𝑗𝑗6
+6!+𝑗𝑗10
+10!+𝑗𝑗14
+14!+⋯∞� 
+ 
+ 
+(𝑦𝑦)𝑗𝑗=�𝑗𝑗3
+3!+𝑗𝑗7
+7!+𝑗𝑗11
+11!+𝑗𝑗15
+15!+⋯∞� 
+  
+ 
+The power series in each infinite series expression can be arranged into a 
+four square, or 16 elements matrix:  
+ 
+(𝑢𝑢) 
+⎣⎢⎢⎢⎢⎢⎡0 4 8 12
+1 5 9 13
+2 6 10 14
+3 7 11 15⎦⎥⎥⎥⎥⎥⎤
+ (190 ) (x) 
+(ν) 
+(y) 
+ 
+  
+
+--- PAGE 79 ---
+
+79 
+ericpdollard.com                 emediap ress.com   
+Rotating this matrix gives:  
+ 
+ 
+ (191 ) 
+ 
+ 
+This matrix serves as a four phase sequence diagram. The first cycle gives the phase sequence:  
+ 
+0,  1,  2,  3.                                         (192 ) 
+ 
+ 
+The next cycle gives the phase sequence:  
+ 
+ 
+4,  5,  6,  7.                                         (193 ) 
+ 
+ 
+The third cycle gives the phase sequence:  
+  
+8,  9,  10,  11,                                       (194 ) 
+ 
+ 
+And so on.   
+
+
+--- PAGE 80 ---
+
+80 
+ericpdollard.com                 emediap ress.com   
+Using quaternary numerals 0, 1, 2, 3, reduces the sequence matrix to:  
+ 
+ 
+𝑗𝑗4=𝑗𝑗0   𝑗𝑗8=𝑗𝑗0   𝑗𝑗12=𝑗𝑗0 
+ 
+𝑗𝑗5=𝑗𝑗1   𝑗𝑗9=𝑗𝑗1   𝑗𝑗13=𝑗𝑗1 
+(195 ) 
+𝑗𝑗6=𝑗𝑗2   𝑗𝑗10=𝑗𝑗2  𝑗𝑗14=𝑗𝑗2 
+ 
+𝑗𝑗7=𝑗𝑗3   𝑗𝑗11=𝑗𝑗3  𝑗𝑗15=𝑗𝑗3 
+ 
+ 
+ Forward  
+Sequence 
+Matrix  (195 a) 
+ 
+The sequences are  continuously repeated thr ough each advancing cycle.  
+ 
+The four functions each represent a distinct phase in the four phase 
+sequence, that is:  
+ 
+(𝑢𝑢) Is the phase one function  
+(x) Is the phase two function  
+(ν) Is the phase three function  
+(y) Is the phase four function  
+ (196 ) 
+  
+
+
+--- PAGE 81 ---
+
+81 
+ericpdollard.com                 emediap ress.com   
+The complete four phase wave is given by:  
+ 
+ 
+Є11
+4=1(𝑢𝑢)+𝑗𝑗(𝑥𝑥)+ℎ(𝜈𝜈)+𝑘𝑘(𝑦𝑦)                              (197)  
+ 
+ 
+And the sequence operators are given as:  
+ 
+1,  Zero sequence  
+ 
+𝑗𝑗,   Positive sequence  
+(198 ) 
+ℎ,   Alternating sequence 
+ 
+𝑘𝑘,   Negative sequence  
+  
+This system of phase functions and related sequence operators establishes a 
+basic starting point in developing poly phase  mathematics.  
+ 
+
+--- PAGE 82 ---
+
+82 
+ericpdollard.com                 emediap ress.com  [11]  Tripolar Exponential Functions  
+ 
+(1)  The most common polyphase system in use is the three phase system. 
+It is used with almost no exception, however its theoretical basis is not well developed.  
+ 
+Three phase possesses some characteristics unlike the other orders of 
+phases, and it is the lowest order of polyphase systems. Two phase 
+alternates, it does not rotate. Two phase is wrongly called single phase 
+alternating current. It is a duo -binary system, bi -polar, with two poles or 
+phases. Single phase i s mono -polar, in its true form.  
+ 
+The number three is a prime number, it is numerically indivisible in the 
+realm of whole numbers. It cannot be compounded from other whole 
+numbers. The number three has no bi -polar characteristics, unlike the 
+number four. There is no “negative one”, as commonly understood. The bi -
+polar functions cosine and sine cannot dir ectly represent three phase 
+rotational waves, conversion must be made into the complex numbers of 
+the Cartesian coordinate form, the “Steinmetz Method”.  
+ The imaginary exponents of Epsilon for a three phase system are derived from the cube root of positive one: 
+ 
+ 
+𝑖𝑖=√+13 
+ 
+(199 ) 
+ 
+𝑖𝑖𝑛𝑛=11
+3    𝑛𝑛=0,1,2. 
+ 
+ 
+  
+
+--- PAGE 83 ---
+
+83 
+ericpdollard.com                 emediap ress.com   
+The roots are given as:  
+ 
+ 
+𝑖𝑖0=1,  Zero Sequence  
+(200 )    
+𝑖𝑖1=𝑖𝑖,  Positive Sequence  
+   
+𝑖𝑖2=𝑘𝑘,  Negative Sequence  
+ 
+ Note that this system contains no alternating sequence, unlike the  four 
+phase system. There is no  bi-polar component, a characteristic of polyphase 
+systems based on prime numbers.  
+  The trinary imaginaries, as sequence operators ha ve the following 
+relationships:  
+ 
+ 
+𝑖𝑖−1=𝑘𝑘,  Negative Sequence   
+    
+𝑘𝑘−1=𝑖𝑖,  Positive Sequence  (201 ) 
+    
+𝑖𝑖𝑘𝑘=1,  Zero Sequence   
+ 
+  
+  
+
+--- PAGE 84 ---
+
+84 
+ericpdollard.com                 emediap ress.com   
+And the inversions are:  
+ 
+ 
+1
+𝑖𝑖=𝑘𝑘 
+ 
+(202 ) 
+ 
+1
+𝑘𝑘=𝑖𝑖 
+  
+ 
+This expresses the counter rotational relation between the positive sequence and negative sequence operators. Since the operator, 𝑖𝑖 , is forward 
+rotational, and the operator, 𝑘𝑘 , is reverse rotational, the product 𝑖𝑖 𝑘𝑘 cancels. 
+The resultant phase position remains unmoved at the zero position, 1.  
+  (2)  The log base Epsilon to a trinary imaginary exponent, 𝑖𝑖 , is expressed 
+in an infin ite series expression as:  
+ 
+ 
+ 
+Є𝑖𝑖=𝑖𝑖0
+0!+𝑖𝑖1
+1!+𝑖𝑖2
+2!+𝑖𝑖3
+3!+𝑖𝑖4
+4!+𝑖𝑖5
+5!+𝑖𝑖6
+6!+𝑖𝑖7
+7!+𝑖𝑖8
+8!+⋯∞       (203 ) 
+  
+ 
+  
+
+--- PAGE 85 ---
+
+85 
+ericpdollard.com                 emediap ress.com   
+Substituting the relations:  
+ 
+ 
+𝑖𝑖0=1,  𝑖𝑖3=1,  𝑖𝑖6=1 
+ 
+ 
+𝑖𝑖1=𝑖𝑖,  𝑖𝑖4=𝑖𝑖,  𝑖𝑖7=𝑖𝑖                                (204 ) 
+ 
+ 
+𝑖𝑖2=𝑘𝑘,  𝑖𝑖5=𝑘𝑘,  𝑖𝑖8=𝑘𝑘 
+  
+ 
+Gives the infinite series expression as:  
+ 
+ 
+Є1𝑛𝑛
+3=1
+0!+𝑖𝑖
+1!+𝑘𝑘
+2!+1
+3!+𝑖𝑖
+4!+𝑘𝑘
+5!+1
+6!+𝑖𝑖
+7!+𝑘𝑘
+8!+⋯∞ 
+ 
+(205 ) 
+Є1𝑛𝑛
+3=Є𝑖𝑖𝑛𝑛 𝑛𝑛=0,1,2 
+ 
+  
+
+--- PAGE 86 ---
+
+86 
+ericpdollard.com                 emediap ress.com   
+The sequences are given as:  
+ 
+ 
+ 1, Zero Sequence   
+1𝑛𝑛
+3   = 𝑖𝑖, Positive Sequence  (206 ) 
+ 𝑘𝑘, Negative Sequence   
+ 
+ 
+And  
+ 
+ 
+ 
+1,   𝑖𝑖,  𝑘𝑘, 1,   𝑖𝑖,   𝑘𝑘, 1,   𝑖𝑖,   𝑘𝑘,  
+Cycle  Cycle  Cycle  (207 ) 
+One Two  Three   
+ 
+ 
+ 
+The number of terms taken in the infinite series here gives three complete 
+cycles of rotation. Each cycle consists of three sequence operations.  
+ 
+ 
+  
+
+--- PAGE 87 ---
+
+87 
+ericpdollard.com                 emediap ress.com   
+Grouping terms with  like imaginaries gives the infinite series expressions 
+for the phase functions as:  
+ 
+ 
+1�1
+0!+1
+3!+1
+6!+⋯ ∞�=1(𝑤𝑤) 
+  
+𝑖𝑖�1
+1!+1
+4!+1
+7!+⋯ ∞�=𝑖𝑖(𝑢𝑢)                              (208 ) 
+ 
+ 
+𝑘𝑘�1
+2!+1
+5!+1
+8!+⋯ ∞�=𝑘𝑘(𝜈𝜈) 
+   
+By substitution the resulting exponential expression is  given by:  
+  
+Є𝑖𝑖𝑛𝑛=1(𝑤𝑤)+𝑖𝑖(𝑢𝑢)+𝑘𝑘(𝜈𝜈)                                 (209 ) 
+ 
+ 
+Where it is:  
+ 
+ 
+(w),  The First Phase Function  
+ 
+(𝑢𝑢),  The Second Phase Function                        (210)  
+ 
+(ν),  The Third Phase Function  
+ 
+  
+
+--- PAGE 88 ---
+
+88 
+ericpdollard.com                 emediap ress.com   
+The imaginary operators for these functions are given as:  
+ 
+1,  Zero  Sequence  
+ 
+𝑖𝑖,   Positive Sequence                                       (211 ) 
+ 𝑘𝑘,   Negative Sequence  
+ 
+ 
+(3)  The expressions thus far have been for unit values:  
+ 
+|1|=1 
+ 
+|𝑖𝑖|=1                                                  (212 ) 
+ 
+|𝑘𝑘|=1 
+  The general expression for the log base Epsilon to a trinary imaginary 
+power of any magnitude in complex symbolic form is given by:  
+  
+Є(𝑖𝑖𝑛𝑛)𝑗𝑗=1(𝑤𝑤)𝑗𝑗+𝑖𝑖(𝑢𝑢)𝑗𝑗+𝑘𝑘(𝜈𝜈) 
+ 
+(213 ) 
+𝑛𝑛=0,1,2 
+ 
+ 
+Expressing this in terms of:  
+ 
+1,  𝑖𝑖,  𝑘𝑘   (214 ) 
+ 
+  
+
+--- PAGE 89 ---
+
+89 
+ericpdollard.com                 emediap ress.com   
+Yields three exponential expressions:  
+ 
+ 
+Є1𝑗𝑗=1(𝑤𝑤)𝑗𝑗+1(𝑢𝑢)𝑗𝑗+1(𝜈𝜈)𝑗𝑗 
+ 
+Є𝑖𝑖𝑗𝑗=1(𝑤𝑤)𝑗𝑗+𝑖𝑖(𝑢𝑢)𝑗𝑗+𝑘𝑘(𝜈𝜈)𝑗𝑗                            (215 ) 
+ 
+Є𝑘𝑘𝑗𝑗=1(𝑤𝑤)𝑗𝑗+𝑘𝑘(𝑢𝑢)𝑗𝑗+𝑖𝑖(𝜈𝜈)𝑗𝑗 
+ 
+ 
+ This is the general form of expression for a three phase rotating electric 
+wave. This constituted from three component waves:  
+  
+Є1𝑗𝑗, Zero Sequence Wave   
+Є𝑖𝑖𝑗𝑗, Positive Sequence Wave  (216 ) 
+Є𝑘𝑘𝑗𝑗, Negative Sequence Wave   
+ 
+ 
+ 
+Any three phase system can be hereby given a mathematical form by the 
+expression:  
+ 
+ 
+Є1𝑗𝑗+Є𝑖𝑖𝑗𝑗+Є𝑘𝑘𝑗𝑗                                      (217 ) 
+  
+  
+
+--- PAGE 90 ---
+
+90 
+ericpdollard.com                 emediap ress.com  This g ives the nine coordinate matrix:  
+ 
+ 
+ (218 ) 
+ 
+Here established is the starting point for polyphase mathematics. This 
+leads to what is commonly known as the “Method of Symmetrical 
+Components”. It is an advancement of the “Steinmetz Method”, this 
+developed by Dr. Charles Fortescue. The symmetrical components method is the basis for the polyphase mathematics in current use.  
+ 
+ 
+
+
+--- PAGE 91 ---
+
+91 
+ericpdollard.com                 emediap ress.com  Chapter Two  
+ 
+System of Symmetrical Components  
+ 
+[1]  The ”Fortescue Method”  
+ (1)  The basis for a generalized expression of any number of phase will be 
+taken from chapter XVI, “Multiphase Systems”, of the Wagner and Evans book “Symmetrical Components”. The common practice of using 
+backwards rotation exists in these derivations. The complications that this 
+practice introduces will present themselves. Here in what follows the derivations will backtrack, setting rotation in the forward direction. This 
+process will provide further insight into the workings of versor operators. 
+Substituti on of simplified terms for repetitive complex terms will assist in a 
+more lucid expression of the processes involved in the general equation.  
+ Any polyphase system possesses a given number of phases, three, four, etc. 
+Each phase has a specific E.M.F., current, etc. These are the variables and 
+thus can have any magnitude or phase position. Their values can represent 
+a set of generalized numbers. This provides the abstract mathematical form 
+from which to deri ve a theoretical understanding.  
+ 
+Each general number consists of three identifying parts:  
+ 
+A · 𝑘𝑘𝑛𝑛                                                  (219 ) 
+Where:  
+ 
+   A, is the tensor, the magnitude of the dimensions, volt, ohm,  etc. 
+ 
+   𝑘𝑘, is the versor axis that the magnitude is affixed to.  
+    n, is the number of unit versor steps from the reference phase.  
+  
+
+--- PAGE 92 ---
+
+92 
+ericpdollard.com                 emediap ress.com  For example is a simp le D.C. case of plus and minus.  
+ 
+  A equals 12 volts,  
+  𝑘𝑘 is a D.C. axis, ℎ, 
+  n is one step ℎ  beyond the positive referen ce giving negative value.  
+ 
+ 
+Then the expression is for a negative twelve volts:  
+ 
+ 
+ℎ1(12)=−12 volt 
+(220 )   
+ℎ1=(−1) A=12 
+ 
+ 
+(2)  A polyphase system consists of a multiplicity of these numbers, this 
+equal to the number of phases in the system. This set of numbers exists as a complex coordinate system.  
+ 
+Let the system of general numbers be given as:  
+ 
+𝑒𝑒𝑎𝑎���,  Phase A  
+ 
+𝑒𝑒𝑏𝑏���,  Phase B  
+ 
+𝑒𝑒𝑒𝑒�,   Phase C                                                    (221 ) 
+ 
+𝑒𝑒𝑑𝑑���,  Phase D  
+  
+𝑒𝑒𝑛𝑛���,  Phase N  
+ 
+  
+
+--- PAGE 93 ---
+
+93 
+ericpdollard.com                 emediap ress.com   
+Where N is the number of phases, and the line over e indicates a directed 
+quantity. The magnitude is given by:  
+  
+                                                
+(222 ) 
+ 
+ 
+The system of N general numbers can be resolved into N component systems, each with N terms, giving N squared terms total. These 
+components are  given as:  
+  
+𝐸𝐸𝑎𝑎0,  𝐸𝐸𝑏𝑏0,  𝐸𝐸𝑒𝑒0,  𝐸𝐸𝑑𝑑0,… etc. 
+ 
+𝐸𝐸𝑎𝑎1,  𝐸𝐸𝑏𝑏1,  𝐸𝐸𝑒𝑒1,  𝐸𝐸𝑑𝑑1,… etc. 
+ 
+𝐸𝐸𝑎𝑎2,  𝐸𝐸𝑏𝑏2,  𝐸𝐸𝑒𝑒2,  𝐸𝐸𝑑𝑑2,… etc.                                 (223 ) 
+ 
+𝐸𝐸𝑎𝑎3,  𝐸𝐸𝑏𝑏3,  𝐸𝐸𝑒𝑒3,  𝐸𝐸𝑑𝑑3,… etc. 
+.        .       .       .     . 
+.        .       .       .     .  
+.        .       .       .     .  
+etc.      etc.     etc.      etc.  
+ 
+   
+
+
+--- PAGE 94 ---
+
+94 
+ericpdollard.com                 emediap ress.com  Like phase components from each component system are summed to give 
+the general number co -responding to that phase, this given by:  
+ 
+𝑒𝑒̅a  =𝐸𝐸𝑎𝑎0 +𝐸𝐸𝑎𝑎1 +𝐸𝐸𝑎𝑎2 +𝐸𝐸𝑎𝑎3 … etc. 
+ 
+𝑒𝑒̅b =𝐸𝐸𝑏𝑏0 +𝐸𝐸𝑏𝑏1 +𝐸𝐸𝑏𝑏2 +𝐸𝐸𝑏𝑏3 … etc. 
+ 
+𝑒𝑒̅c =𝐸𝐸𝑒𝑒0 +𝐸𝐸𝑒𝑒1 +𝐸𝐸𝑒𝑒2 +𝐸𝐸𝑒𝑒3 … etc.                       (224 ) 
+.        .       .       .     .  
+.        .       .       .     .  
+𝑒𝑒̅N              etc.       etc.      etc.        etc.  
+ 
+ 
+The general number components can all be resolved to a reference phase by a sequence of operations:  
+ 
+𝑘𝑘𝐸𝐸𝑎𝑎=𝐸𝐸𝑏𝑏  
+ 
+𝑘𝑘𝐸𝐸𝑏𝑏=𝐸𝐸𝑒𝑒  
+(225 ) 
+𝑘𝑘𝐸𝐸𝑒𝑒=𝐸𝐸𝑑𝑑  
+ 
+𝑘𝑘𝐸𝐸𝑑𝑑=𝑒𝑒𝑒𝑒𝑒𝑒. 
+  And for the reference phase it is:  
+  
+𝐸𝐸𝑎𝑎=𝑘𝑘0 𝐸𝐸𝑎𝑎                                            (226 ) 
+  
+By these sequential operations a general expression in terms of one phase 
+can be arrived at.  
+  
+
+--- PAGE 95 ---
+
+95 
+ericpdollard.com                 emediap ress.com   
+(3)  In the Wagner and Evans chapter, “Multiphase Systems”, the 
+expression for a system of general numbers is given as:  
+ 
+ 
+𝑒𝑒̅a =Є−0𝛾𝛾·𝐸𝐸𝑎𝑎0 +Є−0𝛾𝛾·𝐸𝐸𝑎𝑎1 +Є−0𝛾𝛾·𝐸𝐸𝑎𝑎2 +Є−0𝛾𝛾·𝐸𝐸𝑎𝑎3 + 
+ 
+𝑒𝑒̅b =Є−0𝛾𝛾·𝐸𝐸𝑎𝑎0 +Є−1𝛾𝛾·𝐸𝐸𝑎𝑎1 +Є−2𝛾𝛾·𝐸𝐸𝑎𝑎2 +Є−3𝛾𝛾·𝐸𝐸𝑎𝑎3 + 
+(227 ) 
+𝑒𝑒̅c =Є−0𝛾𝛾·𝐸𝐸𝑎𝑎0 +Є−2𝛾𝛾·𝐸𝐸𝑎𝑎1 +Є−4𝛾𝛾·𝐸𝐸𝑎𝑎2 +Є−6𝛾𝛾·𝐸𝐸𝑎𝑎3 + 
+ 
+𝑒𝑒̅d =Є−0𝛾𝛾·𝐸𝐸𝑎𝑎0 +Є−3𝛾𝛾·𝐸𝐸𝑎𝑎1 +Є−6𝛾𝛾·𝐸𝐸𝑎𝑎2 +Є−9𝛾𝛾·𝐸𝐸𝑎𝑎3 + 
+ 
+ 
+The exponent is given as:  
+  
+𝛾𝛾=𝑗𝑗𝑗𝑗                                                    (228 ) 
+  And the angle given by:  
+  
+𝑗𝑗 = Angle between consecutive phases, N  
+(229 ) 
+𝑗𝑗=2𝜋𝜋
+𝑁𝑁 
+ 
+ 
+Where N is the number of phases, and represents the number of divisions of one unit cycle.  
+   
+
+--- PAGE 96 ---
+
+96 
+ericpdollard.com                 emediap ress.com   
+The duo -binary operator is defined as:  
+ 
+ 
+𝑗𝑗 = Duo -Binary Operator  
+ 
+(230 ) 
+𝑗𝑗=√−12 
+ 
+ 
+ 
+The resulting matrix of exponent multipliers is given by: 
+ 
+ 
+ (231 ) 
+ 
+ 
+All values in this matrix are negative, this is a result of the authors using 
+backward rotation.  
+ Converting the form of Epsilon to an imaginary power to the form of an imaginary log base to a real power is given as:  
+  
+Є𝑗𝑗𝑗𝑗=Є𝛾𝛾=𝑘𝑘1·𝑛𝑛                                          (232 ) 
+ 
+  
+
+
+--- PAGE 97 ---
+
+97 
+ericpdollard.com                 emediap ress.com   
+Substituting the imaginary log base  𝑘𝑘 into the general expression gives:  
+ 
+ 
+𝑒𝑒̅a =𝑘𝑘𝑁𝑁−0·𝐸𝐸𝑎𝑎0 +𝑘𝑘𝑁𝑁−0·𝐸𝐸𝑎𝑎1 +𝑘𝑘𝑁𝑁−0·𝐸𝐸𝑎𝑎2 +𝑘𝑘𝑁𝑁−0·𝐸𝐸𝑎𝑎3 
++ … 
+𝑒𝑒̅b =𝑘𝑘𝑁𝑁−0·𝐸𝐸𝑎𝑎0 +𝑘𝑘𝑁𝑁−1·𝐸𝐸𝑎𝑎1 +𝑘𝑘𝑁𝑁−2·𝐸𝐸𝑎𝑎2 +𝑘𝑘𝑁𝑁−3·𝐸𝐸𝑎𝑎3 
++ … 
+𝑒𝑒̅c =𝑘𝑘𝑁𝑁−0·𝐸𝐸𝑎𝑎0 +𝑘𝑘𝑁𝑁−2·𝐸𝐸𝑎𝑎1 +𝑘𝑘𝑁𝑁−4·𝐸𝐸𝑎𝑎2 +𝑘𝑘𝑁𝑁−6·𝐸𝐸𝑎𝑎3 
++ … 
+𝑒𝑒̅d =𝑘𝑘𝑁𝑁−0·𝐸𝐸𝑎𝑎0 +𝑘𝑘𝑁𝑁−3·𝐸𝐸𝑎𝑎1 +𝑘𝑘𝑁𝑁−6·𝐸𝐸𝑎𝑎2 +𝑘𝑘𝑁𝑁−9·𝐸𝐸𝑎𝑎3 
++ … 
+ 
+(233 ) 
+ 
+ 
+Thus far the methods and the equations have been that of Wagner and 
+Evans, and this is as far as they go into the theoretical development.  
+  
+(4)  Their expression for a system of general numbers can be simplified 
+by the following relations. To eliminate extraneous terms in the exponents 
+a substitution is made:  
+ 
+𝑚𝑚=𝑁𝑁−𝑛𝑛                                              (234 ) 
+ 
+ 
+Where N is the number of phases, or divisions in the unit cycle, n is the 
+number of  unit versor steps from the reference phase:  
+ 
+ 
+𝑘𝑘0=1                                                   (235 ) 
+  
+
+--- PAGE 98 ---
+
+98 
+ericpdollard.com                 emediap ress.com   
+The total number of non-zero versor operators  required to complete one 
+cycle is always less than the total number of phases. Then the relation is 
+given by:  
+ 
+𝑘𝑘𝑁𝑁−𝑚𝑚=𝑘𝑘𝑁𝑁·𝑘𝑘−𝑚𝑚                                        (236 ) 
+  according to the law of exponents.  
+  
+For the imaginary log, base  
+𝑘𝑘𝑁𝑁, to the N power it is:  
+ 
+ 
+𝑘𝑘𝑁𝑁𝑁𝑁=1                                                    (237 ) 
+ 
+ 
+This represents one complete unit cycle of n versor steps. This is explicitly 
+given as:  
+ 
+ 
+𝑘𝑘=√+1𝑁𝑁 
+(238 ) 
+𝑘𝑘𝑁𝑁
+𝑁𝑁=1 
+ 
+ 
+And it is given that:  
+ 
+ 
+𝑘𝑘𝑛𝑛=1𝑛𝑛
+𝑁𝑁                                                 (239 ) 
+ 
+ 
+  
+
+--- PAGE 99 ---
+
+99 
+ericpdollard.com                 emediap ress.com   
+Thus for one complete cycle it is:  
+ 
+ 
+𝑘𝑘𝑁𝑁
+𝑁𝑁=1 
+ 
+ 
+𝑘𝑘𝑁𝑁=1𝑁𝑁
+𝑁𝑁                                              (240 ) 
+ 
+ 
+1𝑁𝑁𝑁𝑁
+=1 
+ 
+ Therefore it is shown that the exponents in the general equation can be 
+reduced as given by:  
+  
+𝑘𝑘𝑁𝑁−𝑚𝑚=1·𝑘𝑘−𝑚𝑚=𝑘𝑘−𝑚𝑚                            (241 ) 
+ 
+ 
+And its inverse form given as:  
+ 
+ 
+𝑘𝑘−𝑚𝑚=1
+𝑘𝑘𝑚𝑚                                        (242 ) 
+ 
+ 
+The backwards rotation has the effect of placing the imaginary operation in 
+the denominator of each component of the general equation. This is a  less 
+than desirable condition.  
+   
+
+--- PAGE 100 ---
+
+100 
+ericpdollard.com                 emediap ress.com   
+These simplificat ions can be substituted into the final general equation of 
+Wagner and Evans to yield a revised expression:  
+ 
+ 
+𝑒𝑒̅a =𝑘𝑘0·𝐸𝐸𝑎𝑎0 +𝑘𝑘0·𝐸𝐸𝑎𝑎1 +𝑘𝑘0·𝐸𝐸𝑎𝑎2 +𝑘𝑘0·𝐸𝐸𝑎𝑎3 +⋯ 
+𝑒𝑒̅b =𝑘𝑘0·𝐸𝐸𝑎𝑎0 +𝑘𝑘−1·𝐸𝐸𝑎𝑎1 +𝑘𝑘−2·𝐸𝐸𝑎𝑎2 +𝑘𝑘−3·𝐸𝐸𝑎𝑎3 +⋯ 
+𝑒𝑒̅c =𝑘𝑘0·𝐸𝐸𝑎𝑎0 +𝑘𝑘−2·𝐸𝐸𝑎𝑎1 +𝑘𝑘−4·𝐸𝐸𝑎𝑎2 +𝑘𝑘−6·𝐸𝐸𝑎𝑎3 +⋯ 
+𝑒𝑒̅d =𝑘𝑘0·𝐸𝐸𝑎𝑎0 +𝑘𝑘−3·𝐸𝐸𝑎𝑎1 +𝑘𝑘−6·𝐸𝐸𝑎𝑎2 +𝑘𝑘−9·𝐸𝐸𝑎𝑎3 +⋯ 
+ 
+(243 ) 
+ 
+ 
+(5)  A simple application of equation 24 3 is that of a three phase system, 
+the lowest order of polyphase systems. The operator is defined by:  
+ 
+ 
+𝑘𝑘=√+13 
+ 
+𝑘𝑘𝑛𝑛=1𝑛𝑛
+3 
+(244 ) 
+𝑘𝑘𝑁𝑁=𝑘𝑘3 
+ 
+𝑘𝑘3=+1 
+ 
+ 
+  
+
+--- PAGE 101 ---
+
+101 
+ericpdollard.com                 emediap ress.com  The general expression for three general numbers becomes:  
+ 
+𝑒𝑒̅a =   𝑘𝑘0·𝐸𝐸𝑎𝑎0 +𝑘𝑘0·𝐸𝐸𝑎𝑎1 +𝑘𝑘0·𝐸𝐸𝑎𝑎2    
+𝑒𝑒̅b =   𝑘𝑘0·𝐸𝐸𝑎𝑎0 +𝑘𝑘−1·𝐸𝐸𝑎𝑎1 +𝑘𝑘−2·𝐸𝐸𝑎𝑎2   (245 ) 
+𝑒𝑒̅c =   𝑘𝑘0·𝐸𝐸𝑎𝑎0 +𝑘𝑘−2·𝐸𝐸𝑎𝑎1 +𝑘𝑘−4·𝐸𝐸𝑎𝑎2    
+ 
+ 
+The resulting matrix of exponents is:  
+ 
+ 
+ (246) 
+ 
+ 
+The three rows represent a phase sequence. The zero sequence is:  
+ 
+0     0     0                                                   (247 ) 
+ 
+ 
+The negative forward sequence is:  
+ 
+0   -1    -2                                                   (248 ) 
+ 
+ 
+The negative reverse sequence is:  
+ 
+0   -2    -4                                                   (249 ) 
+  
+
+
+--- PAGE 102 ---
+
+102 
+ericpdollard.com                 emediap ress.com   
+Because the general equations having their basis in backward rotation the 
+sequence numbers are negative. Since a forward sequence is positive, and a 
+reverse sequence is negative, the condition here is a negative positive 
+sequence, and a negative , negative sequence. Now the complications 
+become more evident, recalling, in mind, the comments of Heaviside and 
+Steinmetz relating to standardizing counter -clockwise rota tion.  
+ 
+The relations become more clear  by substituting:  
+ 
+ 
+𝑘𝑘−0=𝑘𝑘4 
+ 
+𝑘𝑘−1=𝑘𝑘2                                              (250 ) 
+ 
+𝑘𝑘−2=𝑘𝑘1 
+  
+This establishes a matrix free of negative signs:  
+ 
+ 
+ (251 ) 
+  
+Here the positive sequence is a negative sequence:  
+ 
+ 
+0 2 1                                           (252 ) 
+   
+
+
+--- PAGE 103 ---
+
+103 
+ericpdollard.com                 emediap ress.com   
+And the negative sequence is a positive sequence. This is in  accord with 
+backward rotation.  
+ 
+ 
+The proper matrix is given as:  
+ 
+ 
+ (253 ) 
+  
+This giving:  
+ 
+ 
+Zero Sequence  [0, 0, 0.]  
+Positive Sequence  [0, 1, 2.] (254 ) 
+Negative Sequence  [0, 2, 1.]  
+   
+ 
+ 
+The complications introduced by backward rotation confuse and obscure 
+the relations involved in this versor algebra. This  becomes a significant 
+impairment when higher order systems, and harmonics, are involved in 
+the mathematical expressions. To go any further into polyphase 
+mathematics, the equations of Wagner and Evans will have to be reversed, 
+giving them a basis in cl ockwise rotation.  
+  
+
+
+--- PAGE 104 ---
+
+104 
+ericpdollard.com                 emediap ress.com   
+(6)  Reversing the sequence of the Wagner and Evans equations gives the 
+revised set of general equations:  
+ 
+ 
+𝑒𝑒̅a 
+ =Є0𝛾𝛾·𝐸𝐸𝑎𝑎0 +Є0𝛾𝛾·𝐸𝐸𝑎𝑎1 +Є0𝛾𝛾·𝐸𝐸𝑎𝑎2 +Є0𝛾𝛾·𝐸𝐸𝑎𝑎3   
+   
+𝑒𝑒̅b 
+ =Є0𝛾𝛾·𝐸𝐸𝑎𝑎0 +Є1𝛾𝛾·𝐸𝐸𝑎𝑎1 +Є2𝛾𝛾·𝐸𝐸𝑎𝑎2 +Є3𝛾𝛾·𝐸𝐸𝑎𝑎3   
+  (255 ) 
+𝑒𝑒̅c 
+ =Є0𝛾𝛾·𝐸𝐸𝑎𝑎0 +Є2𝛾𝛾·𝐸𝐸𝑎𝑎1 +Є4𝛾𝛾·𝐸𝐸𝑎𝑎2 +Є6𝛾𝛾·𝐸𝐸𝑎𝑎3   
+   
+𝑒𝑒̅d 
+ =Є0𝛾𝛾·𝐸𝐸𝑎𝑎0 +Є3𝛾𝛾·𝐸𝐸𝑎𝑎1 +Є6𝛾𝛾·𝐸𝐸𝑎𝑎2 +Є9𝛾𝛾·𝐸𝐸𝑎𝑎3   
+ 
+Rearranging terms defines the individual components, giving:  
+ 
+ 
+𝐸𝐸𝑎𝑎0 =1
+𝑁𝑁[𝑒𝑒̅a+Є0𝛾𝛾·𝑒𝑒̅b+Є0𝛾𝛾·𝑒𝑒̅c+Є0𝛾𝛾·𝑒𝑒̅d+] 
+ 
+𝐸𝐸𝑎𝑎1 =1
+𝑁𝑁[𝑒𝑒̅a+Є1𝛾𝛾·𝑒𝑒̅b+Є2𝛾𝛾·𝑒𝑒̅c+Є3𝛾𝛾·𝑒𝑒̅d+] 
+(256 ) 
+𝐸𝐸𝑎𝑎2 =1
+𝑁𝑁[𝑒𝑒̅a+Є2𝛾𝛾·𝑒𝑒̅b+Є4𝛾𝛾·𝑒𝑒̅c+Є6𝛾𝛾·𝑒𝑒̅d+] 
+ 
+𝐸𝐸𝑎𝑎3 =1
+𝑁𝑁[𝑒𝑒̅a+Є3𝛾𝛾·𝑒𝑒̅b+Є6𝛾𝛾·𝑒𝑒̅c+Є9𝛾𝛾·𝑒𝑒̅d+] 
+   
+
+--- PAGE 105 ---
+
+105 
+ericpdollard.com                 emediap ress.com   
+In order to convert from Epsilon to an imaginary log base the f ollowing 
+substitutions are made:  
+ 
+ 
+Є+1𝛾𝛾=𝑘𝑘𝑁𝑁𝑁𝑁+1  Є−1𝛾𝛾=𝑘𝑘𝑁𝑁𝑁𝑁−1  
+    
+Є+2𝛾𝛾=𝑘𝑘𝑁𝑁𝑁𝑁+2  Є−2𝛾𝛾=𝑘𝑘𝑁𝑁𝑁𝑁−2  
+   (257 ) 
+Є+3𝛾𝛾=𝑘𝑘𝑁𝑁𝑁𝑁+3  Є−3𝛾𝛾=𝑘𝑘𝑁𝑁𝑁𝑁−3  
+    
+Є+4𝛾𝛾=𝑘𝑘𝑁𝑁𝑁𝑁+4  Є−4𝛾𝛾=𝑘𝑘𝑁𝑁𝑁𝑁−4  
+ 
+ 
+The series shown extends to higher order multipliers, only one through 
+four are shown. The exponent is simplified by:  
+ 
+ 
+𝑘𝑘𝑁𝑁(𝑁𝑁+1)=𝑘𝑘𝑁𝑁𝑁𝑁·𝑘𝑘𝑁𝑁1                                           (258 ) 
+ 
+ 
+And for any versor position, n, it is:  
+ 
+ 
+𝑘𝑘𝑁𝑁(𝑁𝑁+𝑛𝑛)=𝑘𝑘𝑁𝑁𝑁𝑁·𝑘𝑘𝑁𝑁𝑛𝑛                                           (259 ) 
+  
+Where:  
+ 
+𝑘𝑘𝑁𝑁𝑁𝑁=+1                                                  (260 ) 
+ 
+  
+
+--- PAGE 106 ---
+
+106 
+ericpdollard.com                 emediap ress.com   
+Hence in general form the imaginary log base to any real unit exponent is:  
+ 
+ 
+𝑘𝑘𝑁𝑁(𝑁𝑁+𝑛𝑛)=𝑘𝑘𝑁𝑁𝑛𝑛                                             (261 ) 
+ 
+ For the negative exponent of the Wagner and Evans equation it is:  
+  
+𝑘𝑘𝑁𝑁(𝑁𝑁−𝑛𝑛)=𝑘𝑘𝑁𝑁𝑁𝑁·𝑘𝑘𝑁𝑁−𝑛𝑛                                       (262 ) 
+  Hence:  
+  
+𝑘𝑘𝑁𝑁(𝑁𝑁−𝑛𝑛)=𝑘𝑘𝑁𝑁−𝑛𝑛                                            (263 ) 
+  Expressed as a unit root relation, the imaginary log, base N, to any real 
+power n is given as:  
+ 
+𝑘𝑘𝑁𝑁𝑛𝑛=1𝑛𝑛
+𝑁𝑁                                                 (264 ) 
+  
+In imaginary form, Epsilon to any positive imaginary power is:  
+  
+𝑘𝑘𝑁𝑁+𝑥𝑥=Є+𝑥𝑥𝛾𝛾                                              (265 ) 
+ 
+𝑦𝑦=𝑗𝑗2𝜋𝜋𝑛𝑛
+𝑁𝑁  
+
+--- PAGE 107 ---
+
+107 
+ericpdollard.com                 emediap ress.com  And for Epsilon to any negative imaginary power is:  
+ 
+ 
+𝑘𝑘𝑁𝑁−𝑥𝑥=Є−𝑥𝑥𝛾𝛾                                              (266 ) 
+ 
+ The positive exponent establishes a forward rotation, the negative 
+exponent establishes a reverse rotation. The variable x is any versor 
+rotation from the reference phase. This defines th e phase position in a cycle 
+that cons ists of N distinct unit phases.  
+  
+The general versor operator is established as:  
+ 
+ 
+𝑘𝑘𝑁𝑁𝑛𝑛=1𝑛𝑛
+𝑁𝑁 
+(267 ) 
+𝑛𝑛=0,1,2,3,…(𝑁𝑁−1) 
+  
+The reference is given as:  
+  
+𝑘𝑘𝑁𝑁0=  Reference Phase, or Versor Position                        (268 ) 
+  
+N is the number of phases or divisions in a unit cycle.  
+ n is the number of unit versor steps between unit phase positions, sta rting 
+from the reference phase.  
+ 
+  
+
+--- PAGE 108 ---
+
+108 
+ericpdollard.com                 emediap ress.com   
+The cyclic versor operat or represents the number of complete cycles. This is 
+defined as:  
+ 
+ 
+1𝑁𝑁1=𝑘𝑘𝑁𝑁1𝑁𝑁 ; One Cycle   
+    
+1𝑁𝑁2=𝑘𝑘𝑁𝑁2𝑁𝑁 ; Two Cycles   
+    
+1𝑁𝑁3=𝑘𝑘𝑁𝑁3𝑁𝑁 ; Three Cycles  (269 ) 
+    
+1𝑁𝑁𝑚𝑚=𝑘𝑘𝑁𝑁𝑚𝑚𝑁𝑁 ; m Cycles   
+    
+1𝑁𝑁, Cyclic Imaginary Log Base   
+ 
+ 
+ 
+Where the versor operator 𝑘𝑘  is in phase steps, the versor operator 1 is in 
+cycle steps. These two operators are related by:  
+  
+𝑛𝑛
+𝑁𝑁  , Fraction of One Complete Cycle   
+   
+1
+𝑁𝑁  , One Step Forward, Full Cycle  (270) 
+   
+𝑁𝑁−1
+𝑁𝑁  , One Step Reverse, Full Cycle   
+ 
+ 
+  
+
+--- PAGE 109 ---
+
+109 
+ericpdollard.com                 emediap ress.com   
+Substitution of the imaginary log base to  a real power gives the general 
+equation of Wagner and Evans in its converted form:  
+ 
+ 
+𝑒𝑒̅a =𝑘𝑘𝑁𝑁0·𝐸𝐸𝑎𝑎0 +𝑘𝑘𝑁𝑁0·𝐸𝐸𝑎𝑎1 +𝑘𝑘𝑁𝑁0·𝐸𝐸𝑎𝑎2 +𝑘𝑘𝑁𝑁0·𝐸𝐸𝑎𝑎3+  
+   
+𝑒𝑒̅b =𝑘𝑘𝑁𝑁0·𝐸𝐸𝑎𝑎0 +𝑘𝑘𝑁𝑁1·𝐸𝐸𝑎𝑎1 +𝑘𝑘𝑁𝑁2·𝐸𝐸𝑎𝑎2 +𝑘𝑘𝑁𝑁3·𝐸𝐸𝑎𝑎3+  
+   
+𝑒𝑒̅c =𝑘𝑘𝑁𝑁0·𝐸𝐸𝑎𝑎0 +𝑘𝑘𝑁𝑁2·𝐸𝐸𝑎𝑎1 +𝑘𝑘𝑁𝑁4·𝐸𝐸𝑎𝑎2 +𝑘𝑘𝑁𝑁6·𝐸𝐸𝑎𝑎3+  
+  (271) 
+𝑒𝑒̅d =𝑘𝑘𝑁𝑁0·𝐸𝐸𝑎𝑎0 +𝑘𝑘𝑁𝑁3·𝐸𝐸𝑎𝑎1 +𝑘𝑘𝑁𝑁6·𝐸𝐸𝑎𝑎2 +𝑘𝑘𝑁𝑁9·𝐸𝐸𝑎𝑎3+  
+   
+𝑒𝑒̅N  etc. ,                              etc. ,                              etc. ,  …                                
+𝑘𝑘𝑁𝑁  =√+1𝑁𝑁  
+𝑘𝑘𝑁𝑁𝑛𝑛=1𝑛𝑛
+𝑁𝑁  
+  
+ 
+  
+
+--- PAGE 110 ---
+
+110 
+ericpdollard.com                 emediap ress.com   
+Rearranging terms gives the symmetrical components in terms of phase (A) 
+as the reference as:  
+ 
+ 
+𝐸𝐸𝑎𝑎0 =1
+𝑁𝑁[𝑘𝑘𝑁𝑁0·𝑒𝑒̅a+𝑘𝑘𝑁𝑁0·𝑒𝑒̅b+𝑘𝑘𝑁𝑁0·𝑒𝑒̅c+𝑘𝑘𝑁𝑁0·𝑒𝑒̅d+] 
+ 
+𝐸𝐸𝑎𝑎1 =1
+𝑁𝑁[𝑘𝑘𝑁𝑁0·𝑒𝑒̅a+𝑘𝑘𝑁𝑁1·𝑒𝑒̅b+𝑘𝑘𝑁𝑁2·𝑒𝑒̅c+𝑘𝑘𝑁𝑁3·𝑒𝑒̅d+] 
+(272 ) 
+𝐸𝐸𝑎𝑎2 =1
+𝑁𝑁[𝑘𝑘𝑁𝑁0·𝑒𝑒̅a+𝑘𝑘𝑁𝑁2·𝑒𝑒̅b+𝑘𝑘𝑁𝑁4·𝑒𝑒̅c+𝑘𝑘𝑁𝑁6·𝑒𝑒̅d+] 
+ 
+𝐸𝐸𝑎𝑎3 =1
+𝑁𝑁[𝑘𝑘𝑁𝑁0·𝑒𝑒̅a+𝑘𝑘𝑁𝑁3·𝑒𝑒̅b+𝑘𝑘𝑁𝑁6·𝑒𝑒̅c+𝑘𝑘𝑁𝑁9·𝑒𝑒̅d+] 
+ 
+ 
+Here arrived at are the fundamental equations of the  “Method of 
+Symmetrical  Coordinates”, as developed by Dr. Fortescue.  
+  
+  
+
+--- PAGE 111 ---
+
+111 
+ericpdollard.com                 emediap ress.com  [2]  The General Equations  
+ 
+(1)  The general equations derived thus far establish a system of 
+imaginary operators:  
+ 
+𝑘𝑘𝑁𝑁𝑛𝑛=1𝑛𝑛
+𝑁𝑁                                                  (273 ) 
+ 
+ 
+Where n is a unit position in the polyphase cycle, and N is the number of divisions, or phases, in the cycle. The exponent is now a real geometric 
+ratio of n to N. This system of geometric ratios can be given in a matrix 
+form: 
+ 
+  
+Let the versor operato r,  
+𝑘𝑘𝑁𝑁𝑛𝑛 be expr essed as a fraction of a cycle,  
+ 
+ 
+ 
+1𝑛𝑛
+𝑁𝑁                                                        (274 ) 
+ 
+ 
+becomes : 
+  
+𝑛𝑛
+𝑁𝑁 , percent (x 100)  (275 ) 
+ 
+ 
+   
+
+--- PAGE 112 ---
+
+112 
+ericpdollard.com                 emediap ress.com  The general matrix then becomes  
+ 
+ 
+ (276 ) 
+ 
+ 
+The log base N  is the number of phases. This determines the size of a given 
+polyphase square, 2x2, 3x3, 4x4, and etc., derived from the generalized  
+matrix. Thus the size of a specific matrix is N squared. The real exponents, n, are fixed in value, regard less of the number of phases, N. 
+  
+
+
+--- PAGE 113 ---
+
+113 
+ericpdollard.com                 emediap ress.com  A ratio exists between the exponent constant, n, and the number of phases, 
+N, the log base variable:  
+ 
+ 
+ 
+0
+𝑁𝑁 ,   1
+𝑁𝑁 ,   2
+𝑁𝑁 ,   3
+𝑁𝑁 ,….𝑒𝑒𝑒𝑒𝑒𝑒.                          (277)  
+ 
+ 
+ This ratio thus changes for each number of phases, and hereby the 
+operator, 1, operates in accord with the number of phases. Since this ratio is 
+unique for each system of a given number of phase, it in and of itself 
+identifies the versor operation. Therefore the imaginary can be dropped in 
+order to simplify the expression.  
+  
+  
+
+--- PAGE 114 ---
+
+114 
+ericpdollard.com                 emediap ress.com   
+The matrix of the exponential constants derived from the general equation 
+is given by:  
+  
+ 
+ 
+ 
+(278 ) 
+   
+
+
+--- PAGE 115 ---
+
+115 
+ericpdollard.com                 emediap ress.com   
+This gives the Pythagorean representation of squares and nomens.  The 
+colored nomens enclose that part of a square which defines the coordinate 
+positions  for that number of phases. The constant exponent is a numeral 
+from the number system defined by the number of phases, binary, trinary, 
+quaternary, and etc. A constant exponent of higher order can be reduced to the numerals of the given number system of the number of phases. For 
+example, a four phase system gives a  quaternary number system, this 
+consisting of four numerals:  
+ 
+ 
+0 = 0 
+ 
+1 = 1 
+ 
+2 = 2 
+ 
+3 = 3 
+(279 ) 
+4 = 0 
+ 
+5 = 1 
+ 
+6 = 2 
+ 
+7 = 3 
+  
+Thus the number four is a repetition of the cycle and is thus equal to zero,  
+and etc.  
+ 
+Various number systems are giv en in  the following diagram : 
+  
+
+--- PAGE 116 ---
+
+116 
+ericpdollard.com                 emediap ress.com   (280 ) 
+  
+
+
+--- PAGE 117 ---
+
+117 
+ericpdollard.com                 emediap ress.com   
+(2)  A specific matrix form exists for each numerical system of phases. 
+Each matrix is in a ratio form, and the imaginary operator is dropped out. 
+Given are the matrices from two phase to nine phase.  
+  
+Two Phase  
+ 
+𝑛𝑛
+𝑁𝑁= 
+ (281 ) 
+   
+Three Phase  
+ 
+𝑛𝑛
+𝑁𝑁= 
+ (282 ) 
+  
+ 
+Four Phase  
+ 
+𝑛𝑛
+𝑁𝑁= 
+ (283 ) 
+   
+
+
+--- PAGE 118 ---
+
+118 
+ericpdollard.com                 emediap ress.com   
+ 
+Five Phase  
+ 
+𝑛𝑛
+𝑁𝑁= 
+ (284 ) 
+  
+ 
+ 
+Six Phase  
+ 
+𝑛𝑛
+𝑁𝑁= 
+ (285 ) 
+   
+  
+
+
+--- PAGE 119 ---
+
+119 
+ericpdollard.com                 emediap ress.com   
+Seven Phase  
+ 
+𝑛𝑛
+𝑁𝑁= 
+ (286 ) 
+ 
+ 
+ 
+ 
+Eight Phase  
+ 
+𝑛𝑛
+𝑁𝑁= 
+ (287 ) 
+  
+  
+
+
+--- PAGE 120 ---
+
+120 
+ericpdollard.com                 emediap ress.com   
+Nine Phase  
+ 
+𝑛𝑛
+𝑁𝑁= 
+ (288 ) 
+ 
+   
+
+
+--- PAGE 121 ---
+
+121 
+ericpdollard.com                 emediap ress.com   
+(3)  Each system of phases establishes a number system of that order, N, 
+and higher order numbers can be resolved into their numerical equivalents. 
+Since all cycles are identical, one following another, the higher order 
+numbers of advanced cycles can be reduced to the numbers in the unit 
+cycle. Each complete cycle can be related by the cyclic versor:  
+ 
+ 
+1𝑁𝑁                                                       (289 ) 
+  
+These relations are expressed in the following equations:  
+  
+Three  Phase 
+ 
+4
+3   ,        𝑘𝑘34   =   131 · 𝑘𝑘3   1,    1
+3 (290) 
+ 
+ 
+ 
+Four Phase  
+ 
+4
+4   ,        𝑘𝑘44   =   141 · 𝑘𝑘4   0,    0
+4  
+  
+6
+4   ,        𝑘𝑘46   =   141 · 𝑘𝑘4   2,    2
+4 (291) 
+  
+9
+4   ,        𝑘𝑘49   =   142 · 𝑘𝑘4   1,    1
+4  
+   
+
+--- PAGE 122 ---
+
+122 
+ericpdollard.com                 emediap ress.com   
+ 
+ 
+Five Phase  
+ 
+ 
+6
+5   ,        𝑘𝑘56   =   151 · 𝑘𝑘5   1,    1
+5  
+  
+8
+5   ,        𝑘𝑘58   =   151 · 𝑘𝑘5   3,    3
+5  
+  
+9
+5   ,        𝑘𝑘59   =   151 · 𝑘𝑘5   4,    4
+5 (292) 
+  
+12
+5   ,        𝑘𝑘512   =   152 · 𝑘𝑘5   2,    2
+5  
+  
+16
+5   ,        𝑘𝑘516   =   153 · 𝑘𝑘5   1,    1
+5  
+  
+  
+
+--- PAGE 123 ---
+
+123 
+ericpdollard.com                 emediap ress.com   
+Six Phase  
+ 
+ 
+6
+6   ,        𝑘𝑘66   =   161 · 𝑘𝑘6   0,    0
+6  
+  
+8
+6   ,        𝑘𝑘68   =   161 · 𝑘𝑘6   2,    2
+6  
+  
+9
+6   ,        𝑘𝑘69   =   161 · 𝑘𝑘6   3,    3
+6  
+  
+10
+6   ,        𝑘𝑘610   =   161 · 𝑘𝑘6   4,    4
+6  
+  
+12
+6   ,        𝑘𝑘612   =   162 · 𝑘𝑘6   0,    0
+6 (293) 
+  
+15
+6   ,        𝑘𝑘615   =   162 · 𝑘𝑘6   3,    3
+6  
+  
+16
+6   ,        𝑘𝑘616   =   162 · 𝑘𝑘6   4,    4
+6  
+  
+20
+6   ,        𝑘𝑘620   =   163 · 𝑘𝑘6   2,    2
+6  
+  
+25
+6   ,        𝑘𝑘625   =   163 · 𝑘𝑘6   1,    1
+6  
+ 
+   
+
+--- PAGE 124 ---
+
+124 
+ericpdollard.com                 emediap ress.com   
+ 
+Seven Phase  
+ 
+Part 1  
+  
+8
+7   ,        𝑘𝑘78   =   171 · 𝑘𝑘7   1,    1
+7 
+(294 )  
+9
+7   ,        𝑘𝑘79   =   171 · 𝑘𝑘7   2,    2
+7 
+ 
+10
+7   ,        𝑘𝑘710   =   171 · 𝑘𝑘7   3,    3
+7 
+ 
+12
+7   ,        𝑘𝑘712   =   171 · 𝑘𝑘7   5,    5
+7 
+ 
+15
+7   ,        𝑘𝑘715   =   172 · 𝑘𝑘7   1,    1
+7 
+ 
+16
+7   ,        𝑘𝑘716   =   172 · 𝑘𝑘7   2,    2
+7 
+ 
+ 
+ 
+  
+
+--- PAGE 125 ---
+
+125 
+ericpdollard.com                 emediap ress.com   
+ 
+Seven Phase  
+ 
+Part 2  
+  
+18
+7   ,        𝑘𝑘718   =   172 · 𝑘𝑘7   4,    4
+7 
+(295 )  
+20
+7   ,        𝑘𝑘720   =   172 · 𝑘𝑘7   6,    6
+7 
+ 
+24
+7   ,        𝑘𝑘724   =   173 · 𝑘𝑘7   3,    3
+7 
+ 
+25
+7   ,        𝑘𝑘725   =   173 · 𝑘𝑘7   4,    4
+7 
+ 
+30
+7   ,        𝑘𝑘730   =   174 · 𝑘𝑘7   2,    2
+7 
+ 
+36
+7   ,        𝑘𝑘736   =   175 · 𝑘𝑘7   1,    1
+7 
+    
+
+--- PAGE 126 ---
+
+126 
+ericpdollard.com                 emediap ress.com   
+Eight Phase  
+ 
+Part 1  
+ 
+ 
+8
+8   ,        𝑘𝑘88   =   181 · 𝑘𝑘8   0,    0
+8 
+(296 )  
+10
+8   ,        𝑘𝑘810   =   181 · 𝑘𝑘8   2,    2
+8 
+ 
+12
+8   ,        𝑘𝑘812   =   181 · 𝑘𝑘8   4,    4
+8 
+ 
+14
+8   ,        𝑘𝑘814   =   181 · 𝑘𝑘8   6,    6
+8 
+ 
+16
+8   ,        𝑘𝑘816   =   182 · 𝑘𝑘8   0,    0
+8 
+ 
+18
+8   ,        𝑘𝑘818   =   182 · 𝑘𝑘8   2,    2
+8 
+ 
+20
+8   ,        𝑘𝑘820   =   182 · 𝑘𝑘8   4,    4
+8 
+ 
+21
+8   ,        𝑘𝑘821   =   182 · 𝑘𝑘8   5,    5
+8 
+   
+
+--- PAGE 127 ---
+
+127 
+ericpdollard.com                 emediap ress.com   
+Eight Phase  
+ 
+Part 2 
+ 
+ 
+24
+8   ,        𝑘𝑘824   =   183 · 𝑘𝑘8   0,    0
+8 
+(297 )  
+28
+8   ,        𝑘𝑘828   =   183 · 𝑘𝑘8   4,    4
+8 
+ 
+30
+8   ,        𝑘𝑘830   =   183 · 𝑘𝑘8   6,    6
+8 
+ 
+35
+8   ,        𝑘𝑘835   =   184 · 𝑘𝑘8   3,    3
+8 
+ 
+36
+8   ,        𝑘𝑘836   =   184 · 𝑘𝑘8   4,    4
+8 
+ 
+42
+8   ,        𝑘𝑘842   =   185 · 𝑘𝑘8   5,    5
+8 
+ 
+49
+8   ,        𝑘𝑘849   =   186 · 𝑘𝑘8   6,    6
+8 
+  
+ 
+  
+
+--- PAGE 128 ---
+
+128 
+ericpdollard.com                 emediap ress.com  (4)  Each exponent matrix defines a set of phase sequences. Several forms 
+of these sequences exist. For the higher number of phase s the higher order 
+sequences become more complex in the form of rotational harmonics. The 
+lowest order sequence is the alternation, a consequence of two phases. The 
+next order is three phase, giving forward and reverse sequences. The 
+reverse sequence is a consequence of a second order forward sequence, this skipping over alternate unit versor positions. Five phase gives one higher 
+order of sequences, one sequence skipping two unit versor positions. A 
+given number of phases can establish a variety of sequence  patterns:  
+ 
+Alternation, No Rotation   (0) 
+ 
+One Unit Step Sequence   (1) 
+ Two Unit Step Sequence   (2) 
+ 
+Three Unit Step Sequence   (3) 
+ etc. 
+ Each order of sequence represents a rotational harmonic. The first order is the fundamental rate of rotation, the cycl e is traversed once. The second 
+order is analogous to a second harmonic, the cycle is traversed twice. These sequences are given here in a set of matrix configurations:  
+  
+Three Phase  
+ 
+ (298 ) 
+  
+
+
+--- PAGE 129 ---
+
+129 
+ericpdollard.com                 emediap ress.com   
+ 
+Four Phase  
+ 
+ (299 ) 
+  
+ 
+ 
+Five Phase  
+ 
+ (300 ) 
+   
+  
+
+
+--- PAGE 130 ---
+
+130 
+ericpdollard.com                 emediap ress.com   
+ 
+Six Phase  
+ 
+ (301 ) 
+  
+ 
+Seven Phase  
+ 
+ (302 ) 
+ 
+ 
+  
+
+
+--- PAGE 131 ---
+
+131 
+ericpdollard.com                 emediap ress.com  Eight Phase  
+ 
+ (303 ) 
+ 
+ 
+Nine Phase  
+ 
+ (304 ) 
+ 
+  
+
+
+--- PAGE 132 ---
+
+132 
+ericpdollard.com                 emediap ress.com  (5)  Each exponent in the matrix represents a unit versor position, that is, 
+a phase. This position exists in a cycle of a rotating electric wave. Therefore 
+each matrix can be shown as a set of rotational versor diagrams. The 
+specific sequence is identified by a color, this carried through a succession of unit steps:  
+Six Phase Sequence Positions, Forward  
+ 
+0  1  2  3  4  5  0 
+0  2  4  0  2  4  0 
+0  3  0  3  0  3  0 
+             
+ (305 ) 
+ 
+
+
+--- PAGE 133 ---
+
+133 
+ericpdollard.com                 emediap ress.com   
+Six Phase Sequence Positions, Reverse  
+ 
+0  3  0  3  0  3  0 
+0  4  2  0  4  2  0 
+0  5  4  3  2  1  0 
+ (306 ) 
+ 
+  
+
+
+--- PAGE 134 ---
+
+134 
+ericpdollard.com                 emediap ress.com   
+Five Phase Sequence Positions, Forward  
+ 
+0  1  2  3  4  0 
+0  2  4  1  2  0 
+ (307 ) 
+ 
+ 
+ 
+ 
+   
+
+
+--- PAGE 135 ---
+
+135 
+ericpdollard.com                 emediap ress.com   
+Five Phase Sequence Positions, Reverse  
+ 
+0  3  1  4  2  0 
+0  4  3  2  1  0 
+ (308 ) 
+ 
+ 
+ 
+ 
+   
+
+
+--- PAGE 136 ---
+
+136 
+ericpdollard.com                 emediap ress.com   
+Four Phase Sequence Positions, Forward  
+ 
+0  1  2  3  0 
+0  2  0  2  0 
+ 
+ (309 ) 
+ 
+ 
+  
+
+
+--- PAGE 137 ---
+
+137 
+ericpdollard.com                 emediap ress.com   
+Four Phase Sequence Positions, Reverse 
+ 
+0  2  0  2  0 
+0  3  2  1  0 
+ 
+ (310 ) 
+ 
+ 
+  
+
+
+--- PAGE 138 ---
+
+138 
+ericpdollard.com                 emediap ress.com   
+Three Phase Sequence Positions, Forward  
+ 
+0  1  2  0 
+ (311 ) 
+ 
+ 
+  
+
+
+--- PAGE 139 ---
+
+139 
+ericpdollard.com                 emediap ress.com   
+Three Phase Sequence Positions, Reverse  
+ 
+0  2  1  0 
+ (312 ) 
+ 
+ 
+ 
+ 
+  
+
+
+--- PAGE 140 ---
+
+140 
+ericpdollard.com                 emediap ress.com   
+When a higher order sequence reaches a certain point, the versor positions 
+it sets upon become those versor positions for a sequence that is rotating in 
+the reverse direction. Hereby a forward and reverse sequence are arrived 
+at. The general equation in it s original form is all forward sequences, where 
+higher order sequences advance upon lower order sequences. All 
+sequences arrive at the reference phase at the end of one unit cycle. 
+Although this representation is in accord with the Wagner and Evans 
+general  equation, here the higher order sequences will be reduced to lower 
+order reversed sequences. This is justified by the fact that such a sequence 
+of phases applied to a rotating machine causes its direction of rotation to reverse.  
+ This situation is confus ed in the textbooks on symmetrical components. It 
+comes about through the utilization of the Phasor Method, this in a backwards manner, to generate an alternating function. The unexplained paradox is created that the sequence is forward rotating, but when 
+connected to a machine gives reverse rotation, and all the while reverse is 
+forward and forward is reverse. This serves as an impairment to the 
+development of a general theory of symmetrical components.  
+ The sequence diagrams for six phase, five phase, fo ur phas e, and three 
+phase are given as:  
+ 
+ 
+Two Phase Exponents  
+  
+  Zero  
+ 
+Alternation  (313) 
+ 
+  
+
+
+--- PAGE 141 ---
+
+141 
+ericpdollard.com                 emediap ress.com   
+ 
+Three Phase Exponents  
+ 
+ 
+  Zero  
+ 
+1 x 1 Forward  
+ 1 x 1 Reverse  (314 ) 
+ 
+ 
+ 
+ 
+Four Phase Exponents  
+ 
+ 
+  Zero  
+ 
+1 x 1 Forward  
+ 
+Alternation  
+ 1 x 1 Reverse  (315 ) 
+ 
+ 
+ 
+  
+
+
+--- PAGE 142 ---
+
+142 
+ericpdollard.com                 emediap ress.com  Five Phase Exponents  
+ 
+ 
+  Zero  
+ 
+1 x 1 Forward  
+ 
+2 x 2 Forward  
+ 2 x 2 Reverse  
+ 
+1 x 1 Reverse  (316 ) 
+  
+ 
+Six Phase Exponents  
+  
+  Zero  
+ 
+1 x 1 Forward  
+ 
+2 x 2 Forward  
+ Alternation  
+ 
+2 x 2 Reverse  
+ 1 x 1 Reverse  (317 ) 
+  
+
+
+--- PAGE 143 ---
+
+143 
+ericpdollard.com                 emediap ress.com   
+ 
+ 
+Seven Phase Exponents  
+ 
+ 
+  Zero  
+ 
+1 x 1 Forward  
+ 
+2 x 2 Forward  
+ 3 x 3 Forward  
+ 
+3 x 3 Reverse  
+ 2 x 2 Reverse  
+ 1 x 1 Reverse  
+ 
+           (318 ) 
+  
+  
+
+
+--- PAGE 144 ---
+
+144 
+ericpdollard.com                 emediap ress.com   
+Eight Phase Exponents  
+ 
+ 
+ Zero  
+ 
+1 x1 Forward  
+ 
+2 x 2 Forward  
+ 
+3 x 3 Forward  
+ Alternation  
+ 3 x 3 Reverse  
+ 
+2 x 2 Reverse  
+ 
+1 x1 Reverse  
+ 
+(319 ) 
+  
+  
+
+
+--- PAGE 145 ---
+
+145 
+ericpdollard.com                 emediap ress.com   
+Nine  Phase Exponents  
+ 
+ 
+ Zero  
+ 
+1 x 1 Forward  
+ 
+2 x 2 Forward  
+ 3 x 3 Forward  
+ 
+4 x 4 Forward  
+ 4 x 4 Reverse  
+ 3 x 3 Reverse  
+ 
+2 x 2 Reverse  
+ 1 x 1 Reverse  
+ 
+(320 ) 
+ 
+ 
+  
+
+
+--- PAGE 146 ---
+
+146 
+ericpdollard.com                 emediap ress.com   
+(6)  Established thus far is a general theory of the Fortescue Method of 
+Symmetrical Coordinates.  It has been expressed in algebraic, versor, and 
+matrix form. It has been shown that this method is in need of significant 
+modification in order to provide a lucid description of the process 
+involved. What is lacking here is the origin of the General Equation, so the General Theory given her e suffers from that limitation.  
+ 
+The Fortescue Method has found extensive practical application in 
+electrical engineering. This is an indication of the soundness of the method. 
+It is only that no theoretical basis has be en provided, along with confused 
+rotational sense that has led to a vague understanding of an important 
+engineering tool.  
+ 
+ 
+  
+ 
+To be continued...  
+ 
+   
+
+--- PAGE 147 ---
+
+147 
+ericpdollard.com                 emediap ress.com   
+ 
+Here are a couple of Eric Dollard's  
+book & video packages...  
+ 
+ 
+LONE  PINE WRITINGS   
+FOUR QUADRANT REPRESENTATION OF 
+ELECTRICITY   
+ 
+ 
+VISIT OUR FULL CATALOG OF 
+NEARLY 40 GAME -CHANGING  
+BOOKS & VIDEOS ! 
+http://emediapress.com  
+ 
+ 
+JOIN OUR AFFILIATE PROGRAM  
+AND EARN 60% ON ALL OUR 
+DIGITAL PRODUCTS  
+  
+
+
+--- PAGE 148 ---
+
+148 
+ericpdollard.com                 emediap ress.com   
+ 
+ 
+Tesla Chargers 
+ 
+World's Most Efficient, 
+Effective & Advanced 
+Battery Chargers and  
+Solar Charge Controllers 
+ 
+Built to Order 
+http://teslachargers.com   
+  
+
+
+--- PAGE 149 ---
+
+149 
+ericpdollard.com                 emediap ress.com  ENERGETIC 
+FORUM 
+ 
+ 
+Visit Eric Dollard's Official Forum  
+ 
+Join for FREE and meet 
+others who are building 
+technologies based on Eric 
+Dollard's work ! 
+ 
+http://www.energeticforum.com/eric -dollard- official -forum/  
+ 
+ 
+  
+
+--- PAGE 150 ---
+
+150 
+ericpdollard.com                 emediap ress.com  2015 Energy 
+Science &  
+Technology 
+Conference  
+ 
+Another * EXCLUSIVE * One -Of-A-Kind Conference  
+Produced by A & P Electronic M edia 
+ 
+July 10, 11 & 12, 2015 in Hayden, Idaho  
+ 
+  
+Join the Free Conference 
+Update Mailing List  
+http://energyscienceconference.com  
+ 
+
+--- PAGE 151 ---
+
+151 
+ericpdollard.com                 emediap ress.com   
+  SUPPORT  
+ERIC DOLLARD  
+ 
+Please donate to Eric Dollard and EPD 
+Laboratories, Inc so he can continue advancing 
+the Electrical Sciences!  
+Donate to EPD Laboratories, Inc.  
+501(c)(3) – Your donations are tax deductible  
+Make Checks or Money Orders  
+Payable to: EPD Laboratories, Inc.  
+EPD Laboratories, Inc.  
+PO Box 31  
+Davenport, CA 95017 
+or 
+ 
+DONATE TO ERIC DOLLARD BY PAYPAL  
+USE THIS PAYPAL EMAIL: info@epdlabs.org  
+ 
+http://ericpdollard.com/donate -to-eric-dollard/  

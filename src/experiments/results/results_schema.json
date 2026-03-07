@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Experiment Result",
+  "type": "object",
+  "required": ["experiment_id", "metadata", "results"],
+  "properties": {
+    "experiment_id": {
+      "type": "string",
+      "description": "Matches entry in EXPERIMENT_REGISTRY.md"
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["timestamp", "python_version", "git_commit"],
+      "properties": {
+        "timestamp": { "type": "string", "format": "date-time" },
+        "python_version": { "type": "string" },
+        "platform": { "type": "string" },
+        "hostname": { "type": "string" },
+        "git_commit": { "type": "string" }
+      }
+    },
+    "results": {
+      "type": "object",
+      "required": ["verdict", "evidence"],
+      "properties": {
+        "verdict": {
+          "type": "string",
+          "enum": ["VERIFIED", "DISPROVED", "INCONCLUSIVE", "ERROR"]
+        },
+        "evidence": { "type": "string" },
+        "details": { "type": "object" }
+      }
+    }
+  }
+}

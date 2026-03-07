@@ -1,0 +1,33 @@
+# Lean 4
+build/
+lake-packages/
+lake-manifest.json
+.lake/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Experiment results are tracked but raw data may be large
+src/experiments/results/*.csv
+src/experiments/results/*.parquet
+!src/experiments/results/.gitkeep
+!src/experiments/results/results_schema.json
+
+# Session files
+.claude/sessions/.current-session

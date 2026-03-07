@@ -1,0 +1,4128 @@
+# EXTRACTED TEXT FROM: 03_Versor Algebra II-23.pdf
+# Extraction Date: 2025-06-02 13:40:45
+# Total Pages: 193
+# Total Characters: 67,583
+
+================================================================================
+
+
+
+--- PAGE 1 ---
+
+ 
+   
+
+
+--- PAGE 2 ---
+
+ 
+2 
+ericpdollard.com                 emediapress.com   
+ 
+ 
+ 
+Versor Algebra  Vol. II  
+Special Theories of Sequence Operators  
+as Applied to Power Engineering  
+ 
+ 
+ 
+ 
+Written by  
+ 
+Eric P. Dollard  
+ 
+ 
+ 
+ 
+ 
+ 
+Published by  
+A&P Electronic Media  
+Spokane , Washington  
+  
+
+--- PAGE 3 ---
+
+ 
+3 
+ericpdollard.com                 emediapress.com   
+Cover Layout:    Aaron Murakami  
+       A&P Electronic Media  
+       Spokane , Washington  
+ 
+ 
+Front Cover Image:  Aaron Murakami  
+Interior Images by:  Eric Dollard and Jeff Moe  
+Transcribed by:   Jeff Moe  
+ 
+ 
+ 
+Version 1.0   Released , August  2015  
+ 
+ 
+ 
+ 
+ 
+Copyright 2015 - Eric P. Dollard  
+Publisher’s Copyright 2015 – A&P Electronic M edia  
+ 
+All Rights Reserved, Worldwide.  No part of this publication may be translated into a 
+foreign language or reproduced, stored in an electronic retrieval system, or transmitted 
+in any form, or by any means, without the prior, written permission of the copyright 
+holders or the publisher.  Unauthorized copying or translating of this digital file is 
+prohibited by International Law.  
+ 
+ 
+Digital Edition Published by:   A&P Electronic Media  
+         PO Box 10029  
+         Spokane, WA 9920 9 
+         http://www.emediapress.com/  
+ 
+ 
+First Edition:  
+First Printing: August  2015 
+Digital Format: PDF File  
+50,000 authorized Downloads  
+ 
+  
+
+--- PAGE 4 ---
+
+ 
+4 
+ericpdollard.com                 emediapress.com  Newsletter  
+ 
+ 
+ 
+ 
+Before doing anything else, make sure to sign up for the free Energy 
+Times newslet ter at http://www.emediapress.com/energytimes.php .  It 
+looks like this:  
+ 
+ 
+  
+
+
+--- PAGE 5 ---
+
+ 
+5 
+ericpdollard.com                 emediapress.com  Table of Contents  
+ 
+ 
+Part One  - Rotational Systems  
+ 
+ (1)  Three Phase Systems                 Page   7 
+ 
+ (2)  Four Phase Systems                  Page    61 
+ 
+ 
+Part Two  - Non -Rotational Systems  
+ 
+ (1)  Two Phase Systems                Page 166 
+ 
+ (2)  Single Phase Systems               Page 1 86  
+  
+
+--- PAGE 6 ---
+
+ 
+6 
+ericpdollard.com                 emediapress.com  Part – 1 
+Rotational Systems  
+ 
+ 
+(1)  The previous volume developed the General Theory o f Sequence 
+Versor Algebra. In what follows a Special Theory will be developed for 
+commonly encountered systems, as well as one of special interest. Each 
+distinct number of phases gives rise to a distinct special theory. The laws of 
+one may not be adaptable  to the laws of another, but all follow from the 
+general theory.  
+ 
+The systems to be developed will be for:  
+ 
+Three Phase,  11
+3 
+ 
+Four Phase,   11
+4 
+ 
+Two Phase,   11
+2 
+ 
+One Phase,   11
+1 
+  
+
+--- PAGE 7 ---
+
+ 
+7 
+ericpdollard.com                 emediapress.com  Three Phase Systems  
+ 
+Three phase is by far the most common polyphase system. The method of 
+symmetrical components for three phase has become a foundation  in 
+power engineering and its use is wide -spread. The theoretical 
+understanding is vague, however, and has never been clearly presented. 
+This has limited t he application of the method to situations of common 
+occurrence, rendering details unseen.  
+ 
+Three phase is a most basic set of sequences, a simple forward and reverse 
+for the most part. This aspect recommends it as a starting point for the 
+development of a special theory. Textbooks available on three phase 
+symmetrical components are readily availabl e or reference on this subject.  
+ 
+Four phase will follow in the development of its special theory, and this 
+will resemble the fundamental Four Quadrant Theory of  Electricity. The 
+quadrapolar theory is further developed in this four phase theory. Of 
+particular interest in four phase is the appearance of a new sequence, the 
+Alternate  Sequence .  
+ 
+Two phase will next be developed, this reducing the theory of phases to  its 
+arithmetic form. Two phase also provides insight to the process of the 
+alternating sequence found in even numbered systems of phases,  
+ 
+2,  4,  6,  8,  etc. 
+ 
+Finally one phase is considered. It completes the Pythagorean Nomen 
+Matrix. The only Sequence  here is zero sequence, or no sequence at all. This 
+will take the theory into another realm to be considered in latter chapters.  
+  
+
+--- PAGE 8 ---
+
+ 
+8 
+ericpdollard.com                 emediapress.com  The special theories developed are suited for a direct engineering 
+application. The process of the Fortescue Method is clearl y laid out. Their 
+application will be covered in a following section. Following the three 
+phase chapter the reader can go directly to the two principle textbooks on 
+the subject:  
+ 
+1. Wagner & Evans:  Symmetrical Components  
+ 
+2. Robinson & Monseth:  Relay Systems The ory and Application  
+ 
+It should be stated here at the beginning that although the sequence and 
+phase EMFs are used throughout, the independent phase variables and 
+sequence components can just as well be the current, impedance, or etc. 
+The basic principles r emain the same as for EMF, which here is used as an 
+example.  
+  
+
+--- PAGE 9 ---
+
+ 
+9 
+ericpdollard.com                 emediapress.com  (2)  Polyphase systems in practice are often not balanced systems. The 
+balance becomes distorted by harmonics, fault conditions, and large 
+alternating (“single phase”) loads. The practice of ba sing calculations on 
+the subdivision of the polyphase system into N alternating systems fails in 
+a condition of imbalance. Therefore, an unbalanced three phase system 
+cannot be given as three “single phase” systems.  
+ 
+The study of unbalanced systems began with Ernst Alexanderson and the 
+analysis of the unbalance caused by large electric railroad loads. This was 
+advanced by L. G. Stokvis and work progressed to the efforts of Dr. 
+Charles Fortescue. It was discovered analytically that any three phase 
+system ca n be resolved into three distinct electric waves, a forward rotating 
+wave, a backwards rotating wave, and a non -rotating unidirectional wave. 
+The non -rotating wave was the most difficult to arrive at analytically. Also, 
+it is this wave that causes the most  trouble in the practical systems. It is 
+known as the zero sequence wave, and it represents an asymmetrical 
+imbalance.  
+ 
+These three component waves are:  
+ 
+0)  Zero Sequence, Non Rotating  
+ 
+1)  Positive Sequence, Forward Rotating  
+ 
+2)  Negative Sequence, Reve rse Rotating  
+ 
+In each component wave all three phases are of Equal  Magnitude , thus one 
+phase defines the other two. As a result “Single Phase” analysis is possible 
+for each sequence. This is known as the Method of Symmetrical 
+Components. The composite of t he three waves combined engenders the 
+general unbalanced wave. The Fortescue Method involves the translation 
+between the unbalanced system and its sequence components.  
+  
+
+--- PAGE 10 ---
+
+ 
+10 
+ericpdollard.com                 emediapress.com  This translation involves Coaxial Versors , two independent versor systems 
+on a common  axis. Since all three phases in each sequence are of equal 
+magnitude and equal angular displacement the relationships are not 
+vectoral, but represent a Versor -Tensor System . It was shown in prior 
+chapters that polyphase systems give rise to multiple imagi naries, one for 
+each phase sequence. For three phases these are:  
+ 
+1,  Zero Sequence  
+ 
+𝑖,  Positive Sequence  
+ 
+k,  Negative Sequence  
+ 
+In what follows the letter 𝑖 will be replaced with the letter 𝑗. This is because 
+the letter  𝑖 represents electric current and cannot be given a dual meaning 
+without confusion. It is hereby to be understood that the letter 𝑗 is no 
+longer a quaternary imaginary, but is now a trinary imaginary, but still 
+retaining its rotation forward.  
+ 
+All versor positions and  versor operations here exist in groups of three. The 
+versor operations act to translate the versor p ositions acted upon into a 
+new set of versor positions. The Fortescue Method to be de veloped here 
+involves operating upon one versor s ystem with a contrary versor  system. 
+This gives a set of cancellations, aligning the desired sequence positions 
+into a com mon, or single phase, causing the undesired sequence positions 
+to null themselves out. This is somewhat analogous to the tumblers in a 
+lock, the tumblers are the positions and the key is the operation upon the 
+tumblers, effecting the alignment and opening the lock.  
+ 
+  
+
+--- PAGE 11 ---
+
+ 
+11 
+ericpdollard.com                 emediapress.com  Hence, to align the positive sequence components of the unbalanced 
+system into a common phase, the unbalanced system is operated upon by a 
+negative sequence versor system. The product of the contrary versors 
+resolves to the common reference p hase, that is, phase (a), such as given by 
+the relation:  
+ 
+𝑗·𝑘=1 
+ 
+Here 1 is the reference imaginary, representing the zero , or starting 
+position in the cycle of rotation.  
+ 
+ 
+(3)  Let the phase E.M.F.s in an arbitrary three phase system be given as:  
+ 
+𝑒̅a  Phase (a) E.M.F. Vector  
+ 
+𝑒̅b  Phase (b) E.M.F. Vector  
+ 
+𝑒̅c  Phase (c) E.M.F. Vector  
+ 
+ 
+These E.M.F.s are of arbitrary magnitude and position. They are the 
+independent variables in the analysis and are derived from measurement 
+or specifications. The objective is to extract the zero, positive, and negative 
+sequence components from the arbitrary three phase system.  
+ 
+  
+
+--- PAGE 12 ---
+
+ 
+12 
+ericpdollard.com                 emediapress.com  Each phase E.M.F. can be given as the sum of the sequence component 
+E.M.F.s:  
+ 
+𝑒̅a =𝐸𝑎 +Ė𝑎 +Ẹ𝑎  
+ 
+𝑒̅b =𝐸𝑏 +Ė𝑏 +Ẹ𝑏  
+ 
+𝑒̅c =𝐸𝑐 +Ė𝑐 +Ẹ𝑐  
+ 
+Equation 1  
+ 
+Where i t is: 
+ 
+𝐸 is the zero sequence E.M.F.  
+ 
+Ė is the positive sequence E.M.F.  
+ 
+Ẹ is the negative sequence E.M.F.  
+ 
+It is important to note that in each sequence the E.M.F.s of each phase are 
+of equal magnitude, each sequence is a unit value system of versors wit h a 
+tensor magnitude. The magnitude is given in the relations as absolute 
+values void of direction:  
+ 
+|𝐸𝑎 |=|𝐸𝑏 |=|𝐸𝑐 |= 𝐸 
+ 
+|Ė𝑎 |=|Ė𝑏 |=|Ė𝑐 |= Ė  
+ 
+|Ẹ𝑎 |=|Ẹ𝑏 |=|Ẹ𝑐 |= Ẹ   
+ 
+Equation 2   
+
+--- PAGE 13 ---
+
+ 
+13 
+ericpdollard.com                 emediapress.com  Therefore each component E.M.F. can be given in terms of the reference 
+phase (a), by the relations:  
+ 
+𝐸𝑎 =10𝐸𝑎  , Ė𝑎 =𝑗0Ė𝑎  , Ẹ𝑎 =𝑘0Ẹ𝑎  
+ 
+𝐸𝑏 =11𝐸𝑎  , Ė𝑏 =𝑗1Ė𝑎  , Ẹ𝑏 =𝑘1Ẹ𝑎  
+ 
+𝐸𝑐 =12𝐸𝑎  , Ė𝑐 =𝑗2Ė𝑎  , Ẹ𝑐 =𝑘2Ẹ𝑎  
+ 
+Equation 3  
+  
+
+--- PAGE 14 ---
+
+ 
+14 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 15 ---
+
+ 
+15 
+ericpdollard.com                 emediapress.com  Reversing the process gives:  
+ 
+𝐸𝑎 =𝐸𝑎 
+10 , Ė𝑎 =Ė𝑎 
+𝑗0 , Ẹ𝑎 =Ẹ𝑎 
+𝑘0 
+ 
+𝐸𝑎 =𝐸𝑏 
+11 , Ė𝑎 =Ė𝑏 
+𝑗1 , Ẹ𝑎 =Ẹ𝑏 
+𝑘1 
+ 
+𝐸𝑎 =𝐸𝑐 
+12 , Ė𝑎 =Ė𝑐 
+𝑗2 , Ẹ𝑎 =Ẹ𝑐 
+𝑘2 
+ 
+Equation 4  
+  
+
+--- PAGE 16 ---
+
+ 
+16 
+ericpdollard.com                 emediapress.com  Substituting the following relations:  
+ 
+ 
+                        1
+10=10     ,     1
+𝑗0=𝑘0    ,      1
+𝑘0=𝑗0 
+ 
+1
+11=1−1  ,  1
+𝑗1=𝑘1  ,  1
+𝑘1=𝑗1 
+ 
+1
+12=1−2  ,  1
+𝑗2=𝑘2  ,  1
+𝑘2=𝑗2 
+ 
+Equation 5  
+ 
+ 
+Into equation (4) gives:  
+ 
+𝐸𝑎 =10𝐸𝑎  , Ė𝑎 =𝑘0Ė𝑎  , Ẹ𝑎 =𝑗0Ẹ𝑎  
+ 
+𝐸𝑎 =1−1𝐸𝑏  , Ė𝑎 =𝑘1Ė𝑏  , Ẹ𝑎 =𝑗1Ẹ𝑏  
+ 
+𝐸𝑎 =1−2𝐸𝑐  , Ė𝑎 =𝑘2Ė𝑐  , Ẹ𝑎 =𝑗2Ẹ𝑐  
+ 
+Equation 6  
+  
+
+--- PAGE 17 ---
+
+ 
+17 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 18 ---
+
+ 
+18 
+ericpdollard.com                 emediapress.com  Substituting these relations into the general equation (1)  gives the 
+expression in terms of the reference phase ( a): 
+ 
+𝑒̅a=10𝐸𝑎 +11Ė𝑎 +12Ẹ𝑎 
+ 
+𝑒̅b=𝑗0𝐸𝑎 +𝑗1Ė𝑎 +𝑗2Ẹ𝑎  
+ 
+𝑒̅c=𝑘0𝐸𝑎 +𝑘1Ė𝑎 +𝑘2Ẹ𝑎  
+ 
+Equation 7  
+ 
+ 
+Where:  
+ 
+1𝑛 is the zero sequence versor  
+ 
+𝑗𝑛 is the positive sequence versor  
+ 
+𝑘𝑛 is the negative sequence versor  
+ 
+  
+
+--- PAGE 19 ---
+
+ 
+19 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 20 ---
+
+ 
+20 
+ericpdollard.com                 emediapress.com  (4)  The versor  positions have been established for each component 
+system:  
+ 
+Zero sequence      10 ,  11 ,  12 
+ 
+Positive sequence    𝑗0,   𝑗1,   𝑗2 
+ 
+Negative Sequence    𝑘0,  𝑘1,  𝑘2  
+ 
+ 
+The general expression is given as:  
+ 
+ 
+𝑒̅a=10+11+12 
+ 
+𝑒̅b=𝑗0+𝑗1+𝑗2 
+ 
+𝑒̅c=𝑘0+𝑘1+𝑘2 
+ 
+ 𝐸𝑎  Ė𝑎  Ẹ𝑎  
+ 
+Equation 8  
+ 
+ 
+Three sequence groups are established hereby:  
+ 
+[10+𝑗0+𝑘0]𝐸𝑎 ,            zero 
+ 
+[11+𝑗1+𝑘1]Ė𝑎 ,   Positive  
+ 
+[12+𝑗2+𝑘2]Ẹ𝑎 ,  Negative  
+ 
+Equation 9   
+
+--- PAGE 21 ---
+
+ 
+21 
+ericpdollard.com                 emediapress.com  Substituting:  
+ 
+𝑗2=𝑘1,  𝑗0=10 
+ 
+𝑘2=𝑗1,  𝑘0=10 
+ 
+Equation 10  
+ 
+ 
+Gives:  
+ 
+ 
+[10+10+10]𝐸𝑎 ,   zero 
+ 
+ [11+𝑗1+𝑘1]Ė𝑎 ,  Positive  
+ 
+  [12+𝑘1+𝑗1]Ẹ𝑎 ,  Negative  
+ 
+Equation 11  
+ 
+ 
+Or, dropping the exponents:  
+ 
+Zero sequence    [1+1+1] 
+ 
+Positive Sequence   [1+𝑗+𝑘] 
+ 
+Negative sequence   [1+𝑘+𝑗] 
+ 
+Equation 12  
+  
+
+--- PAGE 22 ---
+
+ 
+22 
+ericpdollard.com                 emediapress.com  The vector sum of both the positive sequence and the negative seque nce 
+vectors is zero:  
+ 
+ 
+1+𝑗+𝑘=0 
+ 
+1+𝑘+𝑗=0 
+ 
+Equation 13  
+  
+
+--- PAGE 23 ---
+
+ 
+23 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 24 ---
+
+ 
+24 
+ericpdollard.com                 emediapress.com  These are symmetrical balanced versor systems which give rise to a 
+symmetrical balanced vector system of tensor value.  
+ 
+Refer to diagram Equation 13  
+ 
+Therefore, the sum of the vectors is zero.  
+ 
+The zero sequence vectors do not cancel, but are additive:  
+ 
+ 
+1+1+1=3 
+ 
+Equation 14  
+  
+
+--- PAGE 25 ---
+
+ 
+25 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 26 ---
+
+ 
+26 
+ericpdollard.com                 emediapress.com  The vectors established by these versor positions are asymmetrical and 
+unbalanced, all orientated in the same direction, or phase position.  
+ 
+Refer to diagram Equatio n 14 
+ 
+ 
+(6)  The component E.M.F.s are given by rearranging terms in the general 
+equation (8):  
+ 
+𝐸𝑎 =1
+3[1𝑒̅a+1𝑒̅b+1𝑒̅c] 
+ 
+ 
+Ė𝑎 =1
+3[1𝑒̅a+𝑗𝑒̅b+𝑘𝑒̅c] 
+ 
+ 
+Ẹ𝑎 =1
+3[1𝑒̅a+𝑘𝑒̅b+𝑗𝑒̅c] 
+ 
+Equation 15   
+
+--- PAGE 27 ---
+
+ 
+27 
+ericpdollard.com                 emediapress.com  Phases (b) and (c) are derived from the relations:  
+ 
+ 
+𝐸𝑏=11𝐸𝑎 ,  𝐸𝑐=12𝐸𝑎 
+ 
+ 
+Ė𝑏 =𝑗1Ė𝑎  ,  Ė𝑐 =𝑗2Ė𝑎  
+ 
+ 
+Ẹ𝑏 =𝑘1Ẹ𝑎  ,  Ẹ𝑐 =𝑘2Ẹ𝑎  
+ 
+Equation 16  
+ 
+ 
+Since all sequence components are given in terms of phase ( a) the subscript 
+(a) can be dropped in subsequent expressions.  
+ 
+ 
+The general ver sor position matrix is given as : 
+ 
+ 
+[    101112
+𝑗0𝑗1𝑗2
+𝑘0𝑘1𝑘2]    
+ 
+ 
+Equation 17  
+  
+
+--- PAGE 28 ---
+
+ 
+28 
+ericpdollard.com                 emediapress.com  Where:  
+ 
+[10+11+12] 
+ 
+Equation 18  
+ 
+ 
+Is the zero sequence row:  
+ 
+ 
+[𝑗0+𝑗1+𝑗2] 
+ 
+Equation 19  
+ 
+ 
+Is the positive sequence row , and:  
+ 
+ 
+[𝑘0+𝑘1+𝑘2] 
+ 
+Equation 20  
+ 
+ 
+Is the Negative sequence row.  
+ 
+Only the zero sequence row has its component versor positions in 
+alignment to the reference phase, and therefore are additive. The positive 
+and negative sequence rows have their versor positions in a complex 
+contrary relationship and are subtr active and nullify each other.  
+  
+
+--- PAGE 29 ---
+
+ 
+29 
+ericpdollard.com                 emediapress.com  Since in a balanced system the sum of the phase vectors is zero, this sum 
+here gives the residual component of asymmetry. Thus the zero sequence 
+component is a natural consequence of dire ct addition of the phase vectors. 
+This is not so with the positive and negative sequence vectors. Therefore a 
+translation is required to rotate the versor positions in these two sequences 
+in order to align their components into the reference phase where th ey also 
+become vectorally additive. This is the principle of the Fortescue Method 
+for derivation of the positive and negative sequence components.  
+ 
+To translate the positive, and the negative, sequence rows each versor 
+position  series is operated upon by a complimentary versor operator  series. 
+This is shown in the expression:  
+ 
+ 
+𝑘𝑚·𝑗𝑛·(𝐸𝑇) 
+ 
+Equation 21  
+ 
+ 
+Where 𝐸𝑇 is the tenso r of the versor position series:  
+ 
+𝑗𝑛  is the versor position,  
+ 
+𝑘𝑚 is the versor operation.  
+ 
+When it is:  
+ 
+𝑚= 𝑛  
+ 
+Then:  
+ 
+𝑘𝑚·𝑗𝑛=1  
+
+--- PAGE 30 ---
+
+ 
+30 
+ericpdollard.com                 emediapress.com  And thus:  
+ 
+𝑘0·𝑗0=1,  𝑘1·𝑗1=1,  𝑘2·𝑗2=1 
+ 
+Equation 22  
+ 
+ 
+For three phase the condition also exists:  
+ 
+𝑗1·𝑗2=1 
+ 
+𝑘1·𝑘2=1 
+ 
+Equation 23  
+ 
+ 
+The complimentary translation versor series operat ing upon the versor 
+position series is, for zero sequence:  
+ 
+10,   11,   12 
+ 
+Thus no translation occurs in the operation since:  
+ 
+10=11=12=1 
+ 
+Equation 24  
+  
+
+--- PAGE 31 ---
+
+ 
+31 
+ericpdollard.com                 emediapress.com  For positive sequence it is:  
+ 
+𝑘0,  𝑘1,  𝑘2 
+ 
+Equation 25A  
+ 
+ 
+Thus the tran slation is a negative sequence operation upon a positive 
+sequence versor series.  
+ 
+For ne gative sequence it is:  
+ 
+𝑗0,   𝑗1,   𝑗2 
+ 
+Equation 25B  
+ 
+ 
+Thus the translation is a positive sequence operation upon a negative 
+sequence versor series.  
+ 
+Henc e, for the rotational sequences translation is effected by operating on 
+the rotational versor positions with a counter -rotational versor operator 
+series.  
+  
+
+--- PAGE 32 ---
+
+ 
+32 
+ericpdollard.com                 emediapress.com  Performing a zero sequence operation on the phase versor positions gives 
+the expression:  
+ 
+10𝑒̅a=10·10𝐸 +10·11Ė +10·12Ẹ 
+ 
+11𝑒̅b=11·𝑗0𝐸 +11·𝑗1Ė +11·𝑗2Ẹ 
+ 
+12𝑒̅c=12·𝑘0𝐸 +12·𝑘1Ė +12·𝑘2Ẹ 
+ 
+Equation 26  
+  
+
+--- PAGE 33 ---
+
+ 
+33 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 34 ---
+
+ 
+34 
+ericpdollard.com                 emediapress.com  Performing a negative sequence operation on the phase versor positions 
+gives the expression:  
+ 
+𝑘0𝑒̅a=𝑘0·10𝐸+𝑘0·11Ė+𝑘0·12Ẹ 
+ 
+𝑘1𝑒̅b=𝑘1·𝑗0𝐸 +𝑘1·𝑗1Ė+𝑘1·𝑗2Ẹ 
+ 
+𝑘2𝑒̅c=𝑘2·𝑘0𝐸 +𝑘2·𝑘1Ė+𝑘2·𝑘2Ẹ 
+ 
+Equation 27  
+  
+
+--- PAGE 35 ---
+
+ 
+35 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 36 ---
+
+ 
+36 
+ericpdollard.com                 emediapress.com  Performing a positive s equence operation on the phase versor positions 
+gives the expression:  
+ 
+𝑗0𝑒̅a=𝑗0·10𝐸+𝑗0·11Ė+𝑗0·12Ẹ 
+ 
+𝑗1𝑒̅b=𝑗1·𝑗0𝐸+𝑗1·𝑗1Ė+𝑗1·𝑗2Ẹ 
+ 
+𝑗2𝑒̅c=𝑗2·𝑘0𝐸 +𝑗2·𝑘1Ė+𝑗2·𝑘2Ẹ 
+ 
+Equatio n 28 
+  
+
+--- PAGE 37 ---
+
+ 
+37 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 38 ---
+
+ 
+38 
+ericpdollard.com                 emediapress.com  These versor operations upon versor positions are shown in the previous  
+set of versor diagrams:  
+ 
+Refer to drawings for  Equations 26, 27, 28  
+  
+
+--- PAGE 39 ---
+
+ 
+39 
+ericpdollard.com                 emediapress.com  The translation process can be given in a matrix form, where the versor 
+position matrix is:  
+ 
+[    101112
+𝑗0𝑗1𝑗2
+𝑘0𝑘1𝑘2]    
+ 
+ 
+Equation 29  
+ 
+ 
+And the operation matrix form is, for zero sequence:  
+ 
+[    101010
+111111
+121212]    
+=𝛤30 
+ 
+Equation 30  
+ 
+ 
+For the positive sequence:  
+ 
+[    𝑘0𝑘0𝑘0
+𝑘1𝑘1𝑘1
+𝑘2𝑘2𝑘2]    
+=𝛤32 
+ 
+Equation 31  
+  
+
+--- PAGE 40 ---
+
+ 
+40 
+ericpdollard.com                 emediapress.com  And for the negative sequence:  
+ 
+[    𝑗0𝑗0𝑗0
+𝑗1𝑗1𝑗1
+𝑗2𝑗2𝑗2]    
+=𝛤31 
+ 
+Equation 32  
+ 
+ 
+The versor position matrix contains the three sequences : 
+ 
+Zero         [10    11    12]=𝛾0 
+ 
+Positive        [𝑗0     𝑗1     𝑗2]=𝛾1 
+ 
+Negative       [𝑘0    𝑘1    𝑘2]=𝛾2 
+ 
+Equation 33  
+ 
+ 
+And thus the position matrix can be given as:  
+ 
+[     𝛾0
+𝛾1
+𝛾2]     
+ 
+ 
+Equation 34  
+  
+
+--- PAGE 41 ---
+
+ 
+41 
+ericpdollard.com                 emediapress.com  The zero sequence operation is given, in symbolic form, as:  
+ 
+[     𝛾0
+𝛾1
+𝛾2]     
+  ·  𝛤0=
+[     10·10,10·11,10·12
+11·𝑗0,11·𝑗1,11·𝑗2
+12·𝑘0,12·𝑘1,12·𝑘2]     
+ 
+ 
+Equation 35  
+ 
+ 
+For the pos itive sequence operation:  
+ 
+[     𝛾0
+𝛾1
+𝛾2]     
+  ·  𝛤2=
+[     𝑘0·10,𝑘0·11, 𝑘0·12
+𝑘1· 𝑗0,𝑘1·𝑗1 ,𝑘1· 𝑗2
+𝑘2· 𝑘0,𝑘2·𝑘1,𝑘2 ·𝑘2]     
+ 
+ 
+Equation 36  
+ 
+ 
+And for the negative sequence  operation:  
+ 
+[     𝛾0
+𝛾1
+𝛾2]     
+  ·  𝛤1=
+[     𝑗0·10,𝑗0·11,𝑗0·12
+  𝑗1· 𝑗0,𝑗1 · 𝑗1,𝑗1· 𝑗2
+𝑗2·𝑘0,𝑗2·𝑘1,𝑗2·𝑘2]     
+ 
+ 
+Equation 37  
+  
+
+--- PAGE 42 ---
+
+ 
+42 
+ericpdollard.com                 emediapress.com  The individual operations on positions for th e zero sequence give the 
+relations:  
+ 
+10·10=1    ,    10·11=1    ,    10·12=1 
+ 
+ 11·𝑗0=1    ,    11·𝑗1=𝑗    ,     11·𝑗2=𝑘 
+ 
+12·𝑘0=1    ,    12·𝑘1=𝑘    ,    12·𝑘2=𝑗 
+ 
+Equation 38  
+ 
+  
+
+--- PAGE 43 ---
+
+ 
+43 
+ericpdollard.com                 emediapress.com   
+
+
+--- PAGE 44 ---
+
+ 
+44 
+ericpdollard.com                 emediapress.com  The individu al operations on positions for the positive sequence gives the 
+relations:  
+ 
+𝑘0·10=1    ,    𝑘0·11=1    ,    𝑘0·12=1 
+ 
+𝑘1·𝑗0=𝑘    ,     𝑘1·𝑗1=1    ,    𝑘1·𝑗2=𝑗 
+ 
+𝑘2·𝑘0=𝑗    ,    𝑘2·𝑘1=1    ,    𝑘2·𝑘2=𝑘 
+ 
+Equation 39  
+  
+
+--- PAGE 45 ---
+
+ 
+45 
+ericpdollard.com                 emediapress.com    
+
+
+--- PAGE 46 ---
+
+ 
+46 
+ericpdollard.com                 emediapress.com  The individual operations on positions for the negative sequence gives the 
+relations:  
+ 
+𝑗0·10=1    ,         𝑗0·11=1    ,    𝑗0·12=1 
+ 
+𝑗1·𝑗0=𝑗    ,          𝑗1·𝑗1=𝑘    ,    𝑗1·𝑗2=1 
+ 
+𝑗2·𝑘0=𝑘    ,    𝑗2·𝑘1=𝑗    ,    𝑗2·𝑘2=1 
+ 
+Equation 40  
+  
+
+--- PAGE 47 ---
+
+ 
+47 
+ericpdollard.com                 emediapress.com    
+
+
+--- PAGE 48 ---
+
+ 
+48 
+ericpdollard.com                 emediapress.com  The resulting zero sequence matrix is:  
+ 
+[    111
+1𝑗𝑘
+1𝑘𝑗]    
+ 
+ 
+Equation 41  
+ 
+ 
+The resulting positive sequence matrix is:  
+ 
+[    111
+𝑘1𝑗
+𝑗1𝑘]    
+ 
+ 
+Equation 42  
+ 
+ 
+And the resulting negative sequence matrix is:  
+ 
+[    111
+𝑗𝑘1
+𝑘𝑗1]    
+ 
+ 
+Equation 43  
+ 
+ 
+  
+
+--- PAGE 49 ---
+
+ 
+49 
+ericpdollard.com                 emediapress.com  (7)  The derived translations can be substituted into the general equation 
+for each sequence. This gives the sequence E.M.F.s in terms of the arbit rary 
+phase E.M.F.s.  
+ 
+Substituting the resultant zero sequence matrix into the general equation 
+gives:  
+ 
+ 
+10·𝑒a+11·𝑒b+12·𝑒c  
+ 
+Equation 44A  
+ 
+ 
+ 
+10·𝑒̅a=1+1+1 
+ 
+11·𝑒̅b=1+𝑗+𝑘 
+ 
+12·𝑒̅c=1+𝑘+𝑗 
+ 
+   𝐸 Ė Ẹ 
+ 
+Equati on 44B  
+ 
+ 
+Rearranging terms in this expression yields the tensor zero sequence E.M.F.  
+ 
+[1+1+1]𝐸+[1+𝑗+𝑘]Ė+[1+𝑘+𝑗]Ẹ 
+ 
+Equation 45  
+  
+
+--- PAGE 50 ---
+
+ 
+50 
+ericpdollard.com                 emediapress.com  Hence, the E.M.F.s  
+ 
+𝑒̅a+𝑒̅b+𝑒̅c=3𝐸+0Ė+0Ẹ 
+ 
+Equation 46 A 
+ 
+ 
+Where  
+ 
+1+𝑗+𝑘=1+𝑘+𝑗=0 
+ 
+Equation 46 B 
+ 
+ 
+Hence  
+ 
+𝑒̅a+𝑒̅b+𝑒̅c=3𝐸 
+ 
+Equation 47  
+ 
+ 
+And rearranging gives the final expression for the zero sequence E.M.F.  as: 
+ 
+𝐸=1
+3[𝑒̅a+𝑒̅b+𝑒̅c] 
+ 
+Equation 48  
+  
+
+--- PAGE 51 ---
+
+ 
+51 
+ericpdollard.com                 emediapress.com  Substituting the resultant positive sequence matrix into the general 
+equation gives:  
+ 
+𝑘0·𝑒̅a+𝑘1·𝑒b+𝑘2·𝑒c  
+ 
+Equation 49A  
+ 
+ 
+ 
+𝑘0·𝑒̅a=1     1      1 
+ + 
+𝑘1·𝑒̅b=𝑘     1      𝑗 
+ + 
+𝑘2·𝑒̅c=𝑗      1      𝑘 
+ 
+   𝐸 Ė Ẹ 
+ 
+Equation 49B  
+ 
+ 
+Rearranging terms in this expression yields the positive sequence E.M.F.:  
+ 
+[1+𝑘+𝑗]𝐸+[1+1+1]Ė+[1+𝑗+𝑘]Ẹ 
+ 
+Equation 50  
+ 
+ 
+Hence the E.M.F.s:  
+ 
+𝑘0𝑒̅a+𝑘1𝑒̅b+𝑘2𝑒̅c=0𝐸+3Ė+0Ẹ 
+ 
+Equation 51  
+  
+
+--- PAGE 52 ---
+
+ 
+52 
+ericpdollard.com                 emediapress.com  or 
+ 
+𝑘0𝑒̅a+𝑘1𝑒̅b+𝑘2𝑒̅c=3Ė 
+ 
+Equation 52  
+ 
+ 
+And rearranging gives the final expression for the positive sequence as:  
+ 
+Ė=1
+3[𝑘0·𝑒̅a+𝑘1·𝑒̅b+𝑘2·𝑒̅c] 
+ 
+Equation 53  
+ 
+ 
+Substituting the resultant negative sequence matrix into the general 
+equation gives:  
+ 
+𝑗0·𝑒̅a+𝑗1·𝑒̅b+𝑗2·𝑒̅c 
+ 
+Equation 54A  
+ 
+ 
+ 
+𝑗0·𝑒̅a=1 +1+1 
+ 
+𝑗1·𝑒̅b=𝑗+𝑘+1 
+ 
+𝑗2·𝑒̅c=𝑘+𝑗+1 
+ 
+   𝐸 Ė Ẹ 
+ 
+Equation 54B  
+  
+
+--- PAGE 53 ---
+
+ 
+53 
+ericpdollard.com                 emediapress.com  Rearranging terms in this expression yields the negative sequence E.M.F.:  
+ 
+[1+𝑗+𝑘]𝐸+[1+𝑘+𝑗]Ė+[1+1+1]Ẹ 
+ 
+Equation 55  
+ 
+ 
+Hence the E.M.F. is:  
+ 
+𝑗0·𝑒a+𝑗1·𝑒b+𝑗2·𝑒c=0𝐸+0Ė+3Ẹ 
+ 
+Equation 56  
+ 
+ 
+Or 
+ 
+𝑗0·𝑒a+𝑗1·𝑒b+𝑗2·𝑒c=3Ẹ 
+ 
+Equation 57  
+ 
+ 
+And rearranging terms gives the final expression for the negative sequence 
+E.M.F. as:  
+ 
+Ẹ=1
+3[𝑗0·𝑒̅a+𝑗1·𝑒̅b+𝑗2·𝑒̅c] 
+ 
+Equation 58  
+  
+
+--- PAGE 54 ---
+
+ 
+54 
+ericpdollard.com                 emediapress.com  (8)  The asymmetrical zero sequence vec tor set is established by the 
+relations:  
+ 
+10𝐸𝑎=𝐸𝑎 
+ 
+11𝐸𝑎=𝐸𝑏 
+ 
+12𝐸𝑎=𝐸𝑐 
+ 
+Equation 59  
+  
+
+--- PAGE 55 ---
+
+ 
+55 
+ericpdollard.com                 emediapress.com    
+
+
+--- PAGE 56 ---
+
+ 
+56 
+ericpdollard.com                 emediapress.com  The symmetrical positive sequence vector set is established by the 
+relations:  
+ 
+𝑗0Ė𝑎=Ė𝑎 
+ 
+𝑗1Ė𝑎=Ė𝑏 
+ 
+𝑗2Ė𝑎=Ė𝑐 
+ 
+Equation 60  
+  
+
+--- PAGE 57 ---
+
+ 
+57 
+ericpdollard.com                 emediapress.com    
+
+
+--- PAGE 58 ---
+
+ 
+58 
+ericpdollard.com                 emediapress.com  The symmetrical negative sequence vector set is established by the 
+relations:  
+ 
+𝑘0Ẹ𝑎=Ẹ𝑎 
+ 
+𝑘1Ẹ𝑎=Ẹ𝑏 
+ 
+𝑘2Ẹ𝑎=Ẹ𝑐 
+ 
+Equation 61  
+  
+
+--- PAGE 59 ---
+
+ 
+59 
+ericpdollard.com                 emediapress.com    
+
+
+--- PAGE 60 ---
+
+ 
+60 
+ericpdollard.com                 emediapress.com  Also, the relations exist:  
+ 
+Zero sequence  
+ 
+𝐸𝑎+𝐸𝑏+𝐸𝑐=3𝐸 
+ 
+Equation 62  
+ 
+ 
+Positive sequence  
+ 
+Ė𝑎+Ė𝑏+Ė𝑐=0 
+ 
+Equation 63  
+ 
+ 
+Negative sequence  
+ 
+Ẹ𝑎+Ẹ𝑏+Ẹ𝑐=0 
+ 
+Equation 64  
+  
+
+--- PAGE 61 ---
+
+ 
+61 
+ericpdollard.com                 emediapress.com  Four Phase Systems  
+ 
+(1)  The four phase polyphase system is the original system of Nikola 
+Tesla. Today it is seldom used in p ower transmission and conversion. Four 
+phase is however commonly utilized in synchro and servo systems. The 
+advantage of four phase is that it can be divided into a quadrature pair of 
+two phase systems. This facilitates balancing and compatibility with 
+common networks and amplifiers.  
+ 
+It is of particular interest to investigate four phase from a theoretical 
+standpoint as it also represents the intrinsic quadrapolar aspects of 
+electricity. The polyphase versor concept can give a better understanding 
+of basi c alternating current principles and relations such as E.M.F., current, 
+and their relation to A.C. power.  
+ 
+The four phase imaginaries are 1, 𝑗, ℎ, & k, as were used in the 
+introductory first chapters. These imaginaries are the four roots of the fourth 
+root of positive one.  
+ 
+√+14=11
+4 
+ 
+11
+4=𝑘4𝑛 , 𝑛
+4 
+ 
+Equation 65 A 
+  
+
+--- PAGE 62 ---
+
+ 
+62 
+ericpdollard.com                 emediapress.com  The four roots are:  
+ 
+𝑘40=1 ,  Zero Fourth Cycle   0
+4 
+ 
+𝑘41=𝑗 ,       One Fourth Cycle       1
+4 
+ 
+𝑘42=h ,  Two Fourth Cycle   2
+4 
+ 
+𝑘43=𝑘 ,  Three F ourth Cycle   3
+4 
+ 
+Equation 65B  
+ 
+ 
+The following relations exist between these imaginaries:  
+ 
+𝑗=𝑘−1 
+ 
+h=h+1 
+ 
+𝑘=𝑗−1 
+ 
+Equation 66  
+  
+
+--- PAGE 63 ---
+
+ 
+63 
+ericpdollard.com                 emediapress.com  And  
+ 
+𝑗−1=−𝑗 
+ 
+h+1=−1 
+ 
+𝑘−1=−𝑘 
+ 
+Equation 67  
+  
+
+--- PAGE 64 ---
+
+ 
+64 
+ericpdollard.com                 emediapress.com  (2)  Let the four phase EMFs be given by:  
+ 
+𝑒̅a , Phase  (a)  EMF Vector  
+ 
+𝑒̅b , Phase  (b)  EMF Vector  
+ 
+𝑒̅c ,  Phase  (c)  EMF Vector  
+ 
+𝑒̅d , Phase  (d)  EMF Vector  
+ 
+These EMFs are of arbitrary magnitude and position. They are determined 
+from measurement or specification. In terms of sequence components, the  
+phase EMFs are given as:  
+ 
+𝑒̅a =𝐸𝑎 +Ė𝑎 +E𝑎 +Ẹ𝑎  
+ 
+𝑒̅b =𝐸𝑏 +Ė𝑏 +E𝑏 +Ẹ𝑏  
+ 
+𝑒̅c =𝐸𝑐 +Ė𝑐 +E𝑐 +Ẹ𝑐  
+ 
+𝑒̅d =𝐸𝑑 +Ė𝑑 +E𝑑 +Ẹ𝑑  
+ 
+Equation 68  
+ 
+ 
+Where  
+ 
+𝐸 is the zero sequence EMF  
+ 
+Ė is the positi ve sequence EMF  
+ 
+E is the alternate sequence EMF  
+ 
+Ẹ is the negative sequence EMF   
+
+--- PAGE 65 ---
+
+ 
+65 
+ericpdollard.com                 emediapress.com  Each sequence component constitutes four equal vector magnitudes and 
+thus can be given in a versor – tensor form. This can be expressed in terms 
+of reference, or starting pha se (a) by the relations:  
+ 
+𝐸𝑎=10𝐸𝑎 ,  Ė𝑎=11Ė𝑎 ,  E𝑎=12E ,   Ẹ𝑎=13Ẹ 
+ 
+𝐸𝑏=𝑗0𝐸𝑎 ,  Ė𝑏=𝑗1Ė𝑎 ,  E𝑏=𝑗2E ,   Ẹ𝑏=𝑗3Ẹ 
+ 
+𝐸𝑐=h0𝐸𝑎 ,  Ė𝑐=h1Ė𝑎 ,  E𝑐=h2E ,   Ẹ𝑐=h3Ẹ 
+ 
+𝐸𝑑=𝑘0𝐸𝑎 ,  Ė𝑑=𝑘1Ė𝑎 ,  E𝑑=𝑘2E ,  Ẹ𝑑=𝑘3Ẹ 
+ 
+Equation 69  
+ 
+ 
+The following versor diagrams represent these positions in terms of phase  
+(a): 
+  
+
+--- PAGE 66 ---
+
+ 
+66 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 67 ---
+
+ 
+67 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 68 ---
+
+ 
+68 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 69 ---
+
+ 
+69 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 70 ---
+
+ 
+70 
+ericpdollard.com                 emediapress.com   
+The symbolic expression in its general form is, in terms of phase (a), is 
+given by:  
+ 
+𝑒̅a=𝑘40𝐸𝑎+𝑘40Ė𝑎+𝑘40E𝑎+𝑘40Ẹ𝑎  
+ 
+𝑒̅b=𝑘40𝐸𝑎+𝑘41Ė𝑎+𝑘42E𝑎+𝑘43Ẹ𝑎  
+ 
+𝑒̅c=𝑘40𝐸𝑎+𝑘42Ė𝑎+𝑘40E𝑎+𝑘42Ẹ𝑎  
+ 
+𝑒̅d=𝑘40𝐸𝑎+𝑘43Ė𝑎+𝑘42E𝑎+𝑘41Ẹ𝑎  
+ 
+Equation 70  
+ 
+ 
+This expression in terms of imaginaries is given by:  
+ 
+𝑒̅a=10𝐸𝑎+11Ė𝑎+12E𝑎+13Ẹ𝑎  
+ 
+𝑒̅b=𝑗0𝐸𝑎+𝑗1Ė𝑎+𝑗2E𝑎+𝑗3Ẹ𝑎  
+ 
+𝑒̅c=h0𝐸𝑎+h1Ė𝑎+h2E𝑎+h3Ẹ𝑎  
+ 
+𝑒̅d=𝑘0𝐸𝑎+𝑘1Ė𝑎+𝑘2E𝑎+𝑘3Ẹ𝑎  
+ 
+Equation 71  
+  
+
+--- PAGE 71 ---
+
+ 
+71 
+ericpdollard.com                 emediapress.com  The subscript can be dropped at this point and the tensor magnitudes 
+become:  
+ 
+𝐸𝑎=𝐸 ,   Zero  
+ 
+Ė𝑎=Ė ,   Positive  
+ 
+E𝑎=E ,   Alter nate  
+ 
+Ẹ𝑎 =Ẹ ,   Negative  
+ 
+Equation 72  
+ 
+ 
+The four imaginaries can be expressed as sequences:  
+ 
+1 ,  Zero sequence imaginary  
+ 
+𝑗 ,  Positive sequence imaginary  
+ 
+h ,  Alternate sequence imaginary  
+ 
+𝑘 ,  Negative sequence imaginary  
+ 
+Each sequence  is shown i n the following diagrams:  
+  
+
+--- PAGE 72 ---
+
+ 
+72 
+ericpdollard.com                 emediapress.com    
+
+
+--- PAGE 73 ---
+
+ 
+73 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 74 ---
+
+ 
+74 
+ericpdollard.com                 emediapress.com    
+
+
+--- PAGE 75 ---
+
+ 
+75 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 76 ---
+
+ 
+76 
+ericpdollard.com                 emediapress.com  The relations between the imaginaries are:  
+ 
+𝑗·𝑘=+1   Diagram  (A) 
+ 
+1·h=−1   Diagram (B)  
+ 
+h·𝑗=−𝑗    Diagram (C)  
+ 
+𝑘·h=−𝑘   Diagram (D)   
+  
+
+--- PAGE 77 ---
+
+ 
+77 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 78 ---
+
+ 
+78 
+ericpdollard.com                 emediapress.com  And  
+ 
+−1=h 
+ 
+−𝑗=𝑘 
+ 
+−𝑘=𝑗 
+ 
+Equation 74  
+ 
+ 
+Each versor operation is giv en in the diagrams of equation 73.  
+ 
+Here the imaginary 𝑗 is related to its  traditional meaning of one quadrature 
+versor step forward.  
+  
+
+--- PAGE 79 ---
+
+ 
+79 
+ericpdollard.com                 emediapress.com  (3)  The versor positions have been established for each component 
+system:  
+ 
+Zero sequence  
+ 
+10 ,  11 ,  12 ,  13 ,  etc. 
+ 
+Positive sequence  
+ 
+𝑗0 ,  𝑗1 ,  𝑗2 ,  𝑗3 ,  etc. 
+ 
+Alternate sequence  
+ 
+h0 ,  h1 ,  h2 ,  h3 ,  etc. 
+ 
+Negative sequence  
+ 
+𝑘0 ,  𝑘1 ,  𝑘2 ,  𝑘3 ,  etc. 
+ 
+The tensor EMFs are established as:  
+ 
+𝐸 ,   Zero sequence  
+ 
+Ė ,   Positive sequence  
+ 
+E ,   Alternate sequence  
+ 
+Ẹ ,   Negative sequence  
+  
+
+--- PAGE 80 ---
+
+ 
+80 
+ericpdollard.com                 emediapress.com  These combine into the general equation given by:  
+ 
+ 
+𝑒̅a = 10 +11+12+13 
+ 
+𝑒̅b =  𝑗0+ 𝑗1+ 𝑗2+ 𝑗3 
+ 
+𝑒̅c = h0+ h1+h2+h3 
+ 
+𝑒̅d = 𝑘0+𝑘1+𝑘2+𝑘3 
+ 
+   𝐸 Ė E Ẹ  
+ 
+Equation 76  
+ 
+ 
+Rearranging gives the expression in terms of sequence EMFs:  
+ 
+[10+ 𝑗0+h0+𝑘0] 𝐸 
+ 
+ 
+[11+ 𝑗1+h1+𝑘1] Ė 
+ 
+ 
+[12+ 𝑗2+h2+𝑘2] E 
+ 
+ 
+[13+ 𝑗3+h3+𝑘3] Ẹ 
+ 
+Equation 77  
+  
+
+--- PAGE 81 ---
+
+ 
+81 
+ericpdollard.com                 emediapress.com  Substituting the resolved powers of the imaginaries:  
+ 
+ 𝑗2= h  𝑘2= h 
+ 𝑗3= 𝑘  𝑘3= 𝑗 
+ 𝑗0= 1  𝑘0= 1 
+ 
+Equation 78  
+ 
+ 
+And  
+ 
+h2= −1 
+ 
+Equation 79  
+ 
+ 
+Gives the expression for the sequence compon ents as:  
+ 
+[1+1+1+1] 𝐸 
+[1+ 𝑗+h+𝑘] Ė 
+[1+h+1+h] E 
+[1+𝑘+h+𝑗] Ẹ 
+ 
+Equation 80  
+  
+
+--- PAGE 82 ---
+
+ 
+82 
+ericpdollard.com                 emediapress.com  For the zero sequence the vector sum of the imaginaries is:  
+ 
+[1+1+1+1]=4 
+ 
+Equation 81  
+  
+
+--- PAGE 83 ---
+
+ 
+83 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 84 ---
+
+ 
+84 
+ericpdollard.com                 emediapress.com  For the positive sequence it is:  
+ 
+[1+ 𝑗+h+𝑘]=0 
+ 
+Equation 82  
+  
+
+--- PAGE 85 ---
+
+ 
+85 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 86 ---
+
+ 
+86 
+ericpdollard.com                 emediapress.com  For the alter nate sequence it is:  
+ 
+[1+h+1+h]=0 
+ 
+Equation 83  
+  
+
+--- PAGE 87 ---
+
+ 
+87 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 88 ---
+
+ 
+88 
+ericpdollard.com                 emediapress.com  For the negative sequence it is:  
+ 
+[1+𝑘+h+𝑗]=0 
+ 
+Equation 84  
+  
+
+--- PAGE 89 ---
+
+ 
+89 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 90 ---
+
+ 
+90 
+ericpdollard.com                 emediapress.com  With the exception of the zero sequence, these are symmetrical balanced 
+versor systems. Accordingly their vector sums are zero, as shown  in the 
+diagrams Equations 82 – 84. 
+ 
+The zero sequence also consists of four equal vectors, but these are 
+asymmetrical and co -linear, and are thus additive, as shown in diagram 
+Equation 81.  
+ 
+ 
+(4)  The component EMFs are given in their final form by rearran ging 
+terms in the general equation, giving the expressions:  
+ 
+𝐸=1
+4[10𝑒̅a+11𝑒̅b+12𝑒c+13𝑒d] 
+ 
+ 
+Ė=1
+4[𝑗0𝑒̅a+𝑗1𝑒̅b+𝑗2𝑒c+𝑗3𝑒d] 
+ 
+ 
+E=1
+4[h0𝑒̅a+h1𝑒̅b+h2𝑒c+h3𝑒d] 
+ 
+ 
+Ẹ=1
+4[𝑘0𝑒̅a+𝑘1𝑒̅b+𝑘2𝑒c+𝑘3𝑒d] 
+ 
+Equation 85  
+  
+
+--- PAGE 91 ---
+
+ 
+91 
+ericpdollard.com                 emediapress.com  Substituting the resolved imag inaries give the sequence component EMFs 
+as: 
+ 
+𝐸=1
+4[1𝑒̅a+1𝑒̅b+1𝑒̅c+1𝑒̅d] 
+ 
+ 
+Ė=1
+4[1𝑒̅a+𝑗𝑒̅b+h𝑒̅c+𝑘𝑒̅d] 
+ 
+ 
+E=1
+4[1𝑒̅a+h𝑒̅b+1𝑒̅c+h𝑒̅d] 
+ 
+ 
+Ẹ=1
+4[1𝑒̅a+𝑘𝑒̅b+h𝑒̅c+𝑗𝑒̅d] 
+ 
+Equation 86  
+ 
+ 
+The vector operations upon the vecto r phase EMFs establish the 
+component tensor EMFs. The versor matrix is:  
+ 
+[      1111
+1𝑗h𝑘
+1h1h
+1𝑘h𝑘]      
+ 
+ 
+Equation 87   
+
+--- PAGE 92 ---
+
+ 
+92 
+ericpdollard.com                 emediapress.com  The tensor sequence components are given in terms of the reference phase 
+(a), but are of equal magnitude in terms of any other ph ase: 
+ 
+𝐸=|𝐸𝑎|=|𝐸𝑏|=|𝐸𝑐|=|𝐸𝑑| 
+ 
+ 
+Ė=|Ė𝑎|=|Ė𝑏|=|Ė𝑐|=|Ė𝑑| 
+ 
+ 
+E=|E𝑎|=|E𝑏|=|E𝑐|=|E𝑑| 
+ 
+ 
+Ẹ=|Ẹ𝑎|=|Ẹ𝑏|=|Ẹ𝑐|=|Ẹ𝑑| 
+ 
+Equation 88  
+ 
+ 
+Hence, all other phase components can be  derived from phase (a) in terms 
+of the relations:  
+ 
+𝐸𝑎=1𝐸𝑎 , 𝐸𝑏=1𝐸𝑎 , 𝐸𝑐=1𝐸𝑎 , 𝐸𝑑=1𝐸𝑎 
+    
+Ė𝑎=1Ė𝑎 , Ė𝑏=𝑗Ė𝑎 , Ė𝑐=hĖ𝑎 , Ė𝑑=𝑘𝐸𝑎 
+    
+E𝑎=1E𝑎 , E𝑏=hE𝑎 , E𝑐=1E𝑎 , E𝑑=h𝐸𝑎 
+    
+Ẹ𝑎=1Ẹ𝑎 , Ẹ𝑏=𝑘Ẹ𝑎 , Ẹ𝑐=hẸ𝑎 , Ẹ𝑑=𝑗𝐸𝑎 
+   
+ 
+Equation 89  
+  
+
+--- PAGE 93 ---
+
+ 
+93 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 94 ---
+
+ 
+94 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 95 ---
+
+ 
+95 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 96 ---
+
+ 
+96 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 97 ---
+
+ 
+97 
+ericpdollard.com                 emediapress.com  (5)  Only the zero sequence has its component versor positions in an 
+alignment in a common phase and therefore they are additive. The  
+positive, alternate, and negative sequences have their component versor 
+positions in a complimentary subtractive relation and nullify to a vectoral 
+zero. In order to establish the tensor magnitude for these sequences a 
+translation process is required. Thi s rotates the tensor components into 
+alignment with a common phase allowing for a vector summation. This 
+was previously shown for the three phase process and now it can be 
+extended to the four phase process.  
+ 
+As with the three phase case, this translation involves an operation  upon 
+the versor positions  of a given sequence by its contrary sequence, or what 
+may be called a conjugate sequence. In the four phase process the contrary 
+sequence to an alternate sequence is also an alternate sequence, since it is 
+non-rotational or alternating. This is similar in a way to the zero sequence 
+where no translation is required as no conjugate exists for the reference 
+versor position. Any operation returns again to the reference position. This 
+is show in Diagrams 1 – 4. 
+ 
+If the zero sequence is operated upon by itself nothing is translated:  
+ 
+Positions    1  1  1  1 
+ 
+Operations    1  1  1  1 
+ 
+Resultants    1  1  1  1 
+  
+
+--- PAGE 98 ---
+
+ 
+98 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 99 ---
+
+ 
+99 
+ericpdollard.com                 emediapress.com  The positive sequence is translated by a negative sequence operation:  
+ 
+Positions    1  𝑗  h  𝑘 
+ 
+Operations    1  𝑘  h  𝑗 
+ 
+Resultants    1  1  1  1 
+  
+
+--- PAGE 100 ---
+
+ 
+100 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 101 ---
+
+ 
+101 
+ericpdollard.com                 emediapress.com  The alternate sequence is translated by another alternate sequence as an 
+operation:  
+ 
+Positions    1  h  1  h 
+ 
+Operations    1  h  1  h 
+ 
+Resultants    1  1  1  1 
+  
+
+--- PAGE 102 ---
+
+ 
+102 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 103 ---
+
+ 
+103 
+ericpdollard.com                 emediapress.com  The negative sequence is translated by a posi tive sequence operation:  
+ 
+Positions    1  𝑘  h  𝑗 
+ 
+Operations    1  𝑗  h  𝑘 
+ 
+Resultants    1  1  1  1 
+  
+
+--- PAGE 104 ---
+
+ 
+104 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 105 ---
+
+ 
+105 
+ericpdollard.com                 emediapress.com  The expression for a zero sequence operation upon the phase EMFs is 
+given by:  
+ 
+10𝑒̅a=10·10𝐸+10·11Ė+10·12E+10·13Ẹ 
+ 
+11𝑒̅b=11·𝑗0 𝐸+11·𝑗1 Ė+11·𝑗2 E+11·𝑗3 Ẹ 
+ 
+12𝑒̅c=12·h0𝐸+12·h1Ė+12·h2E+12·h3Ẹ 
+ 
+13𝑒̅d=13·𝑘0𝐸+13·𝑘1Ė+13·𝑘2E+13·𝑘3Ẹ 
+ 
+Equation 90  
+ 
+ 
+The expression for a negative sequence  operation upon the phase EMFs is 
+given by:  
+ 
+𝑘0𝑒̅a=𝑘0·10𝐸+𝑘0·11Ė+𝑘0·12E+𝑘0·13Ẹ 
+ 
+𝑘1𝑒̅b=𝑘1·𝑗0𝐸+𝑘1·𝑗1Ė+𝑘1·𝑗2E+𝑘1·𝑗3Ẹ 
+ 
+𝑘2𝑒̅c=𝑘2·h0𝐸+𝑘2·h1Ė+𝑘2·h2E+𝑘2·h3Ẹ 
+ 
+𝑘3𝑒̅d=𝑘3·𝑘0𝐸+𝑘3·𝑘1Ė+𝑘3·𝑘2E+𝑘3·𝑘3Ẹ 
+ 
+Equation 91  
+  
+
+--- PAGE 106 ---
+
+ 
+106 
+ericpdollard.com                 emediapress.com  The expression for an alternate sequence operation upon the phase EMFs is 
+given by:  
+ 
+h0𝑒̅a=h0·10𝐸+h0·11Ė+h0·12E+h0·13Ẹ 
+ 
+h1𝑒̅b=h1·𝑗0 𝐸+h1·𝑗1 Ė+h1·𝑗2 E+h1·𝑗3 Ẹ 
+ 
+h2𝑒̅c=h2·h0𝐸+h2·h1Ė+h2·h2E+h2·h3Ẹ 
+ 
+h3𝑒̅d=h3·𝑘0𝐸+h3·𝑘1Ė+h3·𝑘2E+h3·𝑘3Ẹ 
+ 
+Equation 92  
+ 
+ 
+The expression for a positive sequence operation u pon the phase EMFs is 
+given by:  
+ 
+𝑗0𝑒̅a=𝑗0·10𝐸+𝑗0·11Ė+𝑗0·12E+𝑗0·13Ẹ 
+ 
+𝑗1𝑒̅b=𝑗1·𝑗0 𝐸+𝑗1·𝑗1Ė+𝑗1·𝑗2 E+𝑗1·𝑗3 Ẹ 
+ 
+𝑗2𝑒̅c=𝑗2·h0𝐸+𝑗2·h1Ė+𝑗2·h2E+𝑗2·h3Ẹ 
+ 
+𝑗3𝑒̅d=𝑗3·𝑘0𝐸+𝑗3·𝑘1Ė+𝑗3·𝑘2E+𝑗3·𝑘3Ẹ 
+ 
+Equation 93  
+  
+
+--- PAGE 107 ---
+
+ 
+107 
+ericpdollard.com                 emediapress.com  In all the above expressions the sequence tensor EMFs, 𝐸, Ė, E, & Ẹ are in 
+terms of reference phase (a). 
+ 
+The negative sequence operation aligns the positive sequence compon ent, 
+the alternate sequence operation aligns the alternate sequence component, 
+the positive sequence operation aligns the negative sequence component 
+and the zero sequence needs no alignment into the zero sequence 
+component.  
+ 
+The matrix of zero sequence o peration is:  
+ 
+10·10 , 10·11 , 10·12 , 10·13 (A) 
+11·𝑗0 , 11·𝑗1 , 11·𝑗2 , 11·𝑗3 (B) 
+12·h0 , 12·h1 , 12·h2 , 12·h3 (C) 
+13·𝑘0 , 13·𝑘1 , 13·𝑘2 , 13·𝑘3 (D) 
+ 
+Equation 94  
+  
+
+--- PAGE 108 ---
+
+ 
+108 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 109 ---
+
+ 
+109 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 110 ---
+
+ 
+110 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 111 ---
+
+ 
+111 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 112 ---
+
+ 
+112 
+ericpdollard.com                 emediapress.com  No change is produced by this zero sequence  operation.  
+ 
+The matrix of negative sequence operators is:  
+ 
+𝑘0·10 , 𝑘0·11 , 𝑘0·12 ,  𝑘0·13 (A) 
+𝑘1·𝑗0 , 𝑘1·𝑗1 , 𝑘1·𝑗2 ,  𝑘1·𝑗3 (B) 
+𝑘2·h0 , 𝑘2·h1 , 𝑘2·h2 ,  𝑘2·h3 (C) 
+𝑘3·𝑘0 , 𝑘3·𝑘1 , 𝑘3·𝑘2 ,  𝑘3·𝑘3 (D) 
+ 
+Equation 95  
+ 
+ 
+These operations are shown i n the following versor diagrams:  
+  
+
+--- PAGE 113 ---
+
+ 
+113 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 114 ---
+
+ 
+114 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 115 ---
+
+ 
+115 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 116 ---
+
+ 
+116 
+ericpdollard.com                 emediapress.com   
+
+
+--- PAGE 117 ---
+
+ 
+117 
+ericpdollard.com                 emediapress.com   
+The matrix of alternate sequence operations is:  
+ 
+h0·10 , h0·11 , h0·12 ,  h0·13 
+h1·𝑗0 , h1·𝑗1 , h1·𝑗2 ,  h1·𝑗3 
+h2·h0 , h2·h1 , h2·h2 ,  h2·h3 
+h3·𝑘0 , h3·𝑘1 , h3·𝑘2 ,  h3·𝑘3 
+ 
+Equation 96  
+ 
+ 
+These operators are shown in  the following versor diag rams:  
+  
+
+--- PAGE 118 ---
+
+ 
+118 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 119 ---
+
+ 
+119 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 120 ---
+
+ 
+120 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 121 ---
+
+ 
+121 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 122 ---
+
+ 
+122 
+ericpdollard.com                 emediapress.com  The matrix for the positive sequence operations is:  
+ 
+𝑗0·10 , 𝑗0·11 , 𝑗0·12 ,  𝑗0·13 
+𝑗1·𝑗0 , 𝑗1·𝑗1 , 𝑗1·𝑗2 ,  𝑗1·𝑗3 
+𝑗2·h0 , 𝑗2·h1 , 𝑗2·h2 ,  𝑗2·h3 
+𝑗3·𝑘0 , 𝑗3·𝑘1 , 𝑗3·𝑘2 ,  𝑗3·𝑘3 
+ 
+Equation 97  
+ 
+ 
+These operations are shown i n the following versor diagrams : 
+  
+
+--- PAGE 123 ---
+
+ 
+123 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 124 ---
+
+ 
+124 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 125 ---
+
+ 
+125 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 126 ---
+
+ 
+126 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 127 ---
+
+ 
+127 
+ericpdollard.com                 emediapress.com  (6)  The phase versor matrix is:  
+ 
+[      10111213
+𝑗0𝑗1𝑗2𝑗3
+h0h1h2h3
+𝑘0𝑘1𝑘2𝑘3]      
+ 
+ 
+Equation 98  
+ 
+ 
+The zero sequence operation matrix is:  
+ 
+[      10101010
+11111111
+12121212
+13131313]      
+=𝛤40 
+ 
+Equation 99  
+  
+
+--- PAGE 128 ---
+
+ 
+128 
+ericpdollard.com                 emediapress.com  The negative sequence operat ion matrix is:  
+ 
+[      𝑘0𝑘0𝑘0𝑘0
+𝑘1𝑘1𝑘1𝑘1
+𝑘2𝑘2𝑘2𝑘2
+𝑘3𝑘3𝑘3𝑘3]      
+=𝛤43 
+ 
+Equation 100  
+ 
+ 
+The alternate sequence operation matrix is:  
+ 
+[      h0h0h0h0
+h1h1h1h1
+h2h2h2h2
+h3h3h3h3]      
+=𝛤42 
+ 
+Equation 101  
+  
+
+--- PAGE 129 ---
+
+ 
+129 
+ericpdollard.com                 emediapress.com  The positive sequence operation matrix is:  
+ 
+[      𝑗𝑗𝑗𝑗
+𝑗𝑗𝑗𝑗
+𝑗𝑗𝑗𝑗
+𝑗𝑗𝑗𝑗]      
+=𝛤41 
+ 
+Equation 102  
+ 
+ 
+The symbol gamma is the symbolic sequence operator. It exists as  a log 
+base and the laws of exponents apply here as with conventional log bases.  
+ 
+The versor phase matrix consists of four sequences:  
+ 
+Zero         [10    11   12  13] 
+ 
+Positive        [𝑗0     𝑗1    𝑗2   𝑗3] 
+ 
+Alternate       [h0   h1   h2  h3] 
+ 
+Negative       [𝑘0   𝑘1   𝑘2  𝑘3] 
+ 
+Equation 103  
+  
+
+--- PAGE 130 ---
+
+ 
+130 
+ericpdollard.com                 emediapress.com  Substituting the versor relations:  
+ 
+𝑗0=1    ,    𝑗3=𝑘    ,    𝑗2=h 
+ 
+h0=1    ,    h3=h    ,    h2=1 
+ 
+𝑘0=1    ,    𝑘3=𝑗    ,    𝑘2=h 
+ 
+Equation 104  
+ 
+ 
+Into the versor phase matrix gives:  
+ 
+Zero         [1      1      1      1]=𝛾0 
+ 
+Positive        [1      𝑗       h      𝑘]=𝛾1 
+ 
+Alternate       [1      h      1      h]=𝛾2 
+ 
+Negative       [1      𝑘       h      𝑗]=𝛾3 
+ 
+Equation  105 
+  
+
+--- PAGE 131 ---
+
+ 
+131 
+ericpdollard.com                 emediapress.com  Thus the phase matrix reduces to:  
+ 
+[      𝛾0
+𝛾1
+𝛾2
+𝛾3]      
+ 
+ 
+Equation 106  
+ 
+ 
+The zero sequence operation in the symbolic form becomes:  
+ 
+ 
+[      𝛾0
+𝛾1
+𝛾2
+𝛾3]      
+ ·  𝛤0 
+ 
+Equation 107  
+  
+
+--- PAGE 132 ---
+
+ 
+132 
+ericpdollard.com                 emediapress.com  It is equivalent to the operation matrix express ion: 
+ 
+10·1 , 10·1 , 10·1 ,
+  10·1  
+11·1 , 11·𝑗 , 11·h ,
+  11·𝑘 
+12·1 , 12·h , 12·1 ,
+  12·h 
+13·1 , 13·𝑘 , 13·h , 𝑗3·𝑗 
+ 
+Equation 108  
+ 
+ 
+The negative sequence operation matrix in symbolic form becomes:  
+ 
+[      𝛾0
+𝛾1
+𝛾2
+𝛾3]      
+ ·  𝛤3 
+ 
+Equation 109  
+  
+
+--- PAGE 133 ---
+
+ 
+133 
+ericpdollard.com                 emediapress.com  It is equivalent to the operation matrix expression:  
+ 
+𝑘0·1 , 𝑘0·1  , 𝑘0·1  ,  𝑘0·1  
+𝑘1·1 , 𝑘1·𝑗 , 𝑘1·h ,  𝑘1·𝑘 
+𝑘2·1 , 𝑘2·h , 𝑘2·1 ,  𝑘2·h 
+𝑘3·1 , 𝑘3·𝑘 , 𝑘3·h ,  𝑘3·𝑗 
+ 
+Equation 110  
+ 
+ 
+The alternate sequence operation matrix in symbolic form becomes:  
+ 
+[      𝛾0
+𝛾1
+𝛾2
+𝛾3]      
+ ·  𝛤2 
+ 
+Equation 111  
+
+--- PAGE 134 ---
+
+ 
+134 
+ericpdollard.com                 emediapress.com  It is equivalent to the operation matrix expression:  
+ 
+h0·1 , h0·1 , h0·1 ,
+  h0·1  
+h1·1 , h1·𝑗 , h1·h ,
+  h1·𝑘 
+h2·1 , h2·h , h2·1 ,
+  h2·h 
+h3·1 , h3·𝑘 , h3·h ,
+  h3·𝑗 
+ 
+Equation 112  
+ 
+ 
+The negative sequence operation matrix in symbolic form is given by:  
+ 
+[      𝛾0
+𝛾1
+𝛾2
+𝛾3]      
+ ·  𝛤1 
+ 
+Equation 113  
+  
+
+--- PAGE 135 ---
+
+ 
+135 
+ericpdollard.com                 emediapress.com  It is equivalent to the operation matrix expression:  
+ 
+𝑗0·1 , 𝑗0·1 , 𝑗0·1 ,
+  𝑗0·1  
+𝑗1·1 , 𝑗1·𝑗 , 𝑗1·h ,
+  𝑗1·𝑘 
+𝑗2·1 , 𝑗2·h , 𝑗2·1 ,
+  𝑗2·h 
+𝑗3·1 , 𝑗3·𝑘 , 𝑗3·h ,
+  𝑗3·𝑗 
+ 
+Equation 11 4 
+ 
+ 
+The relation between the symbolic sequence operators is:  
+ 
+𝛤0 ·  𝛤1=𝛤1  𝛤2 ·  𝛤2=𝛤0 
+   
+𝛤1 ·  𝛤1=𝛤2  𝛤3 ·  𝛤2=𝛤1 
+   
+𝛤2 ·  𝛤1=𝛤3  𝛤3 ·  𝛤3=𝛤2 
+   
+𝛤3 ·  𝛤1=𝛤0  & 𝑒𝑡𝑐. 
+ 
+Equation 11 5 
+ 
+ 
+These operators will be useful in later chapters.  
+  
+
+--- PAGE 136 ---
+
+ 
+136 
+ericpdollard.com                 emediapress.com  (7)  The individual versor operations for the zero sequence give:  
+ 
+1·1=1    ,    1·1=1    ,   1·1=1    ,   1·1=1 
+ 
+1·1=1    ,   1·𝑗  = 𝑗    ,   1·h=h    ,   1·𝑘=𝑘 
+ 
+1·1=1    ,   1·h =h    ,   1·1=1    ,   1·h=h 
+ 
+1·1=1    ,   1·𝑘 =𝑘    ,   1·h=h    ,   1·𝑗 =𝑗 
+ 
+Equation 11 6 
+  
+
+--- PAGE 137 ---
+
+ 
+137 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 138 ---
+
+ 
+138 
+ericpdollard.com                 emediapress.com  The individual versor operations for the positive sequence components is:  
+ 
+1·1=1    ,    1·1=1    ,   1·1=1    ,   1·1=1 
+ 
+𝑘·1=𝑘    ,   𝑘· 𝑗 =1    ,   𝑘·h= 𝑗    ,   𝑘·𝑘=h 
+ 
+h·1=h    ,   h·h =1    ,   h·1=h    ,   h·h=1 
+ 
+𝑗·1 = 𝑗    ,   𝑗· 𝑘 =1    ,   𝑗·h =𝑘    ,   𝑗·𝑗 =h 
+ 
+Equation 11 7 
+  
+
+--- PAGE 139 ---
+
+ 
+139 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 140 ---
+
+ 
+140 
+ericpdollard.com                 emediapress.com  The individual versor operations for the alternate sequence components is:  
+ 
+1·1=1    ,    1·1=1    ,   1·1=1    ,   1·1=1 
+ 
+h·1=h    ,   h· 𝑗 =𝑘    ,   h·h=1    ,   h·𝑘=𝑗 
+ 
+1·1=1    ,   1·h =h    ,   1·1=1    ,   1·h=h 
+ 
+h·1=h    ,   h· 𝑘 =𝑗    ,   h·h=1    ,   h·𝑗 =𝑘 
+ 
+Equation 11 8 
+  
+
+--- PAGE 141 ---
+
+ 
+141 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 142 ---
+
+ 
+142 
+ericpdollard.com                 emediapress.com  The individual versor operations for the  negative sequence components is:  
+ 
+1·1=1    ,    1·1= 1    ,   1·1=1    ,   1·1=1 
+ 
+𝑗·1 =𝑗     ,           𝑗· 𝑗 = h    ,   𝑗·h =𝑘    ,   𝑗·𝑘 =1 
+ 
+h·1=h    ,   h·h = 1    ,   h·1=h    ,   h·h=1 
+ 
+𝑘·1=𝑘    ,   𝑘· 𝑘 =h    ,   𝑘·h= 𝑗    ,   𝑘·𝑗 =1 
+ 
+Equation 11 9 
+  
+
+--- PAGE 143 ---
+
+ 
+143 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 144 ---
+
+ 
+144 
+ericpdollard.com                 emediapress.com  The resultant zero sequence matrix is:  
+ 
+[      1111
+1𝑗h𝑘
+1h1h
+1𝑘h𝑗]      
+ 
+ 
+Equation 12 0 
+ 
+ 
+The resultant positive sequence matrix is:  
+ 
+[      1111
+𝑘1𝑗h
+h1h1
+𝑗1𝑘h]      
+ 
+ 
+Equation 12 1 
+  
+
+--- PAGE 145 ---
+
+ 
+145 
+ericpdollard.com                 emediapress.com  The resultant alternate sequence matri x is: 
+ 
+[      11𝟏1
+h𝑘𝟏𝑗
+1h𝟏h
+h𝑗𝟏𝑘]      
+ 
+ 
+Equation 12 2 
+ 
+ 
+The resultant negative sequence matrix is:  
+ 
+[      1111
+𝑗h𝑘1
+h1h1
+𝑘h𝑗1]      
+ 
+ 
+Equation 12 3 
+  
+
+--- PAGE 146 ---
+
+ 
+146 
+ericpdollard.com                 emediapress.com  The relation between the component sequences can be seen in this set of 
+matrix expression s: 
+ 
+1)  A negative sequence operating on a zero sequence is a negative 
+sequence:  
+ 
+(𝛾)3·(𝛾)0=(𝛾)3 
+ 
+Equation 12 4 
+ 
+ 
+2)  A negative sequence operating on a positive sequence is a zero 
+sequence:  
+ 
+(𝛾)3·(𝛾)1=(𝛾)0 
+ 
+Equation 12 5 
+ 
+ 
+3)  A nega tive sequence operating on an alternate sequence is a positive 
+sequence:  
+ 
+(𝛾)3·(𝛾)2=(𝛾)1 
+ 
+Equation 12 6 
+  
+
+--- PAGE 147 ---
+
+ 
+147 
+ericpdollard.com                 emediapress.com  4)  A negative sequence operating on a negative sequence is an alternate 
+sequence:  
+ 
+(𝛾)3·(𝛾)3=(𝛾)2 
+ 
+Equation 12 7 
+ 
+ 
+5)  An alter nate sequence operating on a zero sequence is an alternate 
+sequence:  
+ 
+(𝛾)2·(𝛾)0=(𝛾)2 
+ 
+Equation 12 8 
+ 
+ 
+6)  An alternate sequence operating on a positive sequence is a negative 
+sequence:  
+ 
+(𝛾)2·(𝛾)1=(𝛾)3 
+ 
+Equation 12 9 
+ 
+ 
+7)  An alternate  sequence operating on an alternate sequence is a zero 
+sequence:  
+ 
+(𝛾)2·(𝛾)2=(𝛾)0 
+ 
+Equation 13 0 
+  
+
+--- PAGE 148 ---
+
+ 
+148 
+ericpdollard.com                 emediapress.com  8)  An alternate sequence operating on a negative sequence is a positive 
+sequence:  
+ 
+(𝛾)2·(𝛾)3=(𝛾)1 
+ 
+Equation 13 1 
+ 
+ 
+9)  A positive seque nce operating on a zero sequence is a positive 
+sequence:  
+ 
+(𝛾)1·(𝛾)0=(𝛾)1 
+ 
+Equation 13 2 
+ 
+ 
+10) A positive sequence operating on a positive sequence is an alternate 
+sequence:  
+ 
+(𝛾)1·(𝛾)1=(𝛾)2 
+ 
+Equation 13 3 
+ 
+ 
+11) A positive sequence oper ating on an alternate sequence is a negative 
+sequence:  
+ 
+(𝛾)1·(𝛾)2=(𝛾)3 
+ 
+Equation 13 4 
+  
+
+--- PAGE 149 ---
+
+ 
+149 
+ericpdollard.com                 emediapress.com  12) A positive sequence operating on a negative sequence is a zero 
+sequence:  
+ 
+(𝛾)1·(𝛾)3=(𝛾)0 
+ 
+Equation 13 5 
+ 
+ 
+The operation by a zero sequence has  no effect on the positive, alternate, 
+and negative sequences. The operation by an alternate sequence on a 
+positive or negative sequence reverses these sequences to a negative and 
+positive sequence respectively. An alternate sequence operating on an 
+altern ate sequence remains an alternate sequence just as a zero sequence 
+operating on a zero sequence remains a zero sequence.  
+ 
+ 
+(8)  The translation resultants that have been given can be substituted 
+into the general equation for each sequence. This defines the  tensor values 
+of each sequence in terms of the arbitrary phase EMFs. This extracts the 
+zero, positive, alternate, and negative sequence components that constitute 
+the phase EMFs.  
+ 
+Substituting the resultant zero sequence matrix into the general equation 
+gives the expression:  
+ 
+10·𝑒̅a+11·𝑒̅b+12·𝑒̅c+13·𝑒̅d  
+ 
+Equation 13 6A 
+  
+
+--- PAGE 150 ---
+
+ 
+150 
+ericpdollard.com                 emediapress.com   
+10·𝑒̅a =  1  + 1 + 1 + 1 
+     +             +       +       +       +  
+11·𝑒̅b =  1  + 𝑗  + h + 𝑘 
+     +             +       +       +       + 
+12·𝑒̅c =  1  + h + 1 + h 
+     +             +       +       +       +  
+13·𝑒̅d =  1  + 𝑘 + h + 𝑗 
+ 
+   𝐸 Ė E Ẹ  
+ 
+Equation 13 6B 
+ 
+ 
+Rearranging the expression gives:  
+ 
+= [1+1+1+1] 𝐸 
+ 
++  [1+𝑗+h+𝑘] Ė 
+ 
++  [1+h+1+h] E 
+  
++  [1+𝑘+h+𝑗] Ẹ 
+ 
+Equation 13 7 
+  
+
+--- PAGE 151 ---
+
+ 
+151 
+ericpdollard.com                 emediapress.com  The vector sums of these sequences are:  
+ 
+1+1+1+1=4 
+ 
+1+𝑗+h+𝑘=0 
+ 
+1+h+1+h=0 
+ 
+1+𝑘+h+𝑗=0 
+ 
+Equation 13 8 
+ 
+ 
+Hence the zero sequence EMF is given by:  
+ 
+4𝐸+0Ė+0E+0Ẹ 
+ 
+Equation 13 9 
+ 
+ 
+And  
+ 
+10𝑒̅a+11𝑒̅b+12𝑒̅c+13𝑒̅d=4𝐸 
+ 
+Equati on 14 0 
+  
+
+--- PAGE 152 ---
+
+ 
+152 
+ericpdollard.com                 emediapress.com  Dividing by four gives the final expression for the tensor zero sequence 
+EMF as:  
+ 
+𝐸= 1
+4[𝑒̅a+𝑒̅b+𝑒̅c+𝑒̅d] 
+ 
+Equation 14 1 
+ 
+ 
+𝑘0𝑒̅a+𝑘1𝑒̅b+𝑘2𝑒̅c+𝑘3𝑒̅d 
+ 
+Equation 14 2 
+ 
+ 
+The positive sequence EMP is given by:  
+ 
+ 
+𝑘0·𝑒̅a =  1  + 1 + 1 + 1 
+     +             +        +      +       +  
+𝑘1·𝑒̅b =  𝑘  + 1  + 𝑗 + h 
+     +             +        +      +       +  
+𝑘2·𝑒̅c =  𝑗  +  1 + h + 1 
+     +             +        +      +       +  
+𝑘3·𝑒̅d =  h  + 1 + 𝑘 + h 
+ 
+   𝐸 Ė E Ẹ  
+ 
+Equation 14 3 
+  
+
+--- PAGE 153 ---
+
+ 
+153 
+ericpdollard.com                 emediapress.com  Rearranging gives:  
+ 
+= [1+𝑘+h+𝑗] 𝐸 
+ 
++ [1+1+1+1] Ė 
+ 
++  [1+𝑗+h+𝑘] E 
+  
++ [1+h+1+h] Ẹ 
+ 
+Equation 14 4 
+ 
+ 
+Hence the positive sequence EMF is given by:  
+ 
+0𝐸+4Ė+0E+0Ẹ 
+ 
+Equation 14 5 
+ 
+ 
+And  
+ 
+𝑘0𝑒̅a+𝑘1𝑒̅b+𝑘2𝑒̅c+𝑘3𝑒̅d=4Ė 
+ 
+Equation 14 6 
+  
+
+--- PAGE 154 ---
+
+ 
+154 
+ericpdollard.com                 emediapress.com  Dividing by four gives the final expression for the tensor positive sequence 
+EMF as:  
+ 
+Ė= 1
+4[𝑘0𝑒̅a+𝑘1𝑒̅b+𝑘2𝑒̅c+𝑘3𝑒̅d] 
+ 
+Equation 14 7 
+ 
+ 
+Substituting the resultant alternate sequence matrix into the general 
+equation gives:  
+ 
+h0𝑒̅a+h1𝑒̅b+h2𝑒̅c+h3𝑒̅d 
+ 
+Equation 14 8A 
+ 
+ 
+The alternate sequence EMF is given by:  
+ 
+ 
+h0·𝑒̅a =  1  + 1 + 1 + 1 
+     +             +        +      +       +  
+h1·𝑒̅b =  h  + 𝑘 + 1 + 𝑗 
+     +             +        +      +       +  
+h2·𝑒̅c =  1  + h + 1 + h 
+     +             +        +      +       +  
+h3·𝑒̅d =  h  + 𝑗  + 1 + 𝑘 
+ 
+   𝐸 Ė E Ẹ  
+ 
+Equation 14 8B 
+  
+
+--- PAGE 155 ---
+
+ 
+155 
+ericpdollard.com                 emediapress.com  Rearranging the expression gives:  
+ 
+    [1+h+1+h] 𝐸 
+ 
++ [1+𝑘+𝑗+ h] Ė 
+ 
++ [1+1+1+1] E 
+  
++ [1+𝑗 +h+𝑘] Ẹ 
+ 
+Equation 14 9 
+ 
+ 
+Hence, the alternate sequence EMF is given by:  
+ 
+0𝐸+0Ė+4E+0Ẹ 
+ 
+Equation 15 0A 
+ 
+h0𝑒̅a+h1𝑒̅b+h2𝑒̅c+h3𝑒̅d=4E 
+ 
+Equation 15 0B 
+  
+
+--- PAGE 156 ---
+
+ 
+156 
+ericpdollard.com                 emediapress.com  Dividing by four gives the tensor alternate sequence EMF as:  
+ 
+Ė = 1
+4[h0𝑒̅a+h1𝑒̅b+h2𝑒̅c+h3𝑒̅d] 
+ 
+Equation 15 1 
+ 
+ 
+Substituting the resultant negative sequence matrix into the general 
+equation gives:  
+ 
+𝑗0𝑒̅a+𝑗1𝑒̅b+𝑗2𝑒̅c+𝑗3𝑒̅d 
+ 
+Equation 15 2A 
+ 
+ 
+The negative sequence EMF is given by:  
+ 
+ 
+𝑗0·𝑒̅a =  1  + 1 + 1 + 1 
+     +             +        +      +       + 
+𝑗1·𝑒̅b =  𝑗  + h + 𝑘 +  1 
+     +             +        +      +       + 
+𝑗2·𝑒̅c =  h  + 1 + h + 1 
+     +             +        +      +       + 
+𝑗3·𝑒̅d =  𝑘  + h  + 𝑗 +1 
+ 
+   𝐸 Ė E Ẹ  
+ 
+Equation 15 2B 
+  
+
+--- PAGE 157 ---
+
+ 
+157 
+ericpdollard.com                 emediapress.com  Rearranging  this expression gives:  
+ 
+[1+𝑗+h+𝑘] 𝐸 
+[1+h+1+h] Ė 
+[1+𝑘+h+𝑗] E 
+[1+1+1+1] Ẹ 
+ 
+Equation 15 3 
+ 
+ 
+Hence the negative sequence EMF is given by:  
+ 
+0𝐸+0Ė+0E+4Ẹ 
+ 
+Equation 15 4A 
+ 
+ 
+𝑗0𝑒̅a+𝑗1𝑒̅b+𝑗2𝑒̅c+𝑗3𝑒̅d=4Ẹ 
+ 
+Equation 15 4B 
+  
+
+--- PAGE 158 ---
+
+ 
+158 
+ericpdollard.com                 emediapress.com  Dividing by fo ur gives the tensor negative sequence EMF as:  
+ 
+Ẹ =[𝑗0𝑒̅a+𝑗1𝑒̅b+𝑗2𝑒̅c+𝑗3𝑒̅d]1
+4 
+ 
+Equation 15 5 
+ 
+ 
+(9)  The asymmetrical zero sequence EMF vector set is established by the 
+relations:  
+ 
+10𝐸𝑎=𝐸𝑎    Diagram  (A) 
+ 
+11𝐸𝑎=𝐸𝑏    Diagram (B) 
+ 
+12𝐸𝑎=𝐸𝑐    Diagram (C) 
+ 
+13𝐸𝑎=𝐸𝑑    Diagram (D) 
+ 
+Equation 15 6 
+  
+
+--- PAGE 159 ---
+
+ 
+159 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 160 ---
+
+ 
+160 
+ericpdollard.com                 emediapress.com  The symmetrical positive sequence EMF vector set is given by the relations:  
+ 
+𝑗0Ė𝑎=Ė𝑎    Diagram  (A) 
+ 
+𝑗1Ė𝑎=Ė𝑏    Diagram (B)  
+ 
+𝑗2Ė𝑎=Ė𝑐    Diagram (C)  
+ 
+𝑗3Ė𝑎=Ė𝑑    Diagram (D)  
+ 
+Equation 15 7 
+  
+
+--- PAGE 161 ---
+
+ 
+161 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 162 ---
+
+ 
+162 
+ericpdollard.com                 emediapress.com  The symmetrical alternate sequence EMF vector set is given by the 
+relations:  
+ 
+h0E𝑎=E𝑎    Diagram  (A) 
+ 
+h1E𝑎=E𝑏    Diagram (B)  
+ 
+h2E𝑎=E𝑐    Diagram (C)  
+ 
+h3E𝑎=E𝑑    Diagram (D)  
+ 
+Equation 15 8 
+  
+
+--- PAGE 163 ---
+
+ 
+163 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 164 ---
+
+ 
+164 
+ericpdollard.com                 emediapress.com  The symmetrical negative sequence EMF vector set is established by the 
+relations:  
+ 
+𝑘0Ẹ𝑎=Ẹ𝑎    Diagram  (A) 
+ 
+𝑘1Ẹ𝑎=Ẹ𝑏     Diagram (B)  
+ 
+𝑘2Ẹ𝑎=Ẹ𝑐     Diagram (C)  
+ 
+𝑘3Ẹ𝑎=Ẹ𝑑    Diagram (D)  
+ 
+Equation 15 9  
+  
+
+--- PAGE 165 ---
+
+ 
+165 
+ericpdollard.com                 emediapress.com   
+  
+
+
+--- PAGE 166 ---
+
+ 
+166 
+ericpdollard.com                 emediapress.com  Part – 2 
+Non -Rotational Systems  
+ 
+ 
+Two Phase Systems  
+ 
+ 
+(1)  Two phase is the common household source of alternating current 
+power. Two phase is wrongly called “Single Phase”, this is  a misnomer. 
+Two phase is non -rotational, or an alternating system. It is not considered a 
+polyphase system. It is an alternate sequence like that found in the four 
+phase system, and all other systems consisting of an even number of 
+phases.  
+ 
+The study of the two phase system enables a better understanding of the 
+alternate sequence. It also enables a complete presentation of the general 
+theory of symmetrical components and serves as a step leading to an 
+expression for a true single phase system.  
+ 
+ 
+(2)  Let the two phase EMFs be given by:  
+ 
+𝑒̅a ,  Phase (a) vector EMF  
+ 
+ 
+𝑒̅b    Phase (b) vector EMF  
+ 
+These EMFs are of arbitrary magnitude and position determined from 
+measurement or specification.  
+  
+
+--- PAGE 167 ---
+
+ 
+167 
+ericpdollard.com                 emediapress.com  In terms of sequence components the phase EMFs are given as : 
+ 
+𝑒̅a =𝑘20𝐸𝑎+𝑘22E𝑎 
+ 
+ 
+𝑒̅b=𝑘20𝐸𝑎+𝑘21E𝑎 
+ 
+Equation 1  
+ 
+ 
+Substituting the resolved powers of the imaginary log bases:  
+ 
+𝑘20=10     𝑘22=11 
+ 
+ 
+𝑘20=h0      𝑘21=h1 
+ 
+Equation 2  
+ 
+ 
+Gives  
+ 
+𝑒̅a =10𝐸𝑎+11E𝑎 
+ 
+ 
+𝑒̅b =h0𝐸𝑎+h1E𝑎 
+ 
+Equation 3  
+  
+
+--- PAGE 168 ---
+
+ 
+168 
+ericpdollard.com                 emediapress.com  Where  
+ 
+𝐸𝑎 is the zero sequence EMF  
+ 
+E𝑎 is the alternate sequence EMF  
+ 
+Phase (b) is derived from the relations:  
+ 
+𝐸𝑏=1𝐸𝑎 
+ 
+ 
+E𝑏=hE𝑎 
+ 
+Equation 4  
+ 
+ 
+𝐸𝑎 and E𝑎 are tensor magnitudes, thus the subscript (a) can be dropped:  
+ 
+𝑒̅a =𝐸+1E 
+ 
+ 
+𝑒̅b =𝐸+hE 
+ 
+Equation 5  
+  
+
+--- PAGE 169 ---
+
+ 
+169 
+ericpdollard.com                 emediapress.com  (3)  The imaginary:  
+ 
+1𝑛 
+ 
+ 
+is the zero sequence versor, and the imaginary:  
+ 
+ 
+h𝑛 
+ 
+ 
+is the alternate sequence versor.  
+ 
+The zero sequence is:  
+ 
+ 
+10, 11, 12, etc. 
+ 
+ 
+The alternate sequence is:  
+ 
+ 
+h0, h1, h2, etc. 
+ 
+ 
+Substituting  
+ 
+10=+1 
+ 
+11=+1 
+ 
+12=+1 
+Equation 6   
+
+--- PAGE 170 ---
+
+ 
+170 
+ericpdollard.com                 emediapress.com  and 
+ 
+h0=+1 
+ 
+h1=−1 
+ 
+h2=+1 
+ 
+Equation 7  
+ 
+ 
+Gives the zero sequence as:  
+ 
+ 
++1,  +1,  +1,  etc. 
+ 
+ 
+And the alter nate sequence as:  
+ 
+ 
++1,  −1,  +1,  etc. 
+  
+
+--- PAGE 171 ---
+
+ 
+171 
+ericpdollard.com                 emediapress.com  (4)  The general equation for the phase EMFs is:  
+ 
+ 
+𝑒̅a = 10+11 
++  + + 
+𝑒̅b = h0+h1 
+ 𝐸 E 
+ 
+ 
+Equation 8  
+ 
+ 
+The two sequence groups are:  
+ 
+Zero sequence  
+ 
+ 
+[10 +  11] 𝐸 
+ 
+ 
+Equation  9 
+ 
+ 
+Alternate sequence  
+ 
+ 
+[h0 +  h1] E 
+ 
+ 
+Equation 10  
+  
+
+
+--- PAGE 172 ---
+
+ 
+172 
+ericpdollard.com                 emediapress.com  Or, eliminating the exponents it is:  
+ 
+Zero sequence  
+ 
+[1+1] 𝐸 
+ 
+Equation 11  
+ 
+ 
+Alternate sequence  
+ 
+[1+h] E 
+ 
+Equation 12  
+ 
+ 
+The zero sequence is asymmetrical:  
+ 
+ 
+[1+1]=2 
+ 
+*Equation 13  
+ 
+ 
+ 
+ 
+  
+
+
+--- PAGE 173 ---
+
+ 
+173 
+ericpdollard.com                 emediapress.com  And the a lternate sequence is symmetrical:  
+ 
+ 
+[1+h]=0 
+ 
+*Equation 14  
+ 
+ 
+ 
+  
+
+
+--- PAGE 174 ---
+
+ 
+174 
+ericpdollard.com                 emediapress.com  The component EMFs are given by rearranging the general equation:  
+ 
+ 
+𝐸= 1
+2[1𝑒̅a+1𝑒̅b] 
+ 
+ 
+Equation 15  
+ 
+ 
+E= 1
+2[1𝑒̅a+h𝑒̅b] 
+ 
+ 
+Equation 16  
+ 
+ 
+Phase (b) is derived by the relations:  
+ 
+𝐸𝑏=1𝐸𝑎 
+ 
+ 
+E𝑏=hE𝑎 
+ 
+Equation 17  
+  
+
+--- PAGE 175 ---
+
+ 
+175 
+ericpdollard.com                 emediapress.com  (5)  The phase versor matrix is given as:  
+ 
+ 
+[1011
+h0h1] 
+ 
+ 
+Equation 18  
+ 
+ 
+A translation process is required to align these into their positions on a 
+reference phase in order to extract the tensor sequence values. Performing a 
+zero sequence operation on the phase versor positions gives the expression:  
+ 
+ 
+10𝑒̅a =10·10𝐸+10·11E 
+ 
+ 
+11𝑒̅b =11·h0𝐸+11·h1E 
+ 
+ 
+Equation 19  
+  
+
+--- PAGE 176 ---
+
+ 
+176 
+ericpdollard.com                 emediapress.com  Performing an alternate sequence operation on the ph ase versor positions 
+gives the expression:  
+ 
+h0𝑒̅a =h0·10𝐸+h0·11E 
+ 
+ 
+h1𝑒̅a =h1·h0𝐸+h1·h1E 
+ 
+ 
+Equation 20  
+ 
+ 
+ 
+The translation process in matrix form, the matrix to the operated upon:  
+ 
+ 
+[1011
+h0h1] 
+ 
+ 
+Equation 2 1 
+ 
+ 
+The zero sequence versor operation matrix is:  
+ 
+ 
+[1010
+1111]=𝛤20 
+ 
+ 
+Equation 22  
+  
+
+--- PAGE 177 ---
+
+ 
+177 
+ericpdollard.com                 emediapress.com  And the alternate sequence versor operation matrix is:  
+ 
+ 
+[h0h0
+h1h1]=𝛤21 
+ 
+ 
+Equation 23  
+ 
+ 
+The versor matrix to be operated upon con tains two sequences:  
+ 
+ 
+Zero         [10   ,   11]=𝛾0 
+ 
+ 
+Equation 24  
+ 
+ 
+Alternate       [h0   ,   h1]=𝛾1 
+ 
+ 
+Equation 25  
+ 
+ 
+This gives the matrix to be operated upon as:  
+ 
+ 
+[𝛾0
+𝛾1] 
+ 
+ 
+Equation 26   
+
+--- PAGE 178 ---
+
+ 
+178 
+ericpdollard.com                 emediapress.com  The zero sequence operation in symbolic  form is then given as:  
+ 
+ 
+[𝛾0
+𝛾1]  ·  𝛤0=[10·10  ,10·11
+11· h0 ,11·h0] 
+ 
+ 
+Equation 27  
+ 
+ 
+And the alternate sequence operation in symbolic form is then given as:  
+ 
+ 
+[𝛾0
+𝛾1]  ·  𝛤1=[h0·10  ,h0·11
+h1·h0  ,h1·h1] 
+ 
+ 
+Equation 28  
+ 
+ 
+The individual operations on the positions for the zero sequence gives the 
+relations:  
+ 
+10·10=1 , 10·11=1 
+ 
+11·h0=1 , 11·h1=h 
+ 
+ 
+Equation 29  
+  
+
+--- PAGE 179 ---
+
+ 
+179 
+ericpdollard.com                 emediapress.com  The individual operations on the position s for the alternate sequence give 
+the relations:  
+ 
+ 
+h0·10=1 , h0·11=1 
+ 
+h1·h0=h , h1·h1=1 
+ 
+ 
+Equation 30  
+ 
+ 
+The resulting zero sequence matrix is:  
+ 
+ 
+[𝟏1
+𝟏h] 
+ 
+ 
+Equation 31  
+ 
+ 
+The resulting alternate sequence matrix is:  
+ 
+ 
+[1𝟏
+h𝟏] 
+ 
+ 
+Equation 32  
+  
+
+--- PAGE 180 ---
+
+ 
+180 
+ericpdollard.com                 emediapress.com  (6)  The derived translations can be substituted into the general equation 
+for each sequence. This gives the sequence EMF in terms of the arbitrary 
+phase EMFs.  
+ 
+Substituting the resultant zero sequence matrix gives:  
+ 
+ 
+10·𝑒̅a+11·𝑒̅b 
+ 
+ 
+Equation 33  
+ 
+ 
+ 
+10·𝑒̅a = 1  +  1 
++  + + 
+11·𝑒̅b = 1  +  h 
+ 𝐸 E 
+ 
+ 
+Equation 34  
+ 
+ 
+Rearranging the terms gives:  
+ 
+ 
+[1+1] 𝐸+[1+h]E  
+ 
+ 
+Equation 35  
+  
+
+
+--- PAGE 181 ---
+
+ 
+181 
+ericpdollard.com                 emediapress.com  And  the vector sums are given by:  
+ 
+ 
+[1+1]=2 
+ 
+ 
+[1+h]=0 
+ 
+ 
+Equation 36  
+ 
+ 
+Hence, the zero se quence tensor EMF is given by:  
+ 
+ 
+2𝐸+0E 
+ 
+ 
+Equation 37  
+ 
+ 
+𝑒̅a+𝑒̅b=2𝐸 
+ 
+ 
+Equation 38  
+  
+
+--- PAGE 182 ---
+
+ 
+182 
+ericpdollard.com                 emediapress.com  Dividing by two gives the tensor EMF in terms of the phase EMFs , for the 
+zero sequence as:  
+ 
+ 
+𝐸= 1
+2[𝑒̅a+𝑒̅b] 
+ 
+ 
+Equation 39  
+ 
+ 
+Substituting the resultant alternate  sequence matrix into the general 
+equation gives:  
+ 
+ 
+h0·𝑒̅a = 1  +  1 
++  + + 
+h1·𝑒̅b = h  +  1 
+ 𝐸 E 
+ 
+ 
+Equation 40  
+ 
+ 
+Rearranging gives:  
+ 
+ 
+[1+h] 𝐸+[1+1]E  
+ 
+ 
+Equation 41  
+  
+
+
+--- PAGE 183 ---
+
+ 
+183 
+ericpdollard.com                 emediapress.com  And  
+ 
+ 
+0𝐸+2E=2E 
+ 
+ 
+Equation 42  
+ 
+ 
+h0𝑒̅a+h1𝑒̅b=2E 
+ 
+ 
+Equation 4 3 
+ 
+ 
+ 
+And dividing by two gives the tensor alternate sequence EMF as:  
+ 
+ 
+E= 1
+2[h0𝑒̅a+h1𝑒̅b] 
+ 
+ 
+Equation 44  
+ 
+ 
+Or simply as:  
+ 
+ 
+E= 1
+2[𝑒̅a−𝑒̅b] 
+ 
+ 
+Equation 45   
+
+--- PAGE 184 ---
+
+ 
+184 
+ericpdollard.com                 emediapress.com  The phase (b) EMF is given by the relations:  
+ 
+ 
+𝐸𝑎=𝐸 
+ 
+E𝑎=E 
+ 
+ 
+Equation 46  
+ 
+ 
+𝐸𝑎=10𝐸𝑎 E𝑎=h0E𝑎 
+ 
+𝐸𝑏=11𝐸𝑎 E𝑏=h1E𝑎 
+ 
+ 
+Equation 47  
+ 
+ 
+ 
+Or simply as:  
+ 
+𝐸𝑏=+𝐸𝑎 
+ 
+E𝑏=−E𝑎 
+ 
+Equation 48  
+  
+
+--- PAGE 185 ---
+
+ 
+185 
+ericpdollard.com                 emediapress.com  The two phase system reduces to a simple arithmetic relation of plus and 
+minus. The versor re duces to an aid or oppose condition, no rotation is 
+involved. Two phase cannot provide a motor rotation without a phase 
+splitting network.  
+  
+
+--- PAGE 186 ---
+
+ 
+186 
+ericpdollard.com                 emediapress.com  Single Phase Systems  
+ 
+ 
+Single phase exists outside of the electromagnetic boundary condition. Its 
+only application has been the “One wire”, or Telluric System of Nikola 
+Tesla. This is a form of “Radio” system that has never reached full 
+development. Common names for this condition vary with application, 
+such as:  
+ 
+Radio:    Antenna Currents  
+ 
+Audio:    Common Mode Currents  
+ 
+Telegraph:   Sneak Currents  
+ 
+Telephone:   Longitudinal Currents  
+ 
+Power:    Zero Sequence Currents  
+ 
+ 
+With the exception of radio, single phase components are parasitic, creating 
+harmonics and interference with other systems. For radio , single phase is 
+desire d because of its ability to escape or enter an otherwise closed 
+electromagnetic system, but this is the very thing that makes it undesirable 
+in closed electromagnetic systems.  
+ 
+It is unfortunate that it has become common practice to call two phase A.C. 
+Single phase. This is a consequence of one coil or transformer winding 
+delivering the two phase EMF. The single winding is then a “Single” phase. 
+This misunderstanding occludes the existence of a true single phase EMF.  
+ 
+Single phase in itself has no mathemat ical structure, it is a pure zero 
+sequence. It is not an alternation, it is a unidirectional pulsation in a 
+monopolar form.   
+
+--- PAGE 187 ---
+
+ 
+187 
+ericpdollard.com                 emediapress.com  Therefore, the Tesla transformer has only ONE terminal, the neutral 
+terminal delivering or abstracting a zero sequence current into  or out of a 
+common conducting medium.  
+ 
+The fundamental expressions for a single phase EMF are:  
+ 
+ 
+𝑒̅a=10𝐸𝑎 , Vector  
+𝐸𝑎=10𝑒̅a , Zero Sequence  
+ 
+ 
+Equation 49  
+ 
+ 
+The zero sequence EMF is now the only EMF. The vector phase EMF is 
+here a uni polar or longitudinal vector, no “other half” of the cycle exists. 
+Since no sequence exists the expressions reduce to:  
+ 
+ 
+𝑒̅=𝐸 
+ 
+Equation 50  
+ 
+  
+
+--- PAGE 188 ---
+
+ 
+188 
+ericpdollard.com                 emediapress.com  (3)  Since all other orders of phase systems are divisible by one, all can 
+exhibit a zero sequence component, p rovided that a neutral connection 
+exists. It is the neutral conductor that gives rise to a zero sequence 
+component.  
+ 
+Zero sequence components are no longer cyclic in the common 
+understanding. Moreover, they are often harmonic waveforms and direct 
+currents.  In some cases the fundamental frequency of the cycle is 
+completely absent. Such is the case with the common push -pull rectifier, 
+where diode asymmetry gives rise to an even series of frequencies:  
+ 
+0w,  2w,  4w,  etc. 
+ 
+With no fundamental.  
+ 
+ 
+Thus far, only  Nikola Tesla worked with single phase systems. For the 
+power engineer zero sequence components are to be avoided.  
+ 
+The End  
+  
+
+--- PAGE 189 ---
+
+ 
+189 
+ericpdollard.com                 emediapress.com   
+ 
+Here are a couple of Eric Dollard's  
+book & video packages...  
+ 
+ 
+LONE  PINE WRITINGS   
+FOUR QUADRANT REPRESENTATION OF 
+ELECTRICITY   
+ 
+ 
+VISIT OUR FULL CATALOG OF 
+NEARLY 40 GAME -CHANGING  
+BOOKS & VIDEOS ! 
+http://emediapre ss.com  
+ 
+ 
+JOIN OUR AFFILIATE PROGRAM  
+AND EARN 60% ON ALL OUR 
+DIGITAL PRODUCTS  
+  
+
+
+--- PAGE 190 ---
+
+ 
+190 
+ericpdollard.com                 emediapress.com   
+ 
+ 
+Tesla Chargers  
+ 
+World's Most Efficient, 
+Effective & Advanced 
+Battery Chargers  and  
+Solar Charge Controllers  
+ 
+Built to Order  
+http://t eslachargers.com   
+  
+
+
+--- PAGE 191 ---
+
+ 
+191 
+ericpdollard.com                 emediapress.com  ENERGETIC  
+FORUM  
+ 
+ 
+Visit Eric Dollard's Official Forum  
+ 
+Join for FREE and meet 
+others who are building 
+technologies based on Eric 
+Dollard's work ! 
+ 
+http://www.ener geticforum.com/eric -dollard -official -forum/  
+ 
+ 
+  
+
+--- PAGE 192 ---
+
+ 
+192 
+ericpdollard.com                 emediapress.com  Energy Science 
+& 
+Technology 
+Conference  
+ 
+Another * EXCLUSIVE * One -Of-A-Kind Conference  
+Produced by A & P Electronic Media  
+ 
+ 
+ 
+Join the Free Conference  
+Update Mailing List  
+http://energyscienceconference.com  
+ 
+ 
+
+--- PAGE 193 ---
+
+ 
+193 
+ericpdollard.com                 emediapress.com    SUPPORT  
+ERIC DOLLARD  
+ 
+Please donate to Eric Dollard and EPD 
+Laboratories, Inc so he can continue advancing 
+the Electrical Sciences!  
+Donate to EPD Laboratories, Inc.  
+501(c)(3) – Your donations are tax ded uctible  
+Make Checks or Money Orders  
+Payable to: EPD Laboratories, Inc.  
+EPD Laboratories, Inc.  
+PO Box 31  
+Davenport, CA 95017  
+or 
+ 
+DONATE TO ERIC DOLLARD BY PAYPAL  
+USE THIS PAYPAL EMAIL: info@epdlabs.org  
+ 
+http://ericpdollard.com/donate -to-eric-dollard/  

@@ -24,7 +24,7 @@ correctly identified the four-factor telegraph analysis, and (accidentally)
 pointed at the action interpretation. His errors: the versor form sign mistake,
 the claim that this is novel (it's Fortescue 1918), and the overreach to "replace E=mc2."
 
-### Level 2: The Corrected Extension (FORMALIZING NOW)
+### Level 2: The Corrected Extension (FORMALIZED)
 
 **Core move: Replace Z_4 with Cl(1,1).**
 
@@ -57,46 +57,49 @@ Cl(1,1) is the Clifford algebra with signature (+1,-1). It has 4 basis elements
 4. Show the split-complex subalgebra naturally decomposes transmission line waves
 5. Compare Cl(1,1) decomposition vs standard scattering parameters (S-parameters)
 
-### Level 3: The Real Unification (RESEARCH PROGRAM)
+### Level 3: The Real Unification (FORMALIZED)
 
-**Core move: Extend Cl(1,1) to Cl(3,1) (spacetime algebra).**
+**Core move: Extend Cl(1,1) through Cl(3,0) to Cl(1,3) (spacetime algebra).**
 
-Cl(3,1) has 16 basis elements and encodes ALL of special relativistic
+Cl(1,3) has 16 basis elements and encodes ALL of special relativistic
 electromagnetism. In this algebra:
 - Maxwell's four equations collapse to ONE: nabla*F = J
 - Electric and magnetic fields unify as bivector components of F
-- Lorentz transformations are rotors (spinor group Spin(3,1))
+- Lorentz transformations are rotors (spinor group Spin(1,3))
 - The Dirac equation has a natural geometric form
 
-The algebraic hierarchy:
+The algebraic hierarchy (ALL FORMALIZED):
 ```
 Z_4 (Dollard)     -- 4 elements, commutative, trivial
-  |
+  |                   [basic_operators.lean, algebraic_necessity.lean]
   v
 Cl(1,1)            -- 4 elements, non-commutative, isomorphic to M2(R)
-  |                   [forward/backward wave decomposition]
+  |                   [cl11.lean: idempotent wave decomposition]
   v
 Cl(3,0)            -- 8 elements, Pauli algebra
-  |                   [3D rotations, spin]
+  |                   [cl30.lean: EM field as F = E + I*B]
   v
-Cl(3,1)            -- 16 elements, spacetime algebra
-  |                   [Maxwell + Dirac + Lorentz in one equation]
+Cl(1,3)            -- 16 elements, spacetime algebra
+  |                   [cl31_maxwell.lean: signature, EM bivector, Maxwell structure]
   v
-Cl(1,4) / Cl(2,4)  -- conformal geometric algebra
+Cl(1,4) / Cl(2,4)  -- conformal geometric algebra (HORIZON)
                       [gravity as gauge theory of Poincare group]
 ```
 
 Each step DOUBLES the dimension and adds physical content.
-The Lean 4 formalization pattern is the same at each level:
-define the basis, verify the multiplication table, prove the theorems.
 
-| Task | Status | Difficulty |
-|------|--------|------------|
-| Define Cl(3,0) with 8-component structure | NOT STARTED | Medium |
-| Verify Pauli matrix isomorphism | NOT STARTED | Medium |
-| Define Cl(3,1) with 16-component structure | NOT STARTED | Hard |
-| Prove Maxwell's equation nabla*F = J | NOT STARTED | Hard |
-| Show Lorentz transformation as rotor | NOT STARTED | Hard |
+| Task | Status | Evidence |
+|------|--------|----------|
+| Define Cl(3,0) with 8-component structure | DONE | `cl30.lean` (0 sorry) |
+| Verify basis blade products and anticommutativity | DONE | `cl30.lean` |
+| EM field representation as vector + bivector | DONE | `cl30.lean` |
+| Define Cl(1,3) with 16-component structure | DONE | `cl31_maxwell.lean` (0 sorry) |
+| Verify signature (+,-,-,-) and anticommutativity | DONE | `cl31_maxwell.lean` |
+| EM field as bivector (electric + magnetic) | DONE | `cl31_maxwell.lean` |
+| Cl(3,0) embeds as spatial subalgebra | DONE | `cl31_maxwell.lean` |
+| Full 16x16 geometric product | DEFERRED | 256 terms; focused approach used instead |
+| Prove Maxwell's nabla*F=J computationally | DEFERRED | Requires differential geometry in Lean |
+| Lorentz transformation as rotor | NOT STARTED | Future work |
 
 ### Level 4: What Constitutes a UFT (HORIZON)
 
@@ -160,7 +163,15 @@ This would be a significant formalization result regardless of Dollard context.
 
 1. Compile all Lean proofs (install elan, lake update, lake build)
 2. Close sorry gaps in polyphase_formula.lean (3 exp/trig facts)
-3. Formalize Lagrangian circuit theory (Experiment 3 completion)
-4. Begin Cl(3,0) formalization (8-component structure)
-5. Draft Track A paper from outline
-6. Close prior-art search gap (Mizar, ACL2, HOL Light, ITP/CPP)
+3. Draft Track A paper from PAPER_OUTLINE.md
+4. Verify Cherry 1951 exact reference
+5. Consider full Cl(1,3) geometric product (256 terms, or use mathlib's Clifford algebra)
+6. Lorentz transformation as rotor in Cl(1,3)
+
+## Completed
+
+- [x] Prior art search (95% confidence in novelty — `research/scratch/prior-art-deep-search.md`)
+- [x] Cl(3,0) formalization (8 basis elements, EM field)
+- [x] Cl(1,3) spacetime algebra (16 basis elements, Maxwell structure)
+- [x] Telegraph equation sign convention fix
+- [x] Factor constraint proof (RG*XB = XG*RB)

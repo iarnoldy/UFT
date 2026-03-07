@@ -1,15 +1,28 @@
 /-
 UFT Formal Verification - Telegraph Equation Mathematics
-=======================================================
+=========================================================
 
-This file verifies the mathematical claims related to Heaviside's Telegraph Equation
-as presented in Eric Dollard's Four Quadrant Theory. We verify the algebraic
-expansions and four-factor analysis.
+Verifies the algebraic expansion of Heaviside's Telegraph Equation
+as presented in Eric Dollard's Four Quadrant Theory.
 
-Key Claims to Verify:
-1. ZY = (R + jX)(G + jB) = (RG + XB) + j(XG - RB)
-2. Four independent factors: XB, RG, XG, RB
-3. Versor form: ZY = h(XB + RG) + j(XG - RB)
+SIGN CONVENTION (Critical):
+  Dollard uses admittance Y = G - jB (negative susceptance convention).
+  Standard EE convention uses Y = G + jB.
+
+  With Z = R + jX and Y = G - jB (Dollard):
+    ZY = (R + jX)(G - jB) = (RG + XB) + j(XG - RB)
+
+  With Z = R + jX and Y = G + jB (standard):
+    ZY = (R + jX)(G + jB) = (RG - XB) + j(RB + XG)
+
+  The signs on XB and RB flip between conventions.
+  This file verifies Dollard's claimed expansion under HIS convention.
+
+NOTE ON PROOF TECHNIQUE:
+  We use Complex.mk (re, im) notation throughout. This avoids issues
+  with the `ring` tactic not knowing Complex.I^2 = -1 (ring treats I
+  as an opaque symbol). With Complex.mk, `ext` splits into real/imaginary
+  components and `ring` closes purely real arithmetic.
 
 References:
 - Dollard, E. P. "Four Quadrant Theory: Advanced Electrical Applications"
@@ -18,111 +31,149 @@ References:
 
 import Mathlib.Data.Complex.Basic
 import Mathlib.Data.Real.Basic
-import Mathlib.Algebra.Ring.Basic
 import Mathlib.Tactic
 import foundations.basic_operators
 
--- Define the telegraph equation product
-def telegraph_product (R X G B : ℝ) : ℂ := (R + Complex.I * X) * (G + Complex.I * B)
+-- ============================================================
+-- Section 1: Telegraph equation (Dollard's sign convention)
+-- ============================================================
 
--- Main theorem: Verify the algebraic expansion
+-- Z = R + jX (series impedance per unit length)
+-- Y = G - jB (shunt admittance per unit length, Dollard convention)
+-- We represent Z as Complex.mk R X and Y as Complex.mk G (-B).
+
+/-- Telegraph equation product ZY with Dollard's convention Y = G - jB.
+    Equivalent to (R + jX)(G - jB) in standard notation. -/
+def telegraph_product (R X G B : ℝ) : ℂ :=
+  Complex.mk R X * Complex.mk G (-B)
+
+/-- Core verification: ZY expands to (RG + XB) + j(XG - RB).
+    This is Dollard's claimed form and it IS correct under his convention. -/
 theorem telegraph_expansion (R X G B : ℝ) :
-  telegraph_product R X G B = (R * G + X * B) + Complex.I * (X * G - R * B) := by
+    telegraph_product R X G B =
+    Complex.mk (R * G + X * B) (X * G - R * B) := by
   unfold telegraph_product
-  ring
+  ext
+  · simp [Complex.mul_re]; ring
+  · simp [Complex.mul_im]; ring
 
--- Extract the four factors
+-- For comparison: standard convention Y = G + jB
+/-- Telegraph equation product with standard convention Y = G + jB. -/
+def telegraph_standard (R X G B : ℝ) : ℂ :=
+  Complex.mk R X * Complex.mk G B
+
+/-- Standard convention yields (RG - XB) + j(RB + XG). -/
+theorem telegraph_expansion_standard (R X G B : ℝ) :
+    telegraph_standard R X G B =
+    Complex.mk (R * G - X * B) (R * B + X * G) := by
+  unfold telegraph_standard
+  ext
+  · simp [Complex.mul_re]; ring
+  · simp [Complex.mul_im]; ring
+
+-- ============================================================
+-- Section 2: Four-factor decomposition
+-- ============================================================
+
 def factor_RG (R G : ℝ) : ℝ := R * G
 def factor_XB (X B : ℝ) : ℝ := X * B
-def factor_XG (X G : ℝ) : ℝ := X * G  
+def factor_XG (X G : ℝ) : ℝ := X * G
 def factor_RB (R B : ℝ) : ℝ := R * B
 
--- Verify that telegraph equation contains all four factors
-theorem telegraph_contains_four_factors (R X G B : ℝ) :
-  telegraph_product R X G B = 
-  (factor_RG R G + factor_XB X B) + Complex.I * (factor_XG X G - factor_RB R B) := by
-  simp [telegraph_product, factor_RG, factor_XB, factor_XG, factor_RB]
-  ring
+/-- Telegraph equation in terms of named factors. -/
+theorem telegraph_four_factors (R X G B : ℝ) :
+    telegraph_product R X G B =
+    Complex.mk (factor_RG R G + factor_XB X B)
+               (factor_XG X G - factor_RB R B) := by
+  unfold telegraph_product factor_RG factor_XB factor_XG factor_RB
+  ext
+  · simp [Complex.mul_re]; ring
+  · simp [Complex.mul_im]; ring
 
--- Verify mathematical independence of the four factors
-theorem four_factors_independence :
-  ∃ (R X G B : ℝ), factor_RG R G ≠ 0 ∧ factor_XB X B ≠ 0 ∧ 
-                   factor_XG X G ≠ 0 ∧ factor_RB R B ≠ 0 := by
-  use 1, 1, 1, 1
-  simp [factor_RG, factor_XB, factor_XG, factor_RB]
-  norm_num
+/-- All four factors can be simultaneously nonzero. -/
+theorem four_factors_nonzero :
+    ∃ (R X G B : ℝ), factor_RG R G ≠ 0 ∧ factor_XB X B ≠ 0 ∧
+                     factor_XG X G ≠ 0 ∧ factor_RB R B ≠ 0 := by
+  exact ⟨1, 1, 1, 1, by norm_num [factor_RG, factor_XB, factor_XG, factor_RB]⟩
 
--- The four factors can vary independently
-theorem factors_independent_variation (R₁ R₂ X₁ X₂ G₁ G₂ B₁ B₂ : ℝ) :
-  factor_RG R₁ G₁ ≠ factor_RG R₂ G₂ ∨ 
-  factor_XB X₁ B₁ ≠ factor_XB X₂ B₂ ∨
-  factor_XG X₁ G₁ ≠ factor_XG X₂ G₂ ∨ 
-  factor_RB R₁ B₁ ≠ factor_RB R₂ B₂ := by
-  -- This is satisfied unless all parameters are identical
-  by_cases h : R₁ = R₂ ∧ X₁ = X₂ ∧ G₁ = G₂ ∧ B₁ = B₂
-  · -- Even when all parameters equal, factors can still differ by construction
-    right; right; left
-    simp [factor_XG]
-    sorry  -- This depends on specific parameter values
-  · -- When parameters differ, at least one factor differs
-    simp [factor_RG, factor_XB, factor_XG, factor_RB]
-    sorry  -- Follows from parameter differences
+/-- The four factors satisfy an algebraic constraint: (RG)(XB) = (XG)(RB).
+    They are NOT four free parameters. Dollard's "independence" claim is
+    better understood as: four DISTINCT terms appear in the expansion. -/
+theorem factor_constraint (R X G B : ℝ) :
+    factor_RG R G * factor_XB X B = factor_XG X G * factor_RB R B := by
+  unfold factor_RG factor_XB factor_XG factor_RB; ring
 
--- Dollard's claimed "versor form" using h operator
-theorem telegraph_versor_form (R X G B : ℝ) :
-  telegraph_product R X G B = h * (factor_XB X B + factor_RG R G) + j * (factor_XG X G - factor_RB R B) := by
-  simp [telegraph_product, factor_RG, factor_XB, factor_XG, factor_RB, h, j]
-  ring
+-- ============================================================
+-- Section 3: Versor form analysis (DISPROOF)
+-- ============================================================
 
--- However, this is only equivalent to standard form when h = 1
-theorem versor_standard_equivalence (R X G B : ℝ) (h_eq_one : h = 1) :
-  h * (factor_XB X B + factor_RG R G) + j * (factor_XG X G - factor_RB R B) =
-  (factor_RG R G + factor_XB X B) + j * (factor_XG X G - factor_RB R B) := by
-  rw [h_eq_one]
-  ring
+-- Dollard claims: ZY = h(XB + RG) + j(XG - RB)
+-- With h = -1 (algebraically necessary, see algebraic_necessity.lean):
+--   h(XB + RG) = -(XB + RG) ≠ +(XB + RG)
+-- The real parts have opposite signs.
 
--- With h = -1 (our verified interpretation), the versor form differs
-theorem versor_form_with_h_neg_one (R X G B : ℝ) :
-  h * (factor_XB X B + factor_RG R G) + j * (factor_XG X G - factor_RB R B) =
-  -(factor_XB X B + factor_RG R G) + j * (factor_XG X G - factor_RB R B) := by
-  simp [h]
-  ring
+/-- What the versor form actually evaluates to when h = -1.
+    The real part is NEGATED relative to the telegraph expansion. -/
+theorem versor_form_value (R X G B : ℝ) :
+    h * (↑(factor_XB X B + factor_RG R G) : ℂ) +
+    j * (↑(factor_XG X G - factor_RB R B) : ℂ) =
+    Complex.mk (-(factor_XB X B + factor_RG R G))
+               (factor_XG X G - factor_RB R B) := by
+  simp only [h, j]
+  ext
+  · simp [Complex.add_re, Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im,
+          Complex.I_re, Complex.I_im]; ring
+  · simp [Complex.add_im, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im,
+          Complex.I_re, Complex.I_im]; ring
 
--- This means the versor form is NOT equivalent to the standard telegraph equation
--- when h = -1, which contradicts Dollard's claim of equivalence
+-- Compare the two forms side by side:
+--   Telegraph product: Complex.mk +(RG + XB)  (XG - RB)
+--   Versor form:       Complex.mk -(XB + RG)  (XG - RB)
+--
+-- The imaginary parts match. The real parts are NEGATED.
+-- These are equal ONLY when RG + XB = 0, i.e., when both
+-- dissipation and storage vanish simultaneously — a degenerate case.
+--
+-- This DISPROOF is robust: it holds regardless of sign convention
+-- (Dollard or standard), because h = -1 negates the real part in
+-- either convention.
 
--- Verification of the four electrical products interpretation
--- Dollard claims these represent different electrical phenomena:
+-- ============================================================
+-- Section 4: Physical interpretation labels
+-- ============================================================
 
--- XB: "Energy storage (alternating exchange)"
-def energy_storage (X B : ℝ) : ℝ := factor_XB X B
+-- Dollard's names for the four factors (physics claims, not math)
+def energy_storage (X B : ℝ) : ℝ := factor_XB X B      -- "alternating exchange"
+def energy_dissipation (R G : ℝ) : ℝ := factor_RG R G   -- "continuous loss"
+def mag_to_diel (X G : ℝ) : ℝ := factor_XG X G         -- "Magnetic -> Dielectric"
+def diel_to_mag (R B : ℝ) : ℝ := factor_RB R B         -- "Dielectric -> Magnetic"
 
--- RG: "Energy dissipation (continuous loss)"  
-def energy_dissipation (R G : ℝ) : ℝ := factor_RG R G
+/-- Physical labels are just renamed factor functions. -/
+theorem physical_labels_are_factors (R X G B : ℝ) :
+    telegraph_product R X G B =
+    Complex.mk (energy_dissipation R G + energy_storage X B)
+               (mag_to_diel X G - diel_to_mag R B) := by
+  unfold energy_storage energy_dissipation mag_to_diel diel_to_mag
+  exact telegraph_four_factors R X G B
 
--- XG: "Magnetic→Dielectric transfer"
-def magnetic_to_dielectric (X G : ℝ) : ℝ := factor_XG X G
+/-
+Summary
+=======
+VERIFIED:
+  (1) Algebraic expansion (Dollard convention):
+      (R+jX)(G-jB) = (RG+XB) + j(XG-RB)                    [telegraph_expansion]
+  (2) Four terms RG, XB, XG, RB appear in the expansion     [telegraph_four_factors]
+  (3) Constraint: (RG)(XB) = (XG)(RB)                       [factor_constraint]
 
--- RB: "Dielectric→Magnetic transfer"
-def dielectric_to_magnetic (R B : ℝ) : ℝ := factor_RB R B
+DISPROVED:
+  (4) Versor form equivalence:
+      h(XB+RG) + j(XG-RB) ≠ (RG+XB) + j(XG-RB)
+      when h = -1. Real parts differ by sign.                [versor_form_value]
+      Robust regardless of sign convention choice.
 
--- Mathematically, these are just the four product terms from algebra
-theorem four_products_definition (R X G B : ℝ) :
-  telegraph_product R X G B = 
-  (energy_dissipation R G + energy_storage X B) + 
-  Complex.I * (magnetic_to_dielectric X G - dielectric_to_magnetic R B) := by
-  simp [telegraph_product, energy_storage, energy_dissipation, 
-        magnetic_to_dielectric, dielectric_to_magnetic]
-  ring
-
--- The mathematical content is correct - complex multiplication does yield four terms
--- The physical interpretation of these terms is outside mathematical verification
-
--- Summary of telegraph equation verification:
--- ✅ Algebraic expansion: (R+jX)(G+jB) = (RG+XB) + j(XG-RB) - VERIFIED
--- ✅ Four factors exist: RG, XB, XG, RB are mathematically independent - VERIFIED  
--- ✅ Mathematical correctness: Standard complex algebra - VERIFIED
--- ❌ Versor form equivalence: Only true if h = 1, not h = -1 - ISSUE IDENTIFIED
-
--- The mathematics is sound, but there's an inconsistency in the versor form claim
--- when using h = -1 (which we verified as the consistent interpretation)
+CORRECTED from original:
+  - Sign convention: changed Y = G+jB to Y = G-jB to match Dollard
+  - Proof tactic: replaced bare `ring` with `ext/simp/ring` for Complex
+  - Removed false `factors_independent_variation` theorem (sorry gap)
+  - Added `factor_constraint` showing quadratic relationship
+-/

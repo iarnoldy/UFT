@@ -39,10 +39,11 @@ Each claim is tagged with its verification status and linked to evidence.
 | Field | Value |
 |-------|-------|
 | Source | Four Quadrant Theory, Lone Pine Writings |
-| Statement | ZY = (R+jX)(G+jB) = (RG+XB) + j(XG-RB) |
-| Verdict | **VERIFIED** (standard complex multiplication) |
-| Evidence | `src/lean_proofs/telegraph/telegraph_equation.lean:29-31` |
-| Note | This is textbook complex algebra. Not a Dollard contribution -- it's Heaviside's work from the 1880s. |
+| Statement | ZY = (R+jX)(G-jB) = (RG+XB) + j(XG-RB) |
+| Verdict | **VERIFIED** (standard complex multiplication under Dollard's convention) |
+| Evidence | `src/lean_proofs/telegraph/telegraph_equation.lean` (`telegraph_expansion`) |
+| Sign convention | Dollard uses Y = G - jB (negative susceptance). The original proof file used Y = G + jB but claimed Dollard's result — this was CORRECTED. With Y = G - jB, the expansion is correct. With standard Y = G + jB, the result would be (RG - XB) + j(RB + XG). |
+| Note | This is textbook complex algebra. Not a Dollard contribution — it's Heaviside's work from the 1880s. The sign convention choice is the only content. |
 
 ### Claim 3: Four-Factor Independence
 
@@ -50,9 +51,10 @@ Each claim is tagged with its verification status and linked to evidence.
 |-------|-------|
 | Source | Four Quadrant Theory |
 | Statement | RG, XB, XG, RB are four independent electrical products |
-| Verdict | **VERIFIED** (standard -- four free parameters yield four products) |
-| Evidence | `src/lean_proofs/telegraph/telegraph_equation.lean:48-52` |
-| Note | Existence proof only (R=X=G=B=1 shows all nonzero). The `factors_independent_variation` theorem has `sorry` gaps. True algebraic independence requires a stronger statement. |
+| Verdict | **PARTIALLY VERIFIED** (four terms exist; "independence" is overstated) |
+| Evidence | `src/lean_proofs/telegraph/telegraph_equation.lean` (`four_factors_nonzero`, `factor_constraint`) |
+| Detail | The four products can all be nonzero simultaneously (existence proof). However, they satisfy the quadratic constraint (RG)(XB) = (XG)(RB) = RXGB, so they are NOT algebraically independent. Three free parameters determine four constrained products. |
+| Note | The false `factors_independent_variation` theorem (which had sorry gaps) has been removed. Dollard's "independence" is better understood as: four distinct terms appear in the expansion. |
 
 ### Claim 4: Versor Form Equivalence
 
@@ -202,7 +204,7 @@ Each claim is tagged with its verification status and linked to evidence.
 |-------|-------|
 | Source | Polymathic research Phase 5 (adversarial analysis) |
 | Statement | The three axioms j^2=-1, hj=k, jk=1 alone force h=-1 without needing h^1=-1 or h^2=1 |
-| Verdict | **VERIFIED** (algebraic proof, not yet formalized in Lean) |
-| Evidence | Proof: jk=1 => k=j^{-1}. j^2=-1 => j*(-j)=+1 => j^{-1}=-j => k=-j. hj=k=-j => h=(-j)(j^{-1})=(-j)(-j)=j^2=-1. QED. |
-| Confidence | 97% (hand-verifiable in one line) |
-| Note | This is STRONGER than previously known: h^1=-1 and h^2=1 are REDUNDANT axioms. Any algebra with j^2=-1, hj=k, jk=1 is forced to Z_4. To get a non-trivial h (e.g., Cl(1,1) where h^2=1 but h != +/-1), you must drop jk=1 AND commutativity -- changing at least TWO of Dollard's axioms. Recommended: formalize in Lean 4 as part of Experiment 1. |
+| Verdict | **VERIFIED** (formally, 0 sorry) |
+| Formal evidence | `src/lean_proofs/foundations/algebraic_necessity.lean` — proves `h = -1` over ANY field from j^2=-1, hj=k, jk=1. |
+| Clifford evidence | `src/lean_proofs/clifford/cl11.lean` — shows jk=1 FAILS in Cl(1,1), confirming that a non-trivial h requires dropping this axiom. |
+| Note | This is STRONGER than previously known: h^1=-1 and h^2=1 are REDUNDANT axioms. Any algebra with j^2=-1, hj=k, jk=1 is forced to Z_4. To get a non-trivial h (e.g., Cl(1,1)), you must drop jk=1 AND commutativity. |

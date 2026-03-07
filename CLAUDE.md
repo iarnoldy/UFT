@@ -23,14 +23,24 @@ Separates verified mathematics from unsubstantiated claims.
 
 ## Build & Run
 
+### First-time setup (free, open-source)
 ```bash
-# Check basic operator proofs
-lake build   # requires lakefile.lean at project root
+# Install elan (Lean version manager) -- Linux/macOS/WSL
+curl https://elan-init.lean-lang.org/elan-init.sh -sSf | sh
 
-# Run individual proof files
-lake env lean src/lean_proofs/foundations/basic_operators.lean
-lake env lean src/lean_proofs/telegraph/telegraph_equation.lean
+# Fetch mathlib (takes a few minutes first time)
+lake update
 ```
+
+### Building
+```bash
+lake build                    # compile all proofs
+lake env lean src/lean_proofs/foundations/basic_operators.lean  # single file
+```
+
+### Key files
+- `lakefile.lean` -- build configuration (srcDir: `src/lean_proofs`)
+- `lean-toolchain` -- pins Lean version
 
 ## Development Rules
 

@@ -20,7 +20,7 @@ import Mathlib.Data.Complex.Basic
 import Mathlib.Data.Real.Basic
 import Mathlib.Algebra.Ring.Basic
 import Mathlib.Tactic
-import UFT_Formal_Verification.lean_proofs.foundations.basic_operators
+import foundations.basic_operators
 
 -- Define the telegraph equation product
 def telegraph_product (R X G B : ℝ) : ℂ := (R + Complex.I * X) * (G + Complex.I * B)

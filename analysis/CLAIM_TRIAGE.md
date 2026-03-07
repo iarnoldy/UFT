@@ -84,10 +84,11 @@ Each claim is tagged with its verification status and linked to evidence.
 |-------|-------|
 | Source | Versor Algebra |
 | Statement | h is defined as sqrt(+1)^(1/2) |
-| Verdict | **AMBIGUOUS** |
-| Experiment | Experiment 1 |
+| Verdict | **AMBIGUOUS** (notation) / **RESOLVED** (algebraically) |
+| Experiment | Experiment 1 (partially resolved by polymathic research) |
 | Computational evidence | N-Phase `operators.py` defines H as VectorOperator corresponding to -1. No alternative interpretation implemented or tested. |
-| Note | The notation is mathematically unclear. sqrt(+1) = 1 in standard math, so sqrt(+1)^(1/2) = 1, which contradicts h^1 = -1. The only consistent interpretation within complex numbers is h = -1. N-Phase confirms this is the only workable interpretation. |
+| Polymathic finding | The axioms j^2=-1, hj=k, jk=1 ALONE force h=-1 by pure algebra, without needing h^1=-1 or h^2=1 as additional axioms. Proof: jk=1 => k=j^{-1}=-j; hj=k=-j => h=-1. This means the notation is irrelevant -- whatever sqrt(+1)^(1/2) means, h must be -1 in any algebra satisfying Dollard's three core axioms. (97% confidence) |
+| Note | Rehabilitation via Cl(1,1) or split-complex numbers requires dropping jk=1 (and commutativity), which changes the algebra entirely. The notation remains ambiguous, but the value is forced. |
 
 ### Claim 7: Sequence Periodicity
 
@@ -105,9 +106,10 @@ Each claim is tagged with its verification status and linked to evidence.
 |-------|-------|
 | Source | Lone Pine Writings |
 | Statement | Q = Psi * Phi (Weber-Coulomb), W = dQ/dt (Joule) |
-| Verdict | **NOT YET VERIFIED** |
+| Verdict | **DIMENSIONALLY CORRECT** but **NOT NOVEL** |
 | Experiment | Experiment 3 |
-| Note | Dimensional analysis is checkable. Weber * Coulomb = V*s * A*s = V*A*s^2 = W*s^2 = J*s. So dQ/dt = J, which is energy, not power. Needs careful checking. |
+| Polymathic finding | Weber * Coulomb = J*s (units of action). This is the coordinate-momentum product in Lagrangian circuit theory (Cherry 1951): charge q is the generalized coordinate, flux lambda is the conjugate momentum, q*lambda = action. W = dQ/dt = energy is dimensionally consistent with the Hamilton-Jacobi equation dS/dt = -H. However, this is 1830s analytical mechanics, not a new discovery. The quantum flux quantum Phi_0 = h/(2e) encodes the same relationship. IF Dollard's Psi and Phi match standard flux and charge (plausible but not confirmed from primary sources). (75% confidence on physical identity, 95% on dimensional correctness) |
+| Note | Dollard's framework accidentally points toward quantum circuit theory (Josephson junctions, superconducting qubits), which begins with exactly this classical Lagrangian formulation. The "E=mc^2 replacement" claim (Claim 11) is a category error: W=dQ/dt is about circuits, E=mc^2 is about rest mass-energy equivalence. |
 
 ---
 
@@ -137,8 +139,9 @@ Each claim is tagged with its verification status and linked to evidence.
 |-------|-------|
 | Source | Core Theoretical Framework |
 | Statement | "W = dQ/dt replaces E = mc^2 as the fundamental energy equation" |
-| Verdict | **EXTRAORDINARY** |
-| Note | Would require extraordinary evidence. None provided. The dimensional analysis (Claim 8) can check internal consistency but cannot validate the replacement claim. |
+| Verdict | **EXTRAORDINARY** / **CATEGORY ERROR** |
+| Polymathic finding | W = dQ/dt is a notational variant of the Hamilton-Jacobi equation dS/dt = -H, which is standard analytical mechanics (1830s). E = mc^2 describes rest mass-energy equivalence in special relativity. These operate in completely different domains. One cannot "replace" the other any more than Ohm's law can "replace" the ideal gas law. The steelmanned version of Dollard's claim is that EE should reconnect with Lagrangian/Hamiltonian mechanics -- which is correct (this is the basis of quantum circuit theory), but the gap is already filled by existing textbooks (Chua 1969, Vool & Devoret 2017). (80% confidence on steelman interpretation) |
+| Note | The claim as stated requires extraordinary evidence. None provided. |
 
 ### Claim 12: Over-Unity Energy Production
 
@@ -192,3 +195,14 @@ Each claim is tagged with its verification status and linked to evidence.
 | Verdict | **VERIFIED** computationally |
 | Computational evidence | N-Phase `test_decomposer.py` -- A_4 construction matches Dollard's claimed matrix |
 | Note | This confirms Dollard correctly identified that versor operators are the N=4 case of Fortescue's general DFT. The insight is valid; the credit belongs to Fortescue (1918). |
+
+### Claim 17: jk=1 + j^2=-1 + hj=k Forces h=-1 (Algebraic Necessity)
+
+| Field | Value |
+|-------|-------|
+| Source | Polymathic research Phase 5 (adversarial analysis) |
+| Statement | The three axioms j^2=-1, hj=k, jk=1 alone force h=-1 without needing h^1=-1 or h^2=1 |
+| Verdict | **VERIFIED** (algebraic proof, not yet formalized in Lean) |
+| Evidence | Proof: jk=1 => k=j^{-1}. j^2=-1 => j*(-j)=+1 => j^{-1}=-j => k=-j. hj=k=-j => h=(-j)(j^{-1})=(-j)(-j)=j^2=-1. QED. |
+| Confidence | 97% (hand-verifiable in one line) |
+| Note | This is STRONGER than previously known: h^1=-1 and h^2=1 are REDUNDANT axioms. Any algebra with j^2=-1, hj=k, jk=1 is forced to Z_4. To get a non-trivial h (e.g., Cl(1,1) where h^2=1 but h != +/-1), you must drop jk=1 AND commutativity -- changing at least TWO of Dollard's axioms. Recommended: formalize in Lean 4 as part of Experiment 1. |

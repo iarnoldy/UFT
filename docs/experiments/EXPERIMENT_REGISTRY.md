@@ -34,26 +34,32 @@ be trivial like the basic operator proofs).
 
 ## Experiment 1: h Operator Alternative Interpretations
 
-**Status**: PRE-REGISTERED
+**Status**: PARTIALLY RESOLVED (polymathic research Phase 5)
 **Track**: A + B
 
 **Hypothesis**: There exists a non-trivial algebraic structure (beyond complex
 numbers) where h satisfies h^2 = 1 and h^1 = -1 simultaneously, AND h != -1.
 
-**Method**:
-1. Survey algebraic structures: split-complex numbers, dual numbers, Clifford algebras
-2. For each candidate, check if h properties hold with h != -1
-3. If found, implement in Lean 4 and verify
+**Polymathic Finding (2026-03-07)**: The axioms j^2=-1, hj=k, jk=1 ALONE force
+h=-1 by pure algebra. Proof: jk=1 => k=j^{-1}=-j; hj=k=-j => h=-1. This means
+even dropping h^1=-1 and h^2=1, the remaining axioms force h=-1 in ANY unital
+associative algebra. To get non-trivial h (e.g. Cl(1,1) where h^2=1, h != +/-1),
+you must drop jk=1 (and commutativity) -- yielding a DIFFERENT algebra, not
+Dollard's. Confidence: 97%.
 
-**Falsification**: If no such structure exists, h = -1 is the only interpretation
-and Dollard's "versor algebra" is isomorphic to Z_4 (the 4th roots of unity).
-This would confirm Finding 1 of the audit.
+**Remaining work**:
+1. Formalize the jk=1-forces-h=-1 proof in Lean 4 (trivial, one-line argument)
+2. Formalize Cl(1,1) in Lean 4 showing it requires different axioms
+3. Document the algebraic hierarchy: Z_4 < Cl(1,0) < Cl(1,1) < Cl(3,0)
 
-**Expected outcome**: DISPROVED (likely no non-trivial structure exists, but the
-search itself has methodological value for Track A).
+**Falsification**: CONFIRMED -- h=-1 is forced. No non-trivial structure satisfies
+ALL of Dollard's axioms simultaneously. The "what Dollard should have said" answer
+is Cl(1,1), but that is a different algebra.
+
+**Expected outcome**: DISPROVED (confirmed by polymathic research; Lean formalization pending)
 
 **Dependencies**: None
-**Downstream impact**: Determines whether versor algebra has novel algebraic content
+**Downstream impact**: Versor algebra has NO novel algebraic content. It is Z_4.
 
 ---
 
@@ -84,22 +90,30 @@ The versor form is wrong.
 
 ## Experiment 3: Dimensional Analysis Verification
 
-**Status**: PRE-REGISTERED
+**Status**: PARTIALLY RESOLVED (polymathic research Phase 2-5)
 **Track**: B + C
 
 **Hypothesis**: Q = Psi * Phi with W = dQ/dt is dimensionally consistent,
 where Psi has units of Coulomb and Phi has units of Weber.
 
-**Method**:
+**Polymathic Finding (2026-03-07)**: Weber * Coulomb = J*s (units of action).
+This is the coordinate-momentum product in Lagrangian circuit theory (Cherry 1951).
+W = dQ/dt has energy units, consistent with Hamilton-Jacobi dS/dt = -H.
+Dimensionally correct but not novel -- this is 1830s analytical mechanics.
+The "E=mc^2 replacement" claim is a category error: circuit energy vs. rest mass.
+Confidence: 95% (dimensional), 75% (physical identity with Lagrangian theory,
+pending confirmation of Dollard's definitions from primary sources).
+
+**Remaining work**:
 1. Define dimensional type system in Lean 4
-2. Verify: Weber * Coulomb = Joule * second
-3. Verify: d/dt(Joule * second) = Joule = Watt * second
-4. Check dimensional consistency of the full energy framework
+2. Verify: Weber * Coulomb = Joule * second (formally)
+3. For an LC circuit, derive the Hamilton-Jacobi equation and check whether
+   Q = q*lambda(q,t) satisfies it (closes the Gap 2 from polymathic research)
+4. Read Dollard primary sources to confirm Psi = flux, Phi = charge
 
-**Falsification**: Dimensional inconsistency would invalidate the energy framework
-claimed in Lone Pine Writings.
+**Falsification**: Dimensional inconsistency would invalidate the energy framework.
 
-**Expected outcome**: VERIFIED (dimensional analysis is checkable and likely correct).
+**Expected outcome**: VERIFIED dimensionally; physical identity probable but conditional.
 
 **Dependencies**: None
 **Downstream impact**: Affects Track C physics claims about energy

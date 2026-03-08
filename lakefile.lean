@@ -12,4 +12,4 @@ require mathlib from git
 @[default_target]
 lean_lib «DollardFormalVerification» where
   srcDir := "src/lean_proofs"
-  roots := #[`foundations.basic_operators, `foundations.algebraic_necessity, `telegraph.telegraph_equation, `polyphase.polyphase_formula, `clifford.cl11, `clifford.cl30, `clifford.cl31_maxwell, `clifford.gauge_gravity, `clifford.dirac, `clifford.su3_color, `clifford.su5_grand, `clifford.unification, `clifford.georgi_glashow, `clifford.lie_bridge, `lagrangian.circuit_action]
+  roots := #[`foundations.basic_operators, `foundations.algebraic_necessity, `telegraph.telegraph_equation, `polyphase.polyphase_formula, `clifford.cl11, `clifford.cl30, `clifford.cl31_maxwell, `clifford.gauge_gravity, `clifford.dirac, `clifford.su3_color, `clifford.su5_grand, `clifford.unification, `clifford.georgi_glashow, `clifford.lie_bridge, `clifford.so10_grand, `lagrangian.circuit_action]

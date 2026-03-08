@@ -412,11 +412,35 @@ analyzing and demonstrate the discriminating power of formal methods.
 
 The \textsc{Algebraic Necessity} category merits special attention. It captures
 cases where the author's axioms entail consequences they did not recognize or
-intend. This is distinct from \textsc{Disproved} (which requires the claim to
-be explicitly stated and false) and from \textsc{Verified} (which implies the
-author's claim is correct). Algebraic necessity reveals that the framework is
-more constrained than its author believed---a finding that is neither
-verification nor refutation but structural analysis.
+intend. This phenomenon has precedents across several fields: as a consequence
+of Hilbert's implicit definitions (the Frege-Hilbert controversy), as
+``implicit commitment'' in epistemic logic~\cite{fagin1988belief}, and as
+overspecification in formal methods. The Banach-Tarski paradox is a canonical
+example at larger scale---the axiom of choice forces consequences its adopters
+did not foresee.
+
+We note a duality with Lakatos's \emph{Proofs and
+Refutations}~\cite{lakatos1976}: Lakatos addresses axiom systems that are too
+\emph{weak}, admitting unintended models (``monsters'' requiring barring). Our
+\textsc{Algebraic Necessity} addresses axiom systems that are too \emph{strong},
+forcing unintended consequences. These are dual failure modes:
+
+\begin{center}
+\small
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Failure} & \textbf{Direction} & \textbf{Lakatos} & \textbf{This work} \\
+\midrule
+Axioms too weak & Admit unintended models & Monster-barring & --- \\
+Axioms too strong & Force unintended conclusions & --- & \textsc{Alg.\ Necessity} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+This duality suggests that \textsc{Algebraic Necessity} fills a genuine gap in
+the vocabulary for analyzing axiom systems---particularly relevant when formal
+methods are applied to frameworks whose authors may not have fully explored the
+consequences of their axioms.
 
 % ============================================================================
 \section{The Clifford Algebra Hierarchy}
@@ -662,6 +686,14 @@ Self-published presentation.
 Cherry, E.C.: Some general theorems for non-linear systems possessing reactance.
 The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science
 \textbf{42}(333), 1161--1177 (1951)
+
+\bibitem{lakatos1976}
+Lakatos, I.: Proofs and Refutations: The Logic of Mathematical Discovery.
+Cambridge University Press (1976)
+
+\bibitem{fagin1988belief}
+Fagin, R., Halpern, J.Y.: Belief, awareness, and limited reasoning.
+Artificial Intelligence \textbf{34}(1), 39--76 (1988)
 
 \end{thebibliography}
 

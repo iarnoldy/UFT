@@ -101,32 +101,37 @@ algebra where electromagnetism becomes geometry:
 | d(Action)/dt = Energy | Verified (0 sorry) | `lagrangian/circuit_action.lean` |
 | Q = Psi*Phi = Lagrangian action | Dimensionally correct | Not novel (Cherry 1951) |
 
-## Computationally Validated (Lean Proof Pending)
+## Computationally Validated AND Formally Verified
 
-### Polyphase Formula (N-Phase: 491 tests, N=2..12)
+### Polyphase Formula (N-Phase: 491 tests, N=2..12; Lean: 0 sorry)
 
-The universal polyphase formula k^n_N = exp(j*2*pi*n/N) is validated by the N-Phase
-system to machine precision (<1e-10 NMSE). Lean proof written with 3 sorry gaps
-on standard mathlib API calls (not mathematical difficulties).
+The universal polyphase formula k^n_N = exp(j*2*pi*n/N) is:
+- Validated by N-Phase system to machine precision (<1e-10 NMSE)
+- Formally verified in Lean 4 with zero sorry gaps (16 theorems)
+
+All former sorry gaps closed (2026-03-08):
+- `omega_pow_N`: closed via `Complex.exp_two_pi_mul_I`
+- `omega4_eq_I`: closed via `Complex.ext <;> simp` (cos/sin at π/2)
+- `omega_on_unit_circle`: closed via `Complex.norm_exp_ofReal_mul_I`
 
 ## Known Gaps
 
 | Gap | Location | Status |
 |-----|----------|--------|
-| 3 sorry gaps in polyphase formula | `polyphase_formula.lean` | Mathlib API issue, not math |
 | Full Cl(1,3) geometric product | `cl31_maxwell.lean` | Deliberately avoided (256 terms) |
-| Lean 4 compilation | All files | elan/mathlib not yet installed |
 
 ## Proof Compilation Status
+
+All proofs compile via `lake build` (3269 jobs, 0 errors). Verified 2026-03-08.
 
 | File | sorry count | Key theorems |
 |------|-------------|-------------|
 | `foundations/basic_operators.lean` | 0 | j^4=1, h=-1, jk=1, 4th roots |
 | `foundations/algebraic_necessity.lean` | 0 | h=-1 forced over ANY field |
 | `telegraph/telegraph_equation.lean` | 0 | Both conventions, factor constraint, versor disproof |
-| `polyphase/polyphase_formula.lean` | 3 | Root powers, periodicity, 3-phase sum |
+| `polyphase/polyphase_formula.lean` | 0 | Root powers, periodicity, 3/4-phase, unit circle |
 | `clifford/cl11.lean` | 0 | Full mult table, idempotents, wave decomposition |
 | `clifford/cl30.lean` | 0 | Pauli algebra, anticommutativity, EM field |
 | `clifford/cl31_maxwell.lean` | 0 | Spacetime algebra, signature, EM bivector |
 | `lagrangian/circuit_action.lean` | 0 | Dimensional analysis, action units |
-| **Total** | **3** | **8 files, ~60 theorems** |
+| **Total** | **0** | **8 files, ~116 theorems** |

@@ -7,9 +7,9 @@ Each entry requires a hypothesis, falsification criteria, and track assignment.
 
 ## Experiment 0: Polyphase Formula Verification [BLOCKING]
 
-**Status**: PROOF WRITTEN, 3 SORRY GAPS REMAINING
+**Status**: FULLY VERIFIED (0 sorry gaps, all proofs compile)
 **Track**: B
-**Priority**: BLOCKING -- other polyphase work depends on this
+**Priority**: COMPLETE -- was BLOCKING, now resolved
 
 **Hypothesis**: The universal polyphase formula k^n_N = exp(j*2*pi*n/N) is provable
 in Lean 4 as a consequence of the nth roots of unity.
@@ -28,15 +28,15 @@ or axioms beyond mathlib, document what's needed.
 be trivial like the basic operator proofs).
 
 **Proof file**: `src/lean_proofs/polyphase/polyphase_formula.lean`
-**Status details (2026-03-07)**:
-- 10+ theorems fully proved (no sorry): omega powers, root multiplication,
-  periodicity, exponent simplification, 3-phase geometric sum
-- 3 sorry gaps on standard complex exponential facts:
-  1. `omega_pow_N`: needs exp(2*pi*I) = 1
-  2. `omega4_eq_I`: needs exp(pi*I/2) = I
-  3. `omega_abs`: needs Re(purely imaginary) = 0
-- All sorry gaps are standard mathlib API issues, not mathematical difficulties
-- Will close once elan/mathlib installed and correct API calls identified
+**Status details (2026-03-08)**:
+- 16 theorems fully proved (0 sorry): omega powers, root multiplication,
+  periodicity, exponent simplification, 3-phase geometric sum, 4-phase versors,
+  unit circle, omega_pow_N, omega4_eq_I, omega_on_unit_circle
+- All 3 former sorry gaps CLOSED using mathlib lemmas:
+  1. `omega_pow_N`: closed via Complex.exp_two_pi_mul_I
+  2. `omega4_eq_I`: closed via Complex.ext + simp (cos(π/2)=0, sin(π/2)=1)
+  3. `omega_on_unit_circle`: closed via Complex.norm_exp_ofReal_mul_I
+- Build passes: `lake build` (3269 jobs, 0 errors)
 
 **Dependencies**: None
 **Downstream impact**: N-Phase system's Fortescue decomposition depends on this

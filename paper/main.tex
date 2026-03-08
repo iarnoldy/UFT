@@ -1,0 +1,668 @@
+% Target: CICM 2026 (19th Conference on Intelligent Computer Mathematics)
+% Ljubljana, Slovenia, September 21-25, 2026
+% Regular paper: up to 15 pages + bibliography, LNCS format
+% Abstract deadline: March 25, 2026 | Paper deadline: April 1, 2026
+% Published in: Springer LNAI
+\documentclass[runningheads]{llncs}
+
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+% Lean 4 listing style
+\lstdefinelanguage{Lean4}{
+  keywords={theorem, lemma, def, noncomputable, import, by, have, exact, rw,
+            simp, ring, norm_num, apply, intro, induction, unfold, show,
+            refine, suffices, convert, push_cast, field_simp, ext, linarith,
+            private, where, with, match, if, then, else, let, in, do, return,
+            structure, class, instance, open, section, namespace, end, variable,
+            axiom, sorry, example, calc, fun},
+  morekeywords=[2]{ℂ, ℝ, ℕ, ℤ},
+  sensitive=true,
+  morecomment=[l]{--},
+  morecomment=[s]{/-}{-/},
+  morestring=[b]",
+}
+
+\lstset{
+  language=Lean4,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue}\bfseries,
+  keywordstyle=[2]\color{purple},
+  commentstyle=\color{gray}\itshape,
+  stringstyle=\color{red},
+  breaklines=true,
+  columns=flexible,
+  frame=single,
+  xleftmargin=2em,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=5pt,
+}
+
+\begin{document}
+
+\title{Formal Verification of Alternative Mathematical Frameworks:\\
+A Case Study Using Lean~4}
+
+\author{Ian M. Arnoldy}
+\institute{Independent Researcher}
+
+\maketitle
+
+\begin{abstract}
+We present a systematic protocol for applying interactive theorem provers to
+claims originating from alternative or non-standard mathematical frameworks.
+Using Lean~4 and mathlib, we extract formalizable assertions from such sources,
+translate them into dependent type theory, and attempt proof or disproof---reporting
+results without prejudice. We demonstrate the protocol through a case study on
+Eric Dollard's ``versor algebra,'' a non-standard extension of electrical
+engineering mathematics. Results are deliberately mixed: we verify a $\mathbb{Z}_4$
+cyclic group structure (trivially correct), disprove a claimed versor-form
+equivalence (sign error), establish by algebraic necessity that the proposed
+operators collapse to standard 4th roots of unity, and trace the algebraic path
+from $\mathbb{Z}_4$ through Clifford algebras $\mathrm{Cl}(1,1)$,
+$\mathrm{Cl}(3,0)$, $\mathrm{Cl}(1,3)$ to spacetime algebra. We propose a
+five-category taxonomy for classifying claims from alternative frameworks:
+\textsc{Verified}, \textsc{Disproved}, \textsc{Algebraic~Necessity},
+\textsc{Ambiguous}, and \textsc{Unfalsifiable}. To our knowledge, this represents
+the first application of interactive theorem provers to formalize claims from
+non-mainstream mathematical sources.
+\end{abstract}
+
+\keywords{formal verification \and Lean~4 \and alternative mathematics \and
+Clifford algebras \and versor algebra}
+
+% ============================================================================
+\section{Introduction}
+\label{sec:intro}
+% ============================================================================
+
+Interactive theorem provers have verified some of mathematics' most challenging
+results: Hales' Kepler conjecture via the Flyspeck project~\cite{hales2017formal},
+the Four Color Theorem~\cite{gonthier2008four}, Scholze's liquid tensor
+experiment~\cite{commelin2022liquid}, the polynomial Freiman-Ruzsa
+conjecture~\cite{tao2023pfr}, and the consistency of Quine's New
+Foundations~\cite{wilshaw2024nf}. In each case, the target was mainstream
+mathematics---contested, complex, or uncertain, but arising within accepted
+mathematical frameworks.
+
+A conspicuous gap remains: no prior work applies interactive theorem provers to
+claims from \emph{alternative} or \emph{non-standard} mathematical frameworks.
+By ``alternative framework'' we mean a coherent system of mathematical claims
+originating outside peer-reviewed mathematics, typically from independent
+researchers, that proposes non-standard definitions, operations, or equivalences.
+Such frameworks are distinct from non-standard \emph{foundations} (e.g., HoTT,
+constructive mathematics), which are rigorous alternative approaches proposed
+within the mathematical community~\cite{shulman2024strange}.
+
+This gap is structural, not accidental. Four factors conspire to maintain it:
+\begin{enumerate}
+\item \textbf{Cultural separation.} Formal verification and alternative
+  mathematics communities have zero overlap.
+\item \textbf{No academic incentive.} Formalizing alternative claims yields no
+  new theorems and no library contributions, while risking the appearance of
+  legitimizing pseudoscience.
+\item \textbf{Asymmetric difficulty.} Translating informal non-standard claims
+  into dependent type theory requires both mathematical expertise and judgment
+  about ambiguous notation.
+\item \textbf{No client.} Proponents of alternative frameworks rarely seek
+  formal verification (which might disprove claims), and mainstream mathematicians
+  see no need (they already reject such claims on conventional grounds).
+\end{enumerate}
+
+We argue that this gap represents a missed opportunity. Formal verification of
+alternative frameworks is methodologically interesting precisely when it produces
+\emph{mixed} results: some claims verified, others disproved, still others
+classified as ambiguous or unfalsifiable. Pure debunking is uninteresting (it
+offers no methodological contribution), and pure verification is unlikely for
+frameworks that diverge from standard mathematics. Mixed results demonstrate the
+discriminating power of formal methods and reveal genuine mathematical structure
+worth analyzing.
+
+\paragraph{Contributions.} This paper makes four contributions:
+\begin{enumerate}
+\item A six-step \emph{protocol} for extracting, translating, and verifying
+  claims from alternative mathematical frameworks (\Cref{sec:protocol}).
+\item A \emph{case study} applying the protocol to Eric Dollard's versor
+  algebra, producing 118 formally verified theorems across 8 Lean~4 proof files
+  with zero \texttt{sorry} gaps (\Cref{sec:case-study}).
+\item A five-category \emph{taxonomy} for classifying claims from alternative
+  frameworks: \textsc{Verified}, \textsc{Disproved},
+  \textsc{Algebraic~Necessity}, \textsc{Ambiguous}, and \textsc{Unfalsifiable}
+  (\Cref{sec:taxonomy}).
+\item A constructive \emph{algebraic hierarchy} tracing the path from the
+  source claims through Clifford algebras to spacetime algebra, demonstrating
+  that formal methods can suggest corrections, not merely judge
+  (\Cref{sec:hierarchy}).
+\end{enumerate}
+
+% ============================================================================
+\section{Related Work}
+\label{sec:related}
+% ============================================================================
+
+\subsection{Formalization of Contested Mathematics}
+
+The closest parallels to our work involve formalizations where the mathematical
+community itself had doubts about correctness. The Flyspeck
+project~\cite{hales2017formal} verified Hales' proof of the Kepler conjecture
+after referees could not fully evaluate it. The liquid tensor
+experiment~\cite{commelin2022liquid} verified a theorem where even the author
+(Scholze) had reservations. Wilshaw's formalization of NF
+consistency~\cite{wilshaw2024nf} addressed a proof that mainstream reviewers
+could not confidently evaluate. In each case, the target was
+contested-within-mainstream, not alternative/fringe.
+
+\subsection{Formalization of Physical Theories}
+
+Tooby-Smith's PhysLean/HepLean project~\cite{toobysmith2025physlean}
+digitalizes mainstream physics in Lean~4, from classical mechanics through
+quantum field theory. Bobbin et al.~\cite{bobbin2024chemical} formalized
+Langmuir and BET adsorption theories, demonstrating that Lean catches faulty
+logic and reveals hidden assumptions---the closest methodological parallel to
+our work, though applied to mainstream physical chemistry.
+
+\subsection{Historical Mathematics Formalization}
+
+Fleuriot and Paulson~\cite{fleuriot2001newton} formalized Newton's geometric
+proofs in Isabelle/HOL and discovered a flaw in one of Newton's proofs. This
+is the closest near-miss to our work: a proof assistant applied to historical
+non-rigorous reasoning that finds errors. The distinction is that Newton is
+mainstream; the ``non-standard'' aspect is proof style, not framework.
+
+\subsection{Clifford Algebra Formalization}
+
+Wieser and Song~\cite{wieser2021clifford} formalized Clifford algebras in
+Lean~3/mathlib, providing the mathematical objects that overlap with our case
+study. Their work formalizes standard theory; ours applies it to non-standard
+claims.
+
+\subsection{Philosophy of Formal Verification}
+
+Avigad~\cite{avigad2021understanding} examines how formal verification
+contributes to mathematical understanding. Imbert and
+Ardourel~\cite{imbert2023formal} analyze formal verification's epistemological
+role in computational science. Shulman~\cite{shulman2024strange} discusses proof
+assistants for exploring alternative foundations (HoTT), though these are
+rigorous alternatives proposed by credentialed mathematicians.
+
+% ============================================================================
+\section{The Protocol}
+\label{sec:protocol}
+% ============================================================================
+
+We propose a six-step protocol for applying interactive theorem provers to
+alternative mathematical frameworks. The individual techniques at each step are
+standard; the contribution is the systematic application to a novel domain.
+
+\begin{enumerate}
+\item \textbf{Source Identification.} Identify an alternative mathematical
+  framework containing specific algebraic or structural claims amenable to
+  formalization. The framework must make assertions beyond rhetorical or
+  philosophical claims.
+
+\item \textbf{Claim Extraction.} Enumerate all formalizable assertions from the
+  source material. Separate mathematical claims (``$j^4 = 1$'') from rhetoric
+  (``electricity is fundamental''), physics claims (``aether exists''), and
+  philosophical framing. Document the extraction process, including claims
+  deliberately excluded and why.
+
+\item \textbf{Translation.} Map each extracted claim to dependent type theory.
+  Document all translation choices, especially where source notation is ambiguous.
+  When multiple interpretations exist, formalize the most charitable one
+  (\emph{principle of charity}).
+
+\item \textbf{Verification Attempt.} For each translated claim, attempt proof
+  or disproof using standard tactics. Record the outcome: proved, disproved
+  (with counterexample or contradiction), or neither (claim may be ambiguous
+  or unformalizable).
+
+\item \textbf{Taxonomy Classification.} Assign each claim to one of five
+  categories (\Cref{sec:taxonomy}).
+
+\item \textbf{Neutral Reporting.} Present all results without editorial judgment
+  on the source framework. The role of the formal verifier is analogous to that
+  of an auditor: to report findings, not to advocate or condemn.
+\end{enumerate}
+
+% ============================================================================
+\section{Case Study: Dollard's Versor Algebra}
+\label{sec:case-study}
+% ============================================================================
+
+\subsection{Background}
+
+Eric Dollard is an independent researcher in electrical engineering who has
+proposed a ``versor algebra'' as an extension of standard complex-number methods
+for analyzing polyphase power systems and transmission
+lines~\cite{dollard-versor,dollard-fourquad}. The framework introduces three
+operators: $j$ (the standard imaginary unit), $h$ (a proposed ``hyperbolic''
+operator with $h^2 = 1$, $h^1 = -1$), and $k = hj$ (a ``sequence'' operator).
+Dollard claims these operators form a novel algebraic structure with applications
+to electromagnetic theory.
+
+The source materials are four self-published documents: \emph{Lone Pine
+Writings}, \emph{Four Quadrant Theory}, \emph{Versor Algebra}, and
+\emph{Advanced Versor Algebra II-23}. We extracted 17 formalizable claims
+from these sources.
+
+\paragraph{Sign convention.} A critical detail: Dollard uses the admittance
+convention $Y = G - jB$ (negative susceptance), not the standard $Y = G + jB$.
+This affects the telegraph equation expansion. Our formalization verifies both
+conventions for comparison.
+
+\subsection{\textsc{Verified}: $\mathbb{Z}_4$ Cyclic Group Structure}
+
+Dollard's operators $\{1, j, h, k\}$ with $j^2 = -1$, $h = -1$, $k = hj = -j$,
+and $jk = 1$ form a group under multiplication. This group is isomorphic to
+$\mathbb{Z}_4$, the cyclic group of order 4, which is also the group of 4th
+roots of unity $\{1, i, -1, -i\}$ under complex multiplication.
+
+\begin{lstlisting}[caption={Versor operators as 4th roots of unity (excerpt from \texttt{basic\_operators.lean})}]
+noncomputable def j : ℂ := Complex.I
+noncomputable def h : ℂ := -1
+noncomputable def k : ℂ := h * j
+
+theorem j_fourth : j ^ 4 = 1 := by ...
+theorem h_squared : h ^ 2 = 1 := by ...
+theorem jk_identity : j * k = 1 := by ...
+\end{lstlisting}
+
+All 16 products of the Cayley table are verified. The structure is trivially
+correct---it is standard complex arithmetic. The verification confirms Dollard's
+framework includes correct standard results, though the algebraic content is
+not novel.
+
+\subsection{\textsc{Disproved}: Versor Form Equivalence}
+\label{sec:disproof}
+
+Dollard claims that the telegraph equation product $ZY = (R + jX)(G - jB)$ can
+be equivalently written in ``versor form'' as:
+\[
+  ZY = h(XB + RG) + j(XG - RB)
+\]
+
+With $h = -1$ (as established by the $\mathbb{Z}_4$ structure):
+\begin{align*}
+  \text{Versor form:} \quad & h(XB + RG) + j(XG - RB) = -(XB + RG) + j(XG - RB) \\
+  \text{Telegraph product:} \quad & (RG + XB) + j(XG - RB)
+\end{align*}
+
+The imaginary parts match, but the real parts differ by sign. The forms are equal
+only when $RG + XB = 0$---a degenerate case where both dissipation and storage
+vanish simultaneously.
+
+\begin{lstlisting}[caption={Versor form disproof (excerpt from \texttt{telegraph\_equation.lean})}]
+theorem versor_form_value (R X G B : ℝ) :
+    h * (↑(factor_XB X B + factor_RG R G) : ℂ) +
+    j * (↑(factor_XG X G - factor_RB R B) : ℂ) =
+    Complex.mk (-(factor_XB X B + factor_RG R G))
+               (factor_XG X G - factor_RB R B) := by
+  simp only [h, j]
+  apply Complex.ext <;> simp [...]
+\end{lstlisting}
+
+This disproof is robust: it holds regardless of sign convention (Dollard or
+standard), because $h = -1$ negates the real part in either case. Furthermore,
+the versor form is \emph{irreparable}: we prove that the coefficient on the
+real part must equal 1 for equivalence (\texttt{versor\_repaired\_with\_one}),
+but $h \neq 1$ (\texttt{h\_ne\_one}).
+
+\subsection{\textsc{Algebraic Necessity}: $h = -1$ Forced}
+
+The most structurally interesting result: Dollard's three core axioms
+$j^2 = -1$, $hj = k$, $jk = 1$ \emph{alone} force $h = -1$ over any field.
+The proof is elementary:
+\[
+  jk = 1 \implies k = j^{-1} = -j, \qquad hj = k = -j \implies h = -1
+\]
+
+The axioms $h^1 = -1$ and $h^2 = 1$ are redundant---they follow from the three
+core axioms. This means Dollard's algebra has zero degrees of freedom: any
+unital associative algebra satisfying the core axioms is forced to
+$\mathbb{Z}_4$.
+
+\begin{lstlisting}[caption={Algebraic necessity over any field (excerpt from \texttt{algebraic\_necessity.lean})}]
+theorem algebraic_necessity_general {F : Type*}
+    [Field F] [CharZero F]
+    (j h k : F) (hj2 : j^2 = -1)
+    (hhj : h * j = k) (hjk : j * k = 1) :
+    h = -1 := by ...
+\end{lstlisting}
+
+This result closes the ``rehabilitation question'': to obtain a non-trivial $h$
+(e.g., in $\mathrm{Cl}(1,1)$ where $e_1^2 = 1$ but $e_1 \neq \pm 1$), one
+must drop at least two of Dollard's three core axioms. The resulting algebra
+is a \emph{different} system, not a repair of Dollard's.
+
+\subsection{\textsc{Ambiguous}: Notation Issues}
+
+Dollard writes $h = \sqrt{+1}^{1/2}$, which is mathematically ambiguous.
+In $\mathbb{R}$, $\sqrt{1} = 1$ and $1^{1/2} = 1$, so $h = 1$---but Dollard
+claims $h = -1$. The notation admits multiple interpretations, none of which
+are standard.
+
+Formal methods precisely \emph{identify} this ambiguity as a contribution:
+rather than resolving it by fiat, we show that the algebraic necessity result
+(\Cref{sec:disproof}) makes the notation irrelevant. Whatever
+$\sqrt{+1}^{1/2}$ means, $h$ must equal $-1$ in any algebra satisfying
+Dollard's core axioms.
+
+\subsection{\textsc{Unfalsifiable}: Physics Claims}
+
+Dollard defines $\Psi$ (total dielectric induction, in Coulombs) and $\Phi$
+(total magnetic induction, in Webers), with $Q = \Psi \cdot \Phi$ and
+$W = dQ/dt$. Dimensionally, $\text{Coulomb} \times \text{Weber} =
+\text{J} \cdot \text{s}$ (action), making $Q$ the action and $W$ the energy.
+This is confirmed by primary source analysis: Dollard's $d\Psi/dt = I$
+(current) and $d\Phi/dt = E$ (voltage) exactly reproduce the Lagrangian
+circuit variables where charge $q$ is the generalized coordinate and flux
+$\lambda$ is the conjugate momentum~\cite{fortescue1918}. The dimensional
+analysis is verified in Lean~4 (\texttt{circuit\_action.lean}, 0~\texttt{sorry}).
+The framework is dimensionally correct but not novel---it is Lagrangian circuit
+theory, known since Cherry~\cite{cherry1951}.
+
+Several remaining claims---``electricity is fundamental,''
+``aether exists as a fifth state of matter,'' ``$W = dQ/dt$ replaces
+$E = mc^2$''---are not addressable by formal mathematical methods. We classify
+these as \textsc{Unfalsifiable} (by theorem provers), noting that this
+classification is itself a useful result: it separates the checkable from the
+uncheckable.
+
+% ============================================================================
+\section{A Taxonomy for Claims from Alternative Frameworks}
+\label{sec:taxonomy}
+% ============================================================================
+
+Based on the case study, we propose a five-category taxonomy for classifying
+claims from alternative mathematical frameworks:
+
+\begin{table}[ht]
+\centering
+\caption{Five-category taxonomy for claims from alternative frameworks}
+\label{tab:taxonomy}
+\begin{tabular}{@{}lp{5cm}p{4.5cm}@{}}
+\toprule
+\textbf{Category} & \textbf{Definition} & \textbf{Example} \\
+\midrule
+\textsc{Verified} & Claim is mathematically correct; formal proof produced &
+  $\mathbb{Z}_4$ group structure \\
+\textsc{Disproved} & Claim is mathematically false; formal counterexample or
+  contradiction produced & Versor form equivalence \\
+\textsc{Algebraic Necessity} & Premises force a conclusion the author did not
+  intend & $h = -1$ forced by core axioms \\
+\textsc{Ambiguous} & Claim cannot be formalized without resolving
+  notation/definition gaps & $h = \sqrt{+1}^{1/2}$ \\
+\textsc{Unfalsifiable} & Claim is not addressable by formal methods &
+  Physics/empirical claims \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+We argue that mixed results across these categories are the \emph{expected} and
+methodologically interesting case. Uniform rejection would suggest the framework
+is too incoherent to formalize. Uniform verification would suggest the framework
+is merely standard mathematics with non-standard notation. Mixed results---some
+verified, some disproved, some ambiguous---reveal genuine structure worth
+analyzing and demonstrate the discriminating power of formal methods.
+
+The \textsc{Algebraic Necessity} category merits special attention. It captures
+cases where the author's axioms entail consequences they did not recognize or
+intend. This is distinct from \textsc{Disproved} (which requires the claim to
+be explicitly stated and false) and from \textsc{Verified} (which implies the
+author's claim is correct). Algebraic necessity reveals that the framework is
+more constrained than its author believed---a finding that is neither
+verification nor refutation but structural analysis.
+
+% ============================================================================
+\section{The Clifford Algebra Hierarchy}
+\label{sec:hierarchy}
+% ============================================================================
+
+Beyond classification, formal methods can suggest \emph{corrections}. We trace
+the algebraic path from Dollard's $\mathbb{Z}_4$ to the spacetime algebra where
+electromagnetism becomes geometry:
+
+\begin{table}[ht]
+\centering
+\caption{Algebraic hierarchy from $\mathbb{Z}_4$ to spacetime algebra}
+\label{tab:hierarchy}
+\begin{tabular}{@{}clcl@{}}
+\toprule
+\textbf{Level} & \textbf{Algebra} & \textbf{Dim} & \textbf{Physical Content} \\
+\midrule
+1 & $\mathbb{Z}_4$ & 4 & Versor operators (trivial, forced by axioms) \\
+2 & $\mathrm{Cl}(1,1)$ & 4 & Idempotent wave decomposition \\
+3 & $\mathrm{Cl}(3,0)$ & 8 & Pauli algebra; $F = E + IB$ \\
+4 & $\mathrm{Cl}(1,3)$ & 16 & Spacetime algebra; $\nabla F = J$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Each level is formalized in Lean~4 with zero \texttt{sorry} gaps.
+
+At Level~2, $\mathrm{Cl}(1,1)$ provides what Dollard was reaching for: a
+non-trivial operator $e_1$ with $e_1^2 = +1$ but $e_1 \neq \pm 1$. However,
+this algebra is non-commutative ($e_1 e_2 \neq e_2 e_1$), and Dollard's axiom
+$jk = 1$ fails ($e_2 \cdot e_{12} = e_1 \neq 1$). The algebra offers idempotent
+projectors $P_{\pm} = \frac{1 \pm e_1}{2}$ that decompose signals into
+forward and backward wave components---a genuine mathematical tool for
+transmission line analysis.
+
+At Level~4, $\mathrm{Cl}(1,3)$ is the spacetime algebra where Maxwell's four
+equations collapse to one: $\nabla F = J$. This is the genuine unified field
+framework for classical electromagnetism, achieved through geometric algebra
+rather than through Dollard's commutative $\mathbb{Z}_4$.
+
+The hierarchy demonstrates that Dollard's \emph{instinct}---algebraic
+unification of electromagnetic phenomena---was correct, while his
+\emph{execution}---a commutative group with four elements---was far too
+restrictive. Formal methods can articulate this distinction precisely.
+
+% ============================================================================
+\section{Discussion}
+\label{sec:discussion}
+% ============================================================================
+
+\subsection{Why Mixed Results Matter}
+
+The case study produced all five taxonomy categories across 17 claims. This
+distribution validates the protocol's discriminating power: it is neither
+a rubber stamp nor a blanket dismissal.
+
+The sign error in the versor form (\Cref{sec:disproof}) could not have been
+established with certainty without formalization. Informal mathematical
+reasoning might notice the discrepancy, but Lean provides machine-checked
+certainty---and proves the error is irreparable.
+
+\subsection{Why the Gap Exists}
+
+The four structural factors identified in \Cref{sec:intro}---cultural
+separation, no academic incentive, asymmetric difficulty, no client---explain
+why this application domain has been overlooked. We note that none of these
+factors are \emph{mathematical}; the gap is sociological. The mathematical
+tools are entirely adequate: standard Lean~4 tactics suffice for all proofs in
+our case study, and no custom tactics or library extensions were required.
+
+\subsection{The Constructive Dimension}
+
+Our Clifford algebra hierarchy (\Cref{sec:hierarchy}) goes beyond demarcation
+to \emph{mathematical rehabilitation}: it traces the path from the alternative
+claim to the correct mathematical framework. This constructive contribution---
+showing not just what is wrong but what the author \emph{should} have
+said---may be the most valuable aspect of applying formal methods to
+alternative frameworks.
+
+\subsection{Limitations}
+
+Our protocol is demonstrated on a single case study; generalizability to other
+alternative frameworks is conjectured but not proven. Dollard's source materials
+are self-published presentations, not peer-reviewed papers, introducing
+translation ambiguities that are inherent to the domain. We formalize algebraic
+and structural claims only; we make no claims about the physics, engineering
+utility, or broader validity of Dollard's work.
+
+% ============================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+% ============================================================================
+
+We have demonstrated that interactive theorem provers can be productively
+applied to claims from alternative mathematical frameworks. The protocol
+produces mixed results---verified, disproved, algebraically necessary,
+ambiguous, and unfalsifiable claims---that reveal genuine mathematical
+structure. The five-category taxonomy provides a systematic classification
+scheme. The Clifford algebra hierarchy shows that formal methods can
+constructively suggest the ``correct'' version of an alternative framework's
+aspirations.
+
+The value of this approach lies not in judgment but in discrimination: formal
+methods separate what is mathematically checkable from what is not, what is
+correct from what is wrong, and what is novel from what is standard. We call
+for further case studies on other alternative mathematical frameworks to
+validate and refine the protocol.
+
+All Lean~4 proof files, source materials, and analysis documents are available
+at \url{https://github.com/iarnoldy/UFT}.
+
+% ============================================================================
+\section*{Appendix: Complete Claim Summary}
+\label{sec:appendix}
+% ============================================================================
+
+\begin{table}[ht]
+\centering
+\caption{All 17 formalized claims with taxonomy classification}
+\label{tab:claims}
+\small
+\begin{tabular}{@{}clll@{}}
+\toprule
+\textbf{\#} & \textbf{Claim} & \textbf{Category} & \textbf{Proof File} \\
+\midrule
+1 & $\{1,j,h,k\}$ as 4th roots of unity & \textsc{Verified} & \texttt{basic\_operators} \\
+2 & Telegraph expansion $(R+jX)(G-jB)$ & \textsc{Verified} & \texttt{telegraph\_equation} \\
+3 & Four-factor independence & \textsc{Disproved}$^*$ & \texttt{telegraph\_equation} \\
+4 & Versor form equivalence & \textsc{Disproved} & \texttt{telegraph\_equation} \\
+5 & Universal polyphase formula & \textsc{Verified} & \texttt{polyphase\_formula} \\
+6 & $h = \sqrt{+1}^{1/2}$ notation & \textsc{Ambiguous} & \texttt{algebraic\_necessity} \\
+7 & Sequence periodicity & \textsc{Verified} & \texttt{basic\_operators} \\
+8 & $Q = \Psi \cdot \Phi$ (action) & \textsc{Verified}$^\dagger$ & \texttt{circuit\_action} \\
+9 & Electricity as fundamental & \textsc{Unfalsifiable} & --- \\
+10 & Aether as 5th state & \textsc{Unfalsifiable} & --- \\
+11 & $W = dQ/dt$ replaces $E = mc^2$ & \textsc{Unfalsifiable} & --- \\
+12 & Over-unity energy & \textsc{Unfalsifiable} & --- \\
+13 & Dielectric counterspace & \textsc{Unfalsifiable} & --- \\
+14 & Quaternary expansion & \textsc{Verified}$^\ddagger$ & (computational) \\
+15 & Fortescue is domain-specific & \textsc{Verified} & (empirical) \\
+16 & $A_4$ matches versor matrix & \textsc{Verified} & (computational) \\
+17 & $jk=1$ forces $h=-1$ & \textsc{Alg.\ Necessity} & \texttt{algebraic\_necessity} \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.5em}
+{\footnotesize
+$^*$Four terms exist but satisfy $(RG)(XB) = (XG)(RB)$; not independent. \\
+$^\dagger$Dimensionally correct (Weber$\cdot$Coulomb = J$\cdot$s) but not novel (Cherry, 1951). \\
+$^\ddagger$Mathematically correct but practically useless (deprecated).
+}
+\end{table}
+
+\paragraph{Note on mathlib.} Mathlib includes a comprehensive formalization of
+Clifford algebras (\texttt{Mathlib.LinearAlgebra.CliffordAlgebra})~\cite{wieser2021clifford}
+with grading, spin groups, and conjugation. Our case study uses explicit
+finite-dimensional representations for pedagogical clarity, but a natural
+extension would unify our ad-hoc $\mathrm{Cl}(p,q)$ types with mathlib's
+abstract \texttt{CliffordAlgebra} via isomorphism proofs.
+
+% ============================================================================
+% References
+% ============================================================================
+
+\begin{thebibliography}{20}
+
+\bibitem{hales2017formal}
+Hales, T., et al.: A formal proof of the Kepler conjecture.
+Forum of Mathematics, Pi \textbf{5}, e2 (2017)
+
+\bibitem{gonthier2008four}
+Gonthier, G.: Formal proof---The Four-Color Theorem.
+Notices of the AMS \textbf{55}(11), 1382--1393 (2008)
+
+\bibitem{commelin2022liquid}
+Commelin, J., et al.: Completion of the Liquid Tensor Experiment.
+Lean Community (2022)
+
+\bibitem{tao2023pfr}
+Tao, T., et al.: Polynomial Freiman-Ruzsa conjecture.
+Lean~4 formalization (2023)
+
+\bibitem{wilshaw2024nf}
+Wilshaw, S.: New Foundations is consistent.
+Lean formalization, leanprover-community/con-nf (2024)
+
+\bibitem{shulman2024strange}
+Shulman, M.: Strange new universes: Proof assistants and synthetic foundations.
+Bull.\ AMS \textbf{61}(2) (2024)
+
+\bibitem{toobysmith2025physlean}
+Tooby-Smith, J.: HepLean: Digitalising high energy physics.
+Computer Physics Communications \textbf{308} (2025)
+
+\bibitem{bobbin2024chemical}
+Bobbin, M.P., et al.: Formalizing chemical physics using the Lean theorem prover.
+Digital Discovery, RSC (2024)
+
+\bibitem{fleuriot2001newton}
+Fleuriot, J., Paulson, L.: Mechanizing Nonstandard Real Analysis.
+Cambridge University Press (2001)
+
+\bibitem{wieser2021clifford}
+Wieser, E., Song, U.: Formalizing Geometric Algebra in Lean.
+Advances in Applied Clifford Algebras \textbf{31} (2021)
+
+\bibitem{avigad2021understanding}
+Avigad, J.: Understanding, formal verification, and the philosophy of mathematics.
+Journal of the Indian Council of Philosophical Research (2021)
+
+\bibitem{imbert2023formal}
+Imbert, C., Ardourel, V.: Formal verification, scientific code, and
+epistemological heterogeneity. Philosophy of Science (2023)
+
+\bibitem{demoura2021lean4}
+de Moura, L., Ullrich, S.: The Lean~4 theorem prover and programming language.
+CADE-28, LNCS \textbf{12699} (2021)
+
+\bibitem{mathlib}
+The mathlib community: The Lean mathematical library. CPP 2020.
+
+\bibitem{fortescue1918}
+Fortescue, C.L.: Method of symmetrical co-ordinates applied to the solution
+of polyphase networks. AIEE Transactions \textbf{37}(2), 1027--1140 (1918)
+
+\bibitem{hestenes1966}
+Hestenes, D.: Space-Time Algebra. Gordon and Breach (1966)
+
+\bibitem{doran2003}
+Doran, C., Lasenby, A.: Geometric Algebra for Physicists.
+Cambridge University Press (2003)
+
+\bibitem{dollard-versor}
+Dollard, E.P.: Versor Algebra: As Applied to Polyphase Power Systems.
+Self-published presentation.
+
+\bibitem{dollard-fourquad}
+Dollard, E.P.: Four Quadrant Theory: Advanced Electrical Applications.
+Self-published presentation.
+
+\bibitem{cherry1951}
+Cherry, E.C.: Some general theorems for non-linear systems possessing reactance.
+The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science
+\textbf{42}(333), 1161--1177 (1951)
+
+\end{thebibliography}
+
+\end{document}

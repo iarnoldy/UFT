@@ -161,12 +161,14 @@ This would be a significant formalization result regardless of Dollard context.
 
 ## Immediate Next Steps
 
-1. Compile all Lean proofs (install elan, lake update, lake build)
-2. Close sorry gaps in polyphase_formula.lean (3 exp/trig facts)
-3. Draft Track A paper from PAPER_OUTLINE.md
-4. Verify Cherry 1951 exact reference
+1. ~~Compile all Lean proofs~~ DONE (3269 jobs, 0 errors, 0 sorry)
+2. ~~Close sorry gaps in polyphase_formula.lean~~ DONE (all 3 closed)
+3. ~~Draft Track A paper from PAPER_OUTLINE.md~~ DONE (`paper/main.tex`)
+4. Verify Cherry 1951 exact reference (polymathic research in progress)
 5. Consider full Cl(1,3) geometric product (256 terms, or use mathlib's Clifford algebra)
 6. Lorentz transformation as rotor in Cl(1,3)
+7. Determine ITP vs JAR vs CPP vs CICM venue (research in progress)
+8. Compile LaTeX paper and review
 
 ## Completed
 
@@ -175,3 +177,7 @@ This would be a significant formalization result regardless of Dollard context.
 - [x] Cl(1,3) spacetime algebra (16 basis elements, Maxwell structure)
 - [x] Telegraph equation sign convention fix
 - [x] Factor constraint proof (RG*XB = XG*RB)
+- [x] All sorry gaps closed (3 in polyphase_formula.lean)
+- [x] Full build: 3269 jobs, 0 errors, 0 sorry
+- [x] Experiment 2 resolved: versor form irreparable (h_ne_one, versor_repaired_with_one)
+- [x] Paper draft: `paper/main.tex` (LNCS format, ~4000 words)

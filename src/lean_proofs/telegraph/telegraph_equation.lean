@@ -131,6 +131,39 @@ theorem versor_form_value (R X G B : ℝ) :
 -- either convention.
 
 -- ============================================================
+-- Section 3b: Versor form repair analysis (Experiment 2)
+-- ============================================================
+-- Can the versor form be repaired while preserving Dollard's algebra?
+-- Answer: NO. The only repair requires h = 1, which contradicts h = -1.
+--
+-- Analysis: For the versor form c*(XB+RG) + j*(XG-RB) to match the
+-- telegraph product (RG+XB) + j*(XG-RB), the coefficient c must
+-- equal 1 (compare real parts when RG+XB ≠ 0). But h = -1 ≠ 1.
+-- The three possible repairs are:
+--   (1) Set c = 1: works mathematically, but c = 1 ≠ h. No versors.
+--   (2) Negate the argument: h*(-XB-RG) = XB+RG. Changes Dollard's formula.
+--   (3) Drop jk=1 to escape h=-1: yields a DIFFERENT algebra (Cl(1,1)).
+-- All three abandon Dollard's system.
+
+/-- h ≠ 1: Dollard's h operator cannot be the identity.
+    Combined with versor_form_value, this shows no versor form repair
+    exists within Dollard's algebra. -/
+theorem h_ne_one : h ≠ (1 : ℂ) := by
+  simp [h]; norm_num
+
+/-- Using 1 instead of h makes the "versor form" trivially correct,
+    but this is just the telegraph expansion with identity coefficient. -/
+theorem versor_repaired_with_one (R X G B : ℝ) :
+    (1 : ℂ) * (↑(factor_XB X B + factor_RG R G) : ℂ) +
+    j * (↑(factor_XG X G - factor_RB R B) : ℂ) =
+    telegraph_product R X G B := by
+  unfold telegraph_product factor_XB factor_RG factor_XG factor_RB
+  apply Complex.ext <;>
+    simp [Complex.add_re, Complex.add_im, Complex.mul_re, Complex.mul_im,
+          Complex.ofReal_re, Complex.ofReal_im, Complex.I_re, Complex.I_im,
+          j] <;> ring
+
+-- ============================================================
 -- Section 4: Physical interpretation labels
 -- ============================================================
 

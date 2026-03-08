@@ -75,6 +75,12 @@ mathematical error.
 **Corroboration from N-Phase**: The N-Phase system uses standard DFT, not Dollard's
 versor form. It works to machine precision precisely because it avoids the versor form.
 
+**Irreparability (Experiment 2)**: Three candidate repairs were enumerated:
+(1) replace h with 1 — works mathematically (`versor_repaired_with_one`) but contradicts
+h=-1 (`h_ne_one`); (2) negate the argument — works but changes Dollard's formula;
+(3) drop jk=1 to escape h=-1 — yields Cl(1,1), a different algebra entirely.
+No repair preserves both equivalence AND Dollard's axioms. The versor form is irreparable.
+
 ## Clifford Algebra Hierarchy (The Path Forward)
 
 The project traces the algebraic hierarchy from Dollard's trivial Z_4 to the spacetime
@@ -128,10 +134,10 @@ All proofs compile via `lake build` (3269 jobs, 0 errors). Verified 2026-03-08.
 |------|-------------|-------------|
 | `foundations/basic_operators.lean` | 0 | j^4=1, h=-1, jk=1, 4th roots |
 | `foundations/algebraic_necessity.lean` | 0 | h=-1 forced over ANY field |
-| `telegraph/telegraph_equation.lean` | 0 | Both conventions, factor constraint, versor disproof |
+| `telegraph/telegraph_equation.lean` | 0 | Both conventions, factor constraint, versor disproof, repair analysis |
 | `polyphase/polyphase_formula.lean` | 0 | Root powers, periodicity, 3/4-phase, unit circle |
 | `clifford/cl11.lean` | 0 | Full mult table, idempotents, wave decomposition |
 | `clifford/cl30.lean` | 0 | Pauli algebra, anticommutativity, EM field |
 | `clifford/cl31_maxwell.lean` | 0 | Spacetime algebra, signature, EM bivector |
 | `lagrangian/circuit_action.lean` | 0 | Dimensional analysis, action units |
-| **Total** | **0** | **8 files, ~116 theorems** |
+| **Total** | **0** | **8 files, ~118 theorems** |

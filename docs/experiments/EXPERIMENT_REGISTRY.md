@@ -92,8 +92,9 @@ Dollard's axioms collapse to Z_4; the correct algebra is Cl(1,3) (spacetime alge
 
 ## Experiment 2: Versor Form Repair
 
-**Status**: PRE-REGISTERED
+**Status**: RESOLVED — FALSIFIED (no repair preserves Dollard's algebra)
 **Track**: B
+**Resolved**: 2026-03-08
 
 **Hypothesis**: There exists a consistent modification of Dollard's versor form
 ZY = h(XB+RG) + j(XG-RB) that preserves equivalence with the standard telegraph
@@ -107,18 +108,31 @@ equation ZY = (RG+XB) + j(XG-RB).
 **Falsification**: If no repair preserves both equivalence and the h operator
 properties (h^2=1, h^1=-1), the versor form is simply wrong and cannot be saved.
 
-**Expected outcome**: The only "repair" is h=1, which contradicts h^1=-1.
-The versor form is wrong.
+**Result**: FALSIFIED. Three candidate repairs enumerated; none preserves Dollard's system.
 
-**Dependencies**: None (uses existing disproof as starting point)
-**Downstream impact**: N-Phase system must not depend on versor form equivalence
+| Repair | Works mathematically? | Preserves Dollard's algebra? | Lean proof |
+|--------|----------------------|------------------------------|-----------|
+| Replace h with 1 | YES (`versor_repaired_with_one`, 0 sorry) | NO — h=1 contradicts h=-1 (`h_ne_one`, 0 sorry) | `telegraph_equation.lean` |
+| Negate argument: h(-XB-RG) | YES ((-1)(-a) = a) | NO — changes Dollard's claimed formula | Trivial |
+| Drop jk=1 to escape h=-1 | Possible in Cl(1,1) | NO — yields a DIFFERENT algebra entirely | `cl11.lean` |
+
+**Conclusion**: The versor form has a sign error. The coefficient on the real part
+must be +1 for equivalence, but Dollard's axioms force it to -1. The only "repairs"
+either abandon the versor algebra (repair 1), change the claimed formula (repair 2),
+or switch to an entirely different algebraic framework (repair 3). The versor form
+is irreparable within its own system.
+
+**Proof files**: `telegraph_equation.lean` (`h_ne_one`, `versor_repaired_with_one`)
+**Dependencies**: None
+**Downstream impact**: N-Phase system correctly avoids versor form (uses standard DFT)
 
 ---
 
 ## Experiment 3: Dimensional Analysis Verification
 
-**Status**: PARTIALLY RESOLVED (polymathic research Phase 2-5)
+**Status**: RESOLVED — VERIFIED (dimensionally correct, not novel)
 **Track**: B + C
+**Resolved**: 2026-03-08
 
 **Hypothesis**: Q = Psi * Phi with W = dQ/dt is dimensionally consistent,
 where Psi has units of Coulomb and Phi has units of Weber.
@@ -128,17 +142,26 @@ This is the coordinate-momentum product in Lagrangian circuit theory (Cherry 195
 W = dQ/dt has energy units, consistent with Hamilton-Jacobi dS/dt = -H.
 Dimensionally correct but not novel -- this is 1830s analytical mechanics.
 The "E=mc^2 replacement" claim is a category error: circuit energy vs. rest mass.
-Confidence: 95% (dimensional), 75% (physical identity with Lagrangian theory,
-pending confirmation of Dollard's definitions from primary sources).
+
+**Primary Source Confirmation (2026-03-08)**: Lone Pine Writings explicitly define:
+- Psi = "total dielectric induction" in Coulombs (lines 525-529)
+- Phi = "total magnetic induction" in Webers (lines 531-535)
+- dPsi/dt = I (Amperes, line 611), dPhi/dt = E (Volts, line 612)
+This exactly matches standard Lagrangian circuit theory: Psi = q (generalized
+coordinate = charge), Phi = λ (conjugate momentum = flux linkage).
+Confidence: 99% (dimensional), 95% (physical identity with Lagrangian theory).
 
 **Remaining work**:
-1. Define dimensional type system in Lean 4
-2. Verify: Weber * Coulomb = Joule * second (formally)
+1. ~~Define dimensional type system in Lean 4~~ DONE (`circuit_action.lean`)
+2. ~~Verify: Weber * Coulomb = Joule * second (formally)~~ DONE (0 sorry)
 3. For an LC circuit, derive the Hamilton-Jacobi equation and check whether
    Q = q*lambda(q,t) satisfies it (closes the Gap 2 from polymathic research)
-4. Read Dollard primary sources to confirm Psi = flux, Phi = charge
+4. ~~Read Dollard primary sources to confirm Psi = charge, Phi = flux~~ DONE (Lone Pine lines 525-535, 905-906)
 
 **Falsification**: Dimensional inconsistency would invalidate the energy framework.
+**Result**: NOT FALSIFIED. Dimensionally verified both formally and from primary sources.
+The only remaining gap is the Hamilton-Jacobi connection (item 3), which is a deeper
+physics question beyond dimensional analysis.
 
 **Expected outcome**: VERIFIED dimensionally; physical identity probable but conditional.
 

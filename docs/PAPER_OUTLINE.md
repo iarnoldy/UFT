@@ -2,7 +2,13 @@
 
 **Track A Methodology Paper — Outline**
 
-**Target venue:** ITP (Interactive Theorem Proving) workshop or Journal of Automated Reasoning
+**Target venue:** CICM 2026 (19th Conference on Intelligent Computer Mathematics)
+- Ljubljana, Slovenia, September 21-25, 2026
+- Abstract deadline: **March 25, 2026** | Paper deadline: **April 1, 2026**
+- Regular paper: up to 15 pages + bibliography, LNCS format
+- Published in Springer LNAI
+- Fallback: JAR (Journal of Automated Reasoning, rolling submission)
+- ITP 2026 deadline passed (Feb 19); CPP 2026 already held (Jan 2026)
 
 ---
 
@@ -214,9 +220,11 @@ Four structural factors explain the absence of prior art:
 ## Open Questions
 
 - [x] Confirm no prior art exists (exhaustive search completed, 95% confidence)
-- [ ] Verify Cherry 1951 exact reference — exact paper title, relevance to versor algebra
-- [ ] Identify citable Dollard sources (presentations, self-published works)
-- [ ] Determine ITP vs. JAR formatting requirements and page limits
-- [ ] Compile all Lean proofs against mathlib (requires elan installation)
+- [x] Verify Cherry 1951 exact reference — "Some general theorems for non-linear systems possessing reactance," Phil. Mag. 42(333), 1161-1177, DOI: 10.1080/14786445108561362
+- [x] Identify citable Dollard sources — "Lone Pine Writings", "Four Quadrant Theory", "Versor Algebra", "Advanced Versor Algebra II-23" (self-published)
+- [x] Determine venue — CICM 2026 (Ljubljana, Sep 21-25). Abstract Mar 25, Paper Apr 1. 15pp + bib, LNCS. See `research/venue-research.md`
+- [x] Compile all Lean proofs against mathlib — DONE (3269 jobs, 0 errors, 0 sorry)
 - [ ] Consider whether "alternative mathematical framework" needs a formal definition in the paper
-- [ ] Explore whether the ALGEBRAIC NECESSITY category has precedent in logic/philosophy of mathematics
+- [ ] Explore whether the ALGEBRAIC NECESSITY category has precedent in logic/philosophy of mathematics (polymathic research in progress)
+- [x] Draft paper — `paper/main.tex` (LNCS format, complete first draft)
+- [x] Confirm Dollard's Psi/Phi definitions from primary sources — Psi=Coulombs (charge), Phi=Webers (flux), matches Lagrangian circuit theory exactly

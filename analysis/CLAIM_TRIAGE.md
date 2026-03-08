@@ -74,11 +74,12 @@ Each claim is tagged with its verification status and linked to evidence.
 |-------|-------|
 | Source | Versor Algebra, Advanced Versor Algebra II-23 |
 | Statement | k^n_N = 1^(n/N) = exp(j*2*pi*n/N) |
-| Verdict | **NOT YET VERIFIED** (formally); CONFIRMED computationally |
-| Experiment | Experiment 0 (BLOCKING for Lean proof) |
+| Verdict | **VERIFIED** (formally, 0 sorry; computationally, 491 tests) |
+| Experiment | Experiment 0 (COMPLETE) |
+| Formal evidence | `src/lean_proofs/polyphase/polyphase_formula.lean` — 16 theorems, 0 sorry. Covers: omega^N=1, root generation, 3-phase (a^3=1, sum=0), 4-phase (versors={1,I,-1,-I}), periodicity, unit circle. |
 | Computational evidence | N-Phase `test_decomposer.py`: 491 tests across N=2..12. Lossless reconstruction (NMSE<1e-10), orthogonality (kappa=1.0), Parseval's theorem, cross-validated against numpy.fft. |
 | Empirical evidence | N-Phase E007 (EEG, p=0.033 vs CSP+LDA), E008c (3-phase power, d=3.1). The formula works on real data. |
-| Note | This is the standard nth roots of unity formula. Computationally proven to machine precision by N-Phase. Lean formal proof remains blocking for mathematical certainty. |
+| Note | This is the standard nth roots of unity formula. Both formally proved and computationally validated. The credit belongs to Fortescue (1918) and standard DFT theory. |
 
 ### Claim 6: h = sqrt(+1)^(1/2) Notation
 
@@ -110,8 +111,8 @@ Each claim is tagged with its verification status and linked to evidence.
 | Statement | Q = Psi * Phi (Weber-Coulomb), W = dQ/dt (Joule) |
 | Verdict | **DIMENSIONALLY CORRECT** but **NOT NOVEL** |
 | Experiment | Experiment 3 |
-| Polymathic finding | Weber * Coulomb = J*s (units of action). This is the coordinate-momentum product in Lagrangian circuit theory (Cherry 1951): charge q is the generalized coordinate, flux lambda is the conjugate momentum, q*lambda = action. W = dQ/dt = energy is dimensionally consistent with the Hamilton-Jacobi equation dS/dt = -H. However, this is 1830s analytical mechanics, not a new discovery. The quantum flux quantum Phi_0 = h/(2e) encodes the same relationship. IF Dollard's Psi and Phi match standard flux and charge (plausible but not confirmed from primary sources). (75% confidence on physical identity, 95% on dimensional correctness) |
-| Note | Dollard's framework accidentally points toward quantum circuit theory (Josephson junctions, superconducting qubits), which begins with exactly this classical Lagrangian formulation. The "E=mc^2 replacement" claim (Claim 11) is a category error: W=dQ/dt is about circuits, E=mc^2 is about rest mass-energy equivalence. |
+| Polymathic finding | Weber * Coulomb = J*s (units of action). This is the coordinate-momentum product in Lagrangian circuit theory (Cherry 1951): charge q is the generalized coordinate, flux lambda is the conjugate momentum, q*lambda = action. W = dQ/dt = energy is dimensionally consistent with the Hamilton-Jacobi equation dS/dt = -H. However, this is 1830s analytical mechanics, not a new discovery. **PRIMARY SOURCE CONFIRMED** (2026-03-08): Lone Pine Writings lines 525-535 and 905-906 explicitly define Psi = "total dielectric induction" in Coulombs (charge) and Phi = "total magnetic induction" in Webers (flux). Lines 611-612: dPsi/dt = I (Amperes), dPhi/dt = E (Volts). This exactly matches standard Lagrangian circuit theory: Psi = q (generalized coordinate), Phi = λ (conjugate momentum). (95% confidence on physical identity, 99% on dimensional correctness) |
+| Note | Dollard's definitions (Psi=Coulombs, Phi=Webers, dPsi/dt=I, dPhi/dt=E) exactly reproduce the Lagrangian circuit variables (q, λ, I=dq/dt, V=dλ/dt). His framework accidentally points toward quantum circuit theory (Josephson junctions, superconducting qubits), which begins with exactly this classical Lagrangian formulation. The "E=mc^2 replacement" claim (Claim 11) is a category error: W=dQ/dt is about circuits, E=mc^2 is about rest mass-energy equivalence. |
 
 ---
 

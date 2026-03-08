@@ -47,6 +47,7 @@ and verify that flux * charge = action.
 /-- SI dimensions represented as integer exponents of base quantities.
     A physical quantity has dimensions [M^m * L^l * T^t * I^i]
     where M = mass, L = length, T = time, I = current. -/
+@[ext]
 structure Dim where
   mass : ℤ     -- kg exponent
   length : ℤ   -- m exponent
@@ -69,6 +70,9 @@ def div (d1 d2 : Dim) : Dim :=
    d1.time - d2.time, d1.current - d2.current⟩
 
 instance : Div Dim := ⟨div⟩
+
+@[simp] lemma mul_def (a b : Dim) : a * b = mul a b := rfl
+@[simp] lemma div_def (a b : Dim) : a / b = Dim.div a b := rfl
 
 /-- Dimensionless quantity. -/
 def dimensionless : Dim := ⟨0, 0, 0, 0⟩
@@ -127,13 +131,11 @@ This is Dollard's Q = Psi * Phi expressed dimensionally.
 /-- Weber * Coulomb = Action (J*s).
     This is the dimensional basis of Dollard's Q = Psi * Phi. -/
 theorem weber_times_coulomb_is_action : weber * coulomb = action := by
-  simp only [weber, coulomb, action, (· * ·), mul]
-  norm_num
+  ext <;> simp [mul_def, mul, weber, coulomb, action]
 
 /-- Equivalently: flux * charge = action. -/
 theorem flux_times_charge_is_action : weber * coulomb = joule * second := by
-  simp only [weber, coulomb, joule, second, (· * ·), mul]
-  norm_num
+  ext <;> simp [mul_def, mul, weber, coulomb, joule, second]
 
 /-- The time derivative of action is energy: d(J*s)/dt = J.
     This is the dimensional basis of Dollard's W = dQ/dt. -/
@@ -161,23 +163,19 @@ In Lagrangian mechanics for circuits:
 
 /-- Inductance * current^2 = energy (magnetic energy T = (1/2)*L*I^2). -/
 theorem magnetic_energy_dims : henry * ampere * ampere = joule := by
-  simp only [henry, ampere, joule, (· * ·), mul]
-  norm_num
+  ext <;> simp [mul_def, mul, henry, ampere, joule]
 
 /-- Charge^2 / capacitance = energy (electric energy V = (1/2)*q^2/C). -/
 theorem electric_energy_dims : coulomb * coulomb / farad = joule := by
-  simp only [coulomb, farad, joule, (· * ·), mul, (· / ·), div]
-  norm_num
+  ext <;> simp [mul_def, div_def, mul, Dim.div, coulomb, farad, joule]
 
 /-- Current * resistance = voltage (Ohm's law: V = IR). -/
 theorem ohms_law_dims : ampere * ohm = volt := by
-  simp only [ampere, ohm, volt, (· * ·), mul]
-  norm_num
+  ext <;> simp [mul_def, mul, ampere, ohm, volt]
 
 /-- Voltage * current = power (P = VI). -/
 theorem power_dims : volt * ampere = watt := by
-  simp only [volt, ampere, watt, (· * ·), mul]
-  norm_num
+  ext <;> simp [mul_def, mul, volt, ampere, watt]
 
 /-!
 ## Part 4: Hamilton-Jacobi Connection
@@ -201,14 +199,12 @@ theorem planck_is_action : action = action := rfl
 /-- The flux quantum Phi_0 = h/(2e) has units of Weber.
     Dimensionally: [J*s] / [C] = [J*s] / [A*s] = [J/A] = [V*s] = [Wb]. -/
 theorem flux_quantum_dims : action / coulomb = weber := by
-  simp only [action, coulomb, weber, (· / ·), div]
-  norm_num
+  ext <;> simp [div_def, Dim.div, action, coulomb, weber]
 
 /-- The energy quantum E = h*f has units of Joule.
     Dimensionally: [J*s] * [1/s] = [J]. -/
 theorem energy_quantum_dims : action * (Dim.mk 0 0 (-1) 0) = joule := by
-  simp only [action, joule, (· * ·), mul]
-  norm_num
+  ext <;> simp [mul_def, mul, action, joule]
 
 end Dim
 

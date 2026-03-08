@@ -30,6 +30,7 @@ import Mathlib.Tactic
     Elements are multivectors: a = a0 + a1*e1 + a2*e2 + a3*e3
     + a12*e12 + a13*e13 + a23*e23 + a123*e123
     where ei^2 = +1 and ei*ej = -ej*ei for i != j. -/
+@[ext]
 structure Cl30 where
   s : ℝ      -- scalar (grade 0)
   v1 : ℝ     -- e1 (grade 1)
@@ -39,7 +40,6 @@ structure Cl30 where
   b13 : ℝ    -- e13 = e1*e3 (grade 2, bivector)
   b23 : ℝ    -- e23 = e2*e3 (grade 2, bivector)
   ps : ℝ     -- e123 = e1*e2*e3 (grade 3, pseudoscalar)
-  deriving Repr, BEq
 
 namespace Cl30
 
@@ -56,7 +56,7 @@ Key products:
   e12 * e12 = e1*e2*e1*e2 = -e1*e1*e2*e2 = -1
   e13 * e13 = -1
   e23 * e23 = -1
-  e123 * e123 = e1*e2*e3*e1*e2*e3 = -1
+  e123 * e123 = -1
 
 The bivectors square to -1 (they act like imaginary units!).
 The pseudoscalar e123 also squares to -1.
@@ -67,20 +67,20 @@ The pseudoscalar e123 also squares to -1.
 def mul (x y : Cl30) : Cl30 :=
   { s := x.s*y.s + x.v1*y.v1 + x.v2*y.v2 + x.v3*y.v3
        - x.b12*y.b12 - x.b13*y.b13 - x.b23*y.b23 - x.ps*y.ps,
-    v1 := x.s*y.v1 + x.v1*y.s - x.b12*y.v2 + x.v2*y.b12
-        - x.b13*y.v3 + x.v3*y.b13 - x.b23*y.ps + x.ps*y.b23,
-    v2 := x.s*y.v2 + x.v2*y.s + x.b12*y.v1 - x.v1*y.b12
-        - x.b23*y.v3 + x.v3*y.b23 + x.b13*y.ps - x.ps*y.b13,
-    v3 := x.s*y.v3 + x.v3*y.s + x.b13*y.v1 - x.v1*y.b13
-        + x.b23*y.v2 - x.v2*y.b23 - x.b12*y.ps + x.ps*y.b12,
+    v1 := x.s*y.v1 + x.v1*y.s - x.v2*y.b12 + x.b12*y.v2
+        - x.v3*y.b13 + x.b13*y.v3 - x.b23*y.ps - x.ps*y.b23,
+    v2 := x.s*y.v2 + x.v2*y.s + x.v1*y.b12 - x.b12*y.v1
+        - x.v3*y.b23 + x.b23*y.v3 + x.b13*y.ps + x.ps*y.b13,
+    v3 := x.s*y.v3 + x.v3*y.s + x.v1*y.b13 - x.b13*y.v1
+        + x.v2*y.b23 - x.b23*y.v2 - x.b12*y.ps - x.ps*y.b12,
     b12 := x.s*y.b12 + x.b12*y.s + x.v1*y.v2 - x.v2*y.v1
-         + x.b13*y.b23 - x.b23*y.b13 - x.v3*y.ps - x.ps*y.v3,
+         - x.b13*y.b23 + x.b23*y.b13 + x.v3*y.ps + x.ps*y.v3,
     b13 := x.s*y.b13 + x.b13*y.s + x.v1*y.v3 - x.v3*y.v1
-         - x.b12*y.b23 + x.b23*y.b12 + x.v2*y.ps + x.ps*y.v2,
+         + x.b12*y.b23 - x.b23*y.b12 - x.v2*y.ps - x.ps*y.v2,
     b23 := x.s*y.b23 + x.b23*y.s + x.v2*y.v3 - x.v3*y.v2
-         + x.b12*y.b13 - x.b13*y.b12 - x.v1*y.ps - x.ps*y.v1,
-    ps := x.s*y.ps + x.ps*y.s + x.v1*y.b23 - x.b23*y.v1
-        - x.v2*y.b13 + x.b13*y.v2 + x.v3*y.b12 - x.b12*y.v3 }
+         - x.b12*y.b13 + x.b13*y.b12 + x.v1*y.ps + x.ps*y.v1,
+    ps := x.s*y.ps + x.ps*y.s + x.v1*y.b23 + x.b23*y.v1
+        - x.v2*y.b13 - x.b13*y.v2 + x.v3*y.b12 + x.b12*y.v3 }
 
 instance : Mul Cl30 := ⟨mul⟩
 
@@ -105,9 +105,15 @@ instance : One Cl30 := ⟨one⟩
 def zero : Cl30 := ⟨0, 0, 0, 0, 0, 0, 0, 0⟩
 instance : Zero Cl30 := ⟨zero⟩
 
-/-!
-### Basis elements
--/
+/-! ### Simp bridge lemmas -/
+
+@[simp] lemma mul_def (a b : Cl30) : a * b = mul a b := rfl
+@[simp] lemma add_def (a b : Cl30) : a + b = add a b := rfl
+@[simp] lemma neg_def (a : Cl30) : -a = neg a := rfl
+@[simp] lemma one_val : (1 : Cl30) = one := rfl
+@[simp] lemma zero_val : (0 : Cl30) = zero := rfl
+
+/-! ### Basis elements -/
 
 def e1 : Cl30 := ⟨0, 1, 0, 0, 0, 0, 0, 0⟩
 def e2 : Cl30 := ⟨0, 0, 1, 0, 0, 0, 0, 0⟩
@@ -117,65 +123,60 @@ def e13 : Cl30 := ⟨0, 0, 0, 0, 0, 1, 0, 0⟩
 def e23 : Cl30 := ⟨0, 0, 0, 0, 0, 0, 1, 0⟩
 def e123 : Cl30 := ⟨0, 0, 0, 0, 0, 0, 0, 1⟩
 
-/-!
-## Fundamental Properties
--/
+/-! ## Fundamental Properties -/
 
 /-- Vectors square to +1. -/
 theorem e1_sq : e1 * e1 = (1 : Cl30) := by
-  simp only [e1, (· * ·), mul, one, One.one]; norm_num
+  ext <;> simp [e1, mul, one]
 
 theorem e2_sq : e2 * e2 = (1 : Cl30) := by
-  simp only [e2, (· * ·), mul, one, One.one]; norm_num
+  ext <;> simp [e2, mul, one]
 
 theorem e3_sq : e3 * e3 = (1 : Cl30) := by
-  simp only [e3, (· * ·), mul, one, One.one]; norm_num
+  ext <;> simp [e3, mul, one]
 
 /-- Bivectors square to -1 (they are imaginary units!). -/
 theorem e12_sq : e12 * e12 = -(1 : Cl30) := by
-  simp only [e12, (· * ·), mul, one, One.one, Neg.neg, neg]; norm_num
+  ext <;> simp [e12, mul, one, neg]
 
 theorem e13_sq : e13 * e13 = -(1 : Cl30) := by
-  simp only [e13, (· * ·), mul, one, One.one, Neg.neg, neg]; norm_num
+  ext <;> simp [e13, mul, one, neg]
 
 theorem e23_sq : e23 * e23 = -(1 : Cl30) := by
-  simp only [e23, (· * ·), mul, one, One.one, Neg.neg, neg]; norm_num
+  ext <;> simp [e23, mul, one, neg]
 
 /-- The pseudoscalar squares to -1. -/
 theorem e123_sq : e123 * e123 = -(1 : Cl30) := by
-  simp only [e123, (· * ·), mul, one, One.one, Neg.neg, neg]; norm_num
+  ext <;> simp [e123, mul, one, neg]
 
 /-- Anticommutativity of basis vectors. -/
-theorem e1_e2_anticommute : e1 * e2 = -( e2 * e1) := by
-  simp only [e1, e2, (· * ·), mul, Neg.neg, neg]; norm_num
+theorem e1_e2_anticommute : e1 * e2 = -(e2 * e1) := by
+  ext <;> simp [e1, e2, mul, neg]
 
 theorem e1_e3_anticommute : e1 * e3 = -(e3 * e1) := by
-  simp only [e1, e3, (· * ·), mul, Neg.neg, neg]; norm_num
+  ext <;> simp [e1, e3, mul, neg]
 
 theorem e2_e3_anticommute : e2 * e3 = -(e3 * e2) := by
-  simp only [e2, e3, (· * ·), mul, Neg.neg, neg]; norm_num
+  ext <;> simp [e2, e3, mul, neg]
 
 /-- Basis vector products give bivectors. -/
 theorem e1_mul_e2 : e1 * e2 = e12 := by
-  simp only [e1, e2, e12, (· * ·), mul]; norm_num
+  ext <;> simp [e1, e2, e12, mul]
 
 theorem e1_mul_e3 : e1 * e3 = e13 := by
-  simp only [e1, e3, e13, (· * ·), mul]; norm_num
+  ext <;> simp [e1, e3, e13, mul]
 
 theorem e2_mul_e3 : e2 * e3 = e23 := by
-  simp only [e2, e3, e23, (· * ·), mul]; norm_num
+  ext <;> simp [e2, e3, e23, mul]
 
 /-- Triple product gives pseudoscalar. -/
 theorem e1_e2_e3 : e1 * e2 * e3 = e123 := by
-  simp only [e1, e2, e3, e123, (· * ·), mul]; norm_num
+  ext <;> simp [e1, e2, e3, e123, mul]
 
 /-!
 ## The Electromagnetic Field in Cl(3,0)
 
-In 3D, the electromagnetic field F is a bivector:
-  F = Ex*e23 + Ey*e31 + Ez*e12 + Bx*e1 + By*e2 + Bz*e3
-
-Wait -- that's in Cl(3,1). In Cl(3,0), the EM field is:
+In Cl(3,0), the EM field is:
   F = E + I*B
 where E = Ex*e1 + Ey*e2 + Ez*e3 (electric vector)
 and I*B = Bx*e23 + By*e13 + Bz*e12 (magnetic bivector, dual of B)
@@ -188,20 +189,17 @@ The electric and magnetic fields UNIFY into a single multivector.
     The vector part is E, the bivector part is I*B. -/
 def em_field (Ex Ey Ez Bx By Bz : ℝ) : Cl30 :=
   ⟨0, Ex, Ey, Ez, Bz, -By, Bx, 0⟩
-  -- Convention: e12 component = Bz (rotation in xy plane)
-  --             e13 component = -By (note sign from orientation)
-  --             e23 component = Bx (rotation in yz plane)
 
 /-- The pseudoscalar I = e123 commutes with all even-grade elements
     and anticommutes with all odd-grade elements in Cl(3,0). -/
 theorem I_commutes_with_bivector :
     e123 * e12 = e12 * e123 := by
-  simp only [e123, e12, (· * ·), mul]; norm_num
+  ext <;> simp [e123, e12, mul]
 
-/-- I anticommutes with vectors. -/
-theorem I_anticommutes_with_vector :
-    e123 * e1 = -(e1 * e123) := by
-  simp only [e123, e1, (· * ·), mul, Neg.neg, neg]; norm_num
+/-- I commutes with vectors in Cl(3,0) (n=3 is odd, so e123 is central). -/
+theorem I_commutes_with_vector :
+    e123 * e1 = e1 * e123 := by
+  ext <;> simp [e123, e1, mul]
 
 end Cl30
 

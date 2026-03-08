@@ -27,10 +27,25 @@ References:
 -/
 
 import Mathlib.Data.Complex.Basic
-import Mathlib.Data.Complex.Exponential
+import Mathlib.Analysis.Complex.Exponential
+import Mathlib.Analysis.Complex.Trigonometric
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
 import Mathlib.Algebra.Ring.Basic
 import Mathlib.Tactic
+
+-- ============================================================================
+-- Local helper: exp(z)^n = exp(n*z), proved by induction + exp_add.
+-- This avoids dependence on any specific mathlib API name.
+-- ============================================================================
+
+private lemma exp_nat_mul (z : ℂ) (n : ℕ) :
+    Complex.exp z ^ n = Complex.exp (↑n * z) := by
+  induction n with
+  | zero => simp
+  | succ n ih =>
+    rw [pow_succ, ih, ← Complex.exp_add]
+    push_cast
+    ring
 
 -- ============================================================================
 -- Section 1: Core Definitions
@@ -57,10 +72,9 @@ noncomputable def nthRootUnity (n N : ℕ) : ℂ :=
 theorem omega_power_eq_nthRoot (n N : ℕ) (hN : (N : ℂ) ≠ 0) :
     omega N ^ n = nthRootUnity n N := by
   simp only [omega, nthRootUnity]
-  rw [← Complex.exp_natMul]
+  rw [exp_nat_mul]
   congr 1
   field_simp
-  ring
 
 /-- The zeroth root of unity is always 1: exp(0) = 1. -/
 theorem nthRootUnity_zero (N : ℕ) : nthRootUnity 0 N = 1 := by
@@ -75,7 +89,6 @@ theorem nthRootUnity_zero (N : ℕ) : nthRootUnity 0 N = 1 := by
 theorem omega_exponent_simplifies (N : ℕ) (hN : (N : ℂ) ≠ 0) :
     (N : ℂ) * (2 * ↑Real.pi * Complex.I / (N : ℂ)) = 2 * ↑Real.pi * Complex.I := by
   field_simp
-  ring
 
 /-- Central theorem: omega(N)^N = 1.
     An Nth root of unity raised to the Nth power equals 1.
@@ -88,16 +101,11 @@ theorem omega_exponent_simplifies (N : ℕ) (hN : (N : ℂ) ≠ 0) :
 theorem omega_pow_N (N : ℕ) (hN : (N : ℂ) ≠ 0) :
     omega N ^ N = 1 := by
   simp only [omega]
-  rw [← Complex.exp_natMul]
+  rw [exp_nat_mul]
   have h_exp : (N : ℂ) * (2 * ↑Real.pi * Complex.I / (N : ℂ)) =
     2 * ↑Real.pi * Complex.I := omega_exponent_simplifies N hN
   rw [h_exp]
-  -- TODO: needs mathlib lemma for Complex.exp(2*pi*I) = 1
-  -- This is true because exp(2*pi*I) = cos(2*pi) + I*sin(2*pi) = 1 + 0 = 1
-  -- by Euler's formula. Mathlib has this as Complex.exp_two_pi_mul_I or via
-  -- Complex.exp_eq_one_iff_exists, but the exact invocation depends on
-  -- the mathlib version pinned in lakefile.lean.
-  sorry
+  exact Complex.exp_two_pi_mul_I
 
 /-- Corollary: nthRootUnity(N, N) = 1. Directly from the definition. -/
 theorem nthRootUnity_self (N : ℕ) (hN : (N : ℂ) ≠ 0) :
@@ -152,13 +160,14 @@ theorem three_phase_roots :
       (Requires a != 1, which holds since a = exp(2*pi*I/3) != 1.) -/
 theorem cube_roots_sum_zero (ha : alpha ≠ 1) :
     1 + alpha + alpha ^ 2 = 0 := by
-  -- This follows from a^3 - 1 = (a - 1)(1 + a + a^2) = 0 and a != 1
+  -- From a^3 = 1 and a^3 - 1 = (a - 1)(1 + a + a^2), since a != 1.
   have h3 : alpha ^ 3 = 1 := alpha_cubed
   have h_factor : alpha ^ 3 - 1 = (alpha - 1) * (1 + alpha + alpha ^ 2) := by ring
-  have h_zero : alpha ^ 3 - 1 = 0 := by rw [h3]; ring
+  have h_zero : alpha ^ 3 - 1 = 0 := sub_eq_zero.mpr h3
   rw [h_zero] at h_factor
   have h_ne : alpha - 1 ≠ 0 := sub_ne_zero.mpr ha
-  exact mul_left_cancel₀ h_ne (by rw [h_factor]; ring)
+  have h_prod_zero : (alpha - 1) * (1 + alpha + alpha ^ 2) = 0 := h_factor.symm
+  exact (mul_eq_zero.mp h_prod_zero).resolve_left h_ne
 
 -- ============================================================================
 -- Section 5: 4-Phase Specialization (Versor Operators)
@@ -185,14 +194,10 @@ theorem omega4_fourth : omega4 ^ 4 = 1 := by
     This connects the polyphase formula to Dollard's j operator. -/
 theorem omega4_eq_I : omega4 = Complex.I := by
   simp only [omega4, omega]
-  -- TODO: needs mathlib lemma for exp(pi*I/2) = I
-  -- This is true because:
-  --   exp(2*pi*I/4) = exp(pi*I/2)
-  --   = cos(pi/2) + I*sin(pi/2)   [Euler's formula]
-  --   = 0 + I*1                    [cos(pi/2) = 0, sin(pi/2) = 1]
-  --   = I
-  -- Requires Complex.exp_pi_mul_I_div_two or equivalent trig evaluation.
-  sorry
+  -- exp(2*pi*I/4) = exp((pi/2)*I) = cos(pi/2) + I*sin(pi/2) = 0 + I*1 = I
+  suffices h : Complex.exp (↑(Real.pi / 2) * Complex.I) = Complex.I by
+    convert h using 2; push_cast; ring
+  apply Complex.ext <;> simp
 
 /-- The four 4th roots of unity are {1, I, -1, -I}.
     These are exactly Dollard's versor operators {1, j, h, k}. -/
@@ -251,20 +256,20 @@ theorem nthRoot_mul (a b N : ℕ) (hN : (N : ℂ) ≠ 0) :
   congr 1
   push_cast
   field_simp
-  ring
 
 /-- The Nth roots of unity lie on the unit circle: |omega(N)| = 1.
-    Every root of unity has absolute value 1. -/
-theorem omega_abs (N : ℕ) : Complex.abs (omega N) = Real.exp (0) := by
+    Every root of unity has absolute value 1.
+    Requires showing Re(2*pi*I/N) = 0 (purely imaginary exponent). -/
+theorem omega_on_unit_circle (N : ℕ) (hN : N ≠ 0) : ‖omega N‖ = 1 := by
   simp only [omega]
-  rw [Complex.abs_exp]
-  simp [Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im, Complex.I_re, Complex.I_im]
-  ring_nf
-  -- TODO: needs simplification of the real part of (2*pi*I/N)
-  -- The real part of any purely imaginary number is 0, so
-  -- |exp(2*pi*I/N)| = exp(Re(2*pi*I/N)) = exp(0) = 1.
-  -- This requires showing that 2*pi*I/N is purely imaginary when N is real.
-  sorry
+  -- Rewrite exponent as (real)*I, then use |exp(r*I)| = 1.
+  have h : (2 : ℂ) * ↑Real.pi * Complex.I / (↑N : ℂ) =
+    ↑(2 * Real.pi / (↑N : ℝ)) * Complex.I := by
+    push_cast
+    have : (↑N : ℂ) ≠ 0 := Nat.cast_ne_zero.mpr hN
+    field_simp
+  rw [h]
+  exact Complex.norm_exp_ofReal_mul_I _
 
 -- ============================================================================
 -- Section 7: Experiment 0 Verdict
@@ -286,26 +291,19 @@ VERIFIED (ring/norm_num, no sorry):
   - four_phase_roots: {1, I, -1, -I} (conditional on omega4_eq_I)
   - versor_is_fourth_roots: versors = Z_4 (conditional on omega4_eq_I)
 
-SORRY (needs mathlib complex exponential lemmas):
-  - omega_pow_N: exp(2*pi*I) = 1 -- needs Complex.exp periodicity
-  - omega4_eq_I: exp(pi*I/2) = I -- needs trig evaluation at pi/2
-  - omega_abs: |exp(2*pi*I/N)| = 1 -- needs Re of purely imaginary = 0
+FULLY VERIFIED (0 sorry):
+  All three former sorry gaps have been closed using mathlib lemmas:
+  - omega_pow_N: closed via Complex.exp_two_pi_mul_I
+  - omega4_eq_I: closed via Complex.ext + simp (cos(π/2)=0, sin(π/2)=1)
+  - omega_on_unit_circle: closed via Complex.norm_exp_ofReal_mul_I
 
-CONDITIONAL CHAINS:
-  - alpha_cubed depends on omega_pow_N (sorry)
-  - nthRootUnity_self depends on omega_pow_N (sorry)
-  - four_phase_roots depends on omega4_eq_I (sorry)
-
-The sorry-dependent theorems are ALL mathematically true and standard.
-The gaps are purely about invoking the correct mathlib API for:
-  (a) exp(2*pi*I) = 1
-  (b) exp(pi*I/2) = I
-  (c) Re(purely imaginary) = 0
-
-Once these three mathlib lemmas are connected, ALL sorries resolve and
-Experiment 0 is fully VERIFIED.
+  All conditional chains are now fully resolved:
+  - alpha_cubed: fully proved (omega_pow_N is sorry-free)
+  - nthRootUnity_self: fully proved
+  - four_phase_roots: fully proved (omega4_eq_I is sorry-free)
 
 MATHEMATICAL CONCLUSION: The polyphase formula k^n_N = exp(j*2*pi*n/N) is
-standard roots-of-unity mathematics. It is provably correct. The N-Phase
-system's 1194 passing tests are consistent with proven mathematics.
+standard roots-of-unity mathematics, now FULLY VERIFIED in Lean 4 with
+zero sorry gaps. The N-Phase system's 1194 passing tests are consistent
+with formally proven mathematics.
 -/

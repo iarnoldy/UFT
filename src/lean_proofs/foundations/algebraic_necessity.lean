@@ -40,7 +40,7 @@ References:
 -/
 
 import Mathlib.Data.Complex.Basic
-import Mathlib.Data.Complex.Exponential
+import Mathlib.Analysis.Complex.Exponential
 import Mathlib.Algebra.Ring.Basic
 import Mathlib.Tactic
 
@@ -161,7 +161,10 @@ theorem versors_are_fourth_roots : j ^ 4 = 1 ∧ h ^ 4 = 1 ∧ k ^ 4 = 1 := by
   · exact j_fourth_power
   constructor
   · simp [h]; norm_num
-  · simp [k, h, j]; ring
+  · calc k ^ 4 = (-Complex.I) ^ 4 := by simp [k, h, j]
+      _ = (Complex.I ^ 2) ^ 2 := by ring
+      _ = (-1 : ℂ) ^ 2 := by rw [Complex.I_sq]
+      _ = 1 := by norm_num
 
 end ConcreteComplex
 

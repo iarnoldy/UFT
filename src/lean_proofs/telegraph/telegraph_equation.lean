@@ -53,9 +53,7 @@ theorem telegraph_expansion (R X G B : ℝ) :
     telegraph_product R X G B =
     Complex.mk (R * G + X * B) (X * G - R * B) := by
   unfold telegraph_product
-  ext
-  · simp [Complex.mul_re]; ring
-  · simp [Complex.mul_im]; ring
+  apply Complex.ext <;> simp [Complex.mul_re, Complex.mul_im]; ring
 
 -- For comparison: standard convention Y = G + jB
 /-- Telegraph equation product with standard convention Y = G + jB. -/
@@ -67,9 +65,7 @@ theorem telegraph_expansion_standard (R X G B : ℝ) :
     telegraph_standard R X G B =
     Complex.mk (R * G - X * B) (R * B + X * G) := by
   unfold telegraph_standard
-  ext
-  · simp [Complex.mul_re]; ring
-  · simp [Complex.mul_im]; ring
+  apply Complex.ext <;> simp [Complex.mul_re, Complex.mul_im]
 
 -- ============================================================
 -- Section 2: Four-factor decomposition
@@ -86,9 +82,7 @@ theorem telegraph_four_factors (R X G B : ℝ) :
     Complex.mk (factor_RG R G + factor_XB X B)
                (factor_XG X G - factor_RB R B) := by
   unfold telegraph_product factor_RG factor_XB factor_XG factor_RB
-  ext
-  · simp [Complex.mul_re]; ring
-  · simp [Complex.mul_im]; ring
+  apply Complex.ext <;> simp [Complex.mul_re, Complex.mul_im]; ring
 
 /-- All four factors can be simultaneously nonzero. -/
 theorem four_factors_nonzero :
@@ -120,11 +114,9 @@ theorem versor_form_value (R X G B : ℝ) :
     Complex.mk (-(factor_XB X B + factor_RG R G))
                (factor_XG X G - factor_RB R B) := by
   simp only [h, j]
-  ext
-  · simp [Complex.add_re, Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im,
-          Complex.I_re, Complex.I_im]; ring
-  · simp [Complex.add_im, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im,
-          Complex.I_re, Complex.I_im]; ring
+  apply Complex.ext <;>
+    simp [Complex.add_re, Complex.add_im, Complex.mul_re, Complex.mul_im,
+          Complex.ofReal_re, Complex.ofReal_im, Complex.I_re, Complex.I_im]
 
 -- Compare the two forms side by side:
 --   Telegraph product: Complex.mk +(RG + XB)  (XG - RB)

@@ -4,7 +4,7 @@ id: 2026-03-07-1600
 name: scaffold-and-polymathic-launch
 started: 2026-03-07T16:00:00-05:00
 parent_session: null
-tags: [scaffold, reframing, n-phase-integration, polymathic-research, lean4-setup]
+tags: [scaffold, reframing, n-phase-integration, polymathic-research, lean4-setup, clifford-algebra, lagrangian, uft-roadmap]
 status: in_progress
 ---
 
@@ -105,14 +105,81 @@ status: in_progress
 - NEW: Prior art in Mizar, ACL2, HOL Light? (Gap 3)
 - NEW: Do Dollard's primary definitions of Psi, Phi match standard flux/charge? (Gap 1)
 
-## Remaining Work
+### Update - 2026-03-07 19:30 - Implications Analysis and Clifford Hierarchy
 
-1. Commit polymathic research output to git
-2. Install elan + Lean 4; run `lake update`; verify proofs compile
-3. Formalize jk=1-forces-h=-1 proof in Lean 4
-4. Execute Experiment 0 (polyphase formula Lean proof)
+**Summary**: Analyzed what the polymathic findings imply for a UFT path.
+Identified the algebraic hierarchy Z_4 -> Cl(1,1) -> Cl(3,0) -> Cl(3,1) as
+the corrected road from Dollard's framework to spacetime algebra. Then built
+the formal proofs for three levels of that hierarchy in a single push.
+
+**Git Changes (3 commits, 4 pushes)**:
+- `9f93081` feat: jk=1 proof, polyphase proof, paper outline (3 files)
+- `95ad5ce` feat: Cl(1,1) algebra + research roadmap (2 files)
+- `b154d86` feat: Cl(3,0) Pauli algebra + Lagrangian dimensions (2 files)
+- Branch: main (up to date with origin)
+
+**New Lean 4 Proof Files (5 created this update)**:
+- `foundations/algebraic_necessity.lean` - jk=1 forces h=-1 over ANY field (0 sorry)
+- `polyphase/polyphase_formula.lean` - Nth roots of unity, Fortescue (3 sorry)
+- `clifford/cl11.lean` - Cl(1,1) with idempotent wave decomposition (0 sorry)
+- `clifford/cl30.lean` - Cl(3,0) Pauli algebra, EM field as multivector (0 sorry)
+- `lagrangian/circuit_action.lean` - Weber*Coulomb=Action dimensional proof (0 sorry)
+
+**New Documentation**:
+- `docs/PAPER_OUTLINE.md` - Track A paper, five-category taxonomy, draft abstract
+- `docs/RESEARCH_ROADMAP.md` - Four-level path from Z_4 to spacetime algebra
+
+**Key Decisions**:
+5. **The UFT path is Clifford algebras** -- Dollard's Z_4 is Level 1 of a hierarchy
+   that leads through Cl(1,1) to Cl(3,1) spacetime algebra where Maxwell = nabla*F = J
+6. **Idempotent decomposition** is the genuine power Dollard was reaching for --
+   P+ and P- in Cl(1,1) project onto forward/backward waves
+7. **Versor form fails at every level** -- grade mismatch (scalar vs vector) means
+   it can't be fixed, but Cl(1,1) offers something better (projectors)
+
+**Total Proof Arsenal**: 7 Lean files, 5 with 0 sorry, 5 sorry gaps remaining
+(3 exp/trig, 2 algebraic independence -- all standard mathlib API issues)
+
+**Potential Issue Identified**: Telegraph equation proof may have sign convention
+issue -- (RG+XB)+j(XG-RB) vs correct (RG-XB)+j(RB+XG). Needs compilation to verify.
+
+### Update - 2026-03-08 - All Lean Proofs Compile, Zero Sorry Gaps
+
+**Summary**: Closed all 3 remaining sorry gaps in polyphase_formula.lean and
+cleaned up all cosmetic lint warnings across the codebase. Full `lake build`
+passes with 3269 jobs, zero errors, zero sorry gaps.
+
+**Sorry Gaps Closed (polyphase_formula.lean)**:
+- `omega_pow_N`: closed via `Complex.exp_two_pi_mul_I`
+- `omega4_eq_I`: closed via `suffices` + `Complex.ext <;> simp` (cos(π/2)=0, sin(π/2)=1)
+- `omega_on_unit_circle`: closed via `Complex.norm_exp_ofReal_mul_I`
+- Required adding `import Mathlib.Analysis.Complex.Trigonometric`
+
+**Cosmetic Cleanup** (5 files):
+- Removed unused `Complex.I_sq` simp args in basic_operators.lean
+- Removed trailing `<;> ring` where `simp` closes all goals (cl11.lean, cl30.lean)
+- Removed unused `push_cast` in polyphase_formula.lean
+- Fixed `<;>` vs `;` in telegraph_equation.lean
+
+**Final Scorecard**: 8 files, ~116 theorems, 0 sorry gaps, 0 errors.
+
+**Key Decisions**:
+8. **Mathlib API for exp/trig**: `exp_two_pi_mul_I`, `exp_ofReal_mul_I_re/im`,
+   `norm_exp_ofReal_mul_I` are the correct lemma names in current mathlib.
+9. **`↑4` vs `4` cast issue**: Use `suffices + convert` pattern to bypass
+   `Nat.cast 4` vs literal `4` syntactic mismatch in rewrites.
+
+## Remaining Work (Updated)
+
+1. ~~Commit polymathic research output to git~~ DONE
+2. ~~Install elan + Lean 4; verify proofs compile~~ DONE (all 8 files, 0 sorry)
+3. ~~Formalize jk=1-forces-h=-1 proof in Lean 4~~ DONE (0 sorry)
+4. ~~Execute Experiment 0 (polyphase formula Lean proof)~~ DONE (0 sorry)
 5. Close prior-art gap (Mizar, ACL2, HOL Light, ITP/CPP proceedings)
 6. Read Dollard primary sources to confirm Psi/Phi definitions
+7. NEW: Formalize Cl(3,1) spacetime algebra (16 components)
+8. NEW: Draft Track A paper from outline
+9. ~~Investigate telegraph equation sign convention issue~~ RESOLVED (Dollard convention Y=G-jB)
 
 ---
 *Use `/session-update` to add progress notes*

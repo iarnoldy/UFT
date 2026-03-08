@@ -10,14 +10,14 @@ The question: what algebra SHOULD he have used?
 Answer: Cl(1,1), the Clifford algebra with signature (+1, -1).
 
 Cl(1,1) has basis {1, e1, e2, e12} with:
-  - e1^2 = +1  (like Dollard's h^2 = +1, but e1 != +/-1)
+  - e1^2 = +1  (like Dollard's h^2 = +1, but e1 is not ±1)
   - e2^2 = -1  (like Dollard's j^2 = -1)
   - e1*e2 = -e2*e1  (ANTICOMMUTATIVE -- this is what Dollard missed)
   - e12 = e1*e2  (the bivector, analogous to Dollard's k)
 
 Key results in this file:
   1. Cl(1,1) is well-defined with explicit multiplication table
-  2. e1 is genuinely non-trivial: e1^2 = 1 but e1 != +/-1
+  2. e1 is genuinely non-trivial: e1^2 = 1 but e1 is not ±1
   3. Dollard's axiom jk=1 FAILS in Cl(1,1) (e2*e12 = e1, not 1)
   4. The idempotents P+ = (1+e1)/2 and P- = (1-e1)/2 decompose signals
      into forward and backward traveling waves
@@ -36,37 +36,27 @@ References:
 import Mathlib.Data.Real.Basic
 import Mathlib.Tactic
 
-/-!
-## Part 1: The Algebra Structure
+/-! ## Part 1: The Algebra Structure
 
 We define Cl(1,1) as a concrete 4-tuple with explicit multiplication.
-This avoids mathlib's general Clifford algebra machinery and makes
-all proofs decidable by `norm_num`.
 -/
 
 /-- Cl(1,1): the Clifford algebra with signature (+1, -1).
     Elements are a + b*e1 + c*e2 + d*e12 where
     e1^2 = +1, e2^2 = -1, e1*e2 = -e2*e1. -/
+@[ext]
 structure Cl11 where
   s : ℝ    -- scalar (grade 0)
   v1 : ℝ   -- e1 coefficient (grade 1)
   v2 : ℝ   -- e2 coefficient (grade 1)
   b12 : ℝ  -- e12 = e1*e2 coefficient (grade 2)
-  deriving Repr, BEq
 
 namespace Cl11
 
-/-- Equality is componentwise. -/
-theorem ext_iff (x y : Cl11) : x = y ↔ x.s = y.s ∧ x.v1 = y.v1 ∧ x.v2 = y.v2 ∧ x.b12 = y.b12 := by
-  constructor
-  · intro h; subst h; exact ⟨rfl, rfl, rfl, rfl⟩
-  · intro ⟨hs, hv1, hv2, hb12⟩
-    cases x; cases y; simp at *; exact ⟨hs, hv1, hv2, hb12⟩
-
 /-!
-### Multiplication
+### Operations
 
-Derived from the geometric product rules:
+Multiplication derived from the geometric product rules:
   e1*e1 = +1,  e2*e2 = -1,  e12*e12 = +1
   e1*e2 = e12, e2*e1 = -e12
   e1*e12 = e2, e12*e1 = -e2
@@ -98,17 +88,26 @@ instance : Neg Cl11 := ⟨neg⟩
 def smul (r : ℝ) (x : Cl11) : Cl11 :=
   { s := r * x.s, v1 := r * x.v1, v2 := r * x.v2, b12 := r * x.b12 }
 
-/-!
-### Distinguished Elements
--/
+/-! ### Distinguished Elements -/
 
-/-- The multiplicative identity. -/
 def one : Cl11 := ⟨1, 0, 0, 0⟩
 instance : One Cl11 := ⟨one⟩
 
-/-- The zero element. -/
 def zero : Cl11 := ⟨0, 0, 0, 0⟩
 instance : Zero Cl11 := ⟨zero⟩
+
+/-! ### Simp bridge lemmas
+
+These connect typeclass operators to our custom functions,
+allowing `simp` to unfold through instance resolution. -/
+
+@[simp] lemma mul_def (a b : Cl11) : a * b = mul a b := rfl
+@[simp] lemma add_def (a b : Cl11) : a + b = add a b := rfl
+@[simp] lemma neg_def (a : Cl11) : -a = neg a := rfl
+@[simp] lemma one_val : (1 : Cl11) = one := rfl
+@[simp] lemma zero_val : (0 : Cl11) = zero := rfl
+
+/-! ### Basis Elements -/
 
 /-- Basis vector e1 with e1^2 = +1 (the "h" direction). -/
 def e1 : Cl11 := ⟨0, 1, 0, 0⟩
@@ -122,68 +121,55 @@ def e12 : Cl11 := ⟨0, 0, 0, 1⟩
 /-- Embed a real scalar into Cl(1,1). -/
 def ofReal (r : ℝ) : Cl11 := ⟨r, 0, 0, 0⟩
 
-/-!
-## Part 2: Fundamental Properties
--/
+/-! ## Part 2: Fundamental Properties -/
 
 /-- e1 squared equals +1 (like Dollard's h^2 = +1). -/
 theorem e1_sq : e1 * e1 = (1 : Cl11) := by
-  simp only [e1, (· * ·), mul, one, One.one]
-  norm_num
+  ext <;> simp [e1, mul, one]
 
 /-- e2 squared equals -1 (like Dollard's j^2 = -1). -/
 theorem e2_sq : e2 * e2 = -(1 : Cl11) := by
-  simp only [e2, (· * ·), mul, one, One.one, Neg.neg, neg]
-  norm_num
+  ext <;> simp [e2, mul, one, neg]
 
 /-- e12 squared equals +1. -/
 theorem e12_sq : e12 * e12 = (1 : Cl11) := by
-  simp only [e12, (· * ·), mul, one, One.one]
-  norm_num
+  ext <;> simp [e12, mul, one]
 
 /-- e1 * e2 = e12 (the bivector). -/
 theorem e1_mul_e2 : e1 * e2 = e12 := by
-  simp only [e1, e2, e12, (· * ·), mul]
-  norm_num
+  ext <;> simp [e1, e2, e12, mul]
 
 /-- e2 * e1 = -e12 (ANTICOMMUTATIVE -- Dollard's critical missing property). -/
 theorem e2_mul_e1 : e2 * e1 = -e12 := by
-  simp only [e2, e1, e12, (· * ·), mul, Neg.neg, neg]
-  norm_num
+  ext <;> simp [e2, e1, e12, mul, neg]
 
 /-- e1 and e2 do NOT commute. This is the fundamental difference from Dollard's algebra. -/
 theorem e1_e2_anticommute : e1 * e2 ≠ e2 * e1 := by
   rw [e1_mul_e2, e2_mul_e1]
   intro h
-  have : (e12 : Cl11).b12 = (-e12 : Cl11).b12 := by rw [h]
-  simp [e12, Neg.neg, neg] at this
+  have := congr_arg Cl11.b12 h
+  simp only [neg_def, e12, neg] at this
+  norm_num at this
 
-/-!
-### Additional multiplication table entries
--/
+/-! ### Additional multiplication table entries -/
 
 /-- e1 * e12 = e2. -/
 theorem e1_mul_e12 : e1 * e12 = e2 := by
-  simp only [e1, e12, e2, (· * ·), mul]
-  norm_num
+  ext <;> simp [e1, e12, e2, mul]
 
 /-- e12 * e1 = -e2. -/
 theorem e12_mul_e1 : e12 * e1 = -e2 := by
-  simp only [e12, e1, e2, (· * ·), mul, Neg.neg, neg]
-  norm_num
+  ext <;> simp [e12, e1, e2, mul, neg]
 
 /-- e2 * e12 = e1 (NOT 1 -- Dollard's jk=1 fails!). -/
 theorem e2_mul_e12 : e2 * e12 = e1 := by
-  simp only [e2, e12, e1, (· * ·), mul]
-  norm_num
+  ext <;> simp [e2, e12, e1, mul]
 
 /-- e12 * e2 = -e1. -/
 theorem e12_mul_e2 : e12 * e2 = -e1 := by
-  simp only [e12, e2, e1, (· * ·), mul, Neg.neg, neg]
-  norm_num
+  ext <;> simp [e12, e2, e1, mul, neg]
 
-/-!
-## Part 3: Why Dollard's Axioms Fail in Cl(1,1)
+/-! ## Part 3: Why Dollard's Axioms Fail in Cl(1,1)
 
 Mapping Dollard's operators into Cl(1,1):
   h -> e1  (h^2 = +1, non-trivially)
@@ -191,18 +177,15 @@ Mapping Dollard's operators into Cl(1,1):
   k -> e12 (k = hj = e1*e2)
 
 We show that jk = 1 FAILS, confirming the algebraic necessity result:
-you cannot have h^2=+1 (non-trivially), j^2=-1, hj=k, AND jk=1.
--/
+you cannot have h^2=+1 (non-trivially), j^2=-1, hj=k, AND jk=1. -/
 
 /-- Dollard's axiom jk = 1 FAILS in Cl(1,1).
-    e2 * e12 = e1, not 1.
-    This is the precise point where Dollard's commutative algebra diverges
-    from the non-commutative Clifford algebra. -/
+    e2 * e12 = e1, not 1. -/
 theorem dollard_jk_fails : e2 * e12 ≠ (1 : Cl11) := by
   rw [e2_mul_e12]
   intro h
-  have : (e1 : Cl11).s = (1 : Cl11).s := by rw [h]
-  simp [e1, one, One.one] at this
+  have := congr_arg Cl11.s h
+  simp [e1, one] at this
 
 /-- Dollard's commutativity assumption hj = jh also FAILS.
     e1*e2 = e12 but e2*e1 = -e12. -/
@@ -215,11 +198,10 @@ theorem dollard_commutativity_fails : e1 * e2 ≠ e2 * e1 := e1_e2_anticommute
 theorem dollard_kj_also_fails : e12 * e2 ≠ (1 : Cl11) := by
   rw [e12_mul_e2]
   intro h
-  have : (-e1 : Cl11).s = (1 : Cl11).s := by rw [h]
-  simp [e1, one, One.one, Neg.neg, neg] at this
+  have := congr_arg Cl11.s h
+  simp [e1, one, neg] at this
 
-/-!
-## Part 4: The Genuine Power of Cl(1,1) -- Idempotent Decomposition
+/-! ## Part 4: The Genuine Power of Cl(1,1) -- Idempotent Decomposition
 
 The idempotents P+ = (1+e1)/2 and P- = (1-e1)/2 are the reason
 Cl(1,1) matters for electrical engineering. They project signals
@@ -233,61 +215,52 @@ In transmission line theory:
 
 This is what Dollard was reaching for: a non-trivial h that
 decomposes signals into complementary halves. But his commutative
-Z_4 can't do this -- Cl(1,1) can.
--/
+Z_4 can't do this -- Cl(1,1) can. -/
 
 /-- The forward-wave projector: P+ = (1 + e1) / 2. -/
-def P_plus : Cl11 := ⟨1/2, 1/2, 0, 0⟩
+noncomputable def P_plus : Cl11 := ⟨1/2, 1/2, 0, 0⟩
 
 /-- The backward-wave projector: P- = (1 - e1) / 2. -/
-def P_minus : Cl11 := ⟨1/2, -1/2, 0, 0⟩
+noncomputable def P_minus : Cl11 := ⟨1/2, -1/2, 0, 0⟩
 
 /-- P+ is idempotent: P+^2 = P+. -/
 theorem P_plus_idempotent : P_plus * P_plus = P_plus := by
-  simp only [P_plus, (· * ·), mul]
-  norm_num
+  ext <;> simp [P_plus, mul] <;> ring
 
 /-- P- is idempotent: P-^2 = P-. -/
 theorem P_minus_idempotent : P_minus * P_minus = P_minus := by
-  simp only [P_minus, (· * ·), mul]
-  norm_num
+  ext <;> simp [P_minus, mul] <;> ring
 
 /-- P+ and P- are orthogonal: P+ * P- = 0. -/
 theorem P_orthogonal : P_plus * P_minus = (0 : Cl11) := by
-  simp only [P_plus, P_minus, (· * ·), mul, zero, Zero.zero]
-  norm_num
+  ext <;> simp [P_plus, P_minus, mul, zero] <;> ring
 
 /-- P- and P+ are orthogonal (the other direction). -/
 theorem P_orthogonal' : P_minus * P_plus = (0 : Cl11) := by
-  simp only [P_minus, P_plus, (· * ·), mul, zero, Zero.zero]
-  norm_num
+  ext <;> simp [P_minus, P_plus, mul, zero] <;> ring
 
 /-- P+ and P- form a complete decomposition: P+ + P- = 1. -/
 theorem P_complete : P_plus + P_minus = (1 : Cl11) := by
-  simp only [P_plus, P_minus, (· + ·), add, one, One.one]
-  norm_num
+  ext <;> simp [P_plus, P_minus, add, one] <;> ring
 
-/-!
-## Part 5: Cl(1,1) Subalgebra Structure
+/-! ## Part 5: Cl(1,1) Subalgebra Structure
 
 Cl(1,1) contains two important subalgebras:
   - {1, e2}: the complex numbers C (e2^2 = -1)
-  - {1, e1}: the split-complex numbers (e1^2 = +1, e1 != +/-1)
+  - {1, e1}: the split-complex numbers (e1^2 = +1, e1 is not ±1)
   - {1, e12}: another copy of split-complex numbers (e12^2 = +1)
 
 The telegraph equation lives in the complex subalgebra {1, e2}.
 The forward/backward decomposition lives in the split-complex subalgebra {1, e1}.
 These two structures are ORTHOGONAL in Cl(1,1) -- which is why Dollard
-couldn't mix them in a commutative algebra.
--/
+couldn't mix them in a commutative algebra. -/
 
 /-- The complex subalgebra: (a + b*e2)*(c + d*e2) = (ac-bd) + (ad+bc)*e2.
     This is standard complex multiplication. -/
 theorem complex_subalgebra (a b c d : ℝ) :
     (⟨a, 0, b, 0⟩ : Cl11) * (⟨c, 0, d, 0⟩ : Cl11) =
     (⟨a*c - b*d, 0, a*d + b*c, 0⟩ : Cl11) := by
-  simp only [(· * ·), mul]
-  constructor <;> ring
+  ext <;> simp [mul]
 
 /-- The split-complex subalgebra: (a + b*e1)*(c + d*e1) = (ac+bd) + (ad+bc)*e1.
     Note the + sign in ac+bd (vs ac-bd for complex). This is the
@@ -295,11 +268,9 @@ theorem complex_subalgebra (a b c d : ℝ) :
 theorem split_complex_subalgebra (a b c d : ℝ) :
     (⟨a, b, 0, 0⟩ : Cl11) * (⟨c, d, 0, 0⟩ : Cl11) =
     (⟨a*c + b*d, a*d + b*c, 0, 0⟩ : Cl11) := by
-  simp only [(· * ·), mul]
-  constructor <;> ring
+  ext <;> simp [mul]
 
-/-!
-## Part 6: The Corrected Telegraph Equation in Cl(1,1)
+/-! ## Part 6: The Corrected Telegraph Equation in Cl(1,1)
 
 The standard telegraph equation uses the complex subalgebra {1, e2}:
   Z = R + X*e2  (impedance: resistance + reactance)
@@ -313,12 +284,10 @@ because e1 is grade 1 while the scalar part is grade 0. You can't replace
 a scalar with a vector and get the same element.
 
 HOWEVER, Cl(1,1) offers something Dollard COULDN'T get in Z_4:
-the idempotent decomposition of ZY into forward and backward components.
--/
+the idempotent decomposition of ZY into forward and backward components. -/
 
 /-- Telegraph equation in the complex subalgebra of Cl(1,1).
-    ZY = (R + X*e2)(G + B*e2) = (RG - XB) + (RB + XG)*e2.
-    This is standard complex multiplication. -/
+    ZY = (R + X*e2)(G + B*e2) = (RG - XB) + (RB + XG)*e2. -/
 theorem telegraph_in_cl11 (R X G B : ℝ) :
     (⟨R, 0, X, 0⟩ : Cl11) * (⟨G, 0, B, 0⟩ : Cl11) =
     (⟨R*G - X*B, 0, R*B + X*G, 0⟩ : Cl11) := by
@@ -336,12 +305,10 @@ theorem versor_form_grade_mismatch (R X G B : ℝ)
   intro h
   have : (0 : ℝ) = X * B + R * G := by
     have := congr_arg Cl11.v1 h
-    simp at this
-    exact this
+    simpa using this
   exact hXB this.symm
 
-/-!
-## Part 7: What Cl(1,1) DOES Offer -- The Forward/Backward Decomposition
+/-! ## Part 7: What Cl(1,1) DOES Offer -- The Forward/Backward Decomposition
 
 The genuine power of Cl(1,1) for electromagnetic theory is the
 idempotent decomposition. For any element in the complex subalgebra:
@@ -358,30 +325,26 @@ forward-traveling and backward-traveling components.
 This is what Dollard was TRYING to do with the h operator:
 separate signals into complementary halves. But in Z_4, h = -1
 just negates -- it can't project. In Cl(1,1), e1 generates
-genuine projectors that decompose signals non-trivially.
--/
+genuine projectors that decompose signals non-trivially. -/
 
 /-- Forward projection of a complex-subalgebra element. -/
 theorem forward_projection (a b : ℝ) :
     P_plus * (⟨a, 0, b, 0⟩ : Cl11) =
     (⟨a/2, a/2, b/2, b/2⟩ : Cl11) := by
-  simp only [P_plus, (· * ·), mul]
-  constructor <;> ring
+  ext <;> simp [P_plus, mul] <;> ring
 
 /-- Backward projection of a complex-subalgebra element. -/
 theorem backward_projection (a b : ℝ) :
     P_minus * (⟨a, 0, b, 0⟩ : Cl11) =
     (⟨a/2, -a/2, b/2, -b/2⟩ : Cl11) := by
-  simp only [P_minus, (· * ·), mul]
-  constructor <;> ring
+  ext <;> simp [P_minus, mul] <;> ring
 
 /-- The projections sum to the original: P+*z + P-*z = z. -/
 theorem projection_complete (a b : ℝ) :
     P_plus * (⟨a, 0, b, 0⟩ : Cl11) + P_minus * (⟨a, 0, b, 0⟩ : Cl11) =
     (⟨a, 0, b, 0⟩ : Cl11) := by
   rw [forward_projection, backward_projection]
-  simp only [(· + ·), add]
-  constructor <;> ring
+  ext <;> simp [add] <;> ring
 
 end Cl11
 
@@ -390,7 +353,7 @@ end Cl11
 
 ### What this file proves:
 1. Cl(1,1) is a well-defined 4D algebra (explicit multiplication table verified)
-2. e1^2 = +1 with e1 genuinely non-trivial (not +/-1)
+2. e1^2 = +1 with e1 genuinely non-trivial (not ±1)
 3. Dollard's axiom jk=1 FAILS (e2*e12 = e1, not 1)
 4. Dollard's commutativity FAILS (e1*e2 = -e2*e1)
 5. Idempotent projectors P+, P- are complete and orthogonal

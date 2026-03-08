@@ -17,7 +17,7 @@ References:
 -/
 
 import Mathlib.Data.Complex.Basic
-import Mathlib.Data.Complex.Exponential
+import Mathlib.Analysis.Complex.Exponential
 import Mathlib.Algebra.Ring.Basic
 import Mathlib.Tactic
 
@@ -27,12 +27,9 @@ def j : ℂ := Complex.I
 -- Verify j operator properties (should be straightforward)
 theorem j_fourth_power : j^4 = 1 := by
   simp [j]
-  norm_cast
-  ring
 
 theorem j_squared : j^2 = -1 := by
   simp [j]
-  rw [Complex.I_sq]
 
 -- Attempt to define h operator - Issue: Properties appear contradictory
 -- If h² = 1 and h¹ = -1, then h = -1 or h = 1
@@ -43,7 +40,6 @@ def h : ℂ := -1
 
 theorem h_squared : h^2 = 1 := by
   simp [h]
-  norm_num
 
 theorem h_first_power : h^1 = -1 := by
   simp [h]
@@ -56,12 +52,10 @@ def k : ℂ := h * j
 
 theorem k_definition : k = -j := by
   simp [k, h, j]
-  ring
 
 -- Verify the cancellation property jk = +1
 theorem jk_cancellation : j * k = 1 := by
   simp [j, k, h]
-  ring
 
 -- Test for potential inconsistencies
 theorem h_interpretation_consistent : h = -1 ∧ h^2 = 1 ∧ h^1 = -1 := by
@@ -121,13 +115,12 @@ example : j * k = 1 := jk_cancellation
 
 -- Verification of 4th roots of unity interpretation
 theorem fourth_roots_of_unity : 1^4 = 1 ∧ j^4 = 1 ∧ h^4 = 1 ∧ k^4 = 1 := by
-  constructor
-  · norm_num
-  constructor  
-  · exact j_fourth_power
-  constructor
-  · simp [h]; norm_num
-  · simp [k, h, j]; ring
+  refine ⟨by norm_num, j_fourth_power, by simp [h]; norm_num, ?_⟩
+  -- k = -I, so k^4 = (-I)^4 = (I^2)^2 = (-1)^2 = 1
+  calc k ^ 4 = (-Complex.I) ^ 4 := by simp [k, h, j]
+    _ = (Complex.I ^ 2) ^ 2 := by ring
+    _ = (-1 : ℂ) ^ 2 := by rw [Complex.I_sq]
+    _ = 1 := by norm_num
 
 -- The versor algebra appears to be mathematically consistent when interpreted
 -- as the cyclic group of 4th roots of unity: {1, i, -1, -i}

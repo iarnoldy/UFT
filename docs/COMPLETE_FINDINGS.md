@@ -47,6 +47,10 @@ Z₄ (basic operators)
 | UFT | so14_unification, so14_anomalies | 91 generators, 6/6 anomaly conditions |
 | Quantum | hilbert_space, mass_gap | Fock space, Wightman axioms, 8/8 prerequisites |
 | Action | circuit_action | Weber×Coulomb=Action dimensional analysis |
+| Spectral | grade2_lie_algebra | Cl(3,0) bivectors form so(3), Casimir nonzero |
+| Spectral | casimir_eigenvalues | C₂=-2·I₃ in fundamental, Schur centrality |
+| Spectral | casimir_spectral_gap | Nonzero Killing form → H²≠0, eigenvalue equations |
+| Spectral | block_tridiagonal | Grade projectors, selection rules, banded structure |
 
 ---
 

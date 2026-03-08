@@ -274,14 +274,17 @@ theorem omega_self (u : PhasePoint) : omega u u = 0 := by
 
 /-- ω is non-degenerate on the canonical basis: ω(e_q, e_λ) = 1. -/
 theorem omega_canonical : omega ⟨1, 0⟩ ⟨0, 1⟩ = 1 := by
-  simp [omega]; ring
+  simp [omega]
 
 end PhasePoint
 
 /-- A 2×2 real matrix (linear map on phase space). -/
 @[ext]
 structure Mat2 where
-  a : ℝ; b : ℝ; c : ℝ; d : ℝ
+  a : ℝ
+  b : ℝ
+  c : ℝ
+  d : ℝ
 
 namespace Mat2
 
@@ -309,11 +312,11 @@ def J : Mat2 := ⟨0, 1, -1, 0⟩
     The oscillatory behavior of every circuit, every pendulum,
     every harmonic oscillator comes from this single equation. -/
 theorem J_squared : J * J = negM identity := by
-  ext <;> simp [mul, J, negM, identity] <;> ring
+  ext <;> simp [mul, J, negM, identity]
 
 /-- J has determinant 1: Liouville's theorem (phase space volume preservation). -/
 theorem J_det_one : det J = 1 := by
-  simp [det, J]; ring
+  simp [det, J]
 
 /-- J is antisymmetric: J^T = -J.
     This is equivalent to the Poisson bracket being antisymmetric. -/
@@ -323,7 +326,7 @@ theorem J_antisymmetric : transpose J = negM J := by
 /-- J acts as a quarter-turn rotation: J(q, λ) = (λ, -q). -/
 theorem J_action (z : PhasePoint) :
     act J z = ⟨z.lam, -z.q⟩ := by
-  simp [act, J]; constructor <;> ring
+  simp [act, J]
 
 /-- J preserves the inner product: ⟨Ju, Jv⟩ = ⟨u, v⟩.
     J is an orthogonal (rotation) matrix. -/
@@ -339,7 +342,7 @@ theorem J_preserves_omega (u v : PhasePoint) :
 
 /-- The identity acts trivially. -/
 theorem identity_action (z : PhasePoint) : act identity z = z := by
-  ext <;> simp [act, identity] <;> ring
+  ext <;> simp [act, identity]
 
 end Mat2
 
@@ -358,7 +361,7 @@ The solution oscillates with frequency ω² = invL * invC = 1/(LC). -/
 
 /-- The Hamiltonian of an LC circuit: H = invC*q²/2 + invL*λ²/2.
     Here invL = 1/L and invC = 1/C (inverse inductance and capacitance). -/
-def lcHamiltonian (invL invC : ℝ) (z : PhasePoint) : ℝ :=
+noncomputable def lcHamiltonian (invL invC : ℝ) (z : PhasePoint) : ℝ :=
   invC * z.q ^ 2 / 2 + invL * z.lam ^ 2 / 2
 
 /-- The gradient of H: ∇H(z) = (invC*q, invL*λ). -/
@@ -374,14 +377,12 @@ def hamiltonFlow (invL invC : ℝ) (z : PhasePoint) : PhasePoint :=
 theorem hamilton_flow_explicit (invL invC : ℝ) (z : PhasePoint) :
     hamiltonFlow invL invC z = ⟨invL * z.lam, -(invC * z.q)⟩ := by
   simp [hamiltonFlow, lcGradH, Mat2.act, Mat2.J]
-  constructor <;> ring
 
 /-- At resonance (invL = invC), the flow IS the J rotation (scaled):
     ż = inv · J · z. The circuit oscillates as a pure rotation in phase space. -/
 theorem resonant_flow_is_J (inv : ℝ) (z : PhasePoint) :
     hamiltonFlow inv inv z = Mat2.act (⟨0, inv, -inv, 0⟩ : Mat2) z := by
   simp [hamiltonFlow, lcGradH, Mat2.act, Mat2.J]
-  constructor <;> ring
 
 /-- The Hamiltonian at resonance (L = C) is proportional to |z|²:
     H = inv * (q² + λ²) / 2 = inv * |z|² / 2.
@@ -431,29 +432,26 @@ theorem dollardQ_J_rotation (z : PhasePoint) :
     After a half-period (J²z = -z), Q returns to its original value. -/
 theorem dollardQ_even (z : PhasePoint) :
     dollardQ ⟨-z.q, -z.lam⟩ = dollardQ z := by
-  simp [dollardQ]; ring
+  simp [dollardQ]
 
 /-- Q after a full period (J⁴ = I) returns to its original value.
     Since J² = -I, we have J⁴ = I, and Q(J⁴z) = Q(z). -/
 theorem dollardQ_period (z : PhasePoint) :
     dollardQ (Mat2.act Mat2.J (Mat2.act Mat2.J
      (Mat2.act Mat2.J (Mat2.act Mat2.J z)))) = dollardQ z := by
-  simp [dollardQ, Mat2.act, Mat2.J]; ring
+  simp [dollardQ, Mat2.act, Mat2.J]
 
 /-- The symplectic form and Q are related:
-    ω(z, Jz) = q² + λ² = |z|².
-    The symplectic structure GENERATES the quadratic invariant
-    (total energy at resonance). -/
-theorem omega_J_is_norm_sq (z : PhasePoint) :
-    PhasePoint.omega z (Mat2.act Mat2.J z) = z.q ^ 2 + z.lam ^ 2 := by
+    ω(z, Jz) = -(q² + λ²).
+    The symplectic structure encodes the norm-squared (up to sign). -/
+theorem omega_J_is_neg_norm_sq (z : PhasePoint) :
+    PhasePoint.omega z (Mat2.act Mat2.J z) = -(z.q ^ 2 + z.lam ^ 2) := by
   simp [PhasePoint.omega, Mat2.act, Mat2.J]; ring
 
-/-- The symplectic form between a point and its gradient gives
-    the Hamiltonian flow: ω(z, ∇H) encodes the dynamics.
-    For the isotropic case: ω(z, ∇H) = inv * (q² + λ²). -/
+/-- At resonance, ω(z, ∇H) = 0: the gradient is parallel to z
+    in the symplectic sense. This is because ∇H = inv·z at resonance. -/
 theorem omega_grad_hamiltonian (inv : ℝ) (z : PhasePoint) :
-    PhasePoint.omega z (lcGradH inv inv z) =
-    inv * (z.q ^ 2 - z.lam ^ 2) := by
+    PhasePoint.omega z (lcGradH inv inv z) = 0 := by
   simp [PhasePoint.omega, lcGradH]; ring
 
 /-- Dollard's Q in terms of the symplectic form:
@@ -461,7 +459,7 @@ theorem omega_grad_hamiltonian (inv : ℝ) (z : PhasePoint) :
     (Not the J-rotated point, but the transpose.) -/
 theorem dollardQ_as_omega (z : PhasePoint) :
     dollardQ z = PhasePoint.omega ⟨z.q, 0⟩ ⟨0, z.lam⟩ := by
-  simp [dollardQ, PhasePoint.omega]; ring
+  simp [dollardQ, PhasePoint.omega]
 
 /-! ## Part 9: Complete Connection Summary
 

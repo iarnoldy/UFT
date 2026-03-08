@@ -127,7 +127,7 @@ theorem w10_all_chiral :
       w10_34, w10_35, w10_45]
 
 /-- There are exactly 10 such weights: C(5,2) = 10. -/
-theorem ten_rep_count : Nat.choose 5 2 = 10 := by norm_num
+theorem ten_rep_count : Nat.choose 5 2 = 10 := by native_decide
 
 /-! ## Part 4: The 5̄ Representation — Antiquarks and Leptons
 
@@ -170,14 +170,14 @@ SM didn't originally include but neutrino oscillations now require). -/
     one generation of Standard Model fermions under SU(5). -/
 theorem spinor_decomposition :
     Nat.choose 5 0 + Nat.choose 5 2 + Nat.choose 5 4 = 16 := by
-  norm_num
+  native_decide
 
 /-- The total number of positive-chirality weights equals 16.
     (Weights with even number of minus signs: 0, 2, or 4.) -/
 theorem total_chiral_weights :
     Nat.choose 5 0 + Nat.choose 5 2 + Nat.choose 5 4 =
     2 ^ (5 - 1) := by
-  norm_num
+  native_decide
 
 /-- The decomposition matches the semi-spinor dimension formula. -/
 theorem matches_semi_spinor : 2 ^ (10 / 2 - 1) = 16 := by norm_num
@@ -228,8 +228,8 @@ theorem dbarR_red_color : colorSum w5bar_1 = -1 := by
     All with color sum = 1 are quarks.
     This distinguishes quarks from leptons ALGEBRAICALLY. -/
 theorem quarks_have_fractional_color :
-    colorSum w10_12 = 1 ∧ colorSum w10_13 = 1 ∧
-    colorSum w10_23 = 1 ∧  -- these three are ūR (color triplet)
+    colorSum w10_12 = -1 ∧ colorSum w10_13 = -1 ∧
+    colorSum w10_23 = -1 ∧  -- these three are ūR (color anti-triplet, 3̄)
     colorSum w10_14 = 1 ∧ colorSum w10_24 = 1 ∧ colorSum w10_34 = 1 ∧  -- uL
     colorSum w10_15 = 1 ∧ colorSum w10_25 = 1 ∧ colorSum w10_35 = 1 ∧  -- dL
     colorSum w10_45 = 3  -- eR (lepton)

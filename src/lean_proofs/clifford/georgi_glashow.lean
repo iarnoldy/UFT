@@ -278,7 +278,7 @@ theorem charge_quark_v1 :
 /-- 6Q eigenvalue on e⁺ position in 5 (v₄): 6 → Q = +1 -/
 theorem charge_v4 :
     (act sixQ ⟨0, 0, 0, 1, 0⟩).v4 = 6 := by
-  simp [act, sixQ]; norm_num
+  simp [act, sixQ]
 
 /-- 6Q eigenvalue on ν̄ position in 5 (v₅): 0 → Q = 0 -/
 theorem charge_v5 :
@@ -293,7 +293,7 @@ theorem charge_traceless :
     (act sixQ ⟨0,0,1,0,0⟩).v3 +
     (act sixQ ⟨0,0,0,1,0⟩).v4 +
     (act sixQ ⟨0,0,0,0,1⟩).v5 = 0 := by
-  simp [act, sixQ]; norm_num
+  simp [act, sixQ]
 
 /-- The electric charge commutes with color: [6Q, SU(3)] = 0.
     Quarks can change color without changing charge. -/
@@ -342,7 +342,7 @@ theorem y_traceless_structural :
     (FundRep.act hyperchargeY ⟨0,0,1,0,0⟩).v3 +
     (FundRep.act hyperchargeY ⟨0,0,0,1,0⟩).v4 +
     (FundRep.act hyperchargeY ⟨0,0,0,0,1⟩).v5 = 0 := by
-  simp [FundRep.act, hyperchargeY]; norm_num
+  simp [FundRep.act, hyperchargeY]
 
 /-- Y is traceless on the 5̄ (conjugate representation).
     Eigenvalues: (2, 2, 2, -3, -3). -/

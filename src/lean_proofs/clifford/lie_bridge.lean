@@ -151,7 +151,7 @@ theorem bridge_boost_boost :
     toBivector (spinorComm Spinor.sigma01 Spinor.sigma02) =
     Bivector.smul 2 (Bivector.neg Bivector.J3) := by
   ext <;> simp [spinorComm, toBivector, Spinor.sigma01, Spinor.sigma02,
-    Spinor.mul, Spinor.add, Spinor.neg, Bivector.J3, Bivector.neg, Bivector.smul]
+    Spinor.mul, Spinor.add, Spinor.neg, Bivector.J3, Bivector.neg, Bivector.smul] <;> ring
 
 /-- [σ₁₂, σ₂₃] in the spinor algebra maps to -2σ₁₃ in the Bivector algebra.
     This is: rotations close under commutator (so(3) subalgebra). -/
@@ -159,7 +159,7 @@ theorem bridge_rotation_rotation :
     toBivector (spinorComm Spinor.sigma12 Spinor.sigma23) =
     Bivector.smul 2 (Bivector.neg Bivector.J2n) := by
   ext <;> simp [spinorComm, toBivector, Spinor.sigma12, Spinor.sigma23,
-    Spinor.mul, Spinor.add, Spinor.neg, Bivector.J2n, Bivector.neg, Bivector.smul]
+    Spinor.mul, Spinor.add, Spinor.neg, Bivector.J2n, Bivector.neg, Bivector.smul] <;> ring
 
 /-- [σ₀₁, σ₂₃] = 0 in the spinor algebra.
     Orthogonal boost and rotation commute. -/

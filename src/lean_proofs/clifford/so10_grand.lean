@@ -330,6 +330,7 @@ def comm (X Y : SO10) : SO10 where
   l8a := -(X.l18 * Y.l1a) + X.l1a * Y.l18 - (X.l28 * Y.l2a) + X.l2a * Y.l28 - (X.l38 * Y.l3a) + X.l3a * Y.l38 - (X.l48 * Y.l4a) + X.l4a * Y.l48 - (X.l58 * Y.l5a) + X.l5a * Y.l58 - (X.l68 * Y.l6a) + X.l6a * Y.l68 - (X.l78 * Y.l7a) + X.l7a * Y.l78 + X.l89 * Y.l9a - (X.l9a * Y.l89)
   l9a := -(X.l19 * Y.l1a) + X.l1a * Y.l19 - (X.l29 * Y.l2a) + X.l2a * Y.l29 - (X.l39 * Y.l3a) + X.l3a * Y.l39 - (X.l49 * Y.l4a) + X.l4a * Y.l49 - (X.l59 * Y.l5a) + X.l5a * Y.l59 - (X.l69 * Y.l6a) + X.l6a * Y.l69 - (X.l79 * Y.l7a) + X.l7a * Y.l79 - (X.l89 * Y.l8a) + X.l8a * Y.l89
 
+set_option maxHeartbeats 8000000 in
 /-- The Lie bracket is antisymmetric: [X, Y] = -[Y, X]. -/
 theorem comm_antisymm (X Y : SO10) : comm X Y = neg (comm Y X) := by
   ext <;> simp [comm, neg] <;> ring
@@ -818,18 +819,32 @@ def L23 : SO10 where
   l8a := 0
   l9a := 0
 
+/-- Basis generator L_{3,4}. -/
+def L34 : SO10 where
+  l12 := 0; l13 := 0; l14 := 0; l15 := 0; l16 := 0; l17 := 0; l18 := 0; l19 := 0; l1a := 0
+  l23 := 0; l24 := 0; l25 := 0; l26 := 0; l27 := 0; l28 := 0; l29 := 0; l2a := 0
+  l34 := 1; l35 := 0; l36 := 0; l37 := 0; l38 := 0; l39 := 0; l3a := 0
+  l45 := 0; l46 := 0; l47 := 0; l48 := 0; l49 := 0; l4a := 0
+  l56 := 0; l57 := 0; l58 := 0; l59 := 0; l5a := 0
+  l67 := 0; l68 := 0; l69 := 0; l6a := 0
+  l78 := 0; l79 := 0; l7a := 0
+  l89 := 0; l8a := 0; l9a := 0
+
 /-! ## Part 3: Structure Constant Verification
 
 Verify key brackets match the known so(10) structure constants. -/
 
+set_option maxHeartbeats 800000 in
 /-- [L12, L23] = L13. Two rotations compose. -/
 theorem bracket_L12_L23 : comm L12 L23 = L13 := by
   ext <;> simp [comm, L12, L23, L13]
 
+set_option maxHeartbeats 800000 in
 /-- [L12, L34] = 0. Orthogonal rotations commute. -/
 theorem bracket_L12_L34 : comm L12 L34 = zero := by
   ext <;> simp [comm, L12, L34, zero]
 
+set_option maxHeartbeats 800000 in
 /-- [L12, L13] = neg L23. -/
 theorem bracket_L12_L13 : comm L12 L13 = neg L23 := by
   ext <;> simp [comm, L12, L13, neg, L23]

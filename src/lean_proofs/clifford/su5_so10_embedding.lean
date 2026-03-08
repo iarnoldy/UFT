@@ -37,6 +37,10 @@ References:
 import Mathlib.Data.Real.Basic
 import Mathlib.Tactic
 
+-- The comm function on 45-component SO10E is expensive to expand.
+-- Each [G, J] = 0 check requires ~45 multiplications and additions.
+set_option maxHeartbeats 800000
+
 -- We need the SO10 type and comm from so10_grand.
 -- For build independence, we re-declare minimal structure here.
 -- The full Jacobi identity proof is in so10_grand.lean.
@@ -416,30 +420,64 @@ theorem J_comm_self : comm complexJ complexJ = zero := by
 /-! ## Part 4: Centralizer Closure
 
 The centralizer of ANY element is automatically a subalgebra
-by the Jacobi identity. This is the key algebraic fact. -/
+by the Jacobi identity. We prove the helper lemmas, then the
+Jacobi identity for SO10E, then close the proof. -/
+
+/-- Bracket with zero on the right is zero. -/
+theorem comm_zero_right (A : SO10E) : comm A zero = zero := by
+  ext <;> simp [comm, zero]
+
+/-- Bracket with zero on the left is zero. -/
+theorem comm_zero_left (A : SO10E) : comm zero A = zero := by
+  ext <;> simp [comm, zero]
+
+set_option maxHeartbeats 8000000 in
+/-- Bracket is antisymmetric: [A, B] = -[B, A]. -/
+theorem comm_antisymm_E (A B : SO10E) : comm A B = neg (comm B A) := by
+  ext <;> simp [comm, neg] <;> ring
+
+/-- neg zero = zero. -/
+theorem neg_zero_eq : neg (zero : SO10E) = zero := by
+  ext <;> simp [neg, zero]
+
+set_option maxHeartbeats 8000000 in
+/-- ★ The Jacobi identity for so(10) (SO10E copy).
+    [A,[B,C]] + [B,[C,A]] + [C,[A,B]] = 0. -/
+theorem jacobi_E (A B C : SO10E) :
+    add (add (comm A (comm B C)) (comm B (comm C A))) (comm C (comm A B)) = zero := by
+  ext <;> simp [comm, add, zero] <;> ring
 
 set_option maxHeartbeats 800000 in
 /-- If [A, J] = 0 and [B, J] = 0, then [[A,B], J] = 0.
-    This follows from the Jacobi identity for so(10).
-    Proof: [[A,B],J] = [A,[B,J]] - [B,[A,J]] = [A,0] - [B,0] = 0.
-    Since we use the concrete Jacobi identity directly: -/
+    Proof: By Jacobi applied to (A, B, J):
+      [A,[B,J]] + [B,[J,A]] + [J,[A,B]] = 0
+    Since [B,J] = 0: [A,0] = 0
+    Since [A,J] = 0: [J,A] = -[A,J] = 0, so [B,0] = 0
+    Therefore [J,[A,B]] = 0
+    By antisymmetry: [[A,B],J] = -[J,[A,B]] = 0 -/
 theorem centralizer_closed (A B : SO10E)
     (hA : comm A complexJ = zero)
     (hB : comm B complexJ = zero) :
     comm (comm A B) complexJ = zero := by
-  -- By Jacobi: comm (comm A B) J + comm (comm B J) A + comm (comm J A) B = 0
-  -- Since comm B J = 0 and comm J A = -(comm A J) = 0:
-  -- comm (comm A B) J = 0
-  have hJA : comm complexJ A = neg (comm A complexJ) := by
-    ext <;> simp [comm, neg, complexJ] <;> ring
-  rw [hA] at hJA
-  -- Now we need the Jacobi identity applied to A, B, J
-  -- [A,[B,J]] + [B,[J,A]] + [J,[A,B]] = 0
-  -- [A, 0] + [B, neg(comm A J)] + [J,[A,B]] = 0
-  -- 0 + [B, 0] + [J,[A,B]] = 0 (since comm A J = 0 → neg 0 = 0)
-  -- So [J,[A,B]] = 0, i.e., comm J (comm A B) = 0
-  -- Then comm (comm A B) J = neg(comm J (comm A B)) = neg 0 = 0
-  sorry -- This requires the full Jacobi identity; deferred to compilation
+  -- The Jacobi identity gives us:
+  -- comm A (comm B complexJ) + comm B (comm complexJ A) + comm complexJ (comm A B) = zero
+  have hJac := jacobi_E A B complexJ
+  -- Substitute hB: comm B complexJ = zero
+  rw [hB] at hJac
+  -- comm A zero + comm B (comm complexJ A) + comm complexJ (comm A B) = zero
+  rw [comm_zero_right] at hJac
+  -- Now handle comm complexJ A = neg (comm A complexJ) = neg zero = zero
+  have hJA : comm complexJ A = zero := by
+    rw [comm_antisymm_E complexJ A, hA, neg_zero_eq]
+  rw [hJA] at hJac
+  rw [comm_zero_right] at hJac
+  -- Now hJac : add (add zero zero) (comm complexJ (comm A B)) = zero
+  -- So comm complexJ (comm A B) = zero
+  have hJAB : comm complexJ (comm A B) = zero := by
+    have h := hJac
+    ext <;> simp [add, zero] at h <;> tauto
+  -- Finally: comm (comm A B) complexJ = neg (comm complexJ (comm A B)) = neg zero = zero
+  rw [comm_antisymm_E (comm A B) complexJ, hJAB, neg_zero_eq]
 
 /-! ## Part 5: Dimension Counts -/
 
@@ -500,8 +538,8 @@ Combined with:
 The COMPLETE algebraic chain from j²=-1 to unified field theory
 is now machine-verified.
 
-Machine-verified. 0 sorry (except centralizer_closed, which requires
-importing the Jacobi identity from so10_grand.lean).
+Machine-verified. 0 sorry. All proofs closed including centralizer_closed
+(via inline Jacobi identity for SO10E).
 -/
 
 end SO10E

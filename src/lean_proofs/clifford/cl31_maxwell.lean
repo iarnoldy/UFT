@@ -106,6 +106,94 @@ def smul (r : ℝ) (x : STA) : STA :=
    r * x.g012, r * x.g013, r * x.g023, r * x.g123,
    r * x.ps⟩
 
+/-- The full geometric product in Cl(1,3).
+    256 terms, computed from the multiplication table of basis blades.
+    Signature: g0²=+1, g1²=g2²=g3²=-1, gμ*gν=-gν*gμ for μ≠ν.
+    Generated programmatically from the Clifford algebra axioms. -/
+def mul (x y : STA) : STA :=
+  { scalar :=
+      x.scalar*y.scalar + x.g0*y.g0 - x.g1*y.g1 - x.g2*y.g2
+      - x.g3*y.g3 + x.g01*y.g01 + x.g02*y.g02 + x.g03*y.g03
+      - x.g12*y.g12 - x.g13*y.g13 - x.g23*y.g23 - x.g012*y.g012
+      - x.g013*y.g013 - x.g023*y.g023 + x.g123*y.g123 - x.ps*y.ps,
+    g0 :=
+      x.scalar*y.g0 + x.g0*y.scalar + x.g1*y.g01 + x.g2*y.g02
+      + x.g3*y.g03 - x.g01*y.g1 - x.g02*y.g2 - x.g03*y.g3
+      - x.g12*y.g012 - x.g13*y.g013 - x.g23*y.g023 - x.g012*y.g12
+      - x.g013*y.g13 - x.g023*y.g23 - x.g123*y.ps + x.ps*y.g123,
+    g1 :=
+      x.scalar*y.g1 + x.g0*y.g01 + x.g1*y.scalar + x.g2*y.g12
+      + x.g3*y.g13 - x.g01*y.g0 - x.g02*y.g012 - x.g03*y.g013
+      - x.g12*y.g2 - x.g13*y.g3 - x.g23*y.g123 - x.g012*y.g02
+      - x.g013*y.g03 - x.g023*y.ps - x.g123*y.g23 + x.ps*y.g023,
+    g2 :=
+      x.scalar*y.g2 + x.g0*y.g02 - x.g1*y.g12 + x.g2*y.scalar
+      + x.g3*y.g23 + x.g01*y.g012 - x.g02*y.g0 - x.g03*y.g023
+      + x.g12*y.g1 + x.g13*y.g123 - x.g23*y.g3 + x.g012*y.g01
+      + x.g013*y.ps - x.g023*y.g03 + x.g123*y.g13 - x.ps*y.g013,
+    g3 :=
+      x.scalar*y.g3 + x.g0*y.g03 - x.g1*y.g13 - x.g2*y.g23
+      + x.g3*y.scalar + x.g01*y.g013 + x.g02*y.g023 - x.g03*y.g0
+      - x.g12*y.g123 + x.g13*y.g1 + x.g23*y.g2 - x.g012*y.ps
+      + x.g013*y.g01 + x.g023*y.g02 - x.g123*y.g12 + x.ps*y.g012,
+    g01 :=
+      x.scalar*y.g01 + x.g0*y.g1 - x.g1*y.g0 - x.g2*y.g012
+      - x.g3*y.g013 + x.g01*y.scalar + x.g02*y.g12 + x.g03*y.g13
+      - x.g12*y.g02 - x.g13*y.g03 - x.g23*y.ps - x.g012*y.g2
+      - x.g013*y.g3 - x.g023*y.g123 + x.g123*y.g023 - x.ps*y.g23,
+    g02 :=
+      x.scalar*y.g02 + x.g0*y.g2 + x.g1*y.g012 - x.g2*y.g0
+      - x.g3*y.g023 - x.g01*y.g12 + x.g02*y.scalar + x.g03*y.g23
+      + x.g12*y.g01 + x.g13*y.ps - x.g23*y.g03 + x.g012*y.g1
+      + x.g013*y.g123 - x.g023*y.g3 - x.g123*y.g013 + x.ps*y.g13,
+    g03 :=
+      x.scalar*y.g03 + x.g0*y.g3 + x.g1*y.g013 + x.g2*y.g023
+      - x.g3*y.g0 - x.g01*y.g13 - x.g02*y.g23 + x.g03*y.scalar
+      - x.g12*y.ps + x.g13*y.g01 + x.g23*y.g02 - x.g012*y.g123
+      + x.g013*y.g1 + x.g023*y.g2 + x.g123*y.g012 - x.ps*y.g12,
+    g12 :=
+      x.scalar*y.g12 + x.g0*y.g012 + x.g1*y.g2 - x.g2*y.g1
+      - x.g3*y.g123 - x.g01*y.g02 + x.g02*y.g01 + x.g03*y.ps
+      + x.g12*y.scalar + x.g13*y.g23 - x.g23*y.g13 + x.g012*y.g0
+      + x.g013*y.g023 - x.g023*y.g013 - x.g123*y.g3 + x.ps*y.g03,
+    g13 :=
+      x.scalar*y.g13 + x.g0*y.g013 + x.g1*y.g3 + x.g2*y.g123
+      - x.g3*y.g1 - x.g01*y.g03 - x.g02*y.ps + x.g03*y.g01
+      - x.g12*y.g23 + x.g13*y.scalar + x.g23*y.g12 - x.g012*y.g023
+      + x.g013*y.g0 + x.g023*y.g012 + x.g123*y.g2 - x.ps*y.g02,
+    g23 :=
+      x.scalar*y.g23 + x.g0*y.g023 - x.g1*y.g123 + x.g2*y.g3
+      - x.g3*y.g2 + x.g01*y.ps - x.g02*y.g03 + x.g03*y.g02
+      + x.g12*y.g13 - x.g13*y.g12 + x.g23*y.scalar + x.g012*y.g013
+      - x.g013*y.g012 + x.g023*y.g0 - x.g123*y.g1 + x.ps*y.g01,
+    g012 :=
+      x.scalar*y.g012 + x.g0*y.g12 - x.g1*y.g02 + x.g2*y.g01
+      + x.g3*y.ps + x.g01*y.g2 - x.g02*y.g1 - x.g03*y.g123
+      + x.g12*y.g0 + x.g13*y.g023 - x.g23*y.g013 + x.g012*y.scalar
+      + x.g013*y.g23 - x.g023*y.g13 + x.g123*y.g03 - x.ps*y.g3,
+    g013 :=
+      x.scalar*y.g013 + x.g0*y.g13 - x.g1*y.g03 - x.g2*y.ps
+      + x.g3*y.g01 + x.g01*y.g3 + x.g02*y.g123 - x.g03*y.g1
+      - x.g12*y.g023 + x.g13*y.g0 + x.g23*y.g012 - x.g012*y.g23
+      + x.g013*y.scalar + x.g023*y.g12 - x.g123*y.g02 + x.ps*y.g2,
+    g023 :=
+      x.scalar*y.g023 + x.g0*y.g23 + x.g1*y.ps - x.g2*y.g03
+      + x.g3*y.g02 - x.g01*y.g123 + x.g02*y.g3 - x.g03*y.g2
+      + x.g12*y.g013 - x.g13*y.g012 + x.g23*y.g0 + x.g012*y.g13
+      - x.g013*y.g12 + x.g023*y.scalar + x.g123*y.g01 - x.ps*y.g1,
+    g123 :=
+      x.scalar*y.g123 + x.g0*y.ps + x.g1*y.g23 - x.g2*y.g13
+      + x.g3*y.g12 - x.g01*y.g023 + x.g02*y.g013 - x.g03*y.g012
+      + x.g12*y.g3 - x.g13*y.g2 + x.g23*y.g1 + x.g012*y.g03
+      - x.g013*y.g02 + x.g023*y.g01 + x.g123*y.scalar - x.ps*y.g0,
+    ps :=
+      x.scalar*y.ps + x.g0*y.g123 - x.g1*y.g023 + x.g2*y.g013
+      - x.g3*y.g012 + x.g01*y.g23 - x.g02*y.g13 + x.g03*y.g12
+      + x.g12*y.g03 - x.g13*y.g02 + x.g23*y.g01 + x.g012*y.g3
+      - x.g013*y.g2 + x.g023*y.g1 - x.g123*y.g0 + x.ps*y.scalar }
+
+instance : Mul STA := ⟨mul⟩
+
 def zero : STA := ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩
 instance : Zero STA := ⟨zero⟩
 
@@ -114,6 +202,7 @@ instance : One STA := ⟨one⟩
 
 /-! ### Simp bridge lemmas -/
 
+@[simp] lemma mul_def (a b : STA) : a * b = mul a b := rfl
 @[simp] lemma add_def (a b : STA) : a + b = add a b := rfl
 @[simp] lemma neg_def (a : STA) : -a = neg a := rfl
 @[simp] lemma one_val : (1 : STA) = one := rfl
@@ -426,6 +515,281 @@ theorem relative_vector_sq_positive :
   | y => simp [eta]
   | z => simp [eta]
 
+/-! ## Part 7: The Full Geometric Product — Signature Verification
+
+With the full 256-term geometric product defined, we can now verify the
+signature axioms directly via multiplication, not just via vecMul. -/
+
+/-- g0 * g0 = +1 (timelike signature, full product). -/
+theorem gamma0_sq_full : gamma0 * gamma0 = (1 : STA) := by
+  ext <;> simp [gamma0, mul, one]
+
+/-- g1 * g1 = -1 (spacelike signature, full product). -/
+theorem gamma1_sq_full : gamma1 * gamma1 = -(1 : STA) := by
+  ext <;> simp [gamma1, mul, one, neg]
+
+/-- g0 * g1 = sigma01 (bivector product, full product). -/
+theorem g0_g1_full : gamma0 * gamma1 = sigma01 := by
+  ext <;> simp [gamma0, gamma1, sigma01, mul]
+
+/-- g1 * g0 = -sigma01 (anticommutativity, full product). -/
+theorem g1_g0_full : gamma1 * gamma0 = -sigma01 := by
+  ext <;> simp [gamma1, gamma0, sigma01, mul, neg]
+
+/-- The pseudoscalar I = g0123 squares to -1. -/
+theorem pseudoscalar_sq_full : I_pseudo * I_pseudo = -(1 : STA) := by
+  ext <;> simp [I_pseudo, mul, one, neg]
+
+/-- The boost bivector g01 squares to +1 (key for Lorentz boosts). -/
+theorem sigma01_sq : sigma01 * sigma01 = (1 : STA) := by
+  ext <;> simp [sigma01, mul, one]
+
+/-- The spatial bivector g12 squares to -1 (key for spatial rotations). -/
+theorem sigma12_sq : sigma12 * sigma12 = -(1 : STA) := by
+  ext <;> simp [sigma12, mul, one, neg]
+
+/-! ## Part 8: Reversion and Rotors in Spacetime
+
+Reversion reverses the order of basis vectors in each blade:
+  rev(1) = 1, rev(gμ) = gμ,
+  rev(gμν) = gνμ = -gμν,
+  rev(gμνρ) = gρνμ = -gμνρ,
+  rev(g0123) = g3210 = +g0123  (even number of swaps)
+
+Grade k blade picks up sign (-1)^(k(k-1)/2):
+  k=0: +1,  k=1: +1,  k=2: -1,  k=3: -1,  k=4: +1 -/
+
+/-- Reversion in Cl(1,3): reverses the order of basis vectors in each blade. -/
+def rev (x : STA) : STA :=
+  ⟨x.scalar,
+   x.g0, x.g1, x.g2, x.g3,
+   -x.g01, -x.g02, -x.g03, -x.g12, -x.g13, -x.g23,
+   -x.g012, -x.g013, -x.g023, -x.g123,
+   x.ps⟩
+
+/-- Reversion is an involution: rev(rev(x)) = x. -/
+theorem rev_rev (x : STA) : rev (rev x) = x := by
+  ext <;> simp [rev]
+
+/-- The sandwich product: how rotors act on multivectors. -/
+def sandwich (R x : STA) : STA := R * x * (rev R)
+
+/-! ### Lorentz Boost Rotors in Cl(1,3)
+
+A boost in the g0-g1 plane (x-direction) is the rotor:
+  R = cosh(φ/2) + sinh(φ/2)*g01
+
+The boost subalgebra {1, g0, g1, g01} is isomorphic to Cl(1,1).
+  g0 ↔ e1 (timelike, squares to +1)
+  g1 ↔ e2 (spacelike, squares to -1)
+  g01 ↔ e12 (boost bivector, squares to +1)
+
+This is the same Cl(1,1) where we proved Lorentz boosts work.
+Now we embed it into full spacetime algebra. -/
+
+/-- A boost rotor in the g01 plane: R = c + s*g01.
+    For a physical Lorentz boost: c = cosh(φ/2), s = sinh(φ/2). -/
+def boostRotor01 (c s : ℝ) : STA :=
+  ⟨c, 0, 0, 0, 0, s, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩
+
+/-- The reverse of a boost rotor flips the bivector sign. -/
+theorem rev_boostRotor01 (c s : ℝ) :
+    rev (boostRotor01 c s) = boostRotor01 c (-s) := by
+  ext <;> simp [rev, boostRotor01]
+
+/-- Rotor normalization: R * R̃ = (c²-s²) * 1.
+    For proper Lorentz boosts, c²-s² = cosh²(φ/2)-sinh²(φ/2) = 1. -/
+theorem boost01_norm (c s : ℝ) :
+    boostRotor01 c s * rev (boostRotor01 c s) =
+    ⟨c^2 - s^2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩ := by
+  simp [rev_boostRotor01]
+  ext <;> simp [boostRotor01, mul] <;> ring
+
+/-- Lorentz boost of g0 (the time direction):
+    R * g0 * R̃ = (c²+s²)*g0 + (-2cs)*g1.
+    With c=cosh(φ/2), s=sinh(φ/2): t' = cosh(φ)*t - sinh(φ)*x. -/
+theorem boost01_gamma0 (c s : ℝ) :
+    sandwich (boostRotor01 c s) gamma0 =
+    ⟨0, c^2 + s^2, -2*c*s, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩ := by
+  simp [sandwich, rev_boostRotor01]
+  ext <;> simp [boostRotor01, gamma0, mul] <;> ring
+
+/-- Lorentz boost of g1 (the x-direction):
+    R * g1 * R̃ = (-2cs)*g0 + (c²+s²)*g1.
+    With c=cosh(φ/2), s=sinh(φ/2): x' = -sinh(φ)*t + cosh(φ)*x. -/
+theorem boost01_gamma1 (c s : ℝ) :
+    sandwich (boostRotor01 c s) gamma1 =
+    ⟨0, -2*c*s, c^2 + s^2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩ := by
+  simp [sandwich, rev_boostRotor01]
+  ext <;> simp [boostRotor01, gamma1, mul] <;> ring
+
+/-- Lorentz boost of g2 (the y-direction): UNCHANGED.
+    The boost in the g01 plane leaves transverse directions alone. -/
+theorem boost01_gamma2 (c s : ℝ) (hn : c^2 - s^2 = 1) :
+    sandwich (boostRotor01 c s) gamma2 = gamma2 := by
+  simp [sandwich, rev_boostRotor01]
+  ext <;> simp [boostRotor01, gamma2, mul] <;> nlinarith
+
+/-- Lorentz boost of g3 (the z-direction): UNCHANGED. -/
+theorem boost01_gamma3 (c s : ℝ) (hn : c^2 - s^2 = 1) :
+    sandwich (boostRotor01 c s) gamma3 = gamma3 := by
+  simp [sandwich, rev_boostRotor01]
+  ext <;> simp [boostRotor01, gamma3, mul] <;> nlinarith
+
+/-! ### The Crown Jewel: Lorentz Boost of the Electromagnetic Field
+
+Under a Lorentz boost in the x-direction, the EM field transforms:
+  F' = R * F * R̃
+
+The electric and magnetic fields MIX:
+  Ex' = Ex                    (parallel to boost: unchanged)
+  Ey' = cosh(φ)*Ey - sinh(φ)*Bz  (transverse: E and B mix!)
+  Ez' = cosh(φ)*Ez + sinh(φ)*By
+  Bx' = Bx                    (parallel to boost: unchanged)
+  By' = cosh(φ)*By + sinh(φ)*Ez  (transverse: B and E mix!)
+  Bz' = cosh(φ)*Bz - sinh(φ)*Ey
+
+What one observer calls pure electric field, another calls electromagnetic.
+This is special relativity encoded in the rotor sandwich product. -/
+
+/-- Lorentz boost of a pure Ex field (along boost direction): UNCHANGED.
+    The component parallel to the boost is invariant. -/
+theorem boost01_Ex (c s : ℝ) (Ex : ℝ) (hn : c^2 - s^2 = 1) :
+    sandwich (boostRotor01 c s) (em_field Ex 0 0 0 0 0) =
+    em_field Ex 0 0 0 0 0 := by
+  have aux : c * Ex * c - s * Ex * s = Ex := by
+    have : c * Ex * c - s * Ex * s = (c ^ 2 - s ^ 2) * Ex := by ring
+    rw [this, hn, one_mul]
+  simp [sandwich, rev_boostRotor01]
+  ext <;> simp [boostRotor01, em_field, mul] <;> linarith
+
+/-- Lorentz boost of a pure Ey field: mixes with Bz.
+    Ey' = (c²+s²)*Ey, Bz' = (-2cs)*Ey.
+    With c=cosh(φ/2), s=sinh(φ/2):
+      Ey' = cosh(φ)*Ey, Bz' = -sinh(φ)*Ey.
+    A moving observer sees a magnetic field appear from pure E! -/
+theorem boost01_Ey (c s : ℝ) (Ey : ℝ) :
+    sandwich (boostRotor01 c s) (em_field 0 Ey 0 0 0 0) =
+    em_field 0 ((c^2+s^2)*Ey) 0 0 0 ((-2*c*s)*Ey) := by
+  simp [sandwich, rev_boostRotor01]
+  ext <;> simp [boostRotor01, em_field, mul] <;> ring
+
+/-- Lorentz boost of a pure Bx field (along boost direction): UNCHANGED.
+    The magnetic component parallel to the boost is invariant. -/
+theorem boost01_Bx (c s : ℝ) (Bx : ℝ) (hn : c^2 - s^2 = 1) :
+    sandwich (boostRotor01 c s) (em_field 0 0 0 Bx 0 0) =
+    em_field 0 0 0 Bx 0 0 := by
+  have aux : c * Bx * c - s * Bx * s = Bx := by
+    have : c * Bx * c - s * Bx * s = (c ^ 2 - s ^ 2) * Bx := by ring
+    rw [this, hn, one_mul]
+  simp [sandwich, rev_boostRotor01]
+  ext <;> simp [boostRotor01, em_field, mul] <;> linarith
+
+/-! ## Part 9: Spatial Rotations
+
+A rotation in the g1-g2 plane (around the g3 axis) uses the rotor:
+  R = cos(θ/2) + sin(θ/2)*σ₁₂
+
+Key difference from boosts:
+  - Boost bivector σ₀₁² = +1  →  normalization c² - s² = 1  (hyperbolic)
+  - Rotation bivector σ₁₂² = -1  →  normalization c² + s² = 1  (circular)
+
+The rotation gives:
+  R*g1*R̃ = cos(θ)*g1 + sin(θ)*g2    (circular rotation!)
+  R*g2*R̃ = -sin(θ)*g1 + cos(θ)*g2
+  R*g0*R̃ = g0   (time unchanged)
+  R*g3*R̃ = g3   (axis unchanged)
+
+Compare with the Lorentz boost:
+  R*g0*R̃ = cosh(φ)*g0 - sinh(φ)*g1  (hyperbolic rotation)
+
+Both are rotor sandwiches. The geometry (circular vs hyperbolic) comes from
+the signature of the bivector plane (negative vs positive square). -/
+
+/-- A spatial rotation rotor in the g12 plane: R = c + s*σ₁₂.
+    For a physical rotation: c = cos(θ/2), s = sin(θ/2). -/
+def rotationRotor12 (c s : ℝ) : STA :=
+  ⟨c, 0, 0, 0, 0, 0, 0, 0, s, 0, 0, 0, 0, 0, 0, 0⟩
+
+/-- The reverse of a rotation rotor flips the bivector sign. -/
+theorem rev_rotationRotor12 (c s : ℝ) :
+    rev (rotationRotor12 c s) = rotationRotor12 c (-s) := by
+  ext <;> simp [rev, rotationRotor12]
+
+/-- Rotation of g1: R*g1*R̃ = (c²-s²)*g1 + 2cs*g2.
+    With c=cos(θ/2), s=sin(θ/2): g1' = cos(θ)*g1 + sin(θ)*g2. -/
+theorem rotation12_gamma1 (c s : ℝ) :
+    sandwich (rotationRotor12 c s) gamma1 =
+    ⟨0, 0, c^2 - s^2, 2*c*s, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩ := by
+  simp [sandwich, rev_rotationRotor12]
+  ext <;> simp [rotationRotor12, gamma1, mul] <;> ring
+
+/-- Rotation of g2: R*g2*R̃ = -2cs*g1 + (c²-s²)*g2.
+    With c=cos(θ/2), s=sin(θ/2): g2' = -sin(θ)*g1 + cos(θ)*g2. -/
+theorem rotation12_gamma2 (c s : ℝ) :
+    sandwich (rotationRotor12 c s) gamma2 =
+    ⟨0, 0, -2*c*s, c^2 - s^2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩ := by
+  simp [sandwich, rev_rotationRotor12]
+  ext <;> simp [rotationRotor12, gamma2, mul] <;> ring
+
+/-- Rotation leaves g0 (time) unchanged. -/
+theorem rotation12_gamma0 (c s : ℝ) (hn : c^2 + s^2 = 1) :
+    sandwich (rotationRotor12 c s) gamma0 = gamma0 := by
+  simp [sandwich, rev_rotationRotor12]
+  ext <;> simp [rotationRotor12, gamma0, mul] <;> nlinarith
+
+/-- Rotation leaves g3 (axis of rotation) unchanged. -/
+theorem rotation12_gamma3 (c s : ℝ) (hn : c^2 + s^2 = 1) :
+    sandwich (rotationRotor12 c s) gamma3 = gamma3 := by
+  simp [sandwich, rev_rotationRotor12]
+  ext <;> simp [rotationRotor12, gamma3, mul] <;> nlinarith
+
+/-- Rotation normalization: R*R̃ = (c²+s²)*1.
+    For proper rotations, c²+s²=1 (vs c²-s²=1 for boosts). -/
+theorem rotation12_norm (c s : ℝ) :
+    rotationRotor12 c s * rev (rotationRotor12 c s) =
+    ⟨c^2 + s^2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩ := by
+  simp [rev_rotationRotor12]
+  ext <;> simp [rotationRotor12, mul] <;> ring
+
+/-! ## Part 10: The Lorentz Lie Algebra
+
+The 6 bivectors {σ₀₁, σ₀₂, σ₀₃, σ₁₂, σ₁₃, σ₂₃} generate the Lorentz group.
+Their commutator algebra [A, B] = A*B - B*A is so(1,3).
+
+Structure:
+  [boost, boost] = -2 * rotation     (two boosts = a rotation!)
+  [rotation, rotation] = ±2 * rotation  (rotations close under commutator)
+  [boost, rotation] = ±2 * boost     (when sharing a spatial index)
+
+This is the algebraic heart of special relativity. The fact that two
+boosts compose to give a rotation is the Thomas precession — a purely
+algebraic consequence of the Cl(1,3) structure. -/
+
+/-- The commutator product: [A, B] = A*B - B*A. -/
+def commutator (x y : STA) : STA := x * y + -(y * x)
+
+/-- [σ₀₁, σ₀₂] = -2*σ₁₂.
+    Two boosts in different directions produce a rotation!
+    This is the algebraic origin of Thomas precession. -/
+theorem comm_boost_boost : commutator sigma01 sigma02 = smul (-2) sigma12 := by
+  ext <;> simp [commutator, sigma01, sigma02, sigma12, mul, add, neg, smul]; norm_num
+
+/-- [σ₁₂, σ₁₃] = 2*σ₂₃.
+    Rotations close under commutator — the so(3) subalgebra. -/
+theorem comm_rotation_rotation : commutator sigma12 sigma13 = smul 2 sigma23 := by
+  ext <;> simp [commutator, sigma12, sigma13, sigma23, mul, add, neg, smul]; norm_num
+
+/-- [σ₀₁, σ₁₂] = -2*σ₀₂.
+    A boost and a rotation (sharing index 1) produce another boost. -/
+theorem comm_boost_rotation : commutator sigma01 sigma12 = smul (-2) sigma02 := by
+  ext <;> simp [commutator, sigma01, sigma12, sigma02, mul, add, neg, smul]; norm_num
+
+/-- [σ₀₁, σ₂₃] = 0.
+    A boost and a rotation in orthogonal planes commute. -/
+theorem comm_orthogonal : commutator sigma01 sigma23 = (0 : STA) := by
+  ext <;> simp [commutator, sigma01, sigma23, mul, add, neg, zero]
+
 end STA
 
 /-!
@@ -437,21 +801,39 @@ end STA
                      Dollard's versor algebra, forced by his axioms.
 
   Cl(1,1)         -- 4 elements, non-commutative, wave decomposition
-                     The algebra Dollard was reaching for.
-                     Idempotent projectors P+, P- decompose forward/backward waves.
+                     Idempotent projectors. LORENTZ BOOSTS as rotors.
 
   Cl(3,0)         -- 8 elements, Pauli algebra, 3D space
                      EM field as F = E + I*B (vector + bivector).
 
   Cl(1,3)         -- 16 elements, Spacetime Algebra, THIS FILE
-                     Maxwell's four equations become ONE: nabla * F = J.
-                     Cl(3,0) embeds as the spatial subalgebra.
+                     Full 256-term geometric product. Lorentz rotors.
+                     Maxwell's four equations → ONE: nabla * F = J.
+                     EM field TRANSFORMS under boosts: E and B MIX.
+
+### What this file proves (Parts 1-8):
+1. STA structure with 16 basis blades (Part 1-2)
+2. Full 256-term geometric product from Clifford axioms (Part 1)
+3. Basis vector products and anticommutativity (Part 3)
+4. g0²=+1, gi²=-1, I²=-1, g01²=+1, g12²=-1 (Part 7)
+5. EM field as bivector, E+B decomposition (Part 4)
+6. Maxwell's equation structure: F is bivector, J is vector (Part 5)
+7. Cl(3,0) embeds as spatial subalgebra (Part 6)
+8. Reversion for all 16 grades (Part 8)
+9. Lorentz boost rotors R = c + s*g01 (Part 8)
+10. R*g0*R̃ = cosh(φ)*g0 - sinh(φ)*g1 (time dilation)
+11. R*g1*R̃ = -sinh(φ)*g0 + cosh(φ)*g1 (length contraction)
+12. R*g2*R̃ = g2, R*g3*R̃ = g3 (transverse invariance)
+13. E∥ invariant under boost, B∥ invariant under boost
+14. E⊥ and B⊥ MIX under boosts (special relativity!)
 
 ### The key message:
 
 Maxwell's four equations are ONE equation in Cl(1,3).
+Lorentz transformations are rotor sandwiches: F' = R*F*R̃.
+E and B are not separate fields — they are one bivector F
+that observers decompose differently based on their motion.
 The hierarchy from Z_4 to Cl(1,3) traces the path from Dollard's
 intuition to the precise mathematical framework where that structure
-is manifest. Dollard's instinct was correct; his execution (Z_4) was
-too restrictive. The correct algebra was always the Clifford algebra.
+is manifest.
 -/

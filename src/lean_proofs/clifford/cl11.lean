@@ -346,6 +346,138 @@ theorem projection_complete (a b : ℝ) :
   rw [forward_projection, backward_projection]
   ext <;> simp [add] <;> ring
 
+/-! ## Part 8: Lorentz Boost Rotors
+
+The crown jewel of Cl(1,1): Lorentz transformations as rotor sandwiches.
+
+A rotor R = cosh(φ/2) + sinh(φ/2)*e12 acts on vectors by the sandwich product:
+  v' = R * v * R̃
+
+where R̃ is the REVERSE (flip sign of bivector component).
+
+This implements hyperbolic rotations (Lorentz boosts):
+  R * e1 * R̃ = cosh(φ)*e1 - sinh(φ)*e2
+  R * e2 * R̃ = -sinh(φ)*e1 + cosh(φ)*e2
+
+The boost subalgebra {1, e1, e2, e12} of Cl(1,3) spacetime algebra
+is isomorphic to this Cl(1,1), with e1 ↔ γ₀ (timelike) and e2 ↔ γ₁ (spacelike).
+
+Thus: Lorentz boosts ARE rotors in Cl(1,1). No matrices needed.
+
+References:
+  - Hestenes, "Space-Time Algebra" (1966), Ch. 1
+  - Doran & Lasenby, "Geometric Algebra for Physicists" (2003), §5.2
+-/
+
+/-- Reversion (grade involution): reverses the order of basis vectors in each blade.
+    Scalars and vectors are unchanged; bivectors flip sign.
+    For a = s + v1*e1 + v2*e2 + b12*e12:  ã = s + v1*e1 + v2*e2 - b12*e12 -/
+def rev (x : Cl11) : Cl11 :=
+  { s := x.s, v1 := x.v1, v2 := x.v2, b12 := -x.b12 }
+
+/-- Reversion is an involution: rev(rev(x)) = x. -/
+theorem rev_rev (x : Cl11) : rev (rev x) = x := by
+  ext <;> simp [rev]
+
+/-- Reversion of the identity is the identity. -/
+theorem rev_one : rev (1 : Cl11) = (1 : Cl11) := by
+  ext <;> simp [rev, one]
+
+/-- Reversion of e1 is e1 (vectors are grade 1, unchanged). -/
+theorem rev_e1 : rev e1 = e1 := by
+  ext <;> simp [rev, e1]
+
+/-- Reversion of e2 is e2. -/
+theorem rev_e2 : rev e2 = e2 := by
+  ext <;> simp [rev, e2]
+
+/-- Reversion of e12 is -e12 (bivectors flip sign). -/
+theorem rev_e12 : rev e12 = -e12 := by
+  ext <;> simp [rev, e12, neg]
+
+/-- The sandwich product: R * x * R̃. This is how rotors act on multivectors. -/
+def sandwich (R x : Cl11) : Cl11 := R * x * (rev R)
+
+/-! ### Boost Rotor: R = c + s*e12
+
+For a rapidity parameter φ, the boost rotor is:
+  R = cosh(φ/2) + sinh(φ/2)*e12 = (c, 0, 0, s)
+
+We work with abstract c, s and prove the ALGEBRAIC identities.
+The connection to cosh/sinh is a separate step. -/
+
+/-- A boost rotor with parameters c (scalar) and s (bivector coefficient). -/
+def boostRotor (c s : ℝ) : Cl11 := ⟨c, 0, 0, s⟩
+
+/-- The reverse of a boost rotor: flip the bivector sign. -/
+theorem rev_boostRotor (c s : ℝ) : rev (boostRotor c s) = boostRotor c (-s) := by
+  ext <;> simp [rev, boostRotor]
+
+/-- R * R̃ = (c² - s²) * 1.
+    For a proper Lorentz boost, c = cosh(φ/2), s = sinh(φ/2),
+    so c² - s² = cosh²(φ/2) - sinh²(φ/2) = 1. -/
+theorem rotor_norm (c s : ℝ) :
+    boostRotor c s * rev (boostRotor c s) = ofReal (c ^ 2 - s ^ 2) := by
+  ext <;> simp [boostRotor, rev, mul, ofReal] <;> ring
+
+/-- Boost of e1: R * e1 * R̃ = (c²+s²)*e1 + (-2cs)*e2.
+    When c = cosh(φ/2), s = sinh(φ/2):
+      c²+s² = cosh(φ),  2cs = sinh(φ)
+    So this is the Lorentz boost: t' = cosh(φ)*t - sinh(φ)*x. -/
+theorem boost_e1 (c s : ℝ) :
+    sandwich (boostRotor c s) e1 =
+    ⟨0, c ^ 2 + s ^ 2, -2 * c * s, 0⟩ := by
+  ext <;> simp [sandwich, boostRotor, e1, rev, mul] <;> ring
+
+/-- Boost of e2: R * e2 * R̃ = (-2cs)*e1 + (c²+s²)*e2.
+    The spacelike vector transforms as: x' = -sinh(φ)*t + cosh(φ)*x. -/
+theorem boost_e2 (c s : ℝ) :
+    sandwich (boostRotor c s) e2 =
+    ⟨0, -2 * c * s, c ^ 2 + s ^ 2, 0⟩ := by
+  ext <;> simp [sandwich, boostRotor, e2, rev, mul] <;> ring
+
+/-- The boost preserves e1² - e2² (the Minkowski metric).
+    If v = a*e1 + b*e2, then v*v = a²-b² (scalar part).
+    After boosting, v' = v'_1*e1 + v'_2*e2 with v'*v' = v'_1² - v'_2².
+    We prove: (c²+s²)² - (2cs)² = (c²-s²)² * (a²-b²),
+    which equals a²-b² when the rotor is normalized (c²-s²=1). -/
+theorem boost_preserves_interval (c s a b : ℝ) :
+    let v' := sandwich (boostRotor c s) ⟨0, a, b, 0⟩
+    v'.v1 ^ 2 - v'.v2 ^ 2 = (c ^ 2 - s ^ 2) ^ 2 * (a ^ 2 - b ^ 2) := by
+  simp [sandwich, boostRotor, rev, mul]
+  ring
+
+/-- Composition of boosts: two boosts compose as rotor multiplication.
+    R₁ * R₂ is another boost rotor (closure). -/
+theorem boost_compose (c₁ s₁ c₂ s₂ : ℝ) :
+    boostRotor c₁ s₁ * boostRotor c₂ s₂ =
+    boostRotor (c₁ * c₂ + s₁ * s₂) (c₁ * s₂ + s₁ * c₂) := by
+  ext <;> simp [boostRotor, mul]
+
+/-! Boost composition matches the hyperbolic addition formula.
+    If c₁ = cosh(α/2), s₁ = sinh(α/2), c₂ = cosh(β/2), s₂ = sinh(β/2),
+    then the composed rotor has:
+      c' = c₁c₂ + s₁s₂ = cosh((α+β)/2)
+      s' = c₁s₂ + s₁c₂ = sinh((α+β)/2)
+    This is the hyperbolic angle addition formula:
+      cosh(A+B) = cosh(A)cosh(B) + sinh(A)sinh(B)
+      sinh(A+B) = sinh(A)cosh(B) + cosh(A)sinh(B)
+    The algebraic structure of boost_compose IS the addition formula. -/
+
+/-- The inverse of a normalized boost rotor is its reverse.
+    If c²-s² = 1, then R̃ * R = 1. -/
+theorem rotor_inverse (c s : ℝ) (hn : c ^ 2 - s ^ 2 = 1) :
+    rev (boostRotor c s) * boostRotor c s = (1 : Cl11) := by
+  rw [rev_boostRotor]
+  rw [boost_compose]
+  ext <;> simp [boostRotor, one] <;> nlinarith
+
+/-- A normalized rotor has unit "norm": R * R̃ = 1. -/
+theorem rotor_unit (c s : ℝ) (hn : c ^ 2 - s ^ 2 = 1) :
+    boostRotor c s * rev (boostRotor c s) = (1 : Cl11) := by
+  rw [rotor_norm]
+  ext <;> simp [ofReal, one]; all_goals linarith
+
 end Cl11
 
 /-!
@@ -360,17 +492,24 @@ end Cl11
 6. Telegraph equation lives in the complex subalgebra {1, e2}
 7. The versor form STILL fails (grade mismatch)
 8. Forward/backward decomposition IS the genuine contribution
+9. LORENTZ BOOSTS are rotor sandwiches: R*v*R̃ (Part 8)
+10. Boost of e1 gives cosh(φ)*e1 - sinh(φ)*e2 (time dilation)
+11. Boost of e2 gives -sinh(φ)*e1 + cosh(φ)*e2 (length contraction)
+12. Minkowski interval a²-b² is PRESERVED by boosts
+13. Boost composition = hyperbolic angle addition (velocity addition)
+14. Normalized rotors (c²-s²=1) have R̃ as inverse
 
 ### The algebraic hierarchy:
   Z_4           = Dollard's versor algebra (trivial, forced by axioms)
   Cl(1,0) ~ R+R = split-complex numbers (2D, zero divisors)
   Cl(0,1) ~ C   = complex numbers (2D, standard)
-  Cl(1,1) ~ M2R = 2x2 real matrices (4D, THIS FILE)
+  Cl(1,1) ~ M2R = 2x2 real matrices (4D, THIS FILE ← LORENTZ BOOSTS HERE)
   Cl(3,0) ~ M2C = Pauli algebra (8D, 3D rotations)
-  Cl(3,1) ~ M4R = spacetime algebra (16D, Maxwell + Dirac)
+  Cl(1,3) ~ M4R = spacetime algebra (16D, Maxwell + Dirac)
 
 ### Next step:
-  Extend to Cl(3,1) where Maxwell's four equations become one: nabla*F = J.
-  This requires 16-dimensional algebra but the PATTERN is the same:
-  define the basis, verify the multiplication table, prove the theorems.
+  Embed these Lorentz rotors into Cl(1,3) spacetime algebra.
+  The boost subalgebra {1, γ₀, γ₁, γ₀₁} of Cl(1,3) IS Cl(1,1).
+  Then: rotors in the full 6D bivector space give ALL Lorentz transformations
+  (boosts + rotations), and Maxwell's equations become ∇F = J.
 -/

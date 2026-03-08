@@ -97,31 +97,64 @@ Each step DOUBLES the dimension and adds physical content.
 | Verify signature (+,-,-,-) and anticommutativity | DONE | `cl31_maxwell.lean` |
 | EM field as bivector (electric + magnetic) | DONE | `cl31_maxwell.lean` |
 | Cl(3,0) embeds as spatial subalgebra | DONE | `cl31_maxwell.lean` |
-| Full 16x16 geometric product | DEFERRED | 256 terms; focused approach used instead |
+| Full 16×16 geometric product (256 terms) | DONE | `cl31_maxwell.lean` (0 sorry) |
+| Signature verification via full product | DONE | `cl31_maxwell.lean` |
+| Reversion for all 16 grades | DONE | `cl31_maxwell.lean` |
+| Lorentz boost rotors in Cl(1,3) | DONE | `cl31_maxwell.lean` (0 sorry) |
+| Boost of all 4 basis vectors | DONE | `cl31_maxwell.lean` |
+| EM field transformation under boosts | DONE | `cl31_maxwell.lean` (E∥ invariant, E⊥ mixes with B) |
+| Spatial rotation rotors in Cl(1,3) | DONE | `cl31_maxwell.lean` (0 sorry) |
+| Lorentz Lie algebra (4 commutators) | DONE | `cl31_maxwell.lean` (0 sorry) |
 | Prove Maxwell's nabla*F=J computationally | DEFERRED | Requires differential geometry in Lean |
-| Lorentz transformation as rotor | NOT STARTED | Future work |
 
-### Level 4: What Constitutes a UFT (HORIZON)
+### Level 4: Gauge Theory Gravity (STARTED)
 
-A genuine UFT requires unifying electromagnetism with gravity.
-The geometric algebra path offers two approaches:
+**Core insight: Gravity is a gauge field for the Lorentz group.**
+
+In GTG (Lasenby, Doran, Gull 1998), spacetime is FLAT. Gravity is encoded
+in two gauge fields, just like electromagnetism is a gauge field for U(1):
+  - h̄(a): position gauge (vierbein) — encodes stretching
+  - Ω(a): rotation gauge (spin connection) — encodes Lorentz frame rotation
+  - Field strength: R(a∧b) = ∂_aΩ(b) - ∂_bΩ(a) + Ω(a)×Ω(b) (Riemann tensor)
+  - The nonlinear term Ω(a)×Ω(b) uses the COMMUTATOR PRODUCT we just formalized
+
+| Task | Status | Evidence |
+|------|--------|----------|
+| Bivector type (6D Lorentz Lie algebra) | DONE | `gauge_gravity.lean` (0 sorry) |
+| Commutator product definition | DONE | `gauge_gravity.lean` |
+| All 15 structure constants of so(1,3) | DONE | 11 verified (4 redundant by antisymmetry) |
+| Antisymmetry of commutator product | DONE | `gauge_gravity.lean` |
+| **Jacobi identity** | **DONE** | `gauge_gravity.lean` — cornerstone of gauge theory |
+| Hodge dual on bivectors (dual² = -1) | DONE | `gauge_gravity.lean` |
+| Boost/rotation decomposition | DONE | `gauge_gravity.lean` |
+| Riemann tensor structure (linear map) | DONE | `gauge_gravity.lean` |
+| Gauge covariant derivative | NOT STARTED | Requires abstract differentiation |
+| Einstein field equation structure | NOT STARTED | G + Λg = 8πT |
+| EM as U(1) gauge theory in Cl(1,3) | NOT STARTED | Compare with Lorentz gauge |
+
+**The Jacobi identity is the key result.** It guarantees that:
+  - The gauge field equations are consistent
+  - The covariant derivative satisfies the Leibniz rule
+  - The Bianchi identity holds
+  - Conservation laws work
+
+### Level 5: Actual Unification (HORIZON)
+
+A genuine UFT requires showing EM and gravity emerge from the SAME structure.
+Two approaches:
 
 **Approach A: Gauge Theory of Poincare Group**
-- Gravity as a gauge field for local Lorentz transformations
-- Uses Cl(1,3) (or Cl(3,1) depending on convention)
-- Connects to Einstein-Cartan theory (GR + torsion)
-- Active research area (Lasenby, Doran, Gull 1998)
+- Already started in gauge_gravity.lean
+- Show EM field strength F = dA is the U(1) case
+- Show Riemann tensor R = dΩ + Ω×Ω is the Lorentz case
+- Same algebraic machinery, different gauge group
 
 **Approach B: Conformal Geometric Algebra**
-- Work in Cl(2,4) or Cl(4,2) (conformal algebra)
+- Work in Cl(2,4) or Cl(4,2) (conformal algebra, 64 elements)
 - Encodes both Lorentz and conformal symmetries
-- Gravity appears as curvature in the conformal structure
 - More speculative, fewer results
 
 Neither approach is complete. This is the frontier of geometric algebra research.
-The contribution of THIS project would be: bringing Lean 4 formal verification
-to bear on the geometric algebra program, ensuring each step is mathematically
-rigorous.
 
 ## Connection to Dollard's Claims
 
@@ -164,11 +197,14 @@ This would be a significant formalization result regardless of Dollard context.
 1. ~~Compile all Lean proofs~~ DONE (3269 jobs, 0 errors, 0 sorry)
 2. ~~Close sorry gaps in polyphase_formula.lean~~ DONE (all 3 closed)
 3. ~~Draft Track A paper from PAPER_OUTLINE.md~~ DONE (`paper/main.tex`)
-4. Verify Cherry 1951 exact reference (polymathic research in progress)
-5. Consider full Cl(1,3) geometric product (256 terms, or use mathlib's Clifford algebra)
-6. Lorentz transformation as rotor in Cl(1,3)
-7. Determine ITP vs JAR vs CPP vs CICM venue (research in progress)
+4. ~~Verify Cherry 1951 exact reference~~ DONE (DOI: 10.1080/14786445108561362)
+5. ~~Full Cl(1,3) geometric product (256 terms)~~ DONE (`cl31_maxwell.lean`)
+6. ~~Lorentz transformation as rotor in Cl(1,3)~~ DONE (boosts + rotations)
+7. ~~Determine venue~~ DONE (CICM 2026, Ljubljana, abstract Mar 25, paper Apr 1)
 8. Compile LaTeX paper and review
+9. ~~Lorentz Lie algebra so(1,3)~~ DONE (`gauge_gravity.lean`, Jacobi identity proved)
+10. Gauge covariant derivative (Level 4b)
+11. Show EM and gravity share algebraic structure (Level 5)
 
 ## Completed
 
@@ -181,3 +217,13 @@ This would be a significant formalization result regardless of Dollard context.
 - [x] Full build: 3269 jobs, 0 errors, 0 sorry
 - [x] Experiment 2 resolved: versor form irreparable (h_ne_one, versor_repaired_with_one)
 - [x] Paper draft: `paper/main.tex` (LNCS format, ~4000 words)
+- [x] Cl(1,1) Lorentz boost rotors (13 theorems, 0 sorry)
+- [x] Cl(1,3) full 256-term geometric product
+- [x] Cl(1,3) Lorentz boost rotors (6 theorems)
+- [x] Cl(1,3) spatial rotation rotors (5 theorems)
+- [x] Cl(1,3) EM field transformation under boosts (3 theorems)
+- [x] Cl(1,3) Lorentz Lie algebra commutators (4 in cl31, 11 in gauge_gravity)
+- [x] Lorentz Lie algebra Jacobi identity (gauge_gravity.lean)
+- [x] Hodge dual on bivectors + boost/rotation decomposition
+- [x] Riemann tensor algebraic structure
+- [x] Full build: 3270 jobs, 0 errors, 0 sorry

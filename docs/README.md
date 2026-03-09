@@ -1,52 +1,26 @@
-# Dollard Formal Verification -- Where Truth Lives
+# Documentation Index
 
-Formal verification of Eric Dollard's versor algebra using Lean 4 theorem prover.
-
-## What This Project Is
-
-A methodology study: can Lean 4 rigorously evaluate mathematical claims from
-alternative/fringe sources? We apply it to Dollard's versor algebra and telegraph
-equation framework.
-
-## What This Project Found
-
-| Claim | Verdict | Evidence |
-|-------|---------|----------|
-| h,j,k are 4th roots of unity | VERIFIED (trivial) | `src/lean_proofs/foundations/basic_operators.lean` |
-| Telegraph expansion (R+jX)(G+jB) | VERIFIED (standard) | `src/lean_proofs/telegraph/telegraph_equation.lean` |
-| Four-factor independence | VERIFIED (standard) | `src/lean_proofs/telegraph/telegraph_equation.lean` |
-| Versor form equivalence | DISPROVED | `src/lean_proofs/telegraph/telegraph_equation.lean:85-92` |
-| Polyphase/Fortescue formula | NOT YET VERIFIED | Experiment 0 (blocking) |
-| Physics claims (aether, over-unity) | UNFALSIFIABLE | No formal backing |
-
-## What This Project Is Not
-
-- Not a validation of Dollard's Unified Field Theory
-- Not evidence for aether, over-unity, or E=mc2 replacement
-- Not an academic paper (yet) -- it's a research scaffold
-
-## Quick Start
-
-```bash
-# Requires Lean 4 + mathlib
-lake build
-lake env lean src/lean_proofs/foundations/basic_operators.lean
-```
-
-## Navigation
+## Quick Navigation
 
 | Question | File |
 |----------|------|
-| Project rules and north star | `../CLAUDE.md` |
+| What is this project? | `../README.md` |
+| Project rules and methodology | `../CLAUDE.md` |
 | Architecture overview | `ARCHITECTURE.md` |
-| How to contribute | `CONTRIBUTING.md` |
 | Full audit report | `audit/AUDIT_FINDINGS.md` |
 | Claim-by-claim triage | `../analysis/CLAIM_TRIAGE.md` |
-| Why we reframed | `decisions/ADR-001-honest-reframing.md` |
+| Why we reframed the project | `decisions/ADR-001-honest-reframing.md` |
+| Why construct SO(14) candidate | `decisions/ADR-002-candidate-theory-construction.md` |
 | Experiment registry | `experiments/EXPERIMENT_REGISTRY.md` |
+| What we proved (epistemological map) | `WHAT_WE_PROVED.md` |
+| Paper 1 outline | `PAPER_OUTLINE.md` |
+| Mass gap council synthesis | `MASS_GAP_COUNCIL_SYNTHESIS.md` |
+| EE-Yang-Mills spectral analysis | `EE_YANG_MILLS_SPECTRAL_ANALYSIS.md` |
+| SO(14) literature survey | `../research/so14-gut-literature.md` |
 
 ## Research Tracks
 
-- **Track A**: Lean 4 methodology for alternative math verification (primary, novel)
-- **Track B**: Mathematical content analysis (where Dollard = standard math, where he errs)
+- **Track A**: Lean 4 methodology for alternative math verification (Paper 1 — submitted to CICM 2026)
+- **Track B**: Cross-domain mathematical identities (Paper 2 — in preparation for AACA)
 - **Track C**: Physics claims (documented, not centered, requires extraordinary evidence)
+- **Track D**: SO(14) candidate theory construction (gated, kill-condition-first)

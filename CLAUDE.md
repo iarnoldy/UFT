@@ -1,7 +1,8 @@
 # Dollard Formal Verification
 
-Formal verification of Eric Dollard's versor algebra using Lean 4.
-Separates verified mathematics from unsubstantiated claims.
+Machine-verified algebraic scaffold from Dollard's versor algebra through Clifford algebras
+to SO(14), built in Lean 4 with mathlib. 35 proof files, ~878 theorems, zero sorry gaps.
+Paper 1 submitted to CICM 2026. Paper 2 (cross-domain identities) in preparation for AACA.
 
 ## Research Tracks
 
@@ -70,8 +71,8 @@ lake env lean src/lean_proofs/foundations/basic_operators.lean  # single file
 
 ## Upstream (Evidence Source)
 
-- **N-Phase Patent Ready** (`C:\Users\ianar\Documents\CODING\March_2026\N_Phase_Patent_Ready`)
-- READ-ONLY. 1194 passing tests (confirmed live 2026-03-07). Provisional patent 63/996,504.
+- **N-Phase Patent Ready** (separate repository, read-only reference)
+- 1194 passing tests (confirmed live 2026-03-07). Provisional patent 63/996,504.
 - Provides computational validation (tests) and empirical validation (real datasets)
 - Evidence catalog: `source_materials/N_PHASE_EVIDENCE.md`
 
@@ -97,7 +98,7 @@ lake env lean src/lean_proofs/foundations/basic_operators.lean  # single file
 | SO(14) literature survey | `research/so14-gut-literature.md` |
 | SO(14) matter decomposition | `src/experiments/so14_matter_decomposition.py` |
 | RG coupling unification | `src/experiments/so14_rg_unification.py` |
-| Proton decay predictions | `src/experiments/so14_proton_decay.py` |
-| SO(14) Lagrangian | `docs/so14_lagrangian.md` |
-| Selection principle (why SO(14)?) | `docs/so14_selection_principle.md` |
-| Candidate theory paper | `paper/so14_candidate_theory.tex` |
+| Paper 1 (CICM 2026, submitted) | `paper/main.tex` |
+| Paper 2 (AACA, in prep) | `paper/paper2.tex` |
+| Epistemological map | `docs/WHAT_WE_PROVED.md` |
+| Mass gap council synthesis | `docs/MASS_GAP_COUNCIL_SYNTHESIS.md` |

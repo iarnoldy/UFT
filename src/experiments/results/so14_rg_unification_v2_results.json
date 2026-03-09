@@ -1,0 +1,71 @@
+{
+  "experiment": "Experiment 4 Phase 1 v2: SO(14) Multi-Scale RG Unification",
+  "timestamp": "2026-03-09T03:47:04.282065",
+  "breaking_chain": "SO(14) -> SO(10)xSO(4) -> SU(5)xU(1) -> SM -> U(1)_EM",
+  "higgs_reps": "104 (sym.traceless) + 45 (SO(10) adj) + 24 (SU(5) adj) + 5 (fund)",
+  "matter_content": "3 x 64 semi-spinor fermions",
+  "inputs": {
+    "M_Z_GeV": 91.1876,
+    "a1_MZ": 59.0,
+    "a2_MZ": 29.6,
+    "a3_MZ": 8.5
+  },
+  "beta_functions": {
+    "SM": {
+      "b1": 2.46,
+      "b2": -3.1666666666666665,
+      "b3": -7.0
+    },
+    "SU5": {
+      "b_SU5": -13.333333333333332
+    },
+    "SO10": {
+      "b_SO10": -38.0
+    },
+    "SO4": {
+      "b_SU2a": 9.666666666666668
+    },
+    "SO14": {
+      "b_SO14": -69.33333333333333
+    }
+  },
+  "desert_results": {
+    "log_M_GUT": 16.97993981997021,
+    "a_GUT_inv": 47.030434782608694,
+    "miss_pct": 3.34066746787463
+  },
+  "proton_decay": {
+    "Desert": {
+      "M_X": 9.548602622113147e+16,
+      "log_MX": 16.97993981997021,
+      "a_GUT": 0.021262827031524455,
+      "a_GUT_inv": 47.030434782608694,
+      "tau_years": 5.274041507361732e+39,
+      "tau_years_AR": 8.438466411778772e+38,
+      "safe": "True",
+      "safe_AR": "True"
+    },
+    "Multi-scale C": {
+      "M_X": 9.548602622113157e+16,
+      "log_MX": 16.97993981997021,
+      "a_GUT": 0.021262827031524455,
+      "a_GUT_inv": 47.030434782608694,
+      "tau_years": 5.274041507361752e+39,
+      "tau_years_AR": 8.438466411778803e+38,
+      "safe": "True",
+      "safe_AR": "True"
+    }
+  },
+  "verdict": {
+    "kc5": "GREEN \u2014 at least one scenario survives",
+    "kc6": "GREEN \u2014 miss < 5%",
+    "overall": "PASS",
+    "desert_miss": "3.34066746787463"
+  },
+  "multi_scale_results": {
+    "log_M4": 16.97993981997021,
+    "log_M3": 16.97993981997021,
+    "log_M1": 19.49993981997021,
+    "quality_pct": 1.931611048982761
+  }
+}

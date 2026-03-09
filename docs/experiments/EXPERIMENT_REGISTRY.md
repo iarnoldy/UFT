@@ -167,3 +167,73 @@ physics question beyond dimensional analysis.
 
 **Dependencies**: None
 **Downstream impact**: Affects Track C physics claims about energy
+
+---
+
+## Experiment 4: SO(14) Candidate Theory Construction
+
+**Status**: IN PROGRESS (Phase 0)
+**Track**: D (Candidate Theory Construction)
+**Priority**: ACTIVE
+**Started**: 2026-03-08
+
+**Hypothesis**: SO(14) is a viable candidate for a unified gauge group that:
+1. Contains SO(10) (Grand Unified) × SO(4) (gravity sector) as subgroups
+2. Achieves coupling constant unification at a single energy scale
+3. Predicts proton lifetime above the Super-Kamiokande bound (τ_p > 1.6 × 10^34 years)
+4. Admits a symmetry breaking chain to the Standard Model
+
+**Method**: Gate-controlled, kill-condition-first construction:
+- Phase 0: Literature survey + matter content decomposition
+- Phase 1: RG coupling unification test (cheapest falsification)
+- Phase 2: Lagrangian + proton decay + selection principle
+- Phase 3: Synthesis and documentation
+
+**Falsification criteria (Kill Conditions)**:
+
+| ID | Condition | Phase | Cost | Severity |
+|----|-----------|-------|------|----------|
+| KC-0 | SO(14) already ruled out in literature | 0 | LOW | FATAL |
+| KC-1 | Couplings don't unify under SO(14) matter content (>5% miss) | 1 | MEDIUM | FATAL |
+| KC-2 | Proton lifetime < Super-K bound (1.6 × 10^34 years) | 2 | MEDIUM | FATAL |
+| KC-3 | Signature question (SO(14,0) vs SO(11,3)) has no resolution | 0-2 | LOW-MED | SERIOUS |
+| KC-4 | Three-generation problem has no plausible resolution | 2 | LOW | SERIOUS |
+| KC-5 | No Higgs achieves required breaking pattern | 2 | MEDIUM | FATAL |
+| KC-6 | Gravity sector requires separate action (not Yang-Mills) | 2 | LOW | SERIOUS |
+
+**Rule**: If a FATAL kill condition fires, the experiment is OVER. Document as negative result and stop.
+**Rule**: SERIOUS conditions require explicit acknowledgment and proposed resolution path.
+
+**Inputs (from scaffold)**:
+- SO(14) dimension: 91 = C(14,2) [MV: so14_dimension in so14_unification.lean]
+- Decomposition: 91 = 45 + 6 + 40 [MV: unification_decomposition in so14_unification.lean]
+- SM beta-coefficients: b_1=41/10, b_2=-19/6, b_3=-7 [MV: rg_running.lean]
+- Low-energy couplings: α_1^-1(M_Z)=59.0, α_2^-1(M_Z)=29.6, α_3^-1(M_Z)=8.5 [SP]
+
+**Claim tagging**:
+- [MV] Machine-verified (Lean 4 proof compiles)
+- [CO] Computed (Python/SymPy, reproducible)
+- [CP] Candidate physics (proposed, not verified)
+- [SP] Standard physics (textbook result)
+- [OP] Open problem (acknowledged gap)
+
+**Gate decisions**: Made by Ian at each phase boundary.
+
+**Phase 0 deliverables**:
+- `research/so14-gut-literature.md` — literature survey (polymathic-researcher)
+- `src/experiments/so14_matter_decomposition.py` — spinor branching rules (clifford-engineer)
+
+**Phase 1 deliverables** (if Phase 0 passes):
+- `src/experiments/so14_rg_unification.py` — RG evolution computation
+- `src/lean_proofs/dynamics/rg_running_so14.lean` — beta-coefficient verification (if unification found)
+
+**Phase 2 deliverables** (if Phase 1 passes):
+- `docs/so14_lagrangian.md` — explicit Lagrangian
+- `src/experiments/so14_proton_decay.py` — proton lifetime computation
+- `docs/so14_selection_principle.md` — why SO(14)?
+
+**Phase 3 deliverables** (if Phase 2 passes):
+- `paper/so14_candidate_theory.tex` — candidate theory paper
+
+**Dependencies**: Experiments 0-3 (all complete), Lean scaffold (35 files, 878 theorems)
+**Downstream impact**: Defines Track D research program

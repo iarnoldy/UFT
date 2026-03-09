@@ -8,6 +8,11 @@ Separates verified mathematics from unsubstantiated claims.
 - **Track A (Primary)**: Methodology -- Lean 4 as a tool for verifying alternative/fringe math
 - **Track B**: Mathematical analysis -- where Dollard = standard math, where he errs
 - **Track C**: Physics claims -- documented, requires extraordinary evidence, not centered
+- **Track D**: Candidate Theory Construction -- SO(14) phenomenology
+  - GATE-CONTROLLED: explicit gates between phases (Ian decides go/stop)
+  - KILL-CONDITION-FIRST: cheapest falsification before expensive construction
+  - HONEST FRAMING: every claim tagged [MV], [CO], [CP], [SP], or [OP]
+  - Pre-registered as Experiment 4 in `docs/experiments/EXPERIMENT_REGISTRY.md`
 
 ## Directory Structure
 
@@ -54,6 +59,14 @@ lake env lean src/lean_proofs/foundations/basic_operators.lean  # single file
 5. **Honest error reporting.** When Lean rejects a proof, that is a finding, not a failure.
 6. **Track C claims require extraordinary evidence.** Physics claims (aether, over-unity,
    E=mc2 replacement) stay in Track C with UNFALSIFIABLE or EXTRAORDINARY tags.
+7. **Kill conditions execute.** If a pre-registered kill condition fires, the experiment
+   is OVER. Document as negative result and stop. No rationalizing.
+8. **Candidate physics is NOT verified math.** Never conflate [CP] with [MV]. The scaffold
+   proves algebraic identities; it does NOT prove that SO(14) describes nature.
+9. **Signature matters.** SO(14,0) (compact, Cl(14,0)) vs SO(11,3) (Lorentzian) must be
+   explicitly addressed in any physics construction. The Lean proofs use compact signature.
+10. **Three-generation problem.** If theory predicts N != 3 generations, this requires
+    explanation with a concrete mechanism, not hand-waving.
 
 ## Upstream (Evidence Source)
 
@@ -80,3 +93,11 @@ lake env lean src/lean_proofs/foundations/basic_operators.lean  # single file
 | Primary sources | `source_materials/` |
 | N-Phase computational evidence | `source_materials/N_PHASE_EVIDENCE.md` |
 | Original claim inventory | `analysis/MATHEMATICAL_CLAIMS_EXTRACTION.md` |
+| Why construct a candidate theory? | `docs/decisions/ADR-002-candidate-theory-construction.md` |
+| SO(14) literature survey | `research/so14-gut-literature.md` |
+| SO(14) matter decomposition | `src/experiments/so14_matter_decomposition.py` |
+| RG coupling unification | `src/experiments/so14_rg_unification.py` |
+| Proton decay predictions | `src/experiments/so14_proton_decay.py` |
+| SO(14) Lagrangian | `docs/so14_lagrangian.md` |
+| Selection principle (why SO(14)?) | `docs/so14_selection_principle.md` |
+| Candidate theory paper | `paper/so14_candidate_theory.tex` |

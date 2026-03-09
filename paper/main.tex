@@ -41,12 +41,26 @@
   numbers=left,
   numberstyle=\tiny\color{gray},
   numbersep=5pt,
+  literate=
+    {ℝ}{{$\mathbb{R}$}}1
+    {ℂ}{{$\mathbb{C}$}}1
+    {ℕ}{{$\mathbb{N}$}}1
+    {ℤ}{{$\mathbb{Z}$}}1
+    {↑}{{$\uparrow$}}1
+    {→}{{$\rightarrow$}}1
+    {←}{{$\leftarrow$}}1
+    {⟨}{{$\langle$}}1
+    {⟩}{{$\rangle$}}1
+    {∀}{{$\forall$}}1
+    {∃}{{$\exists$}}1
+    {λ}{{$\lambda$}}1,
 }
 
 \begin{document}
 
 \title{Formal Verification of Alternative Mathematical Frameworks:\\
 A Case Study Using Lean~4}
+\titlerunning{Formal Verification of Alternative Mathematical Frameworks}
 
 \author{Ian M. Arnoldy}
 \institute{Independent Researcher}
@@ -296,7 +310,7 @@ The imaginary parts match, but the real parts differ by sign. The forms are equa
 only when $RG + XB = 0$---a degenerate case where both dissipation and storage
 vanish simultaneously.
 
-\begin{lstlisting}[caption={Versor form disproof (excerpt from \texttt{telegraph\_equation.lean})}]
+\begin{lstlisting}[caption={Versor form disproof (excerpt from \texttt{telegraph\_equation.lean})},basicstyle=\ttfamily\footnotesize]
 theorem versor_form_value (R X G B : ℝ) :
     h * (↑(factor_XB X B + factor_RG R G) : ℂ) +
     j * (↑(factor_XG X G - factor_RB R B) : ℂ) =
@@ -385,7 +399,7 @@ claims from alternative mathematical frameworks:
 \centering
 \caption{Five-category taxonomy for claims from alternative frameworks}
 \label{tab:taxonomy}
-\begin{tabular}{@{}lp{5cm}p{4.5cm}@{}}
+\begin{tabular}{@{}lp{4.5cm}p{4cm}@{}}
 \toprule
 \textbf{Category} & \textbf{Definition} & \textbf{Example} \\
 \midrule
@@ -526,9 +540,10 @@ alternative frameworks.
 Our protocol is demonstrated on a single case study; generalizability to other
 alternative frameworks is conjectured but not proven. Dollard's source materials
 are self-published presentations, not peer-reviewed papers, introducing
-translation ambiguities that are inherent to the domain. We formalize algebraic
-and structural claims only; we make no claims about the physics, engineering
-utility, or broader validity of Dollard's work.
+translation ambiguities that are inherent to the domain. All Lean~4 proofs
+compile against mathlib (3,296 build jobs, zero errors, zero \texttt{sorry}
+gaps). We formalize algebraic and structural claims only; we make no claims
+about the physics, engineering utility, or broader validity of Dollard's work.
 
 % ============================================================================
 \section{Conclusion}
@@ -538,11 +553,10 @@ utility, or broader validity of Dollard's work.
 We have demonstrated that interactive theorem provers can be productively
 applied to claims from alternative mathematical frameworks. The protocol
 produces mixed results---verified, disproved, algebraically necessary,
-ambiguous, and unfalsifiable claims---that reveal genuine mathematical
-structure. The five-category taxonomy provides a systematic classification
-scheme. The Clifford algebra hierarchy shows that formal methods can
-constructively suggest the ``correct'' version of an alternative framework's
-aspirations.
+ambiguous, and unfalsifiable claims---that reveal genuine mathematical structure.
+The five-category taxonomy provides a systematic classification scheme.
+The Clifford algebra hierarchy shows that formal methods can constructively
+suggest the ``correct'' version of an alternative framework's aspirations.
 
 The value of this approach lies not in judgment but in discrimination: formal
 methods separate what is mathematically checkable from what is not, what is

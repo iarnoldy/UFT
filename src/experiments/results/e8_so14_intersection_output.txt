@@ -1,0 +1,370 @@
+================================================================================
+E8 ROOT SYSTEM: SO(14)xU(1) vs SU(3)xE6 INTERSECTION
+================================================================================
+
+VERIFICATION OF E8 ROOT SYSTEM
+--------------------------------------------------
+  All 240 roots have |alpha|^2 = 2: VERIFIED
+  Unique inner products: [np.float64(-2.0), np.float64(-1.0), np.float64(0.0), np.float64(1.0), np.float64(2.0)]
+  Inner products in {-2,-1,0,1,2}: VERIFIED
+  Angle distribution from a root:
+    <alpha, beta> = -2.0: 1 roots
+    <alpha, beta> = -1.0: 56 roots
+    <alpha, beta> = +0.0: 126 roots
+    <alpha, beta> = +1.0: 56 roots
+    <alpha, beta> = +2.0: 1 roots
+  Angle counts match E8: VERIFIED
+
+E8 -> SO(16) DECOMPOSITION
+--------------------------------------------------
+  D8 roots (SO(16) adjoint 120): 112
+  Half-spinor roots (128_s):      128
+
+SO(16) -> SO(14) x U(1) DECOMPOSITION
+--------------------------------------------------
+
+  D8 roots (SO(16) adjoint 120 = 112 roots + 8 Cartan):
+    D7 roots (SO(14) adjoint): 84
+    Mixed roots (14 x charge): 28
+    Check: 84 + 28 = 112 = 112 D8 roots: VERIFIED
+
+    q = -1.0: 14 roots
+    q = +1.0: 14 roots
+
+  Half-spinor roots (128_s of SO(16)):
+    U(1) charge q = -0.50: 64 weights
+    U(1) charge q = +0.50: 64 weights
+
+  SO(14) spinor classification at each U(1) charge:
+    q = -0.50: 0 with even minus (64_+), 64 with odd minus (64_-)
+    q = +0.50: 64 with even minus (64_+), 0 with odd minus (64_-)
+
+  RESULT: 128_s of SO(16) -> (64_+, +1/2) + (64_-, -1/2) under SO(14) x U(1)
+  where 64_+ and 64_- are the two semi-spinors of SO(14) = D7.
+
+  FULL E8 DECOMPOSITION under SO(14) x U(1):
+    E8 adjoint 248 = 8 (Cartan of D8)
+                   + 84 (D7 roots = SO(14) adjoint part)
+                   + 28 (mixed: (14, +/-1))
+                   + 64 (64_+ with q = +1/2)
+                   + 64 (64_- with q = -1/2)
+
+  As representations of SO(14) x U(1):
+    248 = (91, 0) + (1, 0) + (14, +1) + (14, -1)
+        + (64_+, +1/2) + (64_-, -1/2)
+
+  Dimension check:
+    91 + 1 + 14 + 14 + 64 + 64 = 248
+    = 248: VERIFIED
+
+E8 -> SU(3) x E6 DECOMPOSITION
+--------------------------------------------------
+
+  E8 Cartan matrix:
+  Computed Cartan matrix:
+     [2, -1, 0, 0, 0, 0, 0, 0]
+     [-1, 2, -1, 0, 0, 0, 0, 0]
+     [0, -1, 2, -1, 0, 0, 0, 0]
+     [0, 0, -1, 2, -1, 0, 0, 0]
+     [0, 0, 0, -1, 2, -1, -1, 0]
+     [0, 0, 0, 0, -1, 2, 0, 0]
+     [0, 0, 0, 0, -1, 0, 2, -1]
+     [0, 0, 0, 0, 0, 0, -1, 2]
+
+  Adjacency (nonzero off-diagonal Cartan entries):
+    alpha_1 -- alpha_2
+    alpha_2 -- alpha_3
+    alpha_3 -- alpha_4
+    alpha_4 -- alpha_5
+    alpha_5 -- alpha_6
+    alpha_5 -- alpha_7
+    alpha_7 -- alpha_8
+
+  det(Cartan) = 1.0
+  (E8 should give det = 1, D8 gives det = 4)
+
+  METHOD: Z3 grading of E8 root system
+
+    Root [1. 1. 0. 0. 0. 0. 0. 0.] -> sum = 2.00
+    Root [ 1. -1.  0.  0.  0.  0.  0.  0.] -> sum = 0.00
+    Root [-1.  1.  0.  0.  0.  0.  0.  0.] -> sum = 0.00
+    Root [-1. -1.  0.  0.  0.  0.  0.  0.] -> sum = -2.00
+    Root [1. 0. 1. 0. 0. 0. 0. 0.] -> sum = 2.00
+
+  Z3 grading by coordinate sum mod 3:
+    Grade 0: 126 roots
+    Grade 1: 57 roots
+    Grade 2: 57 roots
+
+  WARNING: Grading by coordinate-sum mod 3 gives {np.int64(2): 57, np.int64(0): 126, np.int64(1): 57}
+  Expected: {0: 78, 1: 81, 2: 81}
+
+  Trying alternative grading functionals...
+
+  Searching for Z3 grading vector...
+
+  Not found among roots. Trying Weyl vector (rho)...
+  Trying all mod-3 gradings on basis vectors...
+  FOUND: c = [0 0 0 0 0 1 1 2]
+  FOUND: c = [0 0 0 0 0 1 2 1]
+
+  Grade 0: 78 roots (E6 + SU(3) adjoint)
+  Grade 1: 81 roots ((3,27) piece)
+  Grade 2: 81 roots ((3bar,27bar) piece)
+
+  SEPARATED: SU(3) has 6 roots, E6 has 72 roots
+  SU(3) simple roots:
+    alpha = [0. 0. 0. 0. 0. 1. 1. 0.]
+    beta  = [ 0.  0.  0.  0.  0. -1.  0.  1.]
+  SU(3) roots:
+    [0. 0. 0. 0. 0. 1. 1. 0.]
+    [ 0.  0.  0.  0.  0. -1. -1.  0.]
+    [ 0.  0.  0.  0.  0.  1.  0. -1.]
+    [ 0.  0.  0.  0.  0. -1.  0.  1.]
+    [0. 0. 0. 0. 0. 0. 1. 1.]
+    [ 0.  0.  0.  0.  0.  0. -1. -1.]
+
+  E8 -> SU(3) x E6 DECOMPOSITION:
+    (1, 78): 72 E6 roots (+ 6 E6 Cartan + 2 from (8,1) Cartan = 78)
+    (8,  1): 6 SU(3) roots (+ 2 SU(3) Cartan = 8)
+    (3, 27): 81 roots -> 81 weights = 3 x 27
+    (3bar, 27bar): 81 roots -> 81 weights = 3 x 27bar
+
+================================================================================
+CROSS-ANALYSIS: SO(14) x U(1) vs SU(3) x E6
+================================================================================
+
+  CROSS-CLASSIFICATION TABLE
+  (SO(14)xU(1) label, Z3 grade) -> count
+
+  SO(14)xU(1) rep         Grade 0    Grade 1    Grade 2      Total
+  -------------------- ---------- ---------- ---------- ----------
+  14_q+1                        2         10          2         14
+  14_q-1                        2          2         10         14
+  64+_q+0.5                    16         16         32         64
+  64-_q-0.5                    16         32         16         64
+  so14_adj                     42         21         21         84
+  TOTAL                        78         81         81        240
+
+  KEY QUESTION: Where do the SO(14) spinor roots land?
+
+  64+_q+0.5:
+    Grade 0 [(1,78)+(8,1)]: 16 roots
+    Grade 1 [(3,27)]: 16 roots
+    Grade 2 [(3bar,27bar)]: 32 roots
+
+  64-_q-0.5:
+    Grade 0 [(1,78)+(8,1)]: 16 roots
+    Grade 1 [(3,27)]: 32 roots
+    Grade 2 [(3bar,27bar)]: 16 roots
+
+  ANALYSIS: How the (3,27) roots decompose under SO(14) x U(1):
+
+    14_q+1: 10 roots
+    14_q-1: 2 roots
+    64+_q+0.5: 16 roots
+    64-_q-0.5: 32 roots
+    so14_adj: 21 roots
+    Total: 81 (should be 81)
+
+  ANALYSIS: How the (3bar,27bar) roots decompose under SO(14) x U(1):
+
+    14_q+1: 2 roots
+    14_q-1: 10 roots
+    64+_q+0.5: 32 roots
+    64-_q-0.5: 16 roots
+    so14_adj: 21 roots
+    Total: 81 (should be 81)
+
+================================================================================
+INTERSECTION SUBGROUP ANALYSIS
+================================================================================
+
+  Intersection roots (SO(14) adj AND grade 0): 42
+
+  Rank of intersection subalgebra: 6
+  Number of roots: 42
+  Tentative identification: A6=SU(7)
+
+  HOW SO(14) REPRESENTATIONS DECOMPOSE UNDER H:
+
+  64_+ (charge +1/2) by Z3 grade:
+    Grade 0: 16 roots
+    Grade 1: 16 roots
+    Grade 2: 32 roots
+  64_- (charge -1/2) by Z3 grade:
+    Grade 0: 16 roots
+    Grade 1: 32 roots
+    Grade 2: 16 roots
+
+  SPINOR ROOTS IN GRADE 1 (the (3,27) piece):
+
+    64_+ roots in (3,27): 16
+    64_- roots in (3,27): 32
+    SO(14) adjoint roots in (3,27): 21
+    (14, q) mixed roots in (3,27): 12
+    Total: 81
+
+  SPINOR ROOTS IN GRADE 2 (the (3bar,27bar) piece):
+
+    64_+ roots in (3bar,27bar): 32
+    64_- roots in (3bar,27bar): 16
+    SO(14) adjoint roots in (3bar,27bar): 21
+    (14, q) mixed roots in (3bar,27bar): 12
+    Total: 81
+
+  SO(10) ROOT MATCHING
+  ----------------------------------------
+
+    SO(10) inside SO(14): 40 roots
+    Of these, also in E6: 40
+
+    Overlap: 40 roots
+
+    RESULT: The SO(10) inside SO(14) is the SAME as the SO(10) inside E6!
+    This means the two decompositions share a common SO(10).
+
+================================================================================
+DIMENSIONAL ANALYSIS AND REPRESENTATION THEORY
+================================================================================
+
+  E6 AND SO(10) BRANCHING RULES:
+
+    E6 -> SO(10) x U(1)_X:
+      27 -> 16(-1) + 10(2) + 1(-4)
+      27bar -> 16bar(1) + 10(-2) + 1(4)
+      78 -> 45(0) + 16(3) + 16bar(-3) + 1(0)
+
+    SO(14) -> SO(10) x SO(4):
+      64_+ -> (16, (2,1)) + (16bar, (1,2))
+      91 -> (45,1) + (1,6) + (10,4)
+      14 -> (10,1) + (1,4)
+
+  DIMENSION COMPARISON:
+
+    27 of E6:  dim 27 = 16 + 10 + 1
+    64 of SO(14): dim 64 = 32 + 32 = (16 x 2) + (16bar x 2)
+
+    The 27 has dim 27. The 64 has dim 64.
+    27 CANNOT sit inside 64 as a single block -- dimensions don't match!
+    But the 16 DOES sit inside both:
+      - 16 inside 27 (with multiplicity 1)
+      - 16 inside 64 (with multiplicity 2, from SO(4) doublet)
+
+  SO(14) x U(1) INSIDE E8:
+
+    248 = (91, 0) + (1, 0) + (14, +1) + (14, -1)
+        + (64_+, +1/2) + (64_-, -1/2)
+
+    Dimensions: 91 + 1 + 14 + 14 + 64 + 64 = 248
+
+  SU(3) x E6 INSIDE E8:
+
+    248 = (1, 78) + (8, 1) + (3, 27) + (3bar, 27bar)
+
+    Dimensions: 78 + 8 + 81 + 81 = 248
+
+  COMMON SO(10) ANALYSIS:
+
+    E6 contains SO(10) x U(1)_X as a maximal subgroup.
+    SO(14) contains SO(10) x SO(4) as a subgroup.
+    Both sit inside E8.
+
+    The question is: is the SO(10) inside E6 the SAME as
+    the SO(10) inside SO(14)?
+
+    Root-level test: D5 roots (first 5 coords only, integers):
+
+================================================================================
+FINAL VERDICT
+================================================================================
+
+  Spinor (64) roots in (3,27): 48 of 81
+
+  KILL CONDITION EVALUATION:
+
+  KC1: Intersection H has 42 roots.
+    -> SUBSTANTIAL intersection.
+    VERDICT: POSITIVE
+
+  KC2: Grade 1 roots by SO(14)xU(1) label:
+    14_q+1: 10
+    14_q-1: 2
+    64+_q+0.5: 16
+    64-_q-0.5: 32
+    so14_adj: 21
+    -> Grade-1 roots spread across 5 SO(14) labels.
+    VERDICT: MIXED
+
+  KC3: Can (3,27) contain three copies of 64?
+    dim(3 x 27) = 81
+    dim(3 x 64) = 192
+    81 < 192: DIMENSIONALLY IMPOSSIBLE
+    VERDICT: NEGATIVE (by dimension counting)
+
+  KC4: Can (3,27) contain three copies of 16 of SO(10)?
+    dim(3 x 27) = 81
+    3 x 16 = 48, which fits inside 81
+    Known branching: 27 = 16 + 10 + 1 under SO(10) x U(1)
+    So: (3,27) -> (3,16) + (3,10) + (3,1) under SU(3) x SO(10) x U(1)
+    The (3,16) gives exactly 3 copies of the 16 of SO(10)!
+    VERDICT: POSITIVE (for three 16s, not three 64s)
+
+  ============================================================
+  OVERALL VERDICT
+  ============================================================
+
+  The E8 -> SU(3) x E6 decomposition gives THREE copies of the 16
+  of SO(10) (embedded inside three 27s of E6). This is well-known
+  and is the basis of E8 heterotic string compactifications.
+
+  However, these three 16s do NOT correspond to three copies of
+  the 64 of SO(14). The reason is fundamental:
+
+  1. The 27 of E6 has dimension 27. The 64 of SO(14) has dimension 64.
+     A 27 cannot contain a 64.
+
+  2. The SO(14) x U(1) and SU(3) x E6 subgroups of E8 are
+     TRANSVERSE decompositions. They cut the 248-dimensional
+     adjoint along different directions.
+
+  3. The SO(14) spinor (64) sits PARTLY in the (3,27) and PARTLY
+     in the (1,78) and other pieces. It is FRAGMENTED across the
+     SU(3) x E6 decomposition.
+
+  4. The SU(3) family symmetry that gives 3 generations is a
+     symmetry of E8 that does NOT commute with SO(14).
+     It mixes the SO(14) representations.
+
+  CONCLUSION: The E8 three-generation mechanism via (3,27) gives
+  three copies of the SO(10) 16-plet, NOT three copies of the
+  SO(14) 64-dimensional spinor.
+
+  For an SO(14) unification theory, the three-generation problem
+  CANNOT be solved by embedding SO(14) in E8 and using the SU(3)
+  family symmetry. The two structures are incompatible: E8's
+  three-generation mechanism operates at the SO(10)/E6 level,
+  and the extra generators of SO(14) break the SU(3) family symmetry.
+
+  POSSIBLE SALVAGE: E8 -> SO(14) x U(1) as a DIFFERENT path
+  --------------------------------------------------
+
+  Under E8 -> SO(14) x U(1):
+    248 = (91, 0) + (1, 0) + (14, +1) + (14, -1)
+        + (64_+, +1/2) + (64_-, -1/2)
+
+  This gives ONE copy of the 64_+ (one generation) and ONE copy
+  of the 64_- (its conjugate). This is the same one-generation
+  result as SO(14) alone.
+
+  E8 does not give three copies of the 64 of SO(14) in ANY
+  decomposition. The three-generation mechanism in E8 specifically
+  requires passing through E6, which only contains SO(10) -- not SO(14).
+
+  FINAL ANSWER: NEGATIVE RESULT
+  The E8 three-generation mechanism is incompatible with SO(14).
+  SO(14) must find its three generations from a DIFFERENT source.
+
+================================================================================
+COMPUTATION COMPLETE
+================================================================================

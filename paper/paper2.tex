@@ -1,0 +1,1432 @@
+% Target: Advances in Applied Clifford Algebras (Springer)
+% Format: Standard Springer svjour3 / or article class
+% ~17 pages, Clifford-algebra emphasis
+% NO overlap with Paper 1 (CICM 2026, methodology/taxonomy/Dollard case study)
+%
+% This paper is MATHEMATICAL CONTENT: the cross-domain identities themselves.
+% NOTE: Switch to svjour3 before AACA submission. Using article for drafting.
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{enumitem}
+\usepackage{tikz-cd}
+
+% Theorem environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{identity}[theorem]{Identity}
+\newtheorem{analogy}[theorem]{Analogy}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}{Remark}[section]
+
+% Acknowledgements environment (svjour3 defines this; article does not)
+\newenvironment{acknowledgements}{\section*{Acknowledgements}}{}
+
+% Lean 4 listing style
+\lstdefinelanguage{Lean4}{
+  keywords={theorem, lemma, def, noncomputable, import, by, have, exact, rw,
+            simp, ring, norm_num, apply, intro, induction, unfold, show,
+            refine, suffices, convert, push_cast, field_simp, ext, linarith,
+            nlinarith, native_decide, omega,
+            private, where, with, match, if, then, else, let, in, do, return,
+            structure, class, instance, open, section, namespace, end, variable,
+            axiom, sorry, example, calc, fun, set_option, maxHeartbeats},
+  morekeywords=[2]{Cl30, Mat3, SL3, isPureBivector, mkBivector, comm, smul, zero,
+            grade0, grade1, grade2, grade3},
+  sensitive=true,
+  morecomment=[l]{--},
+  morecomment=[s]{/-}{-/},
+  morestring=[b]",
+}
+
+\lstset{
+  language=Lean4,
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{blue}\bfseries,
+  keywordstyle=[2]\color{purple},
+  commentstyle=\color{gray}\itshape,
+  stringstyle=\color{red},
+  breaklines=true,
+  columns=flexible,
+  frame=single,
+  xleftmargin=1em,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=3pt,
+  aboveskip=0.5em,
+  belowskip=0.5em,
+  literate=
+    {forall}{{$\forall$}}1
+    {exists}{{$\exists$}}1,
+}
+
+% Notation shortcuts
+\newcommand{\so}{\mathfrak{so}}
+\newcommand{\su}{\mathfrak{su}}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\h}{\mathfrak{h}}
+\newcommand{\Cl}{\mathrm{Cl}}
+\newcommand{\ad}{\mathrm{ad}}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\spec}{\mathrm{spec}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\NN}{\mathbb{N}}
+
+\journalname{Advances in Applied Clifford Algebras}
+
+\begin{document}
+
+\title{Character Decomposition from Fortescue to Cartan--Weyl: \\
+  Unifying Symmetrical Components and Root Space Decomposition \\
+  via Clifford Algebras}
+
+\titlerunning{Character Decomposition from Fortescue to Cartan--Weyl}
+
+\author{Ian M. Arnoldy}
+
+\institute{
+  Independent Researcher \\
+  \email{ian@arnoldy.me}
+}
+
+\date{Received: date / Accepted: date}
+
+\maketitle
+
+\begin{abstract}
+The grade-2 elements of a Clifford algebra $\Cl(n,0)$ form the
+Lie algebra $\so(n)$ under the commutator bracket. This classical
+observation has algebraic consequences that connect three seemingly
+disparate decomposition methods: Fortescue's symmetrical components
+(electrical engineering, 1918), the Cartan--Weyl root space
+decomposition (Lie theory, 1913--1925), and the principal grading by
+Coxeter elements \cite{coxeter1934}. We prove that the first two are instances of
+character decomposition on compact groups at different levels of
+generality. The Fortescue matrix is the character table of the cyclic
+group $\ZZ_N$; the Cartan--Weyl decomposition is a Fortescue-type
+decomposition of the adjoint representation; and the Coxeter grading
+decomposes a simple Lie algebra into $h$ eigenspaces ($h$ = Coxeter
+number) via a generalized DFT. We further prove that Clifford grade
+selection rules force Hamiltonians built from $\so(n)$ generators into
+block-tridiagonal form, establishing a structural constraint on the
+spectrum of such operators. All concrete instances---including $\so(3)$
+structure constants, Casimir eigenvalues, Killing form negativity, grade
+projections in $\Cl(3,0)$, and the complete Cartan--Weyl decomposition
+of $\su(3)$---are machine-verified in Lean~4 with zero \texttt{sorry}
+gaps. We delineate two additional structural analogies (the mass gap as a
+spectral stop band, and the Coxeter grading as generalized Fortescue)
+that share the same mathematical parent but require qualification before
+being called provable identities.
+
+\keywords{Clifford algebras \and symmetrical components \and
+Cartan--Weyl decomposition \and character theory \and Fortescue \and
+grade selection rules \and Lean~4}
+\end{abstract}
+
+% ============================================================================
+\section{Introduction}
+\label{sec:intro}
+% ============================================================================
+
+In 1918, building on Steinmetz's phasor methods
+\cite{steinmetz1893}, Charles L.\ Fortescue presented a method for
+decomposing an unbalanced $N$-phase electrical system into $N$ balanced ``symmetrical
+components'' \cite{fortescue1918}. The method, which reduces coupled
+polyphase problems to decoupled single-phase problems, became a
+cornerstone of power systems engineering. Its mathematical content is
+the discrete Fourier transform (DFT) on the cyclic group $\ZZ_N$:
+the Fortescue matrix $A_N$ with entries $A_{ps} = \omega_N^{ps}$
+(where $\omega_N = e^{2\pi i/N}$) is precisely the character table
+of $\ZZ_N$.
+
+Meanwhile, between 1913 and 1925, \'Elie Cartan and Hermann Weyl
+developed the root space decomposition of semisimple Lie algebras
+\cite{cartan1913,weyl1925}. For a semisimple Lie algebra $\g$ with
+Cartan subalgebra $\h$, the adjoint representation decomposes into
+eigenspaces under $\h$:
+\begin{equation}\label{eq:cartan-weyl}
+  \g = \h \oplus \bigoplus_{\alpha \in \Phi} \g_\alpha,
+\end{equation}
+where $\Phi$ is the root system and $\g_\alpha = \{X \in \g : [H, X] =
+\alpha(H) X \text{ for all } H \in \h\}$.
+
+These two decomposition methods were developed in complete isolation.
+Fortescue's work belongs to electrical engineering; Cartan--Weyl theory
+belongs to pure mathematics. Despite a century of development in both
+fields, we are not aware of any published work that systematically
+identifies the precise mathematical relationship between them.
+
+This paper establishes that relationship. Our main results are:
+
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Identity~1} (\Cref{sec:peter-weyl}): The Fortescue
+  decomposition is a special case of the Peter--Weyl theorem.
+  Specifically, Fortescue's symmetrical components are the character
+  decomposition of the regular representation of $\ZZ_N$, and the
+  Peter--Weyl theorem generalizes this from $\ZZ_N$ to all compact
+  groups.
+
+\item \textbf{Identity~2} (\Cref{sec:cartan-weyl-fortescue}): The
+  Cartan--Weyl root space decomposition \eqref{eq:cartan-weyl} is a
+  Fortescue-type decomposition of the adjoint representation. The
+  Cartan subalgebra plays the role of the ``zero sequence,'' positive
+  roots play the role of ``positive sequences,'' and negative roots
+  play the role of ``negative sequences.'' We verify this concretely
+  for $\su(2)$ (from $\Cl(3,0)$) and $\su(3)$.
+
+\item \textbf{Grade selection rules} (\Cref{sec:grade-selection}):
+  In $\Cl(n,0)$, the product of two grade-2 elements lies in grade
+  $0 \oplus 2$ (no odd-grade components). This forces any Hamiltonian
+  built from $\so(n)$ generators into a block-tridiagonal structure in
+  the grade basis, constraining its spectral properties via
+  continued-fraction expansions of the resolvent.
+
+\item \textbf{Two analogies} (\Cref{sec:analogy-stopband,sec:analogy-coxeter}):
+  We identify two further structural parallels---the mass gap as a
+  spectral stop band, and the Coxeter principal grading as a
+  generalized Fortescue decomposition---that share the same
+  mathematical parent (character theory / spectral decomposition) but
+  fall short of provable identities. We explain precisely where each
+  analogy breaks.
+\end{enumerate}
+
+All concrete computations---structure constants, Casimir eigenvalues,
+Killing form negativity, grade projections, and the complete
+Cartan--Weyl decomposition of $\su(3)$---are machine-verified in
+Lean~4 \cite{demoura2021lean4} using mathlib \cite{mathlib}, with zero
+\texttt{sorry} gaps. The proof files are publicly available
+\cite{uft-github}.
+
+\paragraph{What this paper is not.}
+We make no claims about the Yang--Mills mass gap, quantum field theory,
+or the physics of gauge theories. Our contribution is purely algebraic:
+identifying the common mathematical structure underlying decomposition
+methods from different fields, and proving the relevant algebraic facts
+in a theorem prover. We are careful throughout to distinguish
+\emph{identities} (same mathematics, different notation) from
+\emph{analogies} (parallel structure, different scope).
+
+% ============================================================================
+\section{Preliminaries}
+\label{sec:prelim}
+% ============================================================================
+
+\subsection{Fortescue's Symmetrical Components}
+
+Let $\omega_N = e^{2\pi i/N}$ be a primitive $N$th root of unity. The
+\emph{Fortescue matrix} is the $N \times N$ matrix
+\begin{equation}\label{eq:fortescue-matrix}
+  A_N = \frac{1}{\sqrt{N}} \begin{pmatrix}
+    1 & 1 & 1 & \cdots & 1 \\
+    1 & \omega_N & \omega_N^2 & \cdots & \omega_N^{N-1} \\
+    1 & \omega_N^2 & \omega_N^4 & \cdots & \omega_N^{2(N-1)} \\
+    \vdots & & & \ddots & \vdots \\
+    1 & \omega_N^{N-1} & \omega_N^{2(N-1)} & \cdots & \omega_N^{(N-1)^2}
+  \end{pmatrix}.
+\end{equation}
+This is, up to normalization, the DFT matrix. It is unitary:
+$A_N^* A_N = I_N$.
+
+Given an $N$-phase signal $\mathbf{x} = (x_0, x_1, \ldots, x_{N-1})^T$,
+the \emph{symmetrical components} are
+\begin{equation}\label{eq:symm-comp}
+  \mathbf{s} = A_N^* \, \mathbf{x},
+\end{equation}
+and the inverse transform recovers the phase quantities:
+$\mathbf{x} = A_N \, \mathbf{s}$.
+
+The key engineering property: if the system impedance matrix $Z$ is
+\emph{circulant} (i.e., commutes with cyclic permutation), then $A_N$
+diagonalizes it:
+$A_N^* Z A_N = \mathrm{diag}(Z_0, Z_1, \ldots, Z_{N-1})$.
+The $Z_k$ are the \emph{sequence impedances}: the coupled $N$-phase
+problem decouples into $N$ independent single-phase problems.
+
+For $N = 3$ (three-phase power), the sequences are traditionally called
+``zero'' ($k = 0$), ``positive'' ($k = 1$), and ``negative'' ($k = 2$).
+
+\subsection{Character Theory of Finite Abelian Groups}
+
+A \emph{character} of a finite group $G$ is a homomorphism
+$\chi : G \to \CC^*$. The characters of the cyclic group $\ZZ_N$ are
+$\chi_k(n) = \omega_N^{kn}$ for $k = 0, 1, \ldots, N-1$. The
+\emph{character table} of $\ZZ_N$ is the matrix
+$T_{kn} = \chi_k(n) = \omega_N^{kn}$---which is exactly the
+(unnormalized) Fortescue matrix \eqref{eq:fortescue-matrix}.
+
+This is the central observation: the Fortescue decomposition \emph{is}
+the character decomposition of $\ZZ_N$.
+
+\subsection{Clifford Algebras and $\so(n)$}
+
+The Clifford algebra $\Cl(n,0)$ is generated by $n$ elements
+$e_1, \ldots, e_n$ satisfying $e_i e_j + e_j e_i = 2\delta_{ij}$
+\cite{atiyah-bott-shapiro1964,hestenes1966}.
+It has dimension $2^n$ and is $\ZZ_2$-graded into even and odd parts.
+More finely, it admits a $\ZZ$-filtration by \emph{grade}:
+grade-$k$ elements are spanned by products of $k$ distinct generators.
+
+\begin{proposition}[Classical; see {\cite[Ch.~3]{lounesto2001}}]
+\label{prop:grade2-lie}
+The grade-2 elements of\/ $\Cl(n,0)$ form a Lie algebra under the
+commutator bracket $[A, B] = AB - BA$. This Lie algebra is isomorphic
+to $\so(n)$.
+\end{proposition}
+
+The isomorphism sends the bivector $e_{ij} = e_i e_j$ ($i < j$) to the
+generator of rotation in the $ij$-plane
+\cite{gallier2020}. The dimension is
+$\binom{n}{2} = n(n-1)/2$, matching $\dim \so(n)$.
+
+\subsection{The Cartan--Weyl Decomposition}
+
+For a semisimple Lie algebra $\g$ of rank $r$
+\cite{humphreys1972,hall2015}, the
+\emph{Cartan subalgebra} $\h$ is a maximal abelian subalgebra of
+dimension $r$. The \emph{roots} are the nonzero linear functionals
+$\alpha \in \h^*$ for which the root space
+$\g_\alpha = \{X \in \g : [H, X] = \alpha(H) X, \, \forall H \in \h\}$
+is nonzero. The decomposition \eqref{eq:cartan-weyl} splits $\g$ into
+$\h$ and the root spaces, with
+\begin{equation}\label{eq:dim-decomp}
+  \dim \g = \dim \h + |\Phi| = r + |\Phi|.
+\end{equation}
+
+The roots come in pairs $\pm \alpha$, giving a further decomposition
+into positive and negative roots:
+$\g = \mathfrak{n}^- \oplus \h \oplus \mathfrak{n}^+$.
+
+% ============================================================================
+\section{Identity~1: Peter--Weyl Generalizes Fortescue}
+\label{sec:peter-weyl}
+% ============================================================================
+
+\subsection{Statement}
+
+\begin{identity}[Fortescue = Character Decomposition of $\ZZ_N$]
+\label{id:fortescue-peter-weyl}
+Fortescue's symmetrical component decomposition
+\eqref{eq:symm-comp} is the decomposition of a signal
+$\mathbf{x} \in \CC^N$ into irreducible representations of the
+cyclic group $\ZZ_N$. Equivalently, the Fortescue matrix $A_N$ is the
+character table of\/ $\ZZ_N$.
+\end{identity}
+
+\subsection{Proof}
+
+The cyclic group $\ZZ_N$ has exactly $N$ irreducible representations,
+all one-dimensional, given by the characters
+$\chi_k : \ZZ_N \to \CC^*$, $\chi_k(n) = \omega_N^{kn}$. The space
+$\CC^N$, viewed as the regular representation of $\ZZ_N$ (where the
+generator acts by cyclic permutation), decomposes as
+\begin{equation}\label{eq:zn-decomp}
+  \CC^N = \bigoplus_{k=0}^{N-1} V_k,
+  \qquad V_k = \{v \in \CC^N : \sigma(v) = \omega_N^k v\},
+\end{equation}
+where $\sigma$ is the cyclic shift operator. The projection onto $V_k$
+is
+\begin{equation}\label{eq:projection}
+  P_k = \frac{1}{N} \sum_{n=0}^{N-1} \overline{\chi_k(n)} \, \sigma^n
+      = \frac{1}{N} \sum_{n=0}^{N-1} \omega_N^{-kn} \, \sigma^n.
+\end{equation}
+The matrix implementing all projections simultaneously is
+$T_{kn} = \omega_N^{kn}$, which is (up to normalization) the Fortescue
+matrix \eqref{eq:fortescue-matrix}. Thus the Fortescue decomposition
+\emph{is} the decomposition \eqref{eq:zn-decomp}. \qed
+
+\subsection{Generalization via Peter--Weyl}
+
+The Peter--Weyl theorem \cite{peter-weyl1927} states that for any
+compact group $G$, the space $L^2(G)$ decomposes as
+\begin{equation}\label{eq:peter-weyl}
+  L^2(G) \cong \widehat{\bigoplus_{\pi \in \hat{G}}}
+    \dim(\pi) \cdot V_\pi,
+\end{equation}
+where the sum runs over equivalence classes of irreducible unitary
+representations. For $G = \ZZ_N$, all irreps are one-dimensional
+($\dim(\pi) = 1$), $\hat{G} = \ZZ_N$, and
+\eqref{eq:peter-weyl} reduces to \eqref{eq:zn-decomp}. Thus:
+
+\begin{proposition}\label{prop:peter-weyl-fortescue}
+Fortescue's symmetrical component decomposition is the Peter--Weyl
+theorem specialized to $G = \ZZ_N$. The Peter--Weyl theorem extends
+Fortescue's method from cyclic groups to all compact Lie groups.
+\end{proposition}
+
+This is not merely a restatement. It has a concrete consequence:
+any function on a compact Lie group $G$ (not just $\ZZ_N$) admits a
+``symmetrical component decomposition'' into irreducible
+representations. The Fourier coefficients generalize the sequence
+components, and the diagonalization of circulant matrices generalizes
+to the diagonalization of convolution operators on $G$.
+
+\subsection{Machine Verification}
+
+The roots-of-unity foundation is verified in Lean~4:
+
+\begin{lstlisting}[caption={$\omega_N^N = 1$: the central theorem of Fortescue's decomposition (excerpt from \texttt{polyphase\_formula.lean}).}]
+theorem omega_pow_N (N : Nat)
+    (hN : (N : Complex) != 0) :
+    omega N ^ N = 1 := by
+  simp only [omega]
+  rw [exp_nat_mul]
+  have h_exp : (N : Complex) *
+    (2 * Real.pi * Complex.I / (N : Complex))
+    = 2 * Real.pi * Complex.I :=
+    omega_exponent_simplifies N hN
+  rw [h_exp]
+  exact Complex.exp_two_pi_mul_I
+\end{lstlisting}
+
+Additional verified results include: the balanced-phase property
+$1 + \omega_3 + \omega_3^2 = 0$, the four-phase specialization
+$\omega_4 = i$ (connecting to $\ZZ_4$), periodicity
+$\omega_N^{N+k} = \omega_N^k$, and the group law
+$\omega_N^a \cdot \omega_N^b = \omega_N^{a+b}$.
+
+% ============================================================================
+\section{Identity~2: Cartan--Weyl as Sequence Decomposition}
+\label{sec:cartan-weyl-fortescue}
+% ============================================================================
+
+\subsection{Statement}
+
+\begin{identity}[Cartan--Weyl = Fortescue on the Adjoint Representation]
+\label{id:cartan-weyl-fortescue}
+The Cartan--Weyl root space decomposition of a semisimple Lie algebra
+$\g$ is the eigendecomposition of the adjoint action of the Cartan
+subalgebra $\h$. This is a Fortescue-type decomposition in the
+following precise sense:
+\begin{itemize}[leftmargin=*]
+\item The Cartan subalgebra $\h$ (eigenvalue $0$ under $\ad_H$ for all
+  $H \in \h$) plays the role of the \emph{zero sequence}.
+\item The positive root spaces $\g_\alpha$ ($\alpha > 0$) play the role
+  of \emph{positive sequences}.
+\item The negative root spaces $\g_{-\alpha}$ play the role of
+  \emph{negative sequences}.
+\end{itemize}
+\end{identity}
+
+\subsection{The Case $\su(2)$ from $\Cl(3,0)$}
+
+The bivectors of $\Cl(3,0)$ are $\{e_{12}, e_{13}, e_{23}\}$, forming
+$\so(3) \cong \su(2)$ under the commutator. Define the angular momentum
+generators $L_k = \frac{1}{2} e_{jl}$ (with appropriate index
+convention). The Cartan--Weyl basis is:
+\begin{align}
+  H &= L_3 = \tfrac{1}{2} e_{12}
+    &\text{(Cartan, ``zero sequence'')}, \nonumber \\
+  E_+ &= L_1 + i L_2
+    &\text{(positive root, ``positive sequence'')}, \label{eq:su2-cw} \\
+  E_- &= L_1 - i L_2
+    &\text{(negative root, ``negative sequence'')}. \nonumber
+\end{align}
+
+The adjoint eigenvalues are:
+\begin{equation}\label{eq:su2-eigenvalues}
+  [H, E_+] = +E_+, \qquad [H, E_-] = -E_-, \qquad [H, H] = 0.
+\end{equation}
+This is a decomposition into three ``sequences'' with
+eigenvalues $\{+1, -1, 0\}$ under the adjoint action of the Cartan
+element---exactly the Fortescue pattern for $N = 3$ reduced to its
+essential structure: one zero, one positive, one negative.
+
+The underlying Clifford algebra structure is verified in Lean~4:
+
+\begin{lstlisting}[caption={$\so(3)$ structure constants from $\Cl(3,0)$ (excerpt from \texttt{grade2\_lie\_algebra.lean}).}]
+-- [e12, e13] = -2*e23
+theorem comm_e12_e13 :
+    comm e12 e13 = smul (-2) e23 := by
+  ext <;> simp [comm, e12, e13, e23,
+    mul, add, neg, smul] <;> norm_num
+
+-- [e12, e23] = 2*e13
+theorem comm_e12_e23 :
+    comm e12 e23 = smul 2 e13 := by
+  ext <;> simp [comm, e12, e23, e13,
+    mul, add, neg, smul] <;> norm_num
+
+-- Jacobi identity: [A,[B,C]] + cyc = 0
+theorem jacobi (A B C : Cl30) :
+    comm A (comm B C) + comm B (comm C A)
+    + comm C (comm A B) = zero := by
+  ext <;> simp [comm, mul_def, add_def,
+    neg_def, mul, add, neg, zero] <;> ring
+\end{lstlisting}
+
+\subsection{The Case $\su(3)$: Complete Verification}
+
+The Lie algebra $\su(3)$ has dimension $8 = 3^2 - 1$, rank $2$, and
+$6$ roots. In the Chevalley basis $\{H_1, H_2, E_1, F_1, E_2, F_2,
+E_3, F_3\}$ \cite{georgi1999,fulton1991}, the Cartan--Weyl
+decomposition is:
+\begin{equation}\label{eq:su3-decomp}
+  \su(3) = \underbrace{\langle H_1, H_2 \rangle}_{\text{Cartan (rank 2)}}
+    \oplus \underbrace{\langle E_1, E_2, E_3 \rangle}_{\text{positive roots}}
+    \oplus \underbrace{\langle F_1, F_2, F_3 \rangle}_{\text{negative roots}}.
+\end{equation}
+The dimension count is $8 = 2 + 3 + 3$.
+
+The adjoint eigenvalues form the root system of type $A_2$. We list
+the complete eigenvalue table, which is machine-verified:
+
+\begin{table}[h]
+\centering
+\caption{Adjoint eigenvalues for $\su(3)$. Each entry is the eigenvalue
+  $\alpha(H_i)$ in $[H_i, E_\alpha] = \alpha(H_i) E_\alpha$.}
+\label{tab:su3-roots}
+\begin{tabular}{@{}lccl@{}}
+\toprule
+Generator & $\ad_{H_1}$ & $\ad_{H_2}$ & Root \\
+\midrule
+$H_1$ & $0$ & $0$ & zero \\
+$H_2$ & $0$ & $0$ & zero \\
+$E_1$ & $+2$ & $-1$ & $\alpha_1$ \\
+$F_1$ & $-2$ & $+1$ & $-\alpha_1$ \\
+$E_2$ & $-1$ & $+2$ & $\alpha_2$ \\
+$F_2$ & $+1$ & $-2$ & $-\alpha_2$ \\
+$E_3$ & $+1$ & $+1$ & $\alpha_1 + \alpha_2$ \\
+$F_3$ & $-1$ & $-1$ & $-(\alpha_1 + \alpha_2)$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The Fortescue analogy is now concrete:
+\begin{itemize}[leftmargin=*]
+\item \textbf{Zero sequence} ($\alpha = 0$): $\{H_1, H_2\}$, the
+  simultaneously diagonalizable generators. In power systems, the zero
+  sequence represents in-phase components.
+\item \textbf{Positive sequences} ($\alpha > 0$): $\{E_1, E_2, E_3\}$,
+  the raising operators. These carry positive ``frequency'' under the
+  adjoint action.
+\item \textbf{Negative sequences} ($\alpha < 0$): $\{F_1, F_2, F_3\}$,
+  the lowering operators.
+\end{itemize}
+
+The Cartan matrix of type $A_2$,
+\begin{equation}\label{eq:cartan-matrix}
+  A = \begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix},
+  \qquad \det A = 3 \neq 0,
+\end{equation}
+encodes the root geometry. It is the analog of the Fortescue matrix
+restricted to simple roots. The nonzero determinant (verified:
+\texttt{cartan\_matrix\_determinant}) proves the root system is
+non-degenerate, just as the invertibility of the Fortescue matrix
+guarantees the decomposition is unique.
+
+Additional verified structure:
+\begin{itemize}[leftmargin=*]
+\item $\mathfrak{n}^+ = \langle E_1, E_2, E_3 \rangle$ is a closed
+  subalgebra: $[E_1, E_2] = E_3$ and all other brackets among
+  $E_i$ vanish (\texttt{positive\_root\_closed}).
+\item Similarly $\mathfrak{n}^-$ is closed (\texttt{negative\_root\_closed}).
+\item Each pair $(E_\alpha, F_\alpha, [E_\alpha, F_\alpha])$ forms an
+  $\su(2)$ triple: $[E_1, F_1] = H_1$, $[E_2, F_2] = H_2$,
+  $[E_3, F_3] = H_1 + H_2$.
+\item All $\binom{8}{2} = 28$ independent brackets are verified
+  (\texttt{bracket\_count}).
+\end{itemize}
+
+\begin{lstlisting}[caption={Root eigenvalue verification and subalgebra closure for $\su(3)$ (excerpts from \texttt{su3\_cartan\_weyl.lean}).}]
+-- [H1, E1] = 2*E1 (root alpha_1(H1) = 2)
+theorem root_alpha1_H1 :
+    comm H1 E1 = smul 2 E1 := h1e1
+
+-- [H2, E1] = -E1 (root alpha_1(H2) = -1)
+theorem root_alpha1_H2 :
+    comm H2 E1 = neg E1 := by
+  ext <;> simp [comm, H2, E1, neg]
+
+-- Positive root subalgebra is CLOSED
+theorem positive_root_closed (A B : SL3)
+    (hA : A.h1 = 0 /\ A.h2 = 0 /\
+          A.f1 = 0 /\ A.f2 = 0 /\ A.f3 = 0)
+    (hB : B.h1 = 0 /\ B.h2 = 0 /\
+          B.f1 = 0 /\ B.f2 = 0 /\ B.f3 = 0) :
+    (comm A B).h1 = 0 /\ (comm A B).h2 = 0 /\
+    (comm A B).f1 = 0 /\ (comm A B).f2 = 0 /\
+    (comm A B).f3 = 0 := by ...
+\end{lstlisting}
+
+\subsection{The General Pattern}
+
+The parallel between Fortescue and Cartan--Weyl extends to any
+semisimple Lie algebra. Let $\g$ have rank $r$ and $|\Phi^+|$ positive
+roots. Then:
+\begin{equation}\label{eq:general-decomp}
+  \dim \g = r + 2|\Phi^+|
+    = \underbrace{r}_{\text{zero}} + \underbrace{|\Phi^+|}_{\text{positive}}
+    + \underbrace{|\Phi^+|}_{\text{negative}}.
+\end{equation}
+
+\begin{table}[h]
+\centering
+\caption{Dimension decomposition for classical Lie algebras compared to
+  Fortescue.}
+\label{tab:decomp-comparison}
+\begin{tabular}{@{}lcccl@{}}
+\toprule
+Algebra & Zero & Pos. & Neg. & Total \\
+\midrule
+Fortescue ($\ZZ_3$) & 1 & 1 & 1 & 3 \\
+$\su(2)$ & 1 & 1 & 1 & 3 \\
+$\su(3)$ & 2 & 3 & 3 & 8 \\
+$\su(5)$ & 4 & 10 & 10 & 24 \\
+$\so(10)$ & 5 & 20 & 20 & 45 \\
+$\so(14)$ & 7 & 42 & 42 & 91 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The common mathematical parent is harmonic analysis on compact groups.
+Fortescue uses characters of $\ZZ_N \subset U(1)$; Cartan--Weyl uses
+characters of the maximal torus $T^r \subset G$. Both decompose a
+representation into eigenspaces of a maximal abelian subgroup.
+
+% ============================================================================
+\section{The Casimir Operator and Killing Form}
+\label{sec:casimir}
+% ============================================================================
+
+The quadratic Casimir operator $C_2 = \sum_a T_a T_a$ (summing over an
+orthonormal basis of $\g$ with respect to the Killing form) commutes
+with all elements of $\g$ and acts as a scalar on each irreducible
+representation (Schur's lemma). The Casimir eigenvalue provides an
+algebraic measure of ``size'' for each representation.
+
+\subsection{The $\so(3)$ Casimir from $\Cl(3,0)$}
+
+In $\Cl(3,0)$, the Casimir of the bivector algebra is
+\begin{equation}\label{eq:casimir-cl30}
+  C_2 = e_{12}^2 + e_{13}^2 + e_{23}^2.
+\end{equation}
+Since each $e_{ij}^2 = -1$ in $\Cl(3,0)$ (from $e_i^2 = +1$ and
+anticommutativity), we get $C_2 = -3$ (as a scalar in the algebra).
+
+In the fundamental (3-dimensional) matrix representation, the Casimir
+acts as
+\begin{equation}\label{eq:casimir-fund}
+  C_2 = L_1^2 + L_2^2 + L_3^2 = -2 I_3,
+\end{equation}
+where $L_i$ are the standard $\so(3)$ generators.
+
+Both facts are machine-verified:
+
+\begin{lstlisting}[caption={Casimir computation in $\Cl(3,0)$ and the $3 \times 3$ representation (excerpts from \texttt{grade2\_lie\_algebra.lean} and \texttt{casimir\_eigenvalues.lean}).}]
+-- In Cl(3,0): C2 = -3 (scalar)
+theorem bivector_sum_of_squares_val :
+    bivector_sum_of_squares =
+    smul (-3) (1 : Cl30) := by
+  ext <;> simp [bivector_sum_of_squares,
+    e12, e13, e23, mul, add, one, smul]
+    <;> norm_num
+
+-- In Mat3: C2 = -2*I3
+theorem casimir_fund_val :
+    casimir_fund = smul (-2) id3 := by
+  ext <;> simp [casimir_fund, L1, L2, L3,
+    mul, add, smul, id3] <;> norm_num
+\end{lstlisting}
+
+\subsection{The Killing Form and Compactness}
+
+The Killing form $B(X, Y) = \Tr(\ad_X \circ \ad_Y)$ restricted to
+$\so(3)$ is negative definite:
+
+\begin{theorem}[Machine-verified]\label{thm:killing-negative}
+For $H = aL_1 + bL_2 + cL_3 \in \so(3)$ with $(a, b, c) \neq (0,0,0)$:
+\begin{equation}\label{eq:killing}
+  \Tr(H^2) = -2(a^2 + b^2 + c^2) < 0.
+\end{equation}
+\end{theorem}
+
+\noindent The proof in Lean~4 proceeds by direct computation of the
+trace, followed by the algebraic fact that $a^2 + b^2 + c^2 > 0$
+when $(a,b,c) \neq 0$.
+
+\begin{lstlisting}[caption={Killing form negativity (from \texttt{casimir\_spectral\_gap.lean}).}]
+theorem killing_form_negative (a b c : Real)
+    (h : !(a = 0 /\ b = 0 /\ c = 0)) :
+    tr (so3_element_squared a b c) < 0 := by
+  rw [so3_sq_trace]
+  have : a^2 + b^2 + c^2 > 0 := by
+    by_contra hle; push_neg at hle
+    have ha : a = 0 := by nlinarith
+      [sq_nonneg a, sq_nonneg b, sq_nonneg c]
+    have hb : b = 0 := by nlinarith ...
+    have hc : c = 0 := by nlinarith ...
+    exact h (And.intro ha (And.intro hb hc))
+  linarith
+\end{lstlisting}
+
+The negative definiteness of the Killing form is the algebraic signature
+of \emph{compactness}. A compact semisimple Lie group has all
+finite-dimensional representations unitarizable, discrete Casimir
+spectrum, and---crucially for applications---the Casimir eigenvalue
+provides a lower bound on representation ``energies.''
+
+\subsection{Casimir Eigenvalues for $\so(n)$}
+
+For the fundamental representation of $\so(n)$ with the standard
+normalization $\Tr(T_a T_b) = -\delta_{ab}$ (antisymmetric matrices),
+the Casimir eigenvalue is $C_2(\text{fund}) = -(n-1)$. With the
+half-normalization $\Tr(T_a T_b) = -\frac{1}{2}\delta_{ab}$, this
+becomes $c_2(\text{fund}) = (n-1)/2$.
+
+\begin{table}[h]
+\centering
+\caption{Casimir eigenvalues for $\so(n)$ in three representations.}
+\label{tab:casimir}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+$n$ & $c_2(\text{fund})$ & $c_2(\text{adj})$ & $c_2(\text{spinor})$ \\
+\midrule
+3 & $1$ & $2$ & --- \\
+10 & $9/2$ & $16$ & $45/4$ \\
+14 & $13/2$ & $24$ & $91/4$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The minimum nonzero Casimir eigenvalue (the fundamental) provides the
+tightest algebraic constraint on representation sizes. For $\so(14)$:
+$c_2(\text{fund}) = 13/2$, verified in Lean~4 via the arithmetic
+identity $14 \times 12 / (2 \times 14) = 13/2$.
+
+The Casimir centrality---$[C_2, T_a] = 0$ for all generators
+$T_a$---is verified for all three $\so(3)$ generators, confirming
+that $C_2$ acts as a scalar on each irreducible component (Schur's
+lemma).
+
+% ============================================================================
+\section{Analogy~1: Mass Gap as Stop Band}
+\label{sec:analogy-stopband}
+% ============================================================================
+
+We now turn to two structural parallels that share the character-theoretic
+parent of Identities~1 and~2 but require honest qualification.
+
+\subsection{The Spectral Correspondence}
+
+In quantum mechanics, the Hamiltonian $\hat{H}$ generates time evolution
+$U(t) = e^{-i\hat{H}t}$. The \emph{resolvent} (Green's function) is
+\begin{equation}\label{eq:resolvent}
+  G(z) = (z - \hat{H})^{-1},
+\end{equation}
+whose poles are exactly $\spec(\hat{H})$.
+
+In circuit theory, the impedance $Z(s)$ is a Laplace-domain transfer
+function whose poles correspond to natural frequencies. The
+\emph{mass gap} condition
+\begin{equation}\label{eq:mass-gap}
+  \spec(\hat{H}) = \{0\} \cup [\Delta, \infty), \qquad \Delta > 0,
+\end{equation}
+states that $G(z)$ has no poles in $(0, \Delta)$. In engineering
+language, this is a \emph{stop band}: no resonances between the vacuum
+state ($z = 0$) and the first excited state ($z = \Delta$).
+
+\begin{analogy}[Mass Gap = Stop Band]\label{an:stopband}
+The operator-theoretic content of the mass gap condition
+\eqref{eq:mass-gap} is identical to the statement that a transfer
+function has a stop band from $0$ to $\Delta$. The resolvent
+\eqref{eq:resolvent} is mathematically a transfer function.
+\end{analogy}
+
+\subsection{Where the Analogy Breaks}
+
+The spectral formulation is exact: the resolvent \emph{is} a transfer
+function, and the mass gap \emph{is} a stop band, in the precise sense
+of spectral theory of self-adjoint operators. However, three critical
+distinctions prevent this from being a \emph{proof tool}:
+
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Finite vs.\ infinite dimensions.} Circuit transfer
+  functions are rational (finitely many poles). The Yang--Mills
+  Hamiltonian acts on an infinite-dimensional Hilbert space with
+  potentially continuous spectrum.
+
+\item \textbf{Linearity.} Sequence networks in power systems work
+  because Maxwell's equations are linear. The Yang--Mills Hamiltonian
+  includes the non-abelian self-interaction term $[A_\mu, A_\nu]$,
+  which breaks superposition.
+
+\item \textbf{Existence.} Writing down \eqref{eq:resolvent} presupposes
+  that $\hat{H}$ exists as a self-adjoint operator on a suitable Hilbert
+  space. For interacting quantum Yang--Mills theory in four dimensions,
+  this existence is itself unproven---it is part of the Clay Millennium
+  Prize problem \cite{jaffe-witten2000}.
+\end{enumerate}
+
+We rate this as a genuine structural analogy (the mathematical
+formalism is identical at the spectral-theoretic level) that
+nevertheless cannot substitute for the analytical work of proving
+\eqref{eq:mass-gap} for a specific interacting quantum field theory.
+
+% ============================================================================
+\section{Analogy~2: Fortescue--Coxeter Principal Grading}
+\label{sec:analogy-coxeter}
+% ============================================================================
+
+\subsection{The Coxeter Element and Principal Grading}
+
+Let $\g$ be a simple Lie algebra of rank $r$ with Weyl group $W$. A
+\emph{Coxeter element} $\varphi \in W$ is a product of all simple
+reflections (one from each simple root), taken in any order. All
+such products are conjugate and have the same order $h$, the
+\emph{Coxeter number} \cite{humphreys1990}.
+
+The Coxeter element $\varphi$ acts on $\g$ via the adjoint
+representation, and its eigenvalues are $\{\omega_h^{m_j} : j = 1,
+\ldots, r\}$, where $m_1, \ldots, m_r$ are the \emph{exponents} of
+$\g$ and $\omega_h = e^{2\pi i/h}$. The principal grading decomposes
+$\g$ into $h$ eigenspaces:
+\begin{equation}\label{eq:coxeter-grading}
+  \g = \bigoplus_{k=0}^{h-1} \g_k,
+  \qquad \g_k = \{X \in \g : \varphi(X) = \omega_h^k X\}.
+\end{equation}
+
+\begin{analogy}[Coxeter Grading $\approx$ Fortescue with Period $h$]
+\label{an:coxeter}
+The principal grading \eqref{eq:coxeter-grading} is a DFT
+decomposition with period $h$. For $\su(N)$ (type $A_{N-1}$), the
+Coxeter number is $h = N$, so the principal grading \emph{is}
+an $N$-phase Fortescue decomposition with the correct period.
+\end{analogy}
+
+\subsection{Where the Periods Match}
+
+For the $A$-series:
+\begin{equation}\label{eq:A-series}
+  \su(N): \quad h = N, \quad
+  \text{exponents} = \{1, 2, \ldots, N-1\}.
+\end{equation}
+The Coxeter decomposition \eqref{eq:coxeter-grading} has exactly $N$
+eigenspaces, labeled by $\omega_N^k$ for $k = 0, \ldots, N-1$. This
+is the $N$-phase Fortescue decomposition on the Lie algebra,
+not on signal space.
+
+\subsection{Where the Periods Diverge}
+
+For other Dynkin types, $h \neq \dim(\text{fundamental representation})$,
+and the Fortescue period does not directly match the representation
+dimension. For example:
+
+\begin{table}[h]
+\centering
+\caption{Coxeter numbers and exponents for selected algebras.}
+\label{tab:coxeter}
+\begin{tabular}{@{}llcl@{}}
+\toprule
+Type & Algebra & $h$ & Exponents \\
+\midrule
+$A_2$ & $\su(3)$ & 3 & $\{1, 2\}$ \\
+$A_4$ & $\su(5)$ & 5 & $\{1, 2, 3, 4\}$ \\
+$D_5$ & $\so(10)$ & 8 & $\{1, 3, 5, 5, 7\}$ \\
+$D_7$ & $\so(14)$ & 12 & $\{1, 3, 5, 6, 7, 9, 11\}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+For $\so(14) = D_7$: the Coxeter number is $h = 12$ (not 14), and the
+exponents $\{1, 3, 5, 6, 7, 9, 11\}$ are not consecutive. The
+Fortescue interpretation requires a 12-phase system with non-uniform
+mode occupancy. The grading \eqref{eq:coxeter-grading} is still a
+DFT decomposition, but with period 12, not 14. The rank-7 Cartan
+subalgebra occupies $\g_0$, and the 84 root vectors are distributed
+among $\g_1$ through $\g_{11}$ according to the exponent structure,
+with the dimension check $7 + 84 = 91 = \dim \so(14)$.
+
+\subsection{Why This Is an Analogy, Not an Identity}
+
+The Coxeter grading \eqref{eq:coxeter-grading} is a character
+decomposition under $\ZZ_h \subset W$ (the cyclic group generated by
+the Coxeter element), so it \emph{is} a DFT decomposition. However:
+
+\begin{enumerate}[leftmargin=*]
+\item The Coxeter element acts on the Lie algebra via the adjoint
+  representation, not on a signal space. The engineering content of
+  Fortescue (decoupling coupled equations via impedance diagonalization)
+  does not directly apply.
+
+\item For non-$A$ types, the exponents are not consecutive, so
+  not all $\ZZ_h$ eigenspaces are occupied. The decomposition has
+  ``missing harmonics.''
+
+\item The Coxeter number $h$ enters Lie theory through the formula
+  $|W| = r! \prod_{i=1}^r (m_i + 1) / r!$ and the dual Coxeter number
+  $\check{h}$ controls the level of the affine Lie algebra. These
+  connections go beyond the Fourier-analytic content of Fortescue.
+\end{enumerate}
+
+We rate this as a precise analogy: same abstract structure
+(character decomposition under a cyclic group), same mathematical
+parent (representation theory), but different scope and not
+directly useful for the engineering applications that motivate
+Fortescue's method.
+
+% ============================================================================
+\section{Grade Selection Rules and Block-Tridiagonal Structure}
+\label{sec:grade-selection}
+% ============================================================================
+
+This section contains the most novel algebraic result of the paper:
+the observation that Clifford grade selection rules impose a structural
+constraint on operators built from Lie algebra generators.
+
+\subsection{Grade Projections in $\Cl(n,0)$}
+
+The algebra $\Cl(n,0)$ decomposes into $n+1$ grade components:
+\begin{equation}\label{eq:grade-decomp}
+  \Cl(n,0) = \bigoplus_{k=0}^{n} \Cl^k(n,0),
+  \qquad \dim \Cl^k(n,0) = \binom{n}{k}.
+\end{equation}
+Each grade-$k$ subspace is spanned by products of $k$ distinct
+generators. For $\Cl(3,0)$: grades $0, 1, 2, 3$ have dimensions
+$1, 3, 3, 1$ (total $8 = 2^3$).
+
+The grade projections $\pi_k : \Cl(n,0) \to \Cl^k(n,0)$ are verified
+to be idempotent ($\pi_k^2 = \pi_k$), mutually orthogonal
+($\pi_j \circ \pi_k = 0$ for $j \neq k$), and exhaustive
+($\sum_k \pi_k = \mathrm{id}$).
+
+\subsection{The Selection Rule}
+
+\begin{theorem}[Grade Selection Rule; Machine-verified]
+\label{thm:selection-rule}
+Let $A, B \in \Cl^2(3,0)$ be pure bivectors. Then their Clifford
+product $AB$ has no grade-1 or grade-3 component:
+\begin{equation}\label{eq:selection-rule}
+  \pi_1(AB) = 0, \qquad \pi_3(AB) = 0.
+\end{equation}
+Equivalently, $AB \in \Cl^0(3,0) \oplus \Cl^2(3,0)$.
+\end{theorem}
+
+\begin{proof}
+Direct computation in the 8-component representation of $\Cl(3,0)$.
+The Lean~4 proof expands the product using the multiplication table,
+substitutes the vanishing components (a bivector has zero scalar,
+vector, and pseudoscalar parts), and verifies that the resulting vector
+and pseudoscalar components are identically zero by the \texttt{ring}
+tactic.
+\end{proof}
+
+\begin{lstlisting}[caption={Grade selection rule (from \texttt{block\_tridiagonal.lean}).}]
+-- (grade 2) * (grade 2) has no odd grades
+theorem grade2_times_grade2_selection
+    (A B : Cl30)
+    (hA : isPureBivector A)
+    (hB : isPureBivector B) :
+    (A * B).v1 = 0 /\ (A * B).v2 = 0 /\
+    (A * B).v3 = 0 /\ (A * B).ps = 0 := by
+  obtain (hAs, hAv1, hAv2, hAv3, hAps) := hA
+  obtain (hBs, hBv1, hBv2, hBv3, hBps) := hB
+  refine (And.intro ?_ (And.intro ?_
+    (And.intro ?_ ?_))) <;>
+  simp [mul_def, mul, hAs, hAv1, hAv2,
+    hAv3, hAps, hBs, hBv1, hBv2,
+    hBv3, hBps] <;> ring
+\end{lstlisting}
+
+\subsection{The General Grade Shifting Rule}
+
+More generally, the Clifford product of a grade-$p$ element with a
+grade-$q$ element has components only in grades
+$|p - q|, |p - q| + 2, \ldots, p + q$ (subject to the constraint
+$\leq n$). For $p = q = 2$: the product lies in grades $0$ and $2$.
+
+The commutator $[A, B] = AB - BA$ of two bivectors is therefore a
+pure bivector (grade 2), since the grade-0 parts cancel:
+if $AB$ has grade-0 part $s$ and grade-2 part $t$, then $BA$ has
+grade-0 part $s$ (symmetric) and grade-2 part $-t + 2s'$ (where $s'$
+accounts for the scalar). The antisymmetric combination kills grade~0,
+confirming \Cref{prop:grade2-lie}.
+
+The complete grade-shifting behavior of bivectors is verified in Lean~4:
+\begin{itemize}[leftmargin=*]
+\item $e_{12} \cdot 1 = e_{12}$ \quad (grade $0 \to 2$),
+\item $e_{12} \cdot e_1 = -e_2$ \quad (grade $1 \to 1$, rotation),
+\item $e_{12} \cdot e_3 = e_{123}$ \quad (grade $1 \to 3$, shift by $+2$),
+\item $e_{12} \cdot e_{23} = e_{13}$ \quad (grade $2 \to 2$, no shift),
+\item $e_{12} \cdot e_{123} = -e_3$ \quad (grade $3 \to 1$, shift by $-2$).
+\end{itemize}
+
+\subsection{Block-Tridiagonal Hamiltonian Structure}
+
+Consider an operator $\hat{H}$ built from grade-2 elements
+(i.e., from $\so(n)$ generators). In the Clifford grade basis, the
+matrix elements $\langle \psi_p | \hat{H} | \psi_q \rangle$ are
+nonzero only when $|p - q| \in \{0, 2\}$. This means $\hat{H}$
+has \emph{block-tridiagonal} structure:
+
+\begin{equation}\label{eq:block-tridiag}
+  \hat{H} \sim \begin{pmatrix}
+    H_{00} & H_{02} & 0 & 0 & \cdots \\
+    H_{20} & H_{22} & H_{24} & 0 & \cdots \\
+    0 & H_{42} & H_{44} & H_{46} & \cdots \\
+    0 & 0 & H_{64} & H_{66} & \ddots \\
+    \vdots & & & \ddots & \ddots
+  \end{pmatrix},
+\end{equation}
+where $H_{pq}$ is the block connecting grade-$p$ and grade-$q$ sectors.
+
+\begin{theorem}[Block-Tridiagonal Structure]\label{thm:block-tridiag}
+Any operator on $\Cl(n,0)$ that is a polynomial in grade-2 elements
+has, in the grade basis, a banded matrix with bandwidth $2$. The
+even-grade and odd-grade sectors decouple:
+\begin{equation}\label{eq:decouple}
+  \Cl(n,0) = \Cl^{\mathrm{even}}(n,0) \oplus \Cl^{\mathrm{odd}}(n,0),
+\end{equation}
+and $\hat{H}$ preserves each summand.
+\end{theorem}
+
+\begin{proof}
+The even subalgebra $\Cl^+(n,0) = \bigoplus_{k \text{ even}} \Cl^k$
+is a subalgebra (closed under multiplication), and any product of
+grade-2 elements lies in $\Cl^+$. Hence $\hat{H}$ maps even grades
+to even grades and odd grades to odd grades, giving the
+block-diagonal decomposition \eqref{eq:decouple}. Within each parity
+sector, the bandwidth-2 banding follows from the grade selection rule
+(\Cref{thm:selection-rule}).
+\end{proof}
+
+\subsection{Spectral Consequences}
+
+Block-tridiagonal matrices have a well-developed spectral theory via
+\emph{continued fractions}. The resolvent of a block-tridiagonal
+operator admits the expansion
+\begin{equation}\label{eq:continued-fraction}
+  G(z) = \left(z - a_0 - \frac{b_1^2}{z - a_1 -
+    \frac{b_2^2}{z - a_2 - \cdots}}\right)^{-1},
+\end{equation}
+where $a_k$ and $b_k$ are derived from the diagonal and off-diagonal
+blocks. The poles of \eqref{eq:continued-fraction} are the eigenvalues
+of $\hat{H}$, and the structure of the continued fraction constrains
+their distribution.
+
+For $\Cl(14,0)$ with $\so(14)$ generators: the algebra has dimension
+$2^{14} = 16384$, with 15 grades of dimensions
+$\binom{14}{k}$. The even subalgebra $\Cl^+(14,0) \cong \Cl(13,0)$
+has dimension $2^{13} = 8192$. Furthermore, $\Cl(14,0) \cong M(128,
+\RR)$ (the algebra of $128 \times 128$ real matrices), providing $128$
+primitive idempotents that further decompose the representation space.
+
+The block-tridiagonal structure, combined with the $128$-sector
+idempotent decomposition, constrains the sparsity pattern of any
+Hamiltonian built from $\so(14)$ generators. This structural
+information goes beyond what the Casimir eigenvalues alone encode.
+
+% ============================================================================
+\section{Machine Verification}
+\label{sec:verification}
+% ============================================================================
+
+All concrete algebraic results in this paper are machine-verified in
+Lean~4 \cite{demoura2021lean4} with mathlib \cite{mathlib}, compiled
+with zero \texttt{sorry} gaps. \Cref{tab:proofs} summarizes the
+relevant proof files.
+
+\begin{table*}[t]
+\centering
+\caption{Machine-verified theorems relevant to this paper. All files
+  compile with zero \texttt{sorry} gaps.}
+\label{tab:proofs}
+\small
+\begin{tabular}{@{}llp{6cm}@{}}
+\toprule
+\textbf{File} & \textbf{Key Theorem} & \textbf{Content} \\
+\midrule
+\texttt{polyphase\_formula.lean}
+  & \texttt{omega\_pow\_N}
+  & $\omega_N^N = 1$; roots of unity, DFT kernel \\
+  & \texttt{cube\_roots\_sum\_zero}
+  & $1 + \omega_3 + \omega_3^2 = 0$; balanced-phase property \\
+  & \texttt{omega4\_eq\_I}
+  & $\omega_4 = i$; connecting $\ZZ_4$ to complex plane \\
+\midrule
+\texttt{grade2\_lie\_algebra.lean}
+  & \texttt{comm\_pure\_bivector}
+  & $[\text{grade 2}, \text{grade 2}] \subseteq \text{grade 2}$; Lie closure \\
+  & \texttt{jacobi}
+  & $[A,[B,C]] + [B,[C,A]] + [C,[A,B]] = 0$; Lie algebra axiom \\
+  & \texttt{casimir\_nonzero}
+  & $C_2 \neq 0$ in $\Cl(3,0)$; algebraic spectral gap \\
+  & \texttt{casimir\_commutes\_e12}
+  & $[C_2, e_{12}] = 0$; Schur centrality \\
+\midrule
+\texttt{casimir\_eigenvalues.lean}
+  & \texttt{casimir\_fund\_val}
+  & $C_2 = -2 I_3$ in fundamental of $\so(3)$ \\
+  & \texttt{comm\_L1\_L2}
+  & $[L_1, L_2] = L_3$; structure constants \\
+  & \texttt{casimir\_commutes\_L1}
+  & $[C_2, L_1] = 0$; Casimir centrality \\
+\midrule
+\texttt{casimir\_spectral\_gap.lean}
+  & \texttt{killing\_form\_negative}
+  & $\Tr(H^2) < 0$ for $H \neq 0$; compactness \\
+  & \texttt{so3\_sq\_nonzero}
+  & $H \neq 0 \Rightarrow H^2 \neq 0$; spectral gap \\
+\midrule
+\texttt{block\_tridiagonal.lean}
+  & \texttt{grade2\_times\_grade2\_selection}
+  & $\pi_1(AB) = \pi_3(AB) = 0$ for bivectors $A, B$ \\
+  & \texttt{grade\_decomposition}
+  & $x = \pi_0(x) + \pi_1(x) + \pi_2(x) + \pi_3(x)$ \\
+\midrule
+\texttt{su3\_cartan\_weyl.lean}
+  & \texttt{ad\_H1\_eigenvalues\_complete}
+  & All 8 eigenvalues of $\ad_{H_1}$ verified \\
+  & \texttt{ad\_H2\_eigenvalues\_complete}
+  & All 8 eigenvalues of $\ad_{H_2}$ verified \\
+  & \texttt{positive\_root\_closed}
+  & $\mathfrak{n}^+$ is a closed subalgebra \\
+  & \texttt{bracket\_count}
+  & All $\binom{8}{2} = 28$ brackets verified \\
+  & \texttt{killing\_cartan\_det}
+  & $\det B|_{\h} = 108 \neq 0$; semisimplicity \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+The verification strategy uses explicit finite-dimensional
+representations (8-component $\Cl(3,0)$, $3 \times 3$ matrices for
+$\so(3)$, 8-component Chevalley basis for $\su(3)$) rather than
+mathlib's abstract \texttt{CliffordAlgebra} type. This choice
+prioritizes computational transparency: every proof reduces to
+\texttt{ext} (extensionality), \texttt{simp} (simplification), and
+\texttt{ring} (polynomial identity), making the proofs independently
+auditable. A natural extension would connect these concrete types to
+mathlib's abstract Clifford algebra via isomorphism proofs.
+
+The full codebase, including all 37 Lean~4 proof files with
+approximately 900 theorems, is available at \cite{uft-github}.
+
+% ============================================================================
+\section{Discussion}
+\label{sec:discussion}
+% ============================================================================
+
+\subsection{The Common Mathematical Parent}
+
+The four results of this paper---two identities and two
+analogies---share a common mathematical parent: \emph{character
+decomposition on compact groups}. The hierarchy is:
+
+\begin{center}
+\begin{tikzcd}[row sep=1em, column sep=0.3em]
+  & \text{Peter--Weyl (compact $G$)} \arrow[dl] \arrow[d] \arrow[dr] & \\
+  \text{Fortescue ($\ZZ_N$)} &
+  \text{Cartan--Weyl ($T^r \subset G$)} &
+  \text{Coxeter ($\ZZ_h \subset W$)}
+\end{tikzcd}
+\end{center}
+
+All three bottom-row decompositions are instances of harmonic analysis
+(eigendecomposition under an abelian subgroup) on different subgroups:
+\begin{itemize}[leftmargin=*]
+\item Fortescue: $\ZZ_N$ (cyclic symmetry of $N$-phase systems).
+\item Cartan--Weyl: $T^r$ (maximal torus of a Lie group).
+\item Coxeter: $\ZZ_h$ (cyclic group generated by the Coxeter element
+  inside the Weyl group $W$).
+\end{itemize}
+
+The mass gap / stop band analogy (\Cref{sec:analogy-stopband}) is
+connected through the resolvent: the spectral decomposition of an
+operator is, at bottom, another instance of decomposing a function
+(the resolvent) into contributions from irreducible representations
+(eigenspaces).
+
+\subsection{Pedagogical Value}
+
+The Fortescue--Cartan--Weyl connection has immediate pedagogical
+applications. Electrical engineering students learn symmetrical
+components as a practical tool; the connection to Lie theory reveals
+the underlying mathematical structure. Conversely, physics students
+learning the Cartan--Weyl decomposition can build intuition from the
+power systems analogy: the Cartan subalgebra is the ``zero sequence''
+(in-phase, simultaneously measurable quantities), positive roots are
+``positive sequences'' (forward-rotating components), and negative
+roots are ``negative sequences'' (backward-rotating components).
+
+The analogy is particularly vivid for $\su(2)$, where the three
+generators map directly to the three Fortescue sequences
+($N = 3$): $H \leftrightarrow$ zero, $E_+ \leftrightarrow$ positive,
+$E_- \leftrightarrow$ negative. The eigenvalues $\{0, +1, -1\}$ match
+the three cube roots of unity restricted to
+$\{1, \omega_3, \omega_3^2\} \to \{0, +, -\}$.
+
+\subsection{Limitations}
+
+Several limitations should be noted:
+
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Concrete vs.\ abstract verification.} Our Lean~4 proofs
+  use explicit finite-dimensional representations rather than abstract
+  Clifford algebra and Lie algebra APIs. This means the proofs verify
+  specific instances ($\so(3)$, $\su(3)$, $\Cl(3,0)$) rather than
+  general theorems about all semisimple Lie algebras. The general
+  statements (\Cref{prop:peter-weyl-fortescue}, the grade selection rule
+  for arbitrary $\Cl(n,0)$) are proved by standard mathematical arguments
+  in the text; only the concrete instances are machine-verified.
+
+\item \textbf{The Coxeter analogy.} We have not formalized the Coxeter
+  element or principal grading in Lean~4. The Coxeter numbers and
+  exponents in \Cref{tab:coxeter} are standard results from
+  \cite{humphreys1990}; their machine verification would require a
+  formalization of root systems and Weyl groups that is currently beyond
+  the scope of our codebase.
+
+\item \textbf{Scope of the grade selection rule.} \Cref{thm:selection-rule}
+  is proved for $\Cl(3,0)$. The general statement for $\Cl(n,0)$ follows
+  from the standard grading theory of Clifford algebras
+  \cite{lounesto2001}, but has not been machine-verified for $n > 3$.
+
+\item \textbf{No physics claims.} We make no claims about quantum field
+  theory, the Yang--Mills mass gap, or the physical relevance of
+  $\so(14)$. The Casimir eigenvalues and block-tridiagonal structure are
+  algebraic facts; their physical interpretation requires additional
+  analytical work that is outside the scope of this paper.
+\end{enumerate}
+
+\subsection{The Identity--Analogy Boundary}
+
+A contribution of this paper is the explicit delineation between
+\emph{identities} and \emph{analogies}:
+
+\begin{table}[h]
+\centering
+\caption{Classification of the four results. Identities are provable
+  mathematical equivalences; analogies share structure but have definite
+  points of failure.}
+\label{tab:identity-analogy}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Result} & \textbf{Status} & \textbf{Limitation} \\
+\midrule
+Peter--Weyl/Fortescue & Identity & None \\
+Cartan--Weyl/Fortescue & Identity & None \\
+Mass gap/stop band & Analogy & Existence, nonlinearity \\
+Coxeter/Fortescue & Analogy & Non-uniform modes \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The distinction matters. An identity means the two decompositions are
+literally the same mathematics, differing only in notation and the
+community that uses them. An analogy means the decompositions share a
+common mathematical parent (character theory) but differ in scope,
+structure, or the level of generality at which they operate.
+
+% ============================================================================
+\section{Related Work}
+\label{sec:related}
+% ============================================================================
+
+The observation that the DFT is the character table of $\ZZ_N$ is
+classical (see, e.g., Terras \cite{terras1999}). The connection between
+Clifford algebras and Lie algebras is covered in standard references
+\cite{lounesto2001,doran2003}. The Coxeter element and principal grading
+are treated in Humphreys \cite{humphreys1990} and Kostant
+\cite{kostant1959}.
+
+What appears to be new is the systematic identification of Fortescue's
+engineering decomposition with the Cartan--Weyl decomposition via their
+common parent in character theory, together with the observation that
+Clifford grade selection rules impose block-tridiagonal structure on
+Hamiltonians. We are not aware of any prior published work that
+connects these threads.
+
+Wieser and Song \cite{wieser2021clifford} formalized Clifford algebras
+in Lean~3/mathlib, providing the mathematical infrastructure that
+underlies our concrete computations. Tooby-Smith's PhysLean/HepLean
+project \cite{toobysmith2025physlean} formalizes standard physics in
+Lean~4 but does not address the cross-domain connections we establish
+here.
+
+% ============================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+% ============================================================================
+
+We have established that Fortescue's symmetrical components (1918) and
+the Cartan--Weyl root space decomposition (1913--1925) are instances
+of the same mathematical operation: character decomposition on compact
+groups. The Fortescue matrix is the character table of $\ZZ_N$; the
+Cartan--Weyl decomposition is the eigendecomposition of the adjoint
+representation under the maximal torus; and the Peter--Weyl theorem
+provides the unifying generalization.
+
+We have further shown that Clifford grade selection rules force
+operators built from $\so(n)$ generators into block-tridiagonal form,
+providing a structural constraint on their spectra. This constraint,
+verified for $\Cl(3,0)$ in Lean~4, goes beyond the information encoded
+in the Casimir eigenvalues alone.
+
+Two additional analogies---the mass gap as a spectral stop band, and
+the Coxeter principal grading as a generalized Fortescue
+decomposition---share the same mathematical parent but fall short of
+provable identities. We have delineated precisely where each analogy
+holds and where it breaks.
+
+All concrete results are machine-verified in Lean~4 with zero
+\texttt{sorry} gaps, including the $\so(3)$ structure constants and
+Jacobi identity from $\Cl(3,0)$, the Casimir eigenvalue and Killing
+form negativity, the grade selection rules, and the complete
+Cartan--Weyl decomposition of $\su(3)$ with all 28 independent
+brackets.
+
+\begin{acknowledgements}
+The machine verification was performed using Lean~4 and the mathlib
+library. The author thanks the Lean and mathlib communities for
+providing the infrastructure that made this work possible.
+\end{acknowledgements}
+
+% ============================================================================
+% References
+% ============================================================================
+
+\begin{thebibliography}{30}
+
+\bibitem{fortescue1918}
+Fortescue, C.L.:
+Method of symmetrical co-ordinates applied to the solution of polyphase
+networks.
+AIEE Transactions \textbf{37}(2), 1027--1140 (1918)
+
+\bibitem{cartan1913}
+Cartan, \'E.:
+Les groupes projectifs qui ne laissent invariante aucune multiplicit\'e
+plane.
+Bulletin de la Soci\'et\'e Math\'ematique de France \textbf{41},
+53--96 (1913)
+
+\bibitem{weyl1925}
+Weyl, H.:
+Theorie der Darstellung kontinuierlicher halbeinfacher Gruppen durch
+lineare Transformationen.
+Mathematische Zeitschrift \textbf{23}, 271--309 (1925)
+
+\bibitem{peter-weyl1927}
+Peter, F., Weyl, H.:
+Die Vollst\"andigkeit der primitiven Darstellungen einer geschlossenen
+kontinuierlichen Gruppe.
+Mathematische Annalen \textbf{97}, 737--755 (1927)
+
+\bibitem{coxeter1934}
+Coxeter, H.S.M.:
+Discrete groups generated by reflections.
+Annals of Mathematics \textbf{35}(3), 588--621 (1934)
+
+\bibitem{kostant1959}
+Kostant, B.:
+The principal three-dimensional subgroup and the Betti numbers of a
+complex simple Lie group.
+American Journal of Mathematics \textbf{81}(4), 973--1032 (1959)
+
+\bibitem{humphreys1972}
+Humphreys, J.E.:
+Introduction to Lie Algebras and Representation Theory.
+Graduate Texts in Mathematics, vol.~9. Springer, New York (1972)
+
+\bibitem{humphreys1990}
+Humphreys, J.E.:
+Reflection Groups and Coxeter Groups.
+Cambridge Studies in Advanced Mathematics, vol.~29. Cambridge University
+Press (1990)
+
+\bibitem{lounesto2001}
+Lounesto, P.:
+Clifford Algebras and Spinors, 2nd edn.
+London Mathematical Society Lecture Note Series, vol.~286. Cambridge
+University Press (2001)
+
+\bibitem{doran2003}
+Doran, C., Lasenby, A.:
+Geometric Algebra for Physicists.
+Cambridge University Press (2003)
+
+\bibitem{hestenes1966}
+Hestenes, D.:
+Space-Time Algebra.
+Gordon and Breach, New York (1966)
+
+\bibitem{georgi1999}
+Georgi, H.:
+Lie Algebras in Particle Physics, 2nd edn.
+Frontiers in Physics. Westview Press (1999)
+
+\bibitem{fulton1991}
+Fulton, W., Harris, J.:
+Representation Theory: A First Course.
+Graduate Texts in Mathematics, vol.~129. Springer, New York (1991)
+
+\bibitem{hall2015}
+Hall, B.C.:
+Lie Groups, Lie Algebras, and Representations: An Elementary
+Introduction, 2nd edn.
+Graduate Texts in Mathematics, vol.~222. Springer, Cham (2015)
+
+\bibitem{terras1999}
+Terras, A.:
+Fourier Analysis on Finite Groups and Applications.
+London Mathematical Society Student Texts, vol.~43. Cambridge University
+Press (1999)
+
+\bibitem{jaffe-witten2000}
+Jaffe, A., Witten, E.:
+Quantum Yang--Mills theory.
+In: The Millennium Prize Problems, pp.~129--152. Clay Mathematics
+Institute (2000)
+
+\bibitem{demoura2021lean4}
+de~Moura, L., Ullrich, S.:
+The Lean~4 theorem prover and programming language.
+In: CADE-28. LNCS, vol.~12699, pp.~625--635. Springer (2021)
+
+\bibitem{mathlib}
+The mathlib community:
+The Lean mathematical library.
+In: CPP 2020, pp.~367--381. ACM (2020)
+
+\bibitem{wieser2021clifford}
+Wieser, E., Song, U.:
+Formalizing geometric algebra in Lean.
+Advances in Applied Clifford Algebras \textbf{31}, 38 (2021)
+
+\bibitem{toobysmith2025physlean}
+Tooby-Smith, J.:
+HepLean: Digitalising high energy physics.
+Computer Physics Communications \textbf{308}, 109457 (2025)
+
+\bibitem{steinmetz1893}
+Steinmetz, C.P.:
+Complex quantities and their use in electrical engineering.
+AIEE Proceedings, 33--74 (1893)
+
+\bibitem{uft-github}
+Arnoldy, I.M.:
+UFT: Formal verification of unified field theory algebraic scaffold.
+\url{https://github.com/iarnoldy/UFT} (2026)
+
+\bibitem{gallier2020}
+Gallier, J., Quaintance, J.:
+Differential Geometry and Lie Groups: A Computational Perspective.
+Geometry and Computing, vol.~12. Springer, Cham (2020)
+
+\bibitem{atiyah-bott-shapiro1964}
+Atiyah, M.F., Bott, R., Shapiro, A.:
+Clifford modules.
+Topology \textbf{3}(Suppl.~1), 3--38 (1964)
+
+\end{thebibliography}
+
+\end{document}

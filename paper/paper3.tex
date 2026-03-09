@@ -448,42 +448,49 @@ $\mathrm{SO}(18)$ family unification fails (8 + 8 mirror families);
 for $\mathrm{SO}(14)$, this critique is much less severe because a single
 semi-spinor gives only one family.
 
-Six candidate mechanisms exist for generating three families within
-$\mathrm{SO}(14)$:
-\begin{enumerate}
-\item Orbifold family unification in $\mathrm{SO}(2N)$ gauge
-  theory~\cite{kawamura2010}, which has been demonstrated for the
-  $\mathrm{SO}(2N)$ series and can yield three families with
-  specific boundary conditions.
-\item The Clifford algebra $S_3$ symmetry
-  mechanism~\cite{gresnigt2024,gresnigt2026}, which produces exactly
-  three copies from the sedenion structure of $\Cl(8) \subset \Cl(14)$
-  via a unique splitting into three complex octonion subalgebras.
-\item Krasnov's octonionic framework~\cite{krasnov2022}, in which
-  the 64-dimensional semi-spinor of $\mathrm{Spin}(11,3)$ is
-  identified with $\mathbb{O} \otimes \mathbb{O}'$ (octonions times
-  split octonions), with a potential quaternionic triple mechanism
-  for three generations.
-\item Calabi-Yau compactification via the $\mathrm{SO}(14) \times
-  \mathrm{U}(1) \subset \mathrm{E}_8$ embedding, where the Euler
-  characteristic $\chi = \pm 6$ gives three generations~\cite{candelas1985}.
-\item Discrete flavor symmetry $A_4 \subset \mathrm{SO}(4)$, exploiting
-  the binary tetrahedral subgroup of $\mathrm{SU}(2)$~\cite{altarelli2005}.
-\item The BenTov-Zee mechanism~\cite{bentov2016}, which revives
-  $\mathrm{SO}(2N)$ family unification via topological
-  superconductor technology.
-\end{enumerate}
-The most algebraically promising mechanism is (2), the $\Cl(8)$ $S_3$
-symmetry, which uniquely produces the number three from algebraic
-structure.  Its extension from $\Cl(8)$ to the $\mathbf{64}$-spinor of
-$\Cl(14)$ is a well-defined open problem\OP.
+The $\mathrm{SO}(4) = \mathrm{SU}(2)_L \times \mathrm{SU}(2)_R$ factor
+that appears in the decomposition $\mathrm{SO}(14) \to \mathrm{SO}(10) \times
+\mathrm{SO}(4)$ initially suggests a four-sector family structure, since the
+semi-spinor branches as
+$\mathbf{64}_+ = (\mathbf{16}, (\mathbf{2},\mathbf{1})) \oplus
+(\overline{\mathbf{16}}, (\mathbf{1},\mathbf{2}))$\MV.
+However, we prove that no mechanism internal to $\mathrm{SO}(14)$ can produce a
+$3+1$ splitting of these four sectors\CO:
+\begin{itemize}
+\item \textbf{Lie algebra impossibility}\CO: any mass operator from
+  $\so(4) \cong \su(2)_L \oplus \su(2)_R$ acting on the family space
+  $(\mathbf{2},\mathbf{1}) \oplus (\mathbf{1},\mathbf{2})$ has eigenvalues
+  $\{a+b, a-b, -a+b, -a-b\}$, which satisfy $m_1 + m_4 = m_2 + m_3 = 0$.
+  Three equal eigenvalues require $a = b = 0$.
+\item \textbf{Representation mismatch}\CO: the family space carries the
+  spinorial representation $(\mathbf{2},\mathbf{1}) \oplus (\mathbf{1},\mathbf{2})$,
+  not the vectorial $(\mathbf{2},\mathbf{2})$.  Under any diagonal
+  $\mathrm{SU}(2) \subset \mathrm{SO}(4)$, the family space decomposes as
+  $\mathbf{2} \oplus \mathbf{2}$ (two doublets), never as
+  $\mathbf{3} \oplus \mathbf{1}$ (triplet $+$ singlet).  This excludes
+  discrete flavor symmetries $A_4 \subset \mathrm{SO}(3)_\text{diag}$.
+\item \textbf{Matter-mirror mixing}: of the four sectors, two carry the
+  $\mathbf{16}$ (matter) and two the $\overline{\mathbf{16}}$ (mirror),
+  so no relabeling produces three identical generations.
+\end{itemize}
+
+The generation mechanism must therefore be external.  The most developed
+option is orbifold family unification~\cite{kawamura2010}: $\mathrm{SO}(2N)$
+gauge theory on $M^4 \times S^1 / (\mathbb{Z}_2 \times \mathbb{Z}_2')$
+yields three chiral families with specific boundary conditions.  This
+mechanism has been demonstrated for the $\mathrm{SO}(2N)$
+series~\cite{maru2025} and applies directly to $\mathrm{SO}(14)$.
+Other external approaches include Calabi-Yau compactification via the
+$\mathrm{SO}(14) \times \mathrm{U}(1) \subset \mathrm{E}_8$ embedding
+with Euler characteristic $\chi = \pm 6$~\cite{candelas1985}, and the
+BenTov-Zee topological mechanism~\cite{bentov2016}.
 
 We emphasize that $\mathrm{SO}(14)$ neither solves nor worsens the
 three-generation problem relative to $\mathrm{SO}(10)$.  It inherits
-the same open question while offering additional algebraic
-structure ($\mathrm{SO}(4)$ factor, octonionic spinor,
-$\Cl(14) \supset \Cl(8)$ chain) that is not available to
-$\mathrm{SO}(10)$.
+the same open question.  The impossibility theorem above---showing that
+the $\mathrm{SO}(4)$ family structure cannot produce $3+1$ from any Lie
+algebra element---is itself a genuine result that constrains future model
+building.
 
 \subsection{Signature and Gravity}
 \label{sec:signature}
@@ -813,9 +820,11 @@ $\mathrm{SO}(10)$ are:
   is embedded as a subgroup, with $[\so(10), \so(3,1)] = 0$\MV.
 \item \textbf{Machine verification}: the algebraic foundation has been
   formally checked by computer.
-\item \textbf{Additional generation mechanisms}: the $\mathrm{SO}(4)$
-  factor and $\Cl(14) \supset \Cl(8)$ chain offer algebraic approaches
-  to three generations not available to $\mathrm{SO}(10)$.
+\item \textbf{Four-sector spinor structure}: the $\mathrm{SO}(4)$ factor
+  provides a four-sector decomposition $(\mathbf{2},\mathbf{1}) \oplus
+  (\mathbf{1},\mathbf{2})$ of the semi-spinor\MV, with a proved
+  impossibility theorem constraining future generation
+  mechanisms\CO---structural information not available to $\mathrm{SO}(10)$.
 \end{enumerate}
 
 The principal disadvantages are:
@@ -857,18 +866,16 @@ We state three principal open problems:
 
 \paragraph{1.\ Three generations\OP.}
 No simple Lie group is known to predict exactly three generations
-from representation theory alone.  The most promising direction for
-$\mathrm{SO}(14)$ is the extension of Gresnigt's $\Cl(8)$ $S_3$
-symmetry mechanism~\cite{gresnigt2024,gresnigt2026} to the
-64-spinor of $\Cl(14)$.  This is a concrete mathematical problem:
-determine whether the $S_3$ action on three complex octonion
-subalgebras within $\Cl(8)$ extends to an $S_3$ action on the
-$\mathbf{64}$ of $\Cl(14)$ that (a) generates three copies of the
-$\mathbf{16}$ of $\mathrm{SO}(10)$, (b) preserves the gauge
-structure, and (c) is compatible with the $\mathrm{SO}(4)$ gravity
-sector.  If this computation succeeds, it would provide the first
-algebraic derivation of three generations; if it fails, the
-$\Cl(8)$ mechanism does not extend to $\mathrm{SO}(14)$.
+from representation theory alone.  We have proved that no mechanism
+intrinsic to $\mathrm{SO}(14)$ can produce $3+1$ from the $\mathrm{SO}(4)$
+family structure (Sec.~\ref{sec:matter}): the Lie algebra impossibility
+theorem, the representation mismatch (spinorial $2+2$ vs.\ vectorial $3+1$),
+and the matter-mirror content collectively exclude all internal candidates\CO.
+The most developed external approach is orbifold family
+unification~\cite{kawamura2010}, which has been demonstrated for the
+$\mathrm{SO}(2N)$ series.  Constructing the explicit orbifold boundary
+conditions for $\mathrm{SO}(14)$ on $M^4 \times S^1/\mathbb{Z}_2$ that
+yield exactly three generations is a concrete open problem.
 
 \paragraph{2.\ Distler ghosts\OP.}
 The non-compact form $\mathrm{SO}(3,11)$ has indefinite Killing form,
@@ -930,9 +937,11 @@ Several concrete research directions emerge:
 \item \textbf{Threshold corrections}: systematic computation of
   threshold corrections from the 178-scalar spectrum to determine
   whether the 0.88\% coupling miss can be naturally closed.
-\item \textbf{$\Cl(8) \to \Cl(14)$ three-generation bridge}:
-  the concrete computation extending Gresnigt's $S_3$ mechanism
-  from $\Cl(8)$ to the 64-spinor of $\Cl(14)$.
+\item \textbf{Orbifold three-generation construction}:
+  explicit boundary conditions for $\mathrm{SO}(14)$ on
+  $M^4 \times S^1/(\mathbb{Z}_2 \times \mathbb{Z}_2')$
+  following Kawamura-Miura~\cite{kawamura2010}, specializing their
+  $\mathrm{SO}(2N)$ framework to $N = 7$.
 \item \textbf{Ghost resolution}: a rigorous treatment of ghost
   decoupling in the broken phase of $\mathrm{SO}(3,11)$, potentially
   following Krasnov's chiral approach.
@@ -1116,37 +1125,6 @@ Y.~Kawamura and T.~Miura,
 ``Orbifold family unification in $\mathrm{SO}(2N)$ gauge theory,''
 Phys.\ Rev.\ D \textbf{81}, 075011 (2010)
 [arXiv:0912.0776].
-
-\bibitem{gresnigt2024}
-N.~G.~Gresnigt \textit{et al.},
-``Algebraic realisation of three fermion generations with
-$S_3$ family and unbroken gauge symmetry from $\mathrm{Cl}(8)$,''
-Eur.\ Phys.\ J.\ C \textbf{84}, 1124 (2024)
-[arXiv:2407.01580].
-
-\bibitem{gresnigt2026}
-N.~G.~Gresnigt,
-``Electroweak structure and three fermion generations in
-Clifford algebra with $S_3$ family symmetry,''
-arXiv:2601.07857 (2026).
-
-\bibitem{furey2014}
-C.~Furey,
-``Generations: three prints, in colour,''
-JHEP \textbf{10}, 046 (2014)
-[arXiv:1405.4601].
-
-\bibitem{gillard2019}
-A.~B.~Gillard and N.~G.~Gresnigt,
-``Three fermion generations with two unbroken gauge symmetries
-from the complex sedenions,''
-Eur.\ Phys.\ J.\ C \textbf{79}, 446 (2019).
-
-\bibitem{altarelli2005}
-G.~Altarelli and F.~Feruglio,
-``Tri-bimaximal neutrino mixing, $A_4$ and the modular symmetry,''
-Nucl.\ Phys.\ B \textbf{741}, 215 (2006)
-[arXiv:hep-ph/0512103].
 
 \bibitem{bentov2016}
 Y.~BenTov and A.~Zee,

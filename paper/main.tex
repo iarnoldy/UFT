@@ -70,7 +70,7 @@ A Case Study Using Lean~4}
 \begin{abstract}
 We present a systematic protocol for applying interactive theorem provers to
 claims originating from alternative or non-standard mathematical frameworks.
-Using Lean~4 and mathlib, we extract formalizable assertions from such sources,
+Using Lean~4~\cite{demoura2021lean4} and mathlib~\cite{mathlib}, we extract formalizable assertions from such sources,
 translate them into dependent type theory, and attempt proof or disproof---reporting
 results without prejudice. We demonstrate the protocol through a case study on
 Eric Dollard's ``versor algebra,'' a non-standard extension of electrical
@@ -327,6 +327,7 @@ real part must equal 1 for equivalence (\texttt{versor\_repaired\_with\_one}),
 but $h \neq 1$ (\texttt{h\_ne\_one}).
 
 \subsection{\textsc{Algebraic Necessity}: $h = -1$ Forced}
+\label{sec:algnec}
 
 The most structurally interesting result: Dollard's three core axioms
 $j^2 = -1$, $hj = k$, $jk = 1$ \emph{alone} force $h = -1$ over any field.
@@ -362,7 +363,7 @@ are standard.
 
 Formal methods precisely \emph{identify} this ambiguity as a contribution:
 rather than resolving it by fiat, we show that the algebraic necessity result
-(\Cref{sec:disproof}) makes the notation irrelevant. Whatever
+(\Cref{sec:algnec}) makes the notation irrelevant. Whatever
 $\sqrt{+1}^{1/2}$ means, $h$ must equal $-1$ in any algebra satisfying
 Dollard's core axioms.
 
@@ -491,8 +492,8 @@ projectors $P_{\pm} = \frac{1 \pm e_1}{2}$ that decompose signals into
 forward and backward wave components---a genuine mathematical tool for
 transmission line analysis.
 
-At Level~4, $\mathrm{Cl}(1,3)$ is the spacetime algebra where Maxwell's four
-equations collapse to one: $\nabla F = J$. This is the genuine unified field
+At Level~4, $\mathrm{Cl}(1,3)$ is the spacetime algebra~\cite{hestenes1966,doran2003}
+where Maxwell's four equations collapse to one: $\nabla F = J$. This is the genuine unified field
 framework for classical electromagnetism, achieved through geometric algebra
 rather than through Dollard's commutative $\mathbb{Z}_4$.
 

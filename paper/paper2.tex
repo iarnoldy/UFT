@@ -35,7 +35,8 @@
 \providecommand{\institute}[1]{}
 \providecommand{\email}[1]{\texttt{#1}}
 \providecommand{\keywords}[1]{%
-  \begingroup\renewcommand{\and}{$\cdot$}%
+  \begingroup\providecommand{\and}{}%
+  \renewcommand{\and}{$\cdot$}%
   \par\medskip\noindent\textbf{Keywords:} #1\endgroup}
 
 % Lean 4 listing style
@@ -110,7 +111,7 @@
   \email{ian@arnoldy.me}
 }
 
-\date{\today}
+\date{March 10, 2026}
 
 \maketitle
 
@@ -702,7 +703,6 @@ becomes $c_2(\text{fund}) = (n-1)/2$.
 \toprule
 $n$ & $c_2(\text{fund})$ & $c_2(\text{adj})$ & $c_2(\text{spinor})$ \\
 \midrule
-3 & $1$ & $2$ & --- \\
 10 & $9/2$ & $16$ & $45/4$ \\
 14 & $13/2$ & $24$ & $91/4$ \\
 \bottomrule
@@ -952,14 +952,18 @@ theorem grade2_times_grade2_selection
 More generally, the Clifford product of a grade-$p$ element with a
 grade-$q$ element has components only in grades
 $|p - q|, |p - q| + 2, \ldots, p + q$ (subject to the constraint
-$\leq n$). For $p = q = 2$: the product lies in grades $0$ and $2$.
+$\leq n$). For $p = q = 2$: the product lies in grades $0$, $2$,
+and (when $n \geq 4$) grade~$4$.
 
 The commutator $[A, B] = AB - BA$ of two bivectors is therefore a
-pure bivector (grade 2), since the grade-0 part of the Clifford
-product is symmetric: $\langle AB \rangle_0 = \langle BA \rangle_0$
-(it equals the scalar product $A \cdot B$). Hence the antisymmetric
-combination $AB - BA$ has zero grade-0 component, leaving only
-grade~2, which confirms \Cref{prop:grade2-lie}.
+pure bivector (grade 2). The grade-0 part of the Clifford product
+is symmetric: $\langle AB \rangle_0 = \langle BA \rangle_0$
+(it equals the scalar product $A \cdot B$). The grade-4 part is
+likewise symmetric: $\langle AB \rangle_4 = A \wedge B = B \wedge A
+= \langle BA \rangle_4$ (since the exterior product of two
+2-forms is symmetric). Hence both cancel in the antisymmetric
+combination $AB - BA$, leaving only grade~2, which confirms
+\Cref{prop:grade2-lie}.
 
 The complete grade-shifting behavior of bivectors is verified in Lean~4:
 \begin{itemize}[leftmargin=*]
@@ -1120,7 +1124,7 @@ auditable. A natural extension would connect these concrete types to
 mathlib's abstract Clifford algebra via isomorphism proofs.
 
 The full codebase, including all 43 Lean~4 proof files with
-approximately 1400 theorems, is available at \cite{uft-github}.
+approximately 1400 theorems, is publicly available \cite{uft-github}.
 
 % ============================================================================
 \section{Discussion}

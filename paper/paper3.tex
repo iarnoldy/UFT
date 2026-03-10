@@ -3,7 +3,7 @@
 % Status: FIRST DRAFT
 % Companion papers:
 %   Paper 1: "Formal Verification of Alternative Mathematical Frameworks" (CICM 2026)
-%   Paper 2: "Character Decomposition from Fortescue to Cartan-Weyl" (AACA, in prep)
+%   Paper 2: "Character Decomposition from Fortescue to Cartan-Weyl" (AACA, submitted)
 %
 % Claim tags:
 %   [MV] Machine-verified in Lean 4 (0 sorry gaps)
@@ -12,7 +12,7 @@
 %   [SP] Standard physics (textbook results)
 %   [OP] Open problem (honestly stated)
 
-\documentclass[aps,prd,twocolumn,showpacs,preprintnumbers,superscriptaddress]{revtex4-2}
+\documentclass[aps,prd,twocolumn,showpacs,preprintnumbers,superscriptaddress,floatfix]{revtex4-2}
 
 \usepackage{amsmath,amssymb}
 \usepackage{mathtools}
@@ -45,7 +45,7 @@ with Phenomenological Predictions}
 \author{Ian M.~Arnoldy}
 \affiliation{Independent Researcher}
 
-\date{\today}
+\date{March 10, 2026}
 
 \begin{abstract}
 We present a candidate unified field theory based on $\mathrm{SO}(14)$, whose algebraic
@@ -61,8 +61,8 @@ representation as the Higgs field for the first step.  One-loop renormalization 
 analysis yields coupling unification at $M_\text{GUT} = 10^{16.98}\GeV$ with
 $\alpha_\text{GUT}^{-1} = 47.03$ (0.88\% miss with threshold corrections from 177
 scalar components), a proton lifetime of $\tau_p \approx 10^{38.9}$~years (safely
-above the Super-Kamiokande bound of $10^{34.4}$~years), and asymptotic freedom at
-all scales above the Standard Model.  We state open problems honestly: the three-generation
+above the Super-Kamiokande bound of $10^{34.4}$~years), and asymptotic freedom
+for all non-abelian gauge factors at scales above the Standard Model.  We state open problems honestly: the three-generation
 problem is inherited from $\mathrm{SO}(10)$, the Distler ghost objection for the
 non-compact form $\mathrm{SO}(3,11)$ remains unresolved, and the mass gap is the
 Millennium Prize problem.  Machine verification is the unique methodological contribution:
@@ -208,17 +208,17 @@ All 6 anomaly conditions %[MV]
 $Q = T_3 + Y/2$ preserves VEV %[MV]
   & \texttt{symmetry\_breaking} & \texttt{charge\_preserves\_vev} & Photon masslessness \\
 $16 = 1 + 10 + \overline{5}$ %[MV]
-  & \texttt{spinor\_matter} & \texttt{spinor\_weight\_decomposition} & One generation per spinor \\
+  & \texttt{spinor\_matter} & \texttt{spinor\_decomposition} & One generation per spinor \\
 Higgs: sym.\ traceless $\mathbf{104}$ %[MV]
   & \texttt{so14\_breaking\_chain} & \texttt{so14\_sym\_traceless\_dim} & Corrected Higgs rep \\
 $75$ massive $+ 16$ massless $= 91$ %[MV]
   & \texttt{so14\_breaking\_chain} & \texttt{gauge\_boson\_conservation} & Mass spectrum accounting \\
 $[\so(1,3), \so(10)] = 0$ %[MV]
-  & \texttt{unification\_gravity} & \texttt{commutator\_vanishes} & Gravity-gauge decoupling \\
+  & \texttt{unification\_gravity} & \texttt{gravity\_gauge\_commute} & Gravity-gauge decoupling \\
 SM beta coefficients %[MV]
   & \texttt{rg\_running} & \texttt{beta1\_gut\_normalized} & $b_1, b_2, b_3$ from reps \\
 Jacobi identity for $\so(10)$ %[MV]
-  & \texttt{so10\_grand} & \texttt{jacobi\_cyclic} & Lie algebra axiom \\
+  & \texttt{so10\_grand} & \texttt{jacobi} & Lie algebra axiom \\
 $\nabla \cdot B = 0$ from Bianchi %[MV]
   & \texttt{bianchi\_identity} & \texttt{gauss\_law\_magnetism} & Maxwell from algebra \\
 \bottomrule
@@ -616,11 +616,13 @@ coupling $g$ is\SP
   \mu \frac{d\alpha_i^{-1}}{d\ln\mu} = -\frac{b_i}{2\pi},
 \end{equation}
 where $\alpha_i = g_i^2 / (4\pi)$ and
-\begin{equation}\label{eq:bcoeff}
-  b_i = -\frac{11}{3} C_2(G) + \frac{2}{3} \sum_f T(R_f)
-    + \frac{1}{3} \sum_\text{cs} T(R_\text{cs})
+\begin{align}
+  b_i = {} &{-}\frac{11}{3} C_2(G) + \frac{2}{3} \sum_f T(R_f)
+    \notag \\
+    &+ \frac{1}{3} \sum_\text{cs} T(R_\text{cs})
     + \frac{1}{6} \sum_\text{rs} T(R_\text{rs}),
-\end{equation}
+    \label{eq:bcoeff}
+\end{align}
 with sums over Weyl fermions, complex scalars, and real scalars
 respectively.\SP{}  The Dynkin indices use the convention
 $T(\text{fund SO}(N)) = 1$, $T(\text{fund SU}(N)) = 1/2$.\SP
@@ -647,7 +649,7 @@ of the breaking chain.
 \toprule
 \textbf{Scale} & \textbf{Group} & $b$ & \textbf{AF?} \\
 \midrule
-$M_Z$ to $M_4$ & SU(3) & $-7.0$ & Yes \\
+$M_Z$ to $M_4$ & SU(3) & $-7$ & Yes \\
 $M_Z$ to $M_4$ & SU(2) & $-19/6$ & Yes \\
 $M_Z$ to $M_4$ & U(1)$_Y$ & $+123/50$ & No \\
 $M_4$ to $M_3$ & SU(5) & $-40/3$ & Yes \\
@@ -786,8 +788,8 @@ $\alpha_\text{GUT} = 1/47.03$\CO:
   \tau_p \approx 10^{38.9} \text{ years}.
 \end{equation}
 This exceeds the current Super-Kamiokande bound of $\tau_p >
-10^{34.4}$ years~\cite{superkamiokande2020} by a factor of $3.5
-\times 10^4$\CO.  The proton lifetime is safely above the
+10^{34.4}$ years~\cite{superkamiokande2020} by a factor of
+${\sim}3 \times 10^4$\CO.  The proton lifetime is safely above the
 experimental bound and will remain so even with the next-generation
 Hyper-Kamiokande experiment (projected sensitivity
 ${\sim}10^{35.3}$~years~\cite{hyperkamiokande2018}).
@@ -945,7 +947,7 @@ argument~\cite{nesti2010} and Krasnov's chiral
 formulation~\cite{krasnov2018} offer partial resolutions, but neither
 has been universally accepted.  A rigorous proof of ghost decoupling
 or a reformulation of the theory that avoids ghosts entirely is needed.
-Our machine-verified energy positivity results (3 files, 8\% of theorems)
+Our machine-verified energy positivity results (3 files, 7\% of theorems)
 apply only to the compact form and do not resolve this question.
 
 \paragraph{3.\ Mass gap\OP.}
@@ -1035,7 +1037,7 @@ been machine-verified in Lean~4 with zero \texttt{sorry} gaps across
 43 proof files.  One-loop renormalization group analysis yields coupling
 unification at $M_\text{GUT} = 10^{16.98}\GeV$ (0.88\% miss with
 threshold corrections), a proton lifetime of $10^{38.9}$~years (safely above
-experimental bounds), and asymptotic freedom at all scales.
+experimental bounds), and asymptotic freedom for all non-abelian gauge factors.
 
 The theory inherits three open problems from the broader gauge unification
 program: three generations (universal to all GUTs), ghost states in the
@@ -1059,8 +1061,8 @@ physical motivation for the algebraic scaffold verified here.
 
 \section*{Data Availability}
 All data generated during this study are contained within the article.
-The Lean~4 source code for all machine-verified proofs is available from
-the corresponding author upon reasonable request.
+The Lean~4 source code for all machine-verified proofs is publicly
+available~\cite{uft-github}.
 
 % ============================================================================
 % References
@@ -1316,7 +1318,7 @@ I.~M.~Arnoldy,
 ``Character decomposition from Fortescue to Cartan--Weyl:
 unifying symmetrical components and root space decomposition
 via Clifford algebras,''
-in preparation for Advances in Applied Clifford Algebras (2026).
+submitted to Advances in Applied Clifford Algebras (2026).
 
 \bibitem{uft-github}
 I.~M.~Arnoldy,

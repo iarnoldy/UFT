@@ -4,9 +4,9 @@ Machine-verified algebraic scaffold from Dollard's versor algebra through Cliffo
 
 ## What This Is
 
-A research project that applies interactive theorem provers (Lean 4) to claims from alternative mathematical frameworks. Starting from Eric Dollard's "versor algebra," we extract formalizable claims, prove or disprove each one, and trace the algebraic path from the source claims through Clifford algebras to gauge theory.
+A research project that applies interactive theorem provers (Lean 4) to claims from alternative mathematical frameworks. Starting from Eric Dollard's "versor algebra," we extract formalizable claims, prove or disprove each one, and trace the algebraic path from the source claims through Clifford algebras to gauge unification.
 
-**35 proof files. ~878 theorems. Zero `sorry` gaps. Zero build errors.**
+**43 proof files. ~1400 theorems. Zero `sorry` gaps. Zero build errors.**
 
 ## Results Summary
 
@@ -21,19 +21,35 @@ A research project that applies interactive theorem provers (Lean 4) to claims f
 ## Algebraic Hierarchy (all machine-verified)
 
 ```
-Z4 --> Cl(1,1) --> Cl(3,0) --> Cl(1,3) --> SU(5) --> SO(10) --> SO(14)
- |        |          |           |           |          |          |
-4th     Wave      Pauli      Spacetime   Georgi-   Grand     Full
-roots   decomp    algebra    algebra     Glashow   unified   unification
-                  F=E+IB    nabla F=J   15-plet   16-plet   91 generators
+Z4 --> Cl(1,1) --> Cl(3,0) --> Cl(1,3) --> SU(5) --> SO(10) --> SO(14) --> E8
+ |        |          |           |           |          |          |         |
+4th     Wave      Pauli      Spacetime   Georgi-   Grand     Full       Three
+roots   decomp    algebra    algebra     Glashow   unified   unification generations
+                  F=E+IB    nabla F=J   15-plet   16-plet   91 gens    via SU(9)
 ```
+
+## Crown Jewel Theorems
+
+| Theorem | File | What It Proves |
+|---------|------|----------------|
+| `so14_dimension` | `so14_unification` | dim so(14) = C(14,2) = 91 |
+| `unification_decomposition` | `so14_unification` | 91 = 45 (gauge) + 6 (gravity) + 40 (mixed) |
+| `centralizer_closed` | `su5_so10_embedding` | su(5) is Lie subalgebra of so(10) |
+| `H1_R12`, `coroot_1` | `su5_lie_structure` | A4 root system identified (Cartan matrix = su(5)) |
+| `charge_preserves_vev` | `symmetry_breaking` | Q = T3 + Y/2 preserves Higgs VEV (photon massless) |
+| `anomaly_checklist` | `so14_anomalies` | All 6 anomaly conditions satisfied |
+| `yang_mills_energy_nonneg` | `yang_mills_energy` | H >= 0 (classical energy positivity) |
+| `gauss_law_magnetism` | `bianchi_identity` | div B = 0 from Bianchi identity |
+| `three_generation_theorem` | `three_generation_theorem` | SO(14) impossibility + E8 = exactly 3 generations |
+| `complete_dimensional_skeleton` | `three_generation_theorem` | 23-part conjunction: entire chain in one theorem |
 
 ## Publications
 
 | Paper | Venue | Status |
 |-------|-------|--------|
 | Formal Verification of Alternative Mathematical Frameworks: A Case Study Using Lean 4 | CICM 2026 (Springer LNAI) | Submitted |
-| Character Decomposition from Fortescue to Cartan-Weyl (cross-domain identities) | Advances in Applied Clifford Algebras | In preparation |
+| Character Decomposition from Fortescue to Cartan-Weyl: Unifying Symmetrical Components and Root Space Decomposition via Clifford Algebras | Advances in Applied Clifford Algebras | Submitted |
+| SO(14) Unification: A Machine-Verified Algebraic Scaffold with Phenomenological Predictions | Physical Review D | In preparation |
 
 ## Build
 
@@ -49,39 +65,43 @@ Requires: Lean 4.29+, mathlib (fetched automatically by `lake build`).
 
 ## Proof Files
 
-All proofs are in `UFT/`:
+All proofs are in `src/lean_proofs/`:
 
 **Foundations** (Dollard verification):
-`BasicOperators`, `AlgebraicNecessity`, `TelegraphEquation`, `PolyphaseFormula`
+`basic_operators`, `algebraic_necessity`
+
+**Polyphase/Telegraph**:
+`polyphase_formula`, `telegraph_equation`
 
 **Clifford Algebras**:
-`Cl11`, `Cl30`, `Cl31Maxwell`, `GaugeGravity`, `Dirac`
+`cl11`, `cl30`, `cl31_maxwell`, `gauge_gravity`, `dirac`
 
 **Gauge Theory**:
-`SU3Color`, `SU5Grand`, `GeorgiGlashow`, `LieBridge`, `SO10Grand`, `SU5SO10Embedding`
+`su3_color`, `su3_cartan_weyl`, `su5_grand`, `su5_lie_structure`, `georgi_glashow`, `lie_bridge`, `so10_grand`, `su5_so10_embedding`
 
 **Unification**:
-`Unification`, `UnificationGravity`, `SpinorMatter`, `GrandUnifiedField`
-`SO14Unification`, `SO14Anomalies`, `SymmetryBreaking`
+`unification`, `unification_gravity`, `spinor_matter`, `grand_unified_field`, `so14_unification`, `so14_anomalies`, `so14_breaking_chain`, `symmetry_breaking`
+
+**Three-Generation Problem**:
+`spinor_parity_obstruction`, `e8_embedding`, `e8_su9_decomposition`, `e8_generation_mechanism`, `three_generation_theorem`
 
 **Dynamics**:
-`YangMillsEnergy`, `CovariantDerivative`, `RGRunning`, `BianchiIdentity`
-`YangMillsEquation`, `YukawaCouplings`
+`yang_mills_energy`, `covariant_derivative`, `rg_running`, `bianchi_identity`, `yang_mills_equation`, `yukawa_couplings`
 
 **Spectral Theory**:
-`Grade2LieAlgebra`, `CasimirEigenvalues`, `CasimirSpectralGap`, `BlockTridiagonal`
+`grade2_lie_algebra`, `casimir_eigenvalues`, `casimir_spectral_gap`, `block_tridiagonal`
 
 **Quantum**:
-`HilbertSpace`, `MassGap`
+`hilbert_space`, `mass_gap`
 
 **Lagrangian**:
-`CircuitAction`
+`circuit_action`
 
 ## Project Structure
 
 | Directory | Contents |
 |-----------|----------|
-| `UFT/` | Lean 4 proof files (the core work) |
+| `src/lean_proofs/` | Lean 4 proof files (the core work) |
 | `paper/` | LaTeX sources and compiled PDFs |
 | `docs/` | Architecture, decisions, research notes |
 | `source_materials/` | Dollard's original PDFs (read-only reference) |
@@ -105,4 +125,4 @@ All Lean proof files are original work. Source materials in `source_materials/` 
 
 ## Author
 
-Ian M. Arnoldy -- Independent Researcher
+Ian M. Arnoldy

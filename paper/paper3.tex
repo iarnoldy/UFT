@@ -779,7 +779,7 @@ on the breaking scale and pattern, which are not determined by
 the algebraic structure alone\CP.
 
 \paragraph{3.\ The enhanced scalar sector.}
-The 178 total scalar components ($104 + 45 + 24 + 5$) provide
+The 177 total scalar components ($104 + 45 + 24 + 4$) provide
 a much richer threshold correction landscape than minimal
 $\mathrm{SO}(10)$ models.  While the extra scalars are too heavy
 to be directly produced, their virtual effects on precision
@@ -871,11 +871,26 @@ intrinsic to $\mathrm{SO}(14)$ can produce $3+1$ from the $\mathrm{SO}(4)$
 family structure (Sec.~\ref{sec:matter}): the Lie algebra impossibility
 theorem, the representation mismatch (spinorial $2+2$ vs.\ vectorial $3+1$),
 and the matter-mirror content collectively exclude all internal candidates\CO.
-The most developed external approach is orbifold family
-unification~\cite{kawamura2010}, which has been demonstrated for the
-$\mathrm{SO}(2N)$ series.  Constructing the explicit orbifold boundary
-conditions for $\mathrm{SO}(14)$ on $M^4 \times S^1/\mathbb{Z}_2$ that
-yield exactly three generations is a concrete open problem.
+More generally, the double-commutant theorem forces the family
+symmetry of \emph{any} $\mathrm{SO}(10) \times \mathrm{SO}(4)$
+decomposition to be exactly $\mathrm{SO}(4)$, whose spinorial
+representations have minimum dimension~2.  Since $3 \nmid 2$, the
+$\mathbf{16}$ of $\mathrm{SO}(10)$ always appears with even
+multiplicity in any spinorial representation of $\mathrm{SO}(14)$---a
+\emph{spinor parity obstruction} that excludes all intrinsic
+mechanisms at once\CO.  The generation mechanism must therefore be
+external.  The most developed option is orbifold family
+unification~\cite{kawamura2010}, demonstrated for the
+$\mathrm{SO}(2N)$ series.  Alternatively, $\mathrm{Spin}(3,11)$
+embeds in $\mathrm{E}_{8(-24)}$ via
+$\mathrm{Spin}(3,11) \subset \mathrm{Spin}(12,4) \subset
+\mathrm{E}_{8(-24)}$, and Wilson~\cite{wilson2024} has identified
+discrete order-3 elements of $\mathrm{E}_8$ whose centralizer
+$\mathrm{SU}(9)/\mathbb{Z}_3$ provides a fundamentally discrete
+three-generation symmetry not visible at the $\mathrm{SO}(14)$ level.
+Establishing which external mechanism---orbifold, $\mathrm{E}_8$
+discrete symmetry, or Calabi-Yau topology---is realized is the
+principal open problem.
 
 \paragraph{2.\ Distler ghosts\OP.}
 The non-compact form $\mathrm{SO}(3,11)$ has indefinite Killing form,
@@ -935,13 +950,22 @@ Several concrete research directions emerge:
   for $\mathrm{SO}(14)$ have not been computed.  These could shift
   the unification scale and quality.
 \item \textbf{Threshold corrections}: systematic computation of
-  threshold corrections from the 178-scalar spectrum to determine
+  threshold corrections from the 177-scalar spectrum to determine
   whether the 0.88\% coupling miss can be naturally closed.
 \item \textbf{Orbifold three-generation construction}:
   explicit boundary conditions for $\mathrm{SO}(14)$ on
   $M^4 \times S^1/(\mathbb{Z}_2 \times \mathbb{Z}_2')$
   following Kawamura-Miura~\cite{kawamura2010}, specializing their
   $\mathrm{SO}(2N)$ framework to $N = 7$.
+\item \textbf{$\mathrm{E}_8$ generation mechanism}:
+  $\mathrm{Spin}(3,11) \subset \mathrm{Spin}(12,4) \subset
+  \mathrm{E}_{8(-24)}$.  Wilson~\cite{wilson2024} identifies
+  discrete order-3 elements (type~5 conjugacy class) whose centralizer
+  $\mathrm{SU}(9)/\mathbb{Z}_3$ provides a fundamentally discrete
+  $\mathbb{Z}_3$ generation symmetry acting on the $\mathbf{84}$
+  of $\mathrm{SU}(9)$.  Verifying this mechanism for the
+  $\mathrm{Spin}(3,11)$ real form and connecting it to the
+  machine-verified $\mathrm{SO}(14)$ scaffold is a natural next step.
 \item \textbf{Ghost resolution}: a rigorous treatment of ghost
   decoupling in the broken phase of $\mathrm{SO}(3,11)$, potentially
   following Krasnov's chiral approach.
@@ -987,6 +1011,11 @@ acknowledges the prior work of Nesti, Percacci, and Krasnov on
 gravity-gauge unification in $\mathrm{SO}(3,11)$, which provided the
 physical motivation for the algebraic scaffold verified here.
 \end{acknowledgments}
+
+\section*{Data Availability}
+All data generated during this study are contained within the article.
+The Lean~4 source code for all machine-verified proofs is available from
+the corresponding author upon reasonable request.
 
 % ============================================================================
 % References
@@ -1125,6 +1154,11 @@ Y.~Kawamura and T.~Miura,
 ``Orbifold family unification in $\mathrm{SO}(2N)$ gauge theory,''
 Phys.\ Rev.\ D \textbf{81}, 075011 (2010)
 [arXiv:0912.0776].
+
+\bibitem{wilson2024}
+R.~A.~Wilson,
+``Uniqueness of an $\mathrm{E}_8$ model of elementary particles,''
+arXiv:2407.18279 [physics.gen-ph] (2024).
 
 \bibitem{bentov2016}
 Y.~BenTov and A.~Zee,

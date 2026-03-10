@@ -4,7 +4,8 @@
 % NO overlap with Paper 1 (CICM 2026, methodology/taxonomy/Dollard case study)
 %
 % This paper is MATHEMATICAL CONTENT: the cross-domain identities themselves.
-% NOTE: Switch to svjour3 before AACA submission. Using article for drafting.
+% Target: AACA (Springer). Using article class for submission.
+% Springer reformats to svjour3 during production if accepted.
 \documentclass[11pt]{article}
 \usepackage[margin=1in]{geometry}
 
@@ -26,10 +27,11 @@
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{remark}{Remark}[section]
 
-% Fallback definitions for svjour3 commands (article class lacks these)
+% Compatibility definitions for Springer svjour3 commands used in body
 \newenvironment{acknowledgements}{\section*{Acknowledgements}}{}
 \providecommand{\journalname}[1]{}
 \providecommand{\titlerunning}[1]{}
+\providecommand{\authorrunning}[1]{}
 \providecommand{\institute}[1]{}
 \providecommand{\email}[1]{\texttt{#1}}
 \providecommand{\keywords}[1]{%
@@ -98,15 +100,16 @@
 
 \titlerunning{Character Decomposition from Fortescue to Cartan--Weyl}
 
+\authorrunning{I.\,M.\ Arnoldy}
+
 \author{Ian M. Arnoldy\thanks{Independent Researcher.
   E-mail: \texttt{ian@arnoldy.me}}}
 
-\institute{  % svjour3 only; ignored under article class
+\institute{
   Independent Researcher \\
   \email{ian@arnoldy.me}
 }
 
-% \date{Received: date / Accepted: date}  % uncomment for svjour3
 \date{\today}
 
 \maketitle
@@ -1300,6 +1303,11 @@ The machine verification was performed using Lean~4 and the mathlib
 library. The author thanks the Lean and mathlib communities for
 providing the infrastructure that made this work possible.
 \end{acknowledgements}
+
+\section*{Data Availability}
+All data generated during this study are contained within the article.
+The Lean~4 source code for all machine-verified proofs is available from
+the corresponding author upon reasonable request.
 
 % ============================================================================
 % References

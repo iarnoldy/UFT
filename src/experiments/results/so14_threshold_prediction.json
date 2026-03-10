@@ -1,0 +1,77 @@
+{
+  "timestamp": "2026-03-10T01:08:00.281829",
+  "M_Z_GeV": 91.1876,
+  "alpha_inv_MZ": {
+    "1": 59.0,
+    "2": 29.57,
+    "3": 8.47
+  },
+  "beta_slopes": {
+    "1": -0.6525352666767709,
+    "2": 0.5039906531243352,
+    "3": 1.1140846016432675
+  },
+  "M_GUT_23_GeV": 9.54860262211308e+16,
+  "log10_M_GUT": 16.979939819970205,
+  "alpha_inv_at_GUT": {
+    "1": 36.432173913043485,
+    "2": 47.00043478260869,
+    "3": 47.00043478260869
+  },
+  "delta_12": -10.568260869565208,
+  "relative_miss_percent": 22.48545341856225,
+  "dynkin_indices_54": {
+    "T3": 12.0,
+    "T2": 12.0,
+    "T1": 12.0,
+    "universal": true
+  },
+  "pairwise_crossings": {
+    "23": {
+      "M_GeV": 9.54860262211308e+16,
+      "log10": 16.979939819970205
+    },
+    "12": {
+      "M_GeV": 10265597959843.23,
+      "log10": 13.011384251621546
+    },
+    "13": {
+      "M_GeV": 240938634616937.6,
+      "log10": 14.381906444895108
+    }
+  },
+  "model_C": {
+    "lambda_octet": -22.13411380603104,
+    "lambda_triplet": -88.53645522412411,
+    "lambda_leptoquark": 110.67056903015511,
+    "M_octet_over_MGUT": 1.5618461670347173e-05,
+    "M_triplet_over_MGUT": 5.950494038664153e-20,
+    "M_leptoquark_over_MGUT": 1.075991199949396e+24,
+    "alpha_unified_inv": 51.11031400966183,
+    "alpha_unified": 0.01956552252468966
+  },
+  "multi_scale_case3": {
+    "description": "X/Y boson + color octet threshold (triplet at M_GUT)",
+    "lam_X": -54.32918843298524,
+    "lam_8": -199.20702425427922,
+    "M_X_GeV": 152232.17368538328,
+    "M_8_GeV": 5.280610378888692e-27,
+    "M_3_GeV": 9.54860262211308e+16,
+    "log10_M_X": 5.182506448606472,
+    "log10_M_8": -26.27731587503015,
+    "proton_lifetime_years": 5.370636937091105e-08,
+    "proton_safe": false
+  },
+  "su5_universality": {
+    "T1_54": 12.0,
+    "T2_54": 12.0,
+    "T3_54": 12.0,
+    "universal": true,
+    "implication": "uniform_mass_shift_does_not_close_gap"
+  },
+  "intermediate_scale": {
+    "M_SU5_crossing_GeV": 10265597959843.23,
+    "log10_M_SU5": 13.011384251621546,
+    "delta_53_at_SU5": 5.575000000000003
+  }
+}

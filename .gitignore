@@ -37,6 +37,7 @@ paper/*.synctex.gz
 paper/*.fls
 paper/*.fdb_latexmk
 
-# Session files
+# Claude Code internal
 .claude/sessions/.current-session
 .claude/sessions/.handoff.md
+.claude/worktrees/

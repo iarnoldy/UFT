@@ -237,3 +237,48 @@ physics question beyond dimensional analysis.
 
 **Dependencies**: Experiments 0-3 (all complete), Lean scaffold (35 files, 878 theorems)
 **Downstream impact**: Defines Track D research program
+
+---
+
+## Experiment 5: KC-E3 Chirality in E₈(-24)
+
+**Status**: COMPLETE — BOUNDARY
+**Track**: D (Candidate Theory Construction)
+**Priority**: RESOLVED
+**Started**: 2026-03-10
+**Resolved**: 2026-03-10
+
+**Hypothesis**: Fermion chirality survives in E₈(-24) when three generations are
+embedded via SU(9)/Z₃, i.e., the Distler-Garibaldi no-go theorem does not apply
+to Wilson's massive-chirality construction.
+
+**Method**:
+1. Compute Clifford periodicity for all relevant signatures: Cl(14,0), Cl(11,3), Cl(12,4)
+2. Verify dimension equalities for real forms: dim SU(9) = dim SU(7,2) = 80
+3. Verify Spin(3,11) → Spin(4,12) embedding: 91 + 1 + 28 = 120
+4. Machine-verify all algebraic prerequisites in Lean 4
+5. Document the precise D-G vs Wilson boundary
+
+**Falsification criteria**:
+- If a dimensional inconsistency is found in the signature analysis, KC-E3 FAILS
+- If the generation count changes under signature change, KC-E3 FAILS
+- If D-G can be shown to apply specifically to E₈(-24), KC-E3 FAILS
+
+**Result**: BOUNDARY. All algebraic prerequisites verified. The ONLY remaining question
+is the definition of chirality (massless vs massive), which is an open problem in
+mathematical physics that cannot be resolved by formal verification.
+
+**Claim tagging**:
+- [MV] Clifford periodicity, dimension equalities, embedding arithmetic (Lean 4)
+- [CO] Spinor reality types from Clifford periodicity (Python)
+- [SP] Distler-Garibaldi theorem statement (published result)
+- [OP] Chirality definition question (open problem)
+
+**Deliverables**:
+- `src/experiments/e8_signature_chirality.py` — Python computation [CO]
+- `src/lean_proofs/clifford/e8_chirality_boundary.lean` — Lean proofs [MV]
+- `research/kc-e3-chirality-resolution.md` — research note
+
+**Dependencies**: Experiments 0-4, e8_embedding.lean, e8_su9_decomposition.lean,
+  e8_generation_mechanism.lean, three_generation_theorem.lean
+**Downstream impact**: Closes the last open kill condition (KC-E3)

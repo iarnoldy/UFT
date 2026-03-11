@@ -8,6 +8,8 @@ A research project that applies interactive theorem provers (Lean 4) to claims f
 
 **47 proof files. ~2,000 verified declarations. Zero `sorry` gaps. Zero build errors.**
 
+Four Lie algebras — so(1,3), sl(3), sl(5), so(10) — carry certified `LieRing` and `LieAlgebra ℝ` instances via `Mathlib.Algebra.Lie.Basic`, connecting the hand-built structures to mathlib's type system.
+
 ## What This Proves — And What It Doesn't
 
 Lean's kernel guarantees that every declaration in this project type-checks against its stated type. What that means depends on the declaration:

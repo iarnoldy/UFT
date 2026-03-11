@@ -1,8 +1,9 @@
 # Dollard Formal Verification
 
 Machine-verified algebraic scaffold from Dollard's versor algebra through Clifford algebras
-to SO(14), built in Lean 4 with mathlib. 43 proof files, ~1400 theorems, zero sorry gaps.
-Paper 1 submitted to CICM 2026. Paper 2 submitted to AACA. Paper 3 drafted for PRD.
+to SO(14) and E₈, built in Lean 4 with mathlib. 46 proof files, over 1,870 verified
+declarations, zero sorry gaps. Paper 1 submitted to CICM 2026. Paper 2 submitted to AACA.
+Paper 3 drafted for PRD. Paper 4 (three-generation Letter) drafted for LMP.
 
 ## Research Tracks
 
@@ -101,6 +102,7 @@ lake env lean src/lean_proofs/foundations/basic_operators.lean  # single file
 | Paper 1 (CICM 2026, submitted) | `paper/main.tex` |
 | Paper 2 (AACA, submitted) | `paper/paper2.tex` |
 | Paper 3 (PRD, drafted) | `paper/paper3.tex` |
+| Paper 4 (LMP, drafted) | `paper/paper4.tex` |
 | Epistemological map | `docs/WHAT_WE_PROVED.md` |
 | Mass gap council synthesis | `docs/MASS_GAP_COUNCIL_SYNTHESIS.md` |
 

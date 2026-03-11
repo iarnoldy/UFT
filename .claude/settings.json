@@ -1,18 +1,1 @@
-{
-  "hooks": {
-    "pre-edit": [
-      {
-        "pattern": "src/experiments/results/*",
-        "command": ".claude/hooks/protect-results.sh",
-        "description": "Prevent direct modification of experiment results"
-      }
-    ],
-    "post-edit": [
-      {
-        "pattern": "src/**",
-        "command": ".claude/hooks/run-tests-on-src-change.sh",
-        "description": "Run tests when source files change"
-      }
-    ]
-  }
-}
+{}

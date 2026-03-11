@@ -142,8 +142,9 @@ worth analyzing.
 \item A six-step \emph{protocol} for extracting, translating, and verifying
   claims from alternative mathematical frameworks (\Cref{sec:protocol}).
 \item A \emph{case study} applying the protocol to Eric Dollard's versor
-  algebra, producing 118 formally verified theorems across 8 Lean~4 proof files
-  with zero \texttt{sorry} gaps (\Cref{sec:case-study}).
+  algebra, producing 190 formally verified theorems across 8 Lean~4 proof files
+  with zero \texttt{sorry} gaps (\Cref{sec:case-study}); the full repository
+  extends to 46 proof files with over 1,870 verified declarations.
 \item A five-category \emph{taxonomy} for classifying claims from alternative
   frameworks: \textsc{Verified}, \textsc{Disproved},
   \textsc{Algebraic~Necessity}, \textsc{Ambiguous}, and \textsc{Unfalsifiable}
@@ -182,7 +183,7 @@ our work, though applied to mainstream physical chemistry.
 
 \subsection{Historical Mathematics Formalization}
 
-Fleuriot and Paulson~\cite{fleuriot2001newton} formalized Newton's geometric
+Fleuriot~\cite{fleuriot2001newton} formalized Newton's geometric
 proofs in Isabelle/HOL and discovered a flaw in one of Newton's proofs. This
 is the closest near-miss to our work: a proof assistant applied to historical
 non-rigorous reasoning that finds errors. The distinction is that Newton is
@@ -252,7 +253,7 @@ standard; the contribution is the systematic application to a novel domain.
 
 Eric Dollard is an independent researcher in electrical engineering who has
 proposed a ``versor algebra'' as an extension of standard complex-number methods
-for analyzing polyphase power systems and transmission
+for analyzing polyphase power systems~\cite{fortescue1918} and transmission
 lines~\cite{dollard-versor,dollard-fourquad}. The framework introduces three
 operators: $j$ (the standard imaginary unit), $h$ (a proposed ``hyperbolic''
 operator with $h^2 = 1$, $h^1 = -1$), and $k = hj$ (a ``sequence'' operator).
@@ -281,9 +282,9 @@ noncomputable def j : ℂ := Complex.I
 noncomputable def h : ℂ := -1
 noncomputable def k : ℂ := h * j
 
-theorem j_fourth : j ^ 4 = 1 := by ...
+theorem j_fourth_power : j ^ 4 = 1 := by ...
 theorem h_squared : h ^ 2 = 1 := by ...
-theorem jk_identity : j * k = 1 := by ...
+theorem jk_cancellation : j * k = 1 := by ...
 \end{lstlisting}
 
 All 16 products of the Cayley table are verified. The structure is trivially
@@ -376,7 +377,7 @@ $W = dQ/dt$. Dimensionally, $\text{Coulomb} \times \text{Weber} =
 This is confirmed by primary source analysis: Dollard's $d\Psi/dt = I$
 (current) and $d\Phi/dt = E$ (voltage) exactly reproduce the Lagrangian
 circuit variables where charge $q$ is the generalized coordinate and flux
-$\lambda$ is the conjugate momentum~\cite{fortescue1918}. The dimensional
+$\lambda$ is the conjugate momentum. The dimensional
 analysis is verified in Lean~4 (\texttt{circuit\_action.lean}, 0~\texttt{sorry}).
 The framework is dimensionally correct but not novel---it is Lagrangian circuit
 theory, known since Cherry~\cite{cherry1951}.
@@ -542,9 +543,10 @@ Our protocol is demonstrated on a single case study; generalizability to other
 alternative frameworks is conjectured but not proven. Dollard's source materials
 are self-published presentations, not peer-reviewed papers, introducing
 translation ambiguities that are inherent to the domain. All Lean~4 proofs
-compile against mathlib (3,306 build jobs, zero errors, zero \texttt{sorry}
-gaps). We formalize algebraic and structural claims only; we make no claims
-about the physics, engineering utility, or broader validity of Dollard's work.
+compile against mathlib (3,306 build jobs across the full 46-file repository,
+zero errors, zero \texttt{sorry} gaps). We formalize algebraic and structural
+claims only; we make no claims about the physics, engineering utility, or
+broader validity of Dollard's work.
 
 % ============================================================================
 \section{Conclusion}
@@ -565,8 +567,13 @@ correct from what is wrong, and what is novel from what is standard. We call
 for further case studies on other alternative mathematical frameworks to
 validate and refine the protocol.
 
-All Lean~4 proof files, source materials, and analysis documents are available
-at \url{https://github.com/iarnoldy/UFT}.
+The case study presented here covers the 8 proof files most directly tied to
+the Dollard verification. The full repository extends the algebraic hierarchy
+through grand unified theories (SO(10), SO(14)) and exceptional algebras
+(E$_8$), totaling 46 proof files with over 1,870 verified declarations---all
+compiling with zero \texttt{sorry} gaps. Source code, source materials, and
+analysis documents are publicly available at
+\url{https://github.com/iarnoldy/UFT}.
 
 % ============================================================================
 \section*{Appendix: Complete Claim Summary}
@@ -621,7 +628,7 @@ abstract \texttt{CliffordAlgebra} via isomorphism proofs.
 % References
 % ============================================================================
 
-\begin{thebibliography}{20}
+\begin{thebibliography}{22}
 
 \bibitem{hales2017formal}
 Hales, T., et al.: A formal proof of the Kepler conjecture.
@@ -656,8 +663,8 @@ Bobbin, M.P., et al.: Formalizing chemical physics using the Lean theorem prover
 Digital Discovery, RSC (2024)
 
 \bibitem{fleuriot2001newton}
-Fleuriot, J., Paulson, L.: Mechanizing Nonstandard Real Analysis.
-Cambridge University Press (2001)
+Fleuriot, J.: A Combination of Geometry Theorem Proving and Nonstandard
+Analysis with Application to Newton's Principia. Springer (2001)
 
 \bibitem{wieser2021clifford}
 Wieser, E., Song, U.: Formalizing Geometric Algebra in Lean.

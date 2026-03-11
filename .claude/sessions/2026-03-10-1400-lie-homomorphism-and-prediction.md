@@ -1,5 +1,5 @@
 ---
-version: 2
+2version: 2
 id: 2026-03-10-1400
 name: lie-homomorphism-and-prediction
 started: 2026-03-10T14:00:00-06:00
@@ -8,7 +8,6 @@ parent_session: 2026-03-09-2145-commit-and-paper-prep.md
 tags: [lean4, paper3, paper2, proofread, three-generations, A4-root-system, bibliography]
 status: completed
 ---
-
 # Development Session - 2026-03-10 14:00 - Lie Homomorphism & Novel Prediction
 
 **Started**: 2026-03-10 14:00
@@ -19,23 +18,25 @@ status: completed
 
 ## Goals
 
-- [x] **Goal 1**: Create `su5_lie_structure.lean` — prove A₄ root system relations for su(5) ⊂ so(10)
-- [x] **Goal 2**: Compute scalar threshold correction prediction (Python)
-- [x] **Goal 3**: Update paper3.tex with new content
-- [x] **Goal 4**: Build and verify all Lean proofs compile
-- [x] **Goal 5**: Full proofread of paper3.tex — fix ALL errors
-- [x] **Goal 6**: Full proofread of paper2.tex — fix ALL errors
-- [x] **Goal 7**: Three-generation novelty assessment — literature survey
+- [X] **Goal 1**: Create `su5_lie_structure.lean` — prove A₄ root system relations for su(5) ⊂ so(10)
+- [X] **Goal 2**: Compute scalar threshold correction prediction (Python)
+- [X] **Goal 3**: Update paper3.tex with new content
+- [X] **Goal 4**: Build and verify all Lean proofs compile
+- [X] **Goal 5**: Full proofread of paper3.tex — fix ALL errors
+- [X] **Goal 6**: Full proofread of paper2.tex — fix ALL errors
+- [X] **Goal 7**: Three-generation novelty assessment — literature survey
 
 ## Architecture Decisions
 
 ### Why A₄ root system (not full 276 bracket table)
+
 - The Serre relations + Cartan matrix UNIQUELY determine a simple Lie algebra
 - A₄ Cartan matrix → su(5), no other possibility (Killing-Cartan classification)
 - ~48 theorems vs 276 — tractable and mathematically complete
 - In compact form: root spaces are 2D (R,S pairs rotate under Cartan)
 
 ### Threshold correction result
+
 - 104 has SU(5)-universal Dynkin indices (T₁=T₂=T₃=12 for the 54)
 - This is a structural CONSTRAINT [CO], not a smoking-gun prediction
 - Cannot differentially close the coupling triangle
@@ -66,13 +67,14 @@ status: completed
 ### Accomplishments
 
 1. **su5_lie_structure.lean** — 48 theorems proving A₄ root system of su(5) ⊂ so(10)
+
    - 4 Cartan generators, 8 root generators, 2 non-simple root generators
    - Full Cartan matrix recovered: 8 diagonal (A_{ii}=2), 12 off-diagonal (A_{ij}=-1), 12 zeros
    - 4 co-root recoveries, 2 root compositions
    - Kills the "just arithmetic" objection — this is genuine Lie algebra identification
    - CLEAN BUILD: 0 errors, 0 sorry
-
 2. **Paper 3 proofread — 8 errors found and fixed**
+
    - 178→177 scalar components (abstract)
    - 41→43 file count (5 locations)
    - ~1350→~1400 theorem count (3 locations)
@@ -82,15 +84,15 @@ status: completed
    - Signature percentages 83/8/8 → 86/7/7 (recalculated for 43 files)
    - 28 uncited bibliography entries removed
    - michel1973 → michel1971 key fixed
-
 3. **Paper 2 proofread — 1 error found and fixed**
-   - 35 files/878 theorems → 43 files/1400 theorems
 
+   - 35 files/878 theorems → 43 files/1400 theorems
 4. **File count correction**: 43 files verified by `find`, not 41
+
    - Previous correction missed `polyphase/polyphase_formula.lean` and `telegraph/telegraph_equation.lean`
    - These live in their own subdirectories, not in `foundations/`
-
 5. **Three-generation novelty assessment** — surveyed 15 approaches
+
    - NO existing approach both proves impossibility AND proves resolution
    - NO existing approach is machine-verified
    - Our contribution is a genuine first in the literature
@@ -98,11 +100,13 @@ status: completed
 ### Git Changes
 
 **Modified Files**:
+
 - `paper/paper3.tex` — 8 error fixes, 28 uncited bibitems removed, new subsection II.E
 - `paper/paper2.tex` — file/theorem count update
 - `.claude/sessions/2026-03-09-2145-commit-and-paper-prep.md` — previous session updates
 
 **Added Files**:
+
 - `src/lean_proofs/clifford/su5_lie_structure.lean` — A₄ root system proof (48 theorems)
 - `src/experiments/so14_threshold_prediction.py` — threshold correction analysis
 - `src/experiments/results/so14_threshold_prediction.json` — results
@@ -114,13 +118,10 @@ status: completed
 
 1. **Problem**: Lean 4 struct fields on one line with semicolons
    **Solution**: Each field on separate line (Lean 4 syntax requirement)
-
 2. **Problem**: `simp` can't close `1+1=2` or `-1+-1=-2`
    **Solution**: Add `<;> norm_num` after `simp` for 12 affected theorems
-
 3. **Problem**: File count wrong (41 claimed, 43 actual)
    **Solution**: Previous correction only checked `foundations/`, missing `polyphase/` and `telegraph/` subdirs. Verified with `find`.
-
 4. **Problem**: 28 uncited bibliography entries in paper3.tex
    **Solution**: Removed all. Using `\begin{thebibliography}` (not BibTeX), so uncited entries appear in output.
 

@@ -38,6 +38,8 @@ git push origin main      # -> PUBLIC (intentional only)
 
 ## Status
 
-- **47 proof files, ~1,940 verified declarations, 0 sorry, 0 errors**
-- Papers 1-3 on public repo. Paper 4 private only.
+- **47 proof files, ~2,026 verified declarations, 0 sorry, 0 errors**
+- 4 Lie algebras have mathlib `LieRing` + `LieAlgebra ℝ` instances (Bivector, SL3, SL5, SO10)
+- Papers 1-2 submitted. Paper 3 blocked (arXiv endorsement). Paper 4 private draft.
+- Credibility upgrade complete: honest docs (PROOF_CLASSIFICATION, SIGNATURE_ANALYSIS), mathlib integration
 - KC-E3 (chirality): REFINED. Massive chirality definition machine-verified.

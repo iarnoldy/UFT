@@ -1,8 +1,9 @@
 # Dollard Formal Verification
 
 Machine-verified algebraic scaffold from Dollard's versor algebra through Clifford algebras
-to SO(14) and E₈, built in Lean 4 with mathlib. 46 proof files, over 1,870 verified
-declarations, zero sorry gaps. Paper 1 submitted to CICM 2026. Paper 2 submitted to AACA.
+to SO(14) and E₈, built in Lean 4 with mathlib. 47 proof files, ~2,000 verified
+declarations, zero sorry gaps. See README.md for current file/declaration counts.
+Paper 1 submitted to CICM 2026. Paper 2 submitted to AACA.
 Paper 3 drafted for PRD. Paper 4 (three-generation Letter) drafted for LMP.
 
 ## Research Tracks
@@ -69,6 +70,10 @@ lake env lean src/lean_proofs/foundations/basic_operators.lean  # single file
    explicitly addressed in any physics construction. The Lean proofs use compact signature.
 10. **Three-generation problem.** If theory predicts N != 3 generations, this requires
     explanation with a concrete mechanism, not hand-waving.
+11. **Mathlib typeclasses for new Lie algebras.** New Lie algebra constructions MUST include
+    `LieRing` and `LieAlgebra ℝ` instances via `Mathlib.Algebra.Lie.Basic`. Use the pattern
+    in the `mathlib-lie-upgrade` skill. Existing algebras (Bivector, SL3, SL5, SO10) already
+    have these instances.
 
 ## Upstream (Evidence Source)
 
@@ -105,6 +110,10 @@ lake env lean src/lean_proofs/foundations/basic_operators.lean  # single file
 | Paper 4 (LMP, drafted) | `paper/paper4.tex` |
 | Epistemological map | `docs/WHAT_WE_PROVED.md` |
 | Mass gap council synthesis | `docs/MASS_GAP_COUNCIL_SYNTHESIS.md` |
+| E₈ three-generation proofs | `src/lean_proofs/clifford/` (9 files: spinor_parity_obstruction through massive_chirality_definition) |
+| Chirality definition | `src/lean_proofs/clifford/massive_chirality_definition.lean` |
+| Proof classification | `docs/PROOF_CLASSIFICATION.md` |
+| Signature analysis | `docs/SIGNATURE_ANALYSIS.md` |
 
 ## Paper Proofreading (MANDATORY)
 

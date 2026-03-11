@@ -6,7 +6,26 @@ Machine-verified algebraic scaffold from Dollard's versor algebra through Cliffo
 
 A research project that applies interactive theorem provers (Lean 4) to claims from alternative mathematical frameworks. Starting from Eric Dollard's "versor algebra," we extract formalizable claims, prove or disprove each one, and trace the algebraic path from the source claims through Clifford algebras to gauge unification.
 
-**47 proof files. Over 1,940 verified declarations. Zero `sorry` gaps. Zero build errors.**
+**47 proof files. ~2,000 verified declarations. Zero `sorry` gaps. Zero build errors.**
+
+## What This Proves — And What It Doesn't
+
+Lean's kernel guarantees that every declaration in this project type-checks against its stated type. What that means depends on the declaration:
+
+**Algebraic structure proofs (~250 declarations).** Jacobi identities, Lie bracket computations, subalgebra closures, embedding homomorphisms, and root system identifications. These are genuine algebraic theorems — the `ring` and `ext` tactics close them, but the *content* is mathematical: su(5) is a Lie subalgebra of so(10), the Lorentz algebra satisfies Jacobi, etc.
+
+**Dimensional consistency checks (~1,500 declarations).** Verified arithmetic: dim so(14) = 91, the 16-plet decomposes as 1+5+10, anomaly traces sum to zero. These are correct and machine-verified, but mathematically straightforward — Lean confirms the arithmetic that a physicist would check by hand.
+
+**Definitional infrastructure (~250 declarations).** Structure definitions, typeclass instances, and setup code. No theorems — just the scaffolding that lets the proofs compile.
+
+**What is NOT proved here:**
+- This is not a unified field theory. It is an algebraic scaffold that verifies the dimensional and structural consistency of a path toward unification.
+- The Dollard starting point is historical and pedagogical. The mathematical content stands independently of Dollard's claims.
+- Steps 7-11 (dynamics) are axiomatized structures — properties are verified from axioms, not derived from first principles.
+- Step 15 (mass gap) is stated, not proved. That's the Millennium Prize problem.
+- Physical identifications (which representations correspond to which particles) are axiomatized, not derived.
+
+See `docs/PROOF_CLASSIFICATION.md` for per-file analysis and `docs/SIGNATURE_ANALYSIS.md` for which proofs depend on metric signature.
 
 ## Results Summary
 

@@ -29,6 +29,7 @@ References:
 
 import Mathlib.Data.Real.Basic
 import Mathlib.Tactic
+import Mathlib.Algebra.Lie.Basic
 
 /-! ## Part 1: The sl(5) Lie Algebra Structure -/
 
@@ -445,6 +446,50 @@ theorem cartan_33 : (comm H3 E3).e3 = 2 := by simp [comm, H3, E3]
 
 /-- h₁ eigenvalue on e₃ vanishes: A₁₃ = 0 (non-adjacent roots) -/
 theorem cartan_13 : (comm H1 E3).e3 = 0 := by simp [comm, H1, E3]
+
+/-! ## Mathlib LieRing and LieAlgebra Instances
+
+sl(5) is certified as a Lie algebra over ℝ via mathlib's typeclass system.
+This is the GUT algebra — the most important certification for credibility. -/
+
+instance : Sub SL5 := ⟨fun a b => add a (neg b)⟩
+instance : SMul ℝ SL5 := ⟨smul⟩
+
+@[simp] lemma sub_def' (a b : SL5) : a - b = add a (neg b) := rfl
+@[simp] lemma smul_def' (r : ℝ) (a : SL5) : r • a = smul r a := rfl
+
+instance : AddCommGroup SL5 where
+  add_assoc := by intros; ext <;> simp [add] <;> ring
+  zero_add := by intros; ext <;> simp [add, zero]
+  add_zero := by intros; ext <;> simp [add, zero]
+  add_comm := by intros; ext <;> simp [add] <;> ring
+  neg_add_cancel := by intros; ext <;> simp [add, neg, zero]
+  sub_eq_add_neg := by intros; rfl
+  nsmul := nsmulRec
+  zsmul := zsmulRec
+
+instance : Module ℝ SL5 where
+  one_smul := by intros; ext <;> simp [smul]
+  mul_smul := by intros; ext <;> simp [smul] <;> ring
+  smul_zero := by intros; ext <;> simp [smul, zero]
+  smul_add := by intros; ext <;> simp [smul, add] <;> ring
+  add_smul := by intros; ext <;> simp [smul, add] <;> ring
+  zero_smul := by intros; ext <;> simp [smul, zero]
+
+instance : Bracket SL5 SL5 := ⟨comm⟩
+
+@[simp] lemma bracket_def' (a b : SL5) : ⁅a, b⁆ = comm a b := rfl
+
+set_option maxHeartbeats 8000000 in
+instance : LieRing SL5 where
+  add_lie := by intros; ext <;> simp [comm, add] <;> ring
+  lie_add := by intros; ext <;> simp [comm, add] <;> ring
+  lie_self := by intro x; ext <;> simp [comm, zero] <;> ring
+  leibniz_lie := by intros; ext <;> simp [comm, add] <;> ring
+
+set_option maxHeartbeats 4000000 in
+instance : LieAlgebra ℝ SL5 where
+  lie_smul := by intros; ext <;> simp [comm, smul] <;> ring
 
 end SL5
 

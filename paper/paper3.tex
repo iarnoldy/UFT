@@ -49,8 +49,8 @@ with Phenomenological Predictions}
 
 \begin{abstract}
 We present a candidate unified field theory based on $\mathrm{SO}(14)$, whose algebraic
-foundation has been machine-verified in Lean~4 with the mathlib library: 43 proof files
-containing approximately 1400 theorems with zero \texttt{sorry} gaps.  The $\mathrm{SO}(14)$
+foundation has been machine-verified in Lean~4 with the mathlib library: 46 proof files
+containing over 1870 theorems with zero \texttt{sorry} gaps.  The $\mathrm{SO}(14)$
 Lie algebra has 91 generators, which decompose as $91 = 45 + 6 + 40$ under
 $\so(10) \oplus \so(4) \oplus \text{mixed}$, embedding both the Standard Model gauge
 group and a gravity sector in a single algebraic structure.  We construct the symmetry-breaking
@@ -66,7 +66,7 @@ for all non-abelian gauge factors at scales above the Standard Model.  We state 
 problem is inherited from $\mathrm{SO}(10)$, the Distler ghost objection for the
 non-compact form $\mathrm{SO}(3,11)$ remains unresolved, and the mass gap is the
 Millennium Prize problem.  Machine verification is the unique methodological contribution:
-86\% of our theorems are signature-independent, holding for all real forms of $\so(14,\mathbb{C})$.
+87\% of our theorems are signature-independent, holding for all real forms of $\so(14,\mathbb{C})$.
 To our knowledge, this is the first grand unified theory whose algebraic foundation
 has been formally verified by an interactive theorem prover.
 \end{abstract}
@@ -109,8 +109,8 @@ $\mathrm{SO}(3,11)$~\cite{krasnov2018,nesti2010}.
 In this paper we present a candidate $\mathrm{SO}(14)$ unified theory with
 a distinctive feature: the algebraic foundation has been machine-verified using
 the Lean~4 interactive theorem prover~\cite{demoura2021lean4} and the
-mathlib library~\cite{mathlib}.  Specifically, 43 Lean~4 proof files
-containing approximately 1400 theorems have been compiled with zero
+mathlib library~\cite{mathlib}.  Specifically, 46 Lean~4 proof files
+containing over 1870 theorems have been compiled with zero
 \texttt{sorry} gaps (unproved assertions).  This means that the algebraic
 structure---dimensions, embeddings, anomaly cancellation, representation
 decompositions, breaking chain, beta-function coefficients, and
@@ -305,8 +305,8 @@ Machine verification does \emph{not} prove:
 \item That three generations arise naturally (open for all GUTs\OP).
 \end{enumerate}
 
-A signature audit of all 43 proof files~\cite{uft-github}
-classifies 86\% as \emph{signature-independent} (properties of
+A signature audit of all 46 proof files~\cite{uft-github}
+classifies 87\% as \emph{signature-independent} (properties of
 $\so(14,\mathbb{C})$, holding for all real forms), 7\% as
 \emph{compact-only} (energy positivity results that fail for
 $\mathrm{SO}(3,11)$ above the breaking scale), and 7\% as
@@ -597,7 +597,7 @@ $\mathrm{SO}(3,11)$ is a feature, not a bug: it permits Majorana
 neutrino masses.
 
 \paragraph{Signature audit.}
-Of 43 proof files containing ${\sim}1400$ theorems: 37 files (86\%)
+Of 46 proof files containing over 1870 theorems: 40 files (87\%)
 are signature-independent, 3 files (7\%) are compact-only (energy
 positivity, Hilbert space positivity, mass gap), and 3 files (7\%)
 need revision for specific-signature results\CO.  The precise
@@ -935,9 +935,13 @@ $\mathrm{Spin}(3,11) \subset \mathrm{Spin}(12,4) \subset
 discrete order-3 elements of $\mathrm{E}_8$ whose centralizer
 $\mathrm{SU}(9)/\mathbb{Z}_3$ provides a fundamentally discrete
 three-generation symmetry not visible at the $\mathrm{SO}(14)$ level.
-Establishing which external mechanism---orbifold, $\mathrm{E}_8$
-discrete symmetry, or Calabi-Yau topology---is realized is the
-principal open problem.
+In a companion paper~\cite{arnoldy2026prl}, we prove this $E_8$
+resolution with full machine verification: the impossibility
+$3 \nmid 2$ in $\mathrm{SO}(14)$ and the resolution via
+$\Lambda^3(\mathbb{C}^9) = 84 \supset 3 \times 16 = 48$ in $E_8$
+are verified across 8 Lean~4 files with zero \texttt{sorry} gaps.
+The chirality question (Distler--Garibaldi vs.\ Wilson's massive
+chirality) remains an open problem in mathematical physics\OP.
 
 \paragraph{2.\ Distler ghosts\OP.}
 The non-compact form $\mathrm{SO}(3,11)$ has indefinite Killing form,
@@ -977,7 +981,7 @@ The main methodological advantages are:
   Any researcher with a Lean~4 installation can verify the results
   in minutes.
 \item \textbf{Signature audit}: classifying proofs by signature
-  dependence (86\% independent, 7\% compact-only, 7\% needs-revision)
+  dependence (87\% independent, 7\% compact-only, 6\% needs-revision)
   provides a precise answer to the question ``which results transfer
   to $\mathrm{SO}(3,11)$?''
 \end{enumerate}
@@ -1034,7 +1038,7 @@ algebraic foundation---91 generators decomposing as $45 + 6 + 40$,
 anomaly cancellation, symmetry-breaking chain to the Standard Model with
 corrected Higgs representations, and matter content $3 \times \mathbf{64}$---has
 been machine-verified in Lean~4 with zero \texttt{sorry} gaps across
-43 proof files.  One-loop renormalization group analysis yields coupling
+46 proof files.  One-loop renormalization group analysis yields coupling
 unification at $M_\text{GUT} = 10^{16.98}\GeV$ (0.88\% miss with
 threshold corrections), a proton lifetime of $10^{38.9}$~years (safely above
 experimental bounds), and asymptotic freedom for all non-abelian gauge factors.
@@ -1319,6 +1323,12 @@ I.~M.~Arnoldy,
 unifying symmetrical components and root space decomposition
 via Clifford algebras,''
 submitted to Advances in Applied Clifford Algebras (2026).
+
+\bibitem{arnoldy2026prl}
+I.~M.~Arnoldy,
+``Three fermion generations from $E_8$: a machine-verified
+impossibility and resolution,''
+in preparation (2026).
 
 \bibitem{uft-github}
 I.~M.~Arnoldy,

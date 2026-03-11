@@ -6,7 +6,7 @@ Machine-verified algebraic scaffold from Dollard's versor algebra through Cliffo
 
 A research project that applies interactive theorem provers (Lean 4) to claims from alternative mathematical frameworks. Starting from Eric Dollard's "versor algebra," we extract formalizable claims, prove or disprove each one, and trace the algebraic path from the source claims through Clifford algebras to gauge unification.
 
-**43 proof files. ~1400 theorems. Zero `sorry` gaps. Zero build errors.**
+**46 proof files. Over 1,870 verified declarations. Zero `sorry` gaps. Zero build errors.**
 
 ## Results Summary
 
@@ -50,6 +50,7 @@ roots   decomp    algebra    algebra     Glashow   unified   unification generat
 | Formal Verification of Alternative Mathematical Frameworks: A Case Study Using Lean 4 | CICM 2026 (Springer LNAI) | Submitted |
 | Character Decomposition from Fortescue to Cartan-Weyl: Unifying Symmetrical Components and Root Space Decomposition via Clifford Algebras | Advances in Applied Clifford Algebras | Submitted |
 | SO(14) Unification: A Machine-Verified Algebraic Scaffold with Phenomenological Predictions | Physical Review D | In preparation |
+| Three Generations from E₈: A Machine-Verified Resolution | Letters in Mathematical Physics | In preparation |
 
 ## Build
 
@@ -82,8 +83,8 @@ All proofs are in `src/lean_proofs/`:
 **Unification**:
 `unification`, `unification_gravity`, `spinor_matter`, `grand_unified_field`, `so14_unification`, `so14_anomalies`, `so14_breaking_chain`, `symmetry_breaking`
 
-**Three-Generation Problem**:
-`spinor_parity_obstruction`, `e8_embedding`, `e8_su9_decomposition`, `e8_generation_mechanism`, `three_generation_theorem`
+**Three-Generation Problem** (E₈ ⊃ SU(9)/Z₃):
+`spinor_parity_obstruction`, `e8_embedding`, `e8_su9_decomposition`, `e8_generation_mechanism`, `three_generation_theorem`, `e8_chirality_boundary`, `j_anomaly_free_eigenspaces`, `exterior_cube_chirality`
 
 **Dynamics**:
 `yang_mills_energy`, `covariant_derivative`, `rg_running`, `bianchi_identity`, `yang_mills_equation`, `yukawa_couplings`

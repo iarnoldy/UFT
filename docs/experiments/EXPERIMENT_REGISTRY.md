@@ -282,3 +282,48 @@ mathematical physics that cannot be resolved by formal verification.
 **Dependencies**: Experiments 0-4, e8_embedding.lean, e8_su9_decomposition.lean,
   e8_generation_mechanism.lean, three_generation_theorem.lean
 **Downstream impact**: Closes the last open kill condition (KC-E3)
+
+---
+
+## Experiment 6: Chirality Kill Conditions KC-C4 and KC-C5
+
+**Status**: IN PROGRESS
+**Track**: D (Candidate Theory Construction)
+**Priority**: ACTIVE
+**Started**: 2026-03-10
+
+**Context**: Experiment 5 resolved KC-E3 as BOUNDARY. The Heptapod B teleological
+analysis proposed a concrete chirality operator J = (2/sqrt(3))(sigma + 1/2 Id) on
+the 168-dim matter space, where sigma is the Z3 automorphism of E8. This experiment
+tests whether J has the required physical properties.
+
+**Hypotheses**:
+- **KC-C4**: SU(2)_W x U(1)_Y distinguishes the 84 from the 84-bar. The complex
+  structure J provides a physically meaningful label (gauge bosons see the distinction).
+- **KC-C5**: J reduces to i*gamma_5 under the E8 -> SM breaking chain. The +i eigenspace
+  (84) corresponds to left-handed SM fermions, and the -i eigenspace (84-bar) to right-handed.
+
+**Method**:
+1. Decompose Lambda^3(C^9) under SU(5) x SU(4) (dimensional verification)
+2. Branch SU(4) -> SU(3)_family x U(1) to extract generation content
+3. Decompose SU(5) reps under SU(3)_C x SU(2)_W x U(1)_Y
+4. Catalog all SM quantum numbers in the 84 and 84-bar
+5. Test KC-C4: are the SM catalogs different? (yes = PASS)
+6. Test KC-C5: does J eigenvalue correlate with SM chirality? (yes = PASS)
+
+**Falsification criteria**:
+- KC-C4 FAILS if 84 and 84-bar have identical SM quantum numbers (this would mean
+  J provides no physical distinction)
+- KC-C5 FAILS if a single SM generation requires components from BOTH J eigenspaces
+  (this would mean J != i*gamma_5)
+
+**Claim tagging**:
+- [MV] Branching rules verified in e8_generation_mechanism.lean (dimensions)
+- [CO] SM quantum number catalogs (Python computation)
+- [CP] Physical interpretation of J operator
+
+**Deliverables**:
+- `src/experiments/chirality_kc_c4_c5.py` — Python computation [CO]
+
+**Dependencies**: Experiment 5, e8_generation_mechanism.lean
+**Downstream impact**: Determines whether J is chirality (gamma_5) or something new

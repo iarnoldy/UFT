@@ -50,7 +50,7 @@ with Phenomenological Predictions}
 \begin{abstract}
 We present a candidate unified field theory based on $\mathrm{SO}(14)$, whose algebraic
 foundation has been machine-verified in Lean~4 with the mathlib library: 46 proof files
-containing over 1870 theorems with zero \texttt{sorry} gaps.  The $\mathrm{SO}(14)$
+containing over 1870 verified declarations (theorems, definitions, and lemmas) with zero \texttt{sorry} gaps.  The $\mathrm{SO}(14)$
 Lie algebra has 91 generators, which decompose as $91 = 45 + 6 + 40$ under
 $\so(10) \oplus \so(4) \oplus \text{mixed}$, embedding both the Standard Model gauge
 group and a gravity sector in a single algebraic structure.  We construct the symmetry-breaking
@@ -110,7 +110,7 @@ In this paper we present a candidate $\mathrm{SO}(14)$ unified theory with
 a distinctive feature: the algebraic foundation has been machine-verified using
 the Lean~4 interactive theorem prover~\cite{demoura2021lean4} and the
 mathlib library~\cite{mathlib}.  Specifically, 46 Lean~4 proof files
-containing over 1870 theorems have been compiled with zero
+containing over 1870 verified declarations have been compiled with zero
 \texttt{sorry} gaps (unproved assertions).  This means that the algebraic
 structure---dimensions, embeddings, anomaly cancellation, representation
 decompositions, breaking chain, beta-function coefficients, and
@@ -597,7 +597,7 @@ $\mathrm{SO}(3,11)$ is a feature, not a bug: it permits Majorana
 neutrino masses.
 
 \paragraph{Signature audit.}
-Of 46 proof files containing over 1870 theorems: 40 files (87\%)
+Of 46 proof files containing over 1870 verified declarations: 40 files (87\%)
 are signature-independent, 3 files (7\%) are compact-only (energy
 positivity, Hilbert space positivity, mass gap), and 3 files (7\%)
 need revision for specific-signature results\CO.  The precise
@@ -981,7 +981,7 @@ The main methodological advantages are:
   Any researcher with a Lean~4 installation can verify the results
   in minutes.
 \item \textbf{Signature audit}: classifying proofs by signature
-  dependence (87\% independent, 7\% compact-only, 6\% needs-revision)
+  dependence (87\% independent, 7\% compact-only, 7\% needs-revision)
   provides a precise answer to the question ``which results transfer
   to $\mathrm{SO}(3,11)$?''
 \end{enumerate}

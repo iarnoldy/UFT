@@ -179,7 +179,7 @@ From the (1, 4-bar) = C(4,3) piece:
 The generation content extracted from the 84 (and its conjugate 84-bar):
   From 84:  3 copies of the 10 of SU(5) -> (10, 3) with dim 30
   From 84*: 3 copies of the 5-bar of SU(5) -> (5-bar, 3-bar) with dim 15
-  From 84*: 3 right-handed neutrinos -> (1, 3-bar) with dim 3
+  From 84:  3 right-handed neutrinos -> (1, 3) with dim 3
   Total generation matter: 30 + 15 + 3 = 48 -/
 
 /-- One SM generation under SU(5): 10 + 5-bar + 1 = 16.

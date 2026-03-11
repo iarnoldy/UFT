@@ -6,7 +6,7 @@ Machine-verified algebraic scaffold from Dollard's versor algebra through Cliffo
 
 A research project that applies interactive theorem provers (Lean 4) to claims from alternative mathematical frameworks. Starting from Eric Dollard's "versor algebra," we extract formalizable claims, prove or disprove each one, and trace the algebraic path from the source claims through Clifford algebras to gauge unification.
 
-**46 proof files. Over 1,870 verified declarations. Zero `sorry` gaps. Zero build errors.**
+**47 proof files. Over 1,940 verified declarations. Zero `sorry` gaps. Zero build errors.**
 
 ## Results Summary
 
@@ -42,6 +42,10 @@ roots   decomp    algebra    algebra     Glashow   unified   unification generat
 | `gauss_law_magnetism` | `bianchi_identity` | div B = 0 from Bianchi identity |
 | `three_generation_theorem` | `three_generation_theorem` | SO(14) impossibility + E8 = exactly 3 generations |
 | `complete_dimensional_skeleton` | `three_generation_theorem` | 23-part conjunction: entire chain in one theorem |
+| `wilson_chirality` | `massive_chirality_definition` | Wilson's Λ³(C⁹) chirality argument, machine-verified |
+| `massive_chirality_definition` | `massive_chirality_definition` | 12-part: two-level chirality definition (Def B + Def D) |
+| `complete_massive_chirality_skeleton` | `massive_chirality_definition` | 20-part: full chirality certificate |
+| `odd_nine_all_chiral` | `massive_chirality_definition` | All exterior powers of C⁹ are chiral (9 is odd) |
 
 ## Publications
 
@@ -84,7 +88,7 @@ All proofs are in `src/lean_proofs/`:
 `unification`, `unification_gravity`, `spinor_matter`, `grand_unified_field`, `so14_unification`, `so14_anomalies`, `so14_breaking_chain`, `symmetry_breaking`
 
 **Three-Generation Problem** (E₈ ⊃ SU(9)/Z₃):
-`spinor_parity_obstruction`, `e8_embedding`, `e8_su9_decomposition`, `e8_generation_mechanism`, `three_generation_theorem`, `e8_chirality_boundary`, `j_anomaly_free_eigenspaces`, `exterior_cube_chirality`
+`spinor_parity_obstruction`, `e8_embedding`, `e8_su9_decomposition`, `e8_generation_mechanism`, `three_generation_theorem`, `e8_chirality_boundary`, `j_anomaly_free_eigenspaces`, `exterior_cube_chirality`, `massive_chirality_definition`
 
 **Dynamics**:
 `yang_mills_energy`, `covariant_derivative`, `rg_running`, `bianchi_identity`, `yang_mills_equation`, `yukawa_couplings`

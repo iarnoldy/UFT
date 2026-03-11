@@ -35,6 +35,7 @@ References:
 
 import Mathlib.Data.Real.Basic
 import Mathlib.Tactic
+import Mathlib.Algebra.Lie.Basic
 
 /-! ## Part 1: The sl(3) Lie Algebra (Chevalley Basis)
 
@@ -281,6 +282,47 @@ theorem h1_eigenvalue_e2 : (comm H1 E2).e2 = -1 := by
 
 theorem h2_eigenvalue_e2 : (comm H2 E2).e2 = 2 := by
   simp [comm, H2, E2]
+
+/-! ## Mathlib LieRing and LieAlgebra Instances
+
+sl(3) is certified as a Lie algebra over ℝ via mathlib's typeclass system. -/
+
+instance : Sub SL3 := ⟨fun a b => add a (neg b)⟩
+instance : SMul ℝ SL3 := ⟨smul⟩
+
+@[simp] lemma sub_def' (a b : SL3) : a - b = add a (neg b) := rfl
+@[simp] lemma smul_def' (r : ℝ) (a : SL3) : r • a = smul r a := rfl
+
+instance : AddCommGroup SL3 where
+  add_assoc := by intros; ext <;> simp [add] <;> ring
+  zero_add := by intros; ext <;> simp [add, zero]
+  add_zero := by intros; ext <;> simp [add, zero]
+  add_comm := by intros; ext <;> simp [add] <;> ring
+  neg_add_cancel := by intros; ext <;> simp [add, neg, zero]
+  sub_eq_add_neg := by intros; rfl
+  nsmul := nsmulRec
+  zsmul := zsmulRec
+
+instance : Module ℝ SL3 where
+  one_smul := by intros; ext <;> simp [smul]
+  mul_smul := by intros; ext <;> simp [smul] <;> ring
+  smul_zero := by intros; ext <;> simp [smul, zero]
+  smul_add := by intros; ext <;> simp [smul, add] <;> ring
+  add_smul := by intros; ext <;> simp [smul, add] <;> ring
+  zero_smul := by intros; ext <;> simp [smul, zero]
+
+instance : Bracket SL3 SL3 := ⟨comm⟩
+
+@[simp] lemma bracket_def' (a b : SL3) : ⁅a, b⁆ = comm a b := rfl
+
+instance : LieRing SL3 where
+  add_lie := by intros; ext <;> simp [comm, add] <;> ring
+  lie_add := by intros; ext <;> simp [comm, add] <;> ring
+  lie_self := by intro x; ext <;> simp [comm, zero] <;> ring
+  leibniz_lie := by intros; ext <;> simp [comm, add] <;> ring
+
+instance : LieAlgebra ℝ SL3 where
+  lie_smul := by intros; ext <;> simp [comm, smul] <;> ring
 
 end SL3
 

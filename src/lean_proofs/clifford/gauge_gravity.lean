@@ -51,6 +51,7 @@ References:
 
 import Mathlib.Data.Real.Basic
 import Mathlib.Tactic
+import Mathlib.Algebra.Lie.Basic
 
 /-! ## Part 1: The Bivector Algebra
 
@@ -930,6 +931,52 @@ theorem gravity_field_strength (L omega1 omega2 : Bivector) :
     unifiedFieldStrength L ⟨omega1, false⟩ ⟨omega2, false⟩ =
     add L (comm omega1 omega2) := by
   simp [unifiedFieldStrength, selfInteraction]
+
+/-! ## Part 18: Mathlib LieRing and LieAlgebra Instances
+
+The Bivector algebra (so(1,3)) is certified as a Lie algebra over ℝ via mathlib's
+typeclass system. This connects the hand-built flat structure to mathlib's
+Lie algebra infrastructure, enabling 50+ free theorems. -/
+
+instance : Sub Bivector := ⟨fun a b => add a (neg b)⟩
+instance : SMul ℝ Bivector := ⟨smul⟩
+
+@[simp] lemma sub_def' (a b : Bivector) : a - b = add a (neg b) := rfl
+@[simp] lemma smul_def' (r : ℝ) (a : Bivector) : r • a = smul r a := rfl
+
+instance : AddCommGroup Bivector where
+  add_assoc := by intros; ext <;> simp [add] <;> ring
+  zero_add := by intros; ext <;> simp [add, zero]
+  add_zero := by intros; ext <;> simp [add, zero]
+  add_comm := by intros; ext <;> simp [add] <;> ring
+  neg_add_cancel := by intros; ext <;> simp [add, neg, zero]
+  sub_eq_add_neg := by intros; rfl
+  nsmul := nsmulRec
+  zsmul := zsmulRec
+
+instance : Module ℝ Bivector where
+  one_smul := by intros; ext <;> simp [smul]
+  mul_smul := by intros; ext <;> simp [smul] <;> ring
+  smul_zero := by intros; ext <;> simp [smul, zero]
+  smul_add := by intros; ext <;> simp [smul, add] <;> ring
+  add_smul := by intros; ext <;> simp [smul, add] <;> ring
+  zero_smul := by intros; ext <;> simp [smul, zero]
+
+instance : Bracket Bivector Bivector := ⟨comm⟩
+
+@[simp] lemma bracket_def' (a b : Bivector) : ⁅a, b⁆ = comm a b := rfl
+
+instance : LieRing Bivector where
+  add_lie := by intros; ext <;> simp [comm, add] <;> ring
+  lie_add := by intros; ext <;> simp [comm, add] <;> ring
+  lie_self := by intro x; ext <;> simp [comm, zero] <;> ring
+  leibniz_lie := by intros; ext <;> simp [comm, add] <;> ring
+
+instance : LieAlgebra ℝ Bivector where
+  lie_smul := by intros; ext <;> simp [comm, smul] <;> ring
+
+/-- Typeclass-resolved antisymmetry: ⁅x, x⁆ = 0 for the Lorentz Lie algebra. -/
+theorem lorentz_lie_self (x : Bivector) : ⁅x, x⁆ = 0 := lie_self x
 
 end Bivector
 

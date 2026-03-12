@@ -17,12 +17,19 @@ A^a (one per generator), and the dynamics are governed by:
 The abelian part F = dA is fully formalized using mathlib's `extDeriv`, giving us
 the abelian Bianchi identity d(dA) = 0 as a THEOREM (not an axiom).
 
-The non-abelian self-interaction term f^a_{bc} A^b ∧ A^c requires the wedge product
-of 1-forms composed with the Lie bracket. This is AXIOMATIZED as a structure (the
-wedge product infrastructure is not yet available for our DiffForm type).
+The non-abelian self-interaction term f^a_{bc} A^b ∧ A^c uses the wedge product
+of 1-forms from `wedge_product.lean`. The wedge product itself is axiomatized
+(see that file for the rationale), but the field strength construction here is
+DERIVED: given any `WedgeProductOps` satisfying the axioms, we construct the
+non-abelian term as a definition and prove its properties as theorems.
+
+The legacy `NonAbelianTerm` structure is retained for backward compatibility with
+`bianchi_from_principles.lean`. A bridge theorem shows that the wedge-product
+construction provides a valid `NonAbelianTerm`.
 
 Builds on:
   - differential_forms.lean: Spacetime, DiffForm, d, d_squared_zero
+  - wedge_product.lean: WedgeProductOps (axiomatized wedge product)
   - covariant_derivative.lean: SU(2)-specific version (hardcoded)
   - gauge_gravity.lean: so(1,3) Jacobi identity (algebra side)
   - su3_color.lean, su5_grand.lean, so10_grand.lean: Lie algebra structure constants
@@ -33,7 +40,7 @@ References:
   - Frankel, "The Geometry of Physics" Ch. 7
 -/
 
-import dynamics.differential_forms
+import dynamics.wedge_product
 import Mathlib.Data.Real.Basic
 import Mathlib.Tactic
 
@@ -135,7 +142,7 @@ theorem abelian_bianchi_at (G : GaugeTheory) (a : Fin G.dim) (x : Spacetime) :
     d (abelianFieldStrength G a) x = 0 :=
   d_squared_zero_at (G.A a) (G.smooth a) x
 
-/-! ## Part 4: Non-Abelian Self-Interaction Term
+/-! ## Part 4: Non-Abelian Self-Interaction Term (Legacy Interface)
 
 For non-abelian gauge theories, the field strength has an additional term:
   F^a = dA^a + f^a_{bc} A^b ∧ A^c
@@ -153,21 +160,19 @@ Composing with structure constants:
 This term is what makes non-abelian gauge theories NONLINEAR: the gauge field
 interacts with itself. For U(1), f^a_{bc} = 0 and this term vanishes.
 
-We AXIOMATIZE this term as a structure because the wedge product of our DiffForm
-type is not yet connected to mathlib's alternating map composition. This is an
-honest boundary: the algebra is correct, the differential geometry plumbing is
-future work. -/
+LEGACY: This `NonAbelianTerm` structure is the original axiomatization.
+The PREFERRED approach is in Part 5b below, which uses `WedgeProductOps`
+from `wedge_product.lean` to give a DERIVED definition. The bridge theorem
+`NonAbelianTerm.fromWedge` shows that the new construction satisfies this
+legacy interface, so downstream code continues to work unchanged. -/
 
-/-- The non-abelian self-interaction term (axiomatized).
+/-- The non-abelian self-interaction term (legacy axiomatized interface).
 
     In components: (A∧A)^a_μν = f^a_{bc} A^b_μ A^c_ν - f^a_{bc} A^b_ν A^c_μ
 
-    This is axiomatized because constructing the wedge product of two DiffForm 1
-    values as a DiffForm 2 requires alternating map composition infrastructure
-    that is not yet connected to our types.
-
-    The key property we require: for abelian theories (all structure constants = 0),
-    the self-interaction vanishes identically. -/
+    This is retained for backward compatibility with `bianchi_from_principles.lean`.
+    The preferred construction is `selfInteractionW` in Part 5b, which uses the
+    axiomatized wedge product to give an explicit formula. -/
 structure NonAbelianTerm (G : GaugeTheory) where
   /-- The self-interaction 2-form for each generator -/
   selfInteraction : Fin G.dim → DiffForm 2
@@ -209,6 +214,108 @@ theorem fieldStrength_abelian (G : GaugeTheory) (T : NonAbelianTerm G)
   funext x
   simp [fieldStrength]
   rw [h]
+  simp
+
+end GaugeTheory
+
+/-! ## Part 5b: Non-Abelian Field Strength via Wedge Product
+
+Given a `WedgeProductOps` (axiomatized wedge product from `wedge_product.lean`),
+we can now DEFINE the non-abelian self-interaction term as:
+
+  (A∧A)^a(x) = Σ_{b,c} f^a_{bc} (A^b ∧ A^c)(x)
+
+This is a DERIVED definition: the non-abelian term is constructed from the
+wedge product, not postulated as an opaque axiom. The key improvement over
+the legacy `NonAbelianTerm` is that the formula is explicit and we can prove
+properties from the wedge product axioms.
+
+The bridge theorem `NonAbelianTerm.fromWedge` shows that this construction
+satisfies the `NonAbelianTerm` interface, so existing downstream code
+(e.g., `bianchi_from_principles.lean`) continues to work. -/
+
+namespace GaugeTheory
+
+variable (W : WedgeProductOps)
+
+/-- The non-abelian self-interaction 2-form for generator a, constructed
+    from the wedge product:
+
+    (A∧A)^a(x) = Σ_{b,c} f^a_{bc} * (A^b ∧ A^c)(x)
+
+    This is the term that makes non-abelian gauge theories nonlinear.
+    For abelian theories (all f = 0), this vanishes identically (proved). -/
+noncomputable def selfInteractionW (G : GaugeTheory) (a : Fin G.dim) : DiffForm 2 :=
+  fun x => ∑ b : Fin G.dim, ∑ c : Fin G.dim,
+    G.structureConstants a b c • W.wedge (G.A b) (G.A c) x
+
+/-- For abelian theories, the wedge-product self-interaction vanishes.
+
+    When all structure constants are zero, each summand
+    f^a_{bc} * (A^b ∧ A^c) = 0 * (...) = 0, so the entire sum is zero.
+
+    This is a THEOREM, proved from the wedge product axioms. -/
+theorem selfInteractionW_abelian (G : GaugeTheory)
+    (habel : ∀ a b c, G.structureConstants a b c = 0) (a : Fin G.dim) (x : Spacetime) :
+    selfInteractionW W G a x = 0 := by
+  simp [selfInteractionW, habel]
+
+/-- The full non-abelian field strength via wedge product:
+    F^a = dA^a + Σ_{b,c} f^a_{bc} A^b ∧ A^c
+
+    This uses the explicit wedge product formula instead of an opaque axiom. -/
+noncomputable def fieldStrengthW (G : GaugeTheory) (a : Fin G.dim) : DiffForm 2 :=
+  fun x => abelianFieldStrength G a x + selfInteractionW W G a x
+
+/-- For abelian theories, the wedge-product field strength equals dA. -/
+theorem fieldStrengthW_abelian (G : GaugeTheory)
+    (habel : ∀ a b c, G.structureConstants a b c = 0) (a : Fin G.dim) :
+    fieldStrengthW W G a = abelianFieldStrength G a := by
+  funext x
+  simp [fieldStrengthW, selfInteractionW_abelian W G habel a x]
+
+/-- The self-interaction term has compatible antisymmetry with structure constants.
+
+    Because f^a_{bc} = -f^a_{cb} and (A^b ∧ A^c) = -(A^c ∧ A^b),
+    the double antisymmetry means each pair (b,c) contributes consistently:
+    f^a_{bc} (A^b ∧ A^c) = f^a_{cb} (A^c ∧ A^b). -/
+theorem selfInteractionW_wedge_antisymm (G : GaugeTheory)
+    (a : Fin G.dim) (x : Spacetime) (b c : Fin G.dim) :
+    G.structureConstants a b c • W.wedge (G.A b) (G.A c) x =
+    G.structureConstants a c b • W.wedge (G.A c) (G.A b) x := by
+  rw [G.antisymm a b c]
+  have hx : W.wedge (G.A b) (G.A c) x = -(W.wedge (G.A c) (G.A b) x) := by
+    exact congrFun (W.wedge_antisymm (G.A b) (G.A c)) x
+  rw [hx]
+  simp [smul_neg, neg_smul]
+
+/-- Bridge theorem: the wedge-product construction provides a valid `NonAbelianTerm`.
+
+    This shows backward compatibility: any downstream code that uses the legacy
+    `NonAbelianTerm` interface can be supplied with `NonAbelianTerm.fromWedge`. -/
+noncomputable def NonAbelianTerm.fromWedge (G : GaugeTheory) : NonAbelianTerm G where
+  selfInteraction := selfInteractionW W G
+  abelian_vanishes := by
+    intro habel a
+    funext x
+    exact selfInteractionW_abelian W G habel a x
+
+/-- The legacy `fieldStrength` agrees with `fieldStrengthW` when using the
+    wedge-product construction. -/
+theorem fieldStrength_eq_fieldStrengthW (G : GaugeTheory) (a : Fin G.dim) :
+    fieldStrength G (NonAbelianTerm.fromWedge W G) a = fieldStrengthW W G a := by
+  funext x
+  simp [fieldStrength, fieldStrengthW, NonAbelianTerm.fromWedge, selfInteractionW]
+
+/-- The diagonal terms A^b ∧ A^b vanish in the self-interaction sum.
+
+    Since f^a_{bb} = 0 (from antisymmetry) and A^b ∧ A^b = 0 (from wedge
+    self-annihilation), the b=c terms contribute nothing. This means only
+    the off-diagonal pairs b ≠ c contribute to the field strength. -/
+theorem selfInteractionW_diag_vanishes (G : GaugeTheory) (a b : Fin G.dim) (x : Spacetime) :
+    G.structureConstants a b b • W.wedge (G.A b) (G.A b) x = 0 := by
+  have hf : G.structureConstants a b b = 0 := by linarith [G.antisymm a b b]
+  rw [hf]
   simp
 
 end GaugeTheory
@@ -348,18 +455,16 @@ This file (`gauge_connection.lean`) generalizes:
 
 1. **Generality**: works for ANY gauge group, not just SU(2)
 2. **Genuine forms**: uses mathlib's DiffForm (functions on spacetime), not flat tuples
-3. **Proved Bianchi**: from d²=0 (calculus), not Jacobi (algebra)
+3. **Proved Bianchi**: from d^2=0 (calculus), not Jacobi (algebra)
 4. **Dimension counting**: connects generator counts to existing Lean files
+5. **Wedge-product field strength**: F = dA + f*A wedge A as a definition (not axiom)
+6. **Bridge theorem**: wedge construction satisfies the legacy NonAbelianTerm interface
 
 ### What covariant_derivative.lean still does better
 
-1. **Explicit non-abelian term**: computes [A_μ, A_ν] via cross product
+1. **Explicit non-abelian term**: computes [A_mu, A_nu] via cross product
 2. **Matter field coupling**: defines T_a action on doublets
-3. **Yang-Mills Lagrangian**: constructs L = -(1/4)Tr(F²)
-
-The eventual goal is to combine both approaches: use the genuine differential
-forms infrastructure (this file) with the explicit Lie algebra computations
-(the clifford/ files) to get the full non-abelian field strength as a theorem.
+3. **Yang-Mills Lagrangian**: constructs L = -(1/4)Tr(F^2)
 
 ### Honest boundary
 
@@ -367,10 +472,16 @@ forms infrastructure (this file) with the explicit Lie algebra computations
 - [MV] Abelian field strength F = dA (definition using extDeriv)
 - [MV] Structure constant antisymmetry consequences (theorems)
 - [MV] Dimension counting for all gauge groups (arithmetic)
-- [AX] Non-abelian self-interaction term (axiomatized structure)
-- [AX] Full field strength F = dA + A∧A (definition using axiom)
+- [MV] selfInteractionW_abelian: vanishing for abelian theories (theorem)
+- [MV] fieldStrengthW_abelian: F = dA for abelian theories (theorem)
+- [MV] selfInteractionW_wedge_antisymm: double antisymmetry (theorem)
+- [MV] selfInteractionW_diag_vanishes: self-wedge terms are zero (theorem)
+- [MV] NonAbelianTerm.fromWedge: bridge to legacy interface (theorem)
+- [MV] fieldStrength_eq_fieldStrengthW: new = old via bridge (theorem)
+- [AX] wedge : DiffForm 1 -> DiffForm 1 -> DiffForm 2 (from wedge_product.lean)
+- [AX-LEGACY] NonAbelianTerm structure (retained for backward compatibility)
 - [STUB] Covariant exterior derivative D = d + [A,-] (not yet defined)
-- [STUB] Non-abelian Bianchi identity DF = 0 (needs D)
+- [STUB] Non-abelian Bianchi identity DF = 0 (needs Leibniz rule for d on wedge)
 - [STUB] Gauge transformation law (needs group action)
 
 Machine-verified. 0 sorry. Soli Deo Gloria.

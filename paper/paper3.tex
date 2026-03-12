@@ -49,8 +49,8 @@ with Phenomenological Predictions}
 
 \begin{abstract}
 We present a candidate unified field theory based on $\mathrm{SO}(14)$, whose algebraic
-foundation has been machine-verified in Lean~4 with the mathlib library: 46 proof files
-containing over 1870 verified declarations (theorems, definitions, and lemmas) with zero \texttt{sorry} gaps.  The $\mathrm{SO}(14)$
+foundation has been machine-verified in Lean~4 with the mathlib library: 59 proof files
+containing over 2,537 verified declarations (theorems, definitions, and lemmas) with zero \texttt{sorry} gaps.  The $\mathrm{SO}(14)$
 Lie algebra has 91 generators, which decompose as $91 = 45 + 6 + 40$ under
 $\so(10) \oplus \so(4) \oplus \text{mixed}$, embedding both the Standard Model gauge
 group and a gravity sector in a single algebraic structure.  We construct the symmetry-breaking
@@ -109,8 +109,8 @@ $\mathrm{SO}(3,11)$~\cite{krasnov2018,nesti2010}.
 In this paper we present a candidate $\mathrm{SO}(14)$ unified theory with
 a distinctive feature: the algebraic foundation has been machine-verified using
 the Lean~4 interactive theorem prover~\cite{demoura2021lean4} and the
-mathlib library~\cite{mathlib}.  Specifically, 46 Lean~4 proof files
-containing over 1870 verified declarations have been compiled with zero
+mathlib library~\cite{mathlib}.  Specifically, 59 Lean~4 proof files
+containing over 2,537 verified declarations have been compiled with zero
 \texttt{sorry} gaps (unproved assertions).  This means that the algebraic
 structure---dimensions, embeddings, anomaly cancellation, representation
 decompositions, breaking chain, beta-function coefficients, and
@@ -177,8 +177,8 @@ The complete methodology is described in the companion
 paper~\cite{arnoldy2026cicm}.
 
 The codebase compiles as a single Lean~4 project (over 3,300 build jobs,
-zero errors, zero \texttt{sorry} gaps) and is publicly
-available~\cite{uft-github}.
+zero errors, zero \texttt{sorry} gaps) and is available
+from the corresponding author upon reasonable request~\cite{uft-github}.
 
 \subsection{Key Machine-Verified Results}
 
@@ -305,7 +305,7 @@ Machine verification does \emph{not} prove:
 \item That three generations arise naturally (open for all GUTs\OP).
 \end{enumerate}
 
-A signature audit of all 46 proof files~\cite{uft-github}
+A signature audit of 46 of the 59 proof files~\cite{uft-github}
 classifies 87\% as \emph{signature-independent} (properties of
 $\so(14,\mathbb{C})$, holding for all real forms), 7\% as
 \emph{compact-only} (energy positivity results that fail for
@@ -589,7 +589,7 @@ below the breaking scale, where the gauge group \emph{is} compact.
 
 \paragraph{Spinor reality.}
 The Clifford algebra isomorphism classes differ between
-signatures: $\Cl(14,0) \cong M(128, \mathbb{R})$ has quaternionic
+signatures: $\Cl(14,0) \cong M(128, \mathbb{R})$ has complex
 spinors (Weyl but no Majorana-Weyl), while $\Cl(11,3) \cong
 M(128, \mathbb{R})$ has real spinors (Majorana-Weyl
 exists)\SP.  The existence of Majorana-Weyl spinors in
@@ -597,7 +597,7 @@ $\mathrm{SO}(3,11)$ is a feature, not a bug: it permits Majorana
 neutrino masses.
 
 \paragraph{Signature audit.}
-Of 46 proof files containing over 1870 verified declarations: 40 files (87\%)
+Of the 46 proof files audited for signature dependence: 40 files (87\%)
 are signature-independent, 3 files (7\%) are compact-only (energy
 positivity, Hilbert space positivity, mass gap), and 3 files (7\%)
 need revision for specific-signature results\CO.  The precise
@@ -939,9 +939,14 @@ In a companion paper~\cite{arnoldy2026prl}, we prove this $E_8$
 resolution with full machine verification: the impossibility
 $3 \nmid 2$ in $\mathrm{SO}(14)$ and the resolution via
 $\Lambda^3(\mathbb{C}^9) = 84 \supset 3 \times 16 = 48$ in $E_8$
-are verified across 8 Lean~4 files with zero \texttt{sorry} gaps.
-The chirality question (Distler--Garibaldi vs.\ Wilson's massive
-chirality) remains an open problem in mathematical physics\OP.
+are verified across 9 Lean~4 files with zero \texttt{sorry} gaps.
+The chirality question remains an open problem in mathematical
+physics\OP: Distler--Garibaldi~\cite{distler2010} proved that no
+embedding of the Standard Model in any real form of $E_8$ yields
+three \emph{massless chiral} generations from the adjoint, but
+Wilson~\cite{wilson2024b} argues that for theories with explicitly
+non-zero masses, this no-go theorem does not apply---the non-compact
+degrees of freedom serve as mass parameters rather than ghosts.
 
 \paragraph{2.\ Distler ghosts\OP.}
 The non-compact form $\mathrm{SO}(3,11)$ has indefinite Killing form,
@@ -1038,7 +1043,7 @@ algebraic foundation---91 generators decomposing as $45 + 6 + 40$,
 anomaly cancellation, symmetry-breaking chain to the Standard Model with
 corrected Higgs representations, and matter content $3 \times \mathbf{64}$---has
 been machine-verified in Lean~4 with zero \texttt{sorry} gaps across
-46 proof files.  One-loop renormalization group analysis yields coupling
+59 proof files containing over 2,537 verified declarations.  One-loop renormalization group analysis yields coupling
 unification at $M_\text{GUT} = 10^{16.98}\GeV$ (0.88\% miss with
 threshold corrections), a proton lifetime of $10^{38.9}$~years (safely above
 experimental bounds), and asymptotic freedom for all non-abelian gauge factors.
@@ -1061,12 +1066,17 @@ the infrastructure that made this work possible.  The author also
 acknowledges the prior work of Nesti, Percacci, and Krasnov on
 gravity-gauge unification in $\mathrm{SO}(3,11)$, which provided the
 physical motivation for the algebraic scaffold verified here.
+R.~A.~Wilson provided valuable correspondence on the chirality
+question and the $\mathrm{SU}(9)/\mathbb{Z}_3$ generation mechanism.
+Proof engineering and manuscript preparation were assisted by Claude
+(Anthropic); all mathematical content, research direction, and
+physical interpretation are the sole responsibility of the author.
 \end{acknowledgments}
 
 \section*{Data Availability}
 All data generated during this study are contained within the article.
-The Lean~4 source code for all machine-verified proofs is publicly
-available~\cite{uft-github}.
+The Lean~4 source code for all machine-verified proofs is available
+from the corresponding author upon reasonable request~\cite{uft-github}.
 
 % ============================================================================
 % References
@@ -1209,7 +1219,12 @@ Phys.\ Rev.\ D \textbf{81}, 075011 (2010)
 \bibitem{wilson2024}
 R.~A.~Wilson,
 ``Uniqueness of an $\mathrm{E}_8$ model of elementary particles,''
-arXiv:2407.18279 [physics.gen-ph] (2024).
+J.\ Math.\ Phys.\ \textbf{63}, 081703 (2022).
+
+\bibitem{wilson2024b}
+R.~A.~Wilson,
+``On the problem of interacting particles in theoretical physics,''
+arXiv:2407.18279 (2024).
 
 \bibitem{bentov2016}
 Y.~BenTov and A.~Zee,

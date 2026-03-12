@@ -42,6 +42,9 @@ paper/paper4.tex
 paper/paper4.pdf
 paper/paper4Notes.bib
 paper/AACA-S-26-00059.pdf
+PRIVATE_README.md
+docs/HANDOFF_GROK_QUESTIONS.md
+.claude/sessions/
 
 # Claude Code internal
 .claude/sessions/.current-session

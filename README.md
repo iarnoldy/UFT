@@ -6,7 +6,9 @@ Machine-verified algebraic scaffold from Dollard's versor algebra through Cliffo
 
 A research project that applies interactive theorem provers (Lean 4) to claims from alternative mathematical frameworks. Starting from Eric Dollard's "versor algebra," we extract formalizable claims, prove or disprove each one, and trace the algebraic path from the source claims through Clifford algebras to gauge unification.
 
-**56 proof files. 2,420 verified declarations. Zero `sorry` gaps. Zero build errors.**
+**59 proof files. ~2,537 verified declarations. Zero `sorry` gaps. Zero build errors.**
+
+Includes the first machine-verified so(10) spinor representation homomorphism in any interactive theorem prover: 1,980 bracket equations verified by `native_decide` over exact rational arithmetic.
 
 Four Lie algebras — so(1,3), sl(3), sl(5), so(10) — carry certified `LieRing` and `LieAlgebra ℝ` instances via `Mathlib.Algebra.Lie.Basic`, connecting the hand-built structures to mathlib's type system.
 
@@ -70,6 +72,7 @@ roots   decomp    algebra    algebra     Glashow   unified   unification generat
 | `complete_chirality_factorization` | `chirality_factorization` | Chirality emerges from 4D×10D unification |
 | `lagrangian_uniqueness` | `lagrangian_uniqueness` | Yang-Mills Lagrangian form is unique (Killing) |
 | `killing_form_unique` | `schur_killing_uniqueness` | Schur's Lemma → Killing form uniqueness (Route A) |
+| `spinor_rep_homomorphism_real/imag` | `spinor_rep_homomorphism` | [ρ(X),ρ(Y)] = ρ([X,Y]) for all 990 so(10) basis pairs |
 | `d_squared_zero` | `differential_forms` | d²=0 from mathlib's extDeriv (replaces axiom) |
 | `clifford_relation_cl13` | `cl31_maxwell` | Full Cl(1,3) Clifford relation verified from 256-term mul table |
 | `comm_metric_independent` | `gauge_gravity` | Lie bracket is definitionally metric-independent (`rfl` proof) |
@@ -119,8 +122,11 @@ All proofs are in `src/lean_proofs/`:
 **Three-Generation Problem** (E₈ ⊃ SU(9)/Z₃):
 `spinor_parity_obstruction`, `e8_embedding`, `e8_su9_decomposition`, `e8_generation_mechanism`, `three_generation_theorem`, `e8_chirality_boundary`, `j_anomaly_free_eigenspaces`, `exterior_cube_chirality`, `massive_chirality_definition`, `chirality_factorization`
 
+**Representations**:
+`spinor_rep` (Cartan eigenvalues, chirality, traces), `spinor_rep_full` (all 45 generators as 16×16 matrices), `spinor_rep_homomorphism` (990-bracket homomorphism proof via native_decide)
+
 **Dynamics**:
-`yang_mills_energy`, `covariant_derivative`, `rg_running`, `bianchi_identity`, `yang_mills_equation`, `yukawa_couplings`, `lagrangian_uniqueness`, `differential_forms`
+`yang_mills_energy`, `covariant_derivative`, `rg_running`, `bianchi_identity`, `yang_mills_equation`, `yukawa_couplings`, `lagrangian_uniqueness`, `differential_forms`, `wedge_product` (axiomatized exterior product), `gauge_connection` (Lie-valued forms, F=dA+[A,A]), `bianchi_from_principles`, `yang_mills_variation`
 
 **Spectral Theory**:
 `grade2_lie_algebra`, `casimir_eigenvalues`, `casimir_spectral_gap`, `block_tridiagonal`, `schur_killing_uniqueness`

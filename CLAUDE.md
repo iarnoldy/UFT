@@ -1,7 +1,7 @@
 # Dollard Formal Verification
 
 Machine-verified algebraic scaffold from Dollard's versor algebra through Clifford algebras
-to SO(14) and E₈, built in Lean 4 with mathlib. 56 proof files, 2,420 verified
+to SO(14) and E₈, built in Lean 4 with mathlib. 59 proof files, ~2,537 verified
 declarations, zero sorry gaps. See README.md for current file/declaration counts.
 Paper 1 submitted to CICM 2026. Paper 2 submitted to AACA.
 Paper 3 drafted for PRD. Paper 4 (three-generation Letter) drafted for LMP.

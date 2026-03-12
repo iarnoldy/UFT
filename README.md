@@ -1,12 +1,12 @@
 # Formal Verification of Alternative Mathematical Frameworks
 
-Machine-verified algebraic scaffold from Dollard's versor algebra through Clifford algebras to SO(14), built in Lean 4 with mathlib.
+Machine-verified algebraic scaffold from Dollard's versor algebra through Clifford algebras to SO(14), built in [Lean 4](https://lean-lang.org/) with mathlib.
+
+**59 proof files. ~2,537 verified declarations. Zero `sorry` gaps. Zero build errors.**
 
 ## What This Is
 
 A research project that applies interactive theorem provers (Lean 4) to claims from alternative mathematical frameworks. Starting from Eric Dollard's "versor algebra," we extract formalizable claims, prove or disprove each one, and trace the algebraic path from the source claims through Clifford algebras to gauge unification.
-
-**59 proof files. ~2,537 verified declarations. Zero `sorry` gaps. Zero build errors.**
 
 Includes the first machine-verified so(10) spinor representation homomorphism in any interactive theorem prover: 1,980 bracket equations verified by `native_decide` over exact rational arithmetic.
 
@@ -53,6 +53,18 @@ roots   decomp    algebra    algebra     Glashow   unified   unification generat
 
 ## Crown Jewel Theorems
 
+The headline results — each a genuine theorem, not dimensional arithmetic:
+
+| Theorem | What It Proves |
+|---------|----------------|
+| `spinor_rep_homomorphism` | [ρ(X),ρ(Y)] = ρ([X,Y]) for all 990 so(10) basis pairs |
+| `three_generation_theorem` | SO(14) impossibility + E₈ yields exactly 3 generations |
+| `killing_form_unique` | Schur's Lemma → Killing form uniqueness (first in any ITP) |
+| `complete_chirality_factorization` | Chirality emerges from 4D×10D unification |
+
+<details>
+<summary>Full theorem table (27 entries)</summary>
+
 | Theorem | File | What It Proves |
 |---------|------|----------------|
 | `so14_dimension` | `so14_unification` | dim so(14) = C(14,2) = 91 |
@@ -79,14 +91,16 @@ roots   decomp    algebra    algebra     Glashow   unified   unification generat
 | `killingForm_eq_4_innerProduct` | `gauge_gravity` | Killing form = 4× Lorentzian inner product (signature enters HERE) |
 | `signature_split` | `dirac` | 6 bivector squares bundle: boost²=+1, rotation²=-1 (Lorentzian witness) |
 
+</details>
+
 ## Publications
 
-| Paper | Venue | Status |
-|-------|-------|--------|
-| Formal Verification of Alternative Mathematical Frameworks: A Case Study Using Lean 4 | CICM 2026 (Springer LNAI) | Submitted |
-| Character Decomposition from Fortescue to Cartan-Weyl: Unifying Symmetrical Components and Root Space Decomposition via Clifford Algebras | Advances in Applied Clifford Algebras | Submitted |
-| SO(14) Unification: A Machine-Verified Algebraic Scaffold with Phenomenological Predictions | Physical Review D | In preparation |
-| Three Generations from E₈: A Machine-Verified Resolution | Letters in Mathematical Physics | In preparation |
+| Paper | Venue | Status | About |
+|-------|-------|--------|-------|
+| [Paper 1](paper/paper1.tex) | CICM 2026 (Springer LNAI) | Submitted | Lean 4 as verification tool for alternative math frameworks |
+| [Paper 2](paper/paper2.tex) | Advances in Applied Clifford Algebras | Submitted | Fortescue → Cartan-Weyl: unifying symmetrical components and root spaces |
+| [Paper 3](paper/paper3.tex) | Physical Review D | In preparation | SO(14) machine-verified algebraic scaffold with phenomenological predictions |
+| [Paper 4](paper/paper4.tex) | Letters in Mathematical Physics | In preparation | Three generations from E₈ via SU(9)/Z₃ |
 
 ## Build
 
@@ -94,15 +108,25 @@ roots   decomp    algebra    algebra     Glashow   unified   unification generat
 # Install Lean 4 via elan (one-time)
 curl https://elan-init.lean-lang.org/elan-init.sh -sSf | sh
 
+# Fetch mathlib cache (first time, takes a few minutes)
+lake update
+
 # Build all proofs
 lake build
 ```
 
-Requires: Lean 4.29+, mathlib (fetched automatically by `lake build`).
+Requires: Lean 4.29+, mathlib (fetched automatically by `lake update`).
 
 ## Proof Files
 
-All proofs are in `src/lean_proofs/`:
+All proofs are in `src/lean_proofs/`. Entry points by interest:
+
+- **Mathematician**: start with `schur_killing_uniqueness` (Schur → Killing uniqueness) and `spinor_rep_homomorphism` (990-bracket proof)
+- **Physicist**: start with `gauge_gravity` (EM/gravity share algebraic structure) and `three_generation_theorem` (why 3 generations)
+- **Formalist**: start with `differential_forms` (d²=0 from mathlib) and `cl31_maxwell` (256-term Clifford relation)
+
+<details>
+<summary>Full file listing by category</summary>
 
 **Foundations** (Dollard verification):
 `basic_operators`, `algebraic_necessity`
@@ -137,12 +161,28 @@ All proofs are in `src/lean_proofs/`:
 **Lagrangian**:
 `circuit_action`
 
+</details>
+
+## FAQ
+
+**Is this a unified field theory?**
+No. It is a machine-verified algebraic scaffold — it proves that the dimensional and structural relationships along the chain Z₄ → Cl(1,3) → SO(10) → SO(14) → E₈ are mathematically consistent. Whether this describes nature is a separate (and open) question.
+
+**How do you get three generations?**
+Via the E₈ ⊃ SU(9)/Z₃ embedding. The `three_generation_theorem` proves that SO(14) alone *cannot* produce 3 generations (its spinor yields only 1), but E₈'s 248-dimensional adjoint decomposes under SU(9) to give exactly 3 copies of the Standard Model fermion content. This follows Wilson's construction.
+
+**What's speculative?**
+Everything tagged [CP] (Candidate Physics) in the codebase. The algebraic proofs [MV] are rigorous; the physical interpretation is not. See `docs/PROOF_CLASSIFICATION.md` for the full tagging system.
+
+**Can I use these proofs?**
+Yes. All Lean proof files are original work. Source materials in `source_materials/` are referenced under fair use for academic analysis.
+
 ## Project Structure
 
 | Directory | Contents |
 |-----------|----------|
 | `src/lean_proofs/` | Lean 4 proof files (the core work) |
-| `paper/` | LaTeX sources and compiled PDFs |
+| `paper/` | LaTeX sources and compiled PDFs (papers 1-4) |
 | `docs/` | Architecture, decisions, research notes |
 | `source_materials/` | Dollard's original PDFs (read-only reference) |
 | `src/experiments/` | Python verification scripts (pre-registered) |
@@ -158,10 +198,6 @@ Every experiment is pre-registered with falsification criteria before execution.
 - **[OP]** Open Problem
 
 See `CLAUDE.md` for full development rules and `docs/decisions/` for architectural decision records.
-
-## License
-
-All Lean proof files are original work. Source materials in `source_materials/` are referenced under fair use for academic analysis.
 
 ## Author
 

@@ -196,7 +196,7 @@ This would be a significant formalization result regardless of Dollard context.
 
 1. ~~Compile all Lean proofs~~ DONE (3269 jobs, 0 errors, 0 sorry)
 2. ~~Close sorry gaps in polyphase_formula.lean~~ DONE (all 3 closed)
-3. ~~Draft Track A paper from PAPER_OUTLINE.md~~ DONE (`paper/main.tex`)
+3. ~~Draft Track A paper from PAPER_OUTLINE.md~~ DONE (`paper/paper1.tex`)
 4. ~~Verify Cherry 1951 exact reference~~ DONE (DOI: 10.1080/14786445108561362)
 5. ~~Full Cl(1,3) geometric product (256 terms)~~ DONE (`cl31_maxwell.lean`)
 6. ~~Lorentz transformation as rotor in Cl(1,3)~~ DONE (boosts + rotations)
@@ -216,7 +216,7 @@ This would be a significant formalization result regardless of Dollard context.
 - [x] All sorry gaps closed (3 in polyphase_formula.lean)
 - [x] Full build: 3269 jobs, 0 errors, 0 sorry
 - [x] Experiment 2 resolved: versor form irreparable (h_ne_one, versor_repaired_with_one)
-- [x] Paper draft: `paper/main.tex` (LNCS format, ~4000 words)
+- [x] Paper draft: `paper/paper1.tex` (LNCS format, ~4000 words)
 - [x] Cl(1,1) Lorentz boost rotors (13 theorems, 0 sorry)
 - [x] Cl(1,3) full 256-term geometric product
 - [x] Cl(1,3) Lorentz boost rotors (6 theorems)

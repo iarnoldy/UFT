@@ -26,13 +26,12 @@ This is a standard result in mathematical physics (Bleecker 1981, Nakahara
 2003), not a new theorem. What IS new is the machine verification of the
 dimensional and structural scaffolding that makes the argument precise.
 
-AXIOMATIZATION NOTE:
-The full Schur's lemma proof requires representation theory infrastructure
-(irreducible modules, HomomorphismSpace). We AXIOMATIZE the key result
-(1-dimensionality of Ad-invariant bilinear forms for simple Lie algebras)
-and verify all downstream consequences. The axiom is tagged [SP] (standard
-physics / mathematics). A full mathlib proof would require importing
-Mathlib.RepresentationTheory, which is beyond current scope.
+UPGRADE NOTE (2026-03-12):
+The full Schur's lemma → Killing form uniqueness proof is now machine-verified
+in spectral/schur_killing_uniqueness.lean (0 sorry, Route A).
+The proof chain: Lie-Schur lemma → nondegeneracy → eigenspace argument →
+intertwiner via toDual → B = c·κ. This upgrades the previous [SP] tag to [MV].
+The only remaining assumptions are [IsKilling K L] and [IsAlgClosed K].
 
 References:
   - Bleecker, D.D., "Gauge Theory and Variational Principles" (1981), §4.2
@@ -98,19 +97,18 @@ Proof sketch (not formalized — requires representation theory infrastructure):
 
 We axiomatize this as a hypothesis and verify all consequences. -/
 
-/-- ASSUMPTION [SP]: The Killing form on a simple Lie algebra of dimension d
-    is the unique Ad-invariant symmetric bilinear form (up to scale).
+/-- UPGRADED TO [MV]: The Killing form uniqueness theorem is now fully
+    machine-verified in spectral/schur_killing_uniqueness.lean.
 
-    This is Schur's lemma applied to the adjoint representation:
-      1. The adjoint representation is irreducible (simplicity of g).
-      2. The Killing form κ(X,Y) = Tr(ad_X ∘ ad_Y) is non-degenerate (Cartan).
-      3. Any Ad-invariant bilinear form B = c · κ for some c ∈ ℝ (Schur).
+    The proof chain (Route A, 0 sorry):
+      1. Lie-Schur lemma: nonzero LieModuleHom between irreducibles is bijective
+      2. Nondegeneracy: nonzero invariant form on simple algebra is right-separating
+      3. Schur corollary: equivariant endomorphism = scalar (eigenspace + irreducibility)
+      4. Intertwiner: T = κ.toDual⁻¹ ∘ B is equivariant when both forms are invariant
+      5. Killing form uniqueness: B = c · κ for nonzero c
 
-    Full formalization would require Mathlib.RepresentationTheory.
-    We document this as a standard mathematical fact [SP] and verify
-    all downstream arithmetic consequences. No axiom is introduced —
-    the uniqueness enters only through the dimensional encoding (1 = 1)
-    in the theorems below. -/
+    See: `killing_form_unique` and `invariant_forms_proportional` in that file.
+    Assumptions: [IsKilling K L] (Cartan criterion), [IsAlgClosed K]. -/
 theorem killing_form_unique_doc : True := trivial
 
 -- ============================================================================
@@ -336,17 +334,17 @@ Attack vector #2 ("dynamics axiomatized") is downgraded from HIGH to MEDIUM:
 
 ### Honest framing:
 - All arithmetic: [MV] (machine-verified, 0 sorry)
-- Killing form uniqueness: [SP] (Schur's lemma, axiomatized here)
+- Killing form uniqueness: [MV] (spectral/schur_killing_uniqueness.lean, 0 sorry)
 - Energy positivity: [MV] (proved in yang_mills_energy.lean)
 - Variational principle: [AXIOM] (physics, explicitly stated as such)
 - Physical identification of F with gauge fields: [AXIOM]
 
 ### 0 axioms in this file:
-- The Killing form uniqueness (Schur's lemma consequence) is documented
-  in `killing_form_unique_doc` as a standard mathematical fact [SP].
-  No Lean `axiom` is introduced — full formalization would require
-  Mathlib.RepresentationTheory. The uniqueness enters only through
-  dimensional encoding (1 = 1) in theorem statements.
+- The Killing form uniqueness (Schur's lemma consequence) is now fully
+  machine-verified in spectral/schur_killing_uniqueness.lean (0 sorry).
+  Previously tagged [SP], now upgraded to [MV]. The uniqueness enters
+  through dimensional encoding (1 = 1) in theorem statements here;
+  the full proof is in the companion file.
 
 Machine-verified. 0 sorry. Soli Deo Gloria.
 -/

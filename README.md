@@ -6,7 +6,7 @@ Machine-verified algebraic scaffold from Dollard's versor algebra through Cliffo
 
 A research project that applies interactive theorem provers (Lean 4) to claims from alternative mathematical frameworks. Starting from Eric Dollard's "versor algebra," we extract formalizable claims, prove or disprove each one, and trace the algebraic path from the source claims through Clifford algebras to gauge unification.
 
-**47 proof files. ~2,000 verified declarations. Zero `sorry` gaps. Zero build errors.**
+**49 proof files. 2,093 verified declarations. Zero `sorry` gaps. Zero build errors.**
 
 Four Lie algebras — so(1,3), sl(3), sl(5), so(10) — carry certified `LieRing` and `LieAlgebra ℝ` instances via `Mathlib.Algebra.Lie.Basic`, connecting the hand-built structures to mathlib's type system.
 
@@ -25,7 +25,7 @@ Lean's kernel guarantees that every declaration in this project type-checks agai
 - The Dollard starting point is historical and pedagogical. The mathematical content stands independently of Dollard's claims.
 - Steps 7-11 (dynamics) are axiomatized structures — properties are verified from axioms, not derived from first principles.
 - Step 15 (mass gap) is stated, not proved. That's the Millennium Prize problem.
-- Physical identifications (which representations correspond to which particles) are axiomatized, not derived.
+- Physical identifications (which representations correspond to which particles) are axiomatized, not derived. This is standard in the field: no GUT formalization derives these identifications from first principles.
 
 See `docs/PROOF_CLASSIFICATION.md` for per-file analysis and `docs/SIGNATURE_ANALYSIS.md` for which proofs depend on metric signature.
 
@@ -67,6 +67,8 @@ roots   decomp    algebra    algebra     Glashow   unified   unification generat
 | `massive_chirality_definition` | `massive_chirality_definition` | 12-part: two-level chirality definition (Def B + Def D) |
 | `complete_massive_chirality_skeleton` | `massive_chirality_definition` | 20-part: full chirality certificate |
 | `odd_nine_all_chiral` | `massive_chirality_definition` | All exterior powers of C⁹ are chiral (9 is odd) |
+| `complete_chirality_factorization` | `chirality_factorization` | Chirality emerges from 4D×10D unification |
+| `lagrangian_uniqueness` | `lagrangian_uniqueness` | Yang-Mills Lagrangian form is unique (Killing) |
 
 ## Publications
 
@@ -109,10 +111,10 @@ All proofs are in `src/lean_proofs/`:
 `unification`, `unification_gravity`, `spinor_matter`, `grand_unified_field`, `so14_unification`, `so14_anomalies`, `so14_breaking_chain`, `symmetry_breaking`
 
 **Three-Generation Problem** (E₈ ⊃ SU(9)/Z₃):
-`spinor_parity_obstruction`, `e8_embedding`, `e8_su9_decomposition`, `e8_generation_mechanism`, `three_generation_theorem`, `e8_chirality_boundary`, `j_anomaly_free_eigenspaces`, `exterior_cube_chirality`, `massive_chirality_definition`
+`spinor_parity_obstruction`, `e8_embedding`, `e8_su9_decomposition`, `e8_generation_mechanism`, `three_generation_theorem`, `e8_chirality_boundary`, `j_anomaly_free_eigenspaces`, `exterior_cube_chirality`, `massive_chirality_definition`, `chirality_factorization`
 
 **Dynamics**:
-`yang_mills_energy`, `covariant_derivative`, `rg_running`, `bianchi_identity`, `yang_mills_equation`, `yukawa_couplings`
+`yang_mills_energy`, `covariant_derivative`, `rg_running`, `bianchi_identity`, `yang_mills_equation`, `yukawa_couplings`, `lagrangian_uniqueness`
 
 **Spectral Theory**:
 `grade2_lie_algebra`, `casimir_eigenvalues`, `casimir_spectral_gap`, `block_tridiagonal`

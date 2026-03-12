@@ -41,6 +41,16 @@ is what makes GTG possible, and it lives entirely in Cl(1,3).
 In the hierarchy:
   Z_4 → Cl(1,1) → Cl(3,0) → Cl(1,3) → **GTG** (this file)
 
+NOTE ON SIGNATURE: This file labels the algebra "so(1,3)" following the GTG
+convention. As a real Lie algebra, so(1,3) ≅ sl(2,C)_R ≅ so(4) (as abstract
+6-dimensional Lie algebras, they share the same structure constants). The
+distinction between so(1,3) and so(4) is physical: so(1,3) acts on Minkowski
+spacetime (indefinite metric), so(4) on Euclidean space (definite metric).
+The Lean proofs verify algebraic identities (Jacobi, self-dual/anti-self-dual
+decomposition) that hold in BOTH signatures. The physical interpretation as
+gravity requires the indefinite Lorentzian metric, which is not encoded in
+the algebraic structure verified here.
+
 References:
   - Lasenby, A., Doran, C., Gull, S. "Gravity, gauge theories and geometric
     algebra." Phil. Trans. R. Soc. A 356, 487-582 (1998)

@@ -540,6 +540,16 @@ is now machine-verified.
 
 Machine-verified. 0 sorry. All proofs closed including centralizer_closed
 (via inline Jacobi identity for SO10E).
+
+### Upgrade path (planned):
+To convert this to a mathlib-certified LieAlgebra.Hom:
+1. Import SL5 (from su5_grand.lean) and SO10 (from so10_grand.lean) — both
+   already have LieRing/LieAlgebra ℝ instances.
+2. Define embedding : SL5 →ₗ[ℝ] SO10 mapping the 24 generators.
+3. Prove map_lie': embedding ⁅x, y⁆ = ⁅embedding x, embedding y⁆.
+4. Package as LieAlgebra.Hom ℝ SL5 SO10.
+The bracket preservation is ALREADY proved (Part 3+4); only the packaging
+into mathlib's type system remains.
 -/
 
 end SO10E

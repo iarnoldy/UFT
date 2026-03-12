@@ -50,7 +50,7 @@ set_option maxHeartbeats 800000
 
 /-! ## Part 0: SO(10) Algebra (minimal redeclaration)
 
-Same structure as SO10E in su5_so10_embedding.lean, redeclared for build independence. -/
+Same structure as SO10 in so10_grand.lean, redeclared for build independence. -/
 
 @[ext]
 structure SO10L where

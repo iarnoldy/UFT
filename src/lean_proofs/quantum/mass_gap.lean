@@ -394,3 +394,11 @@ Step 15: precise statement + all prerequisites verified.
 The mass gap itself is the Millennium Prize.
 Everything that CAN be verified algebraically HAS BEEN.
 -/
+
+/-! ## Signature Independence Note (F3 Audit)
+
+All theorems in this file are signature-independent. The content consists of
+tautologies and arithmetic. The spectral gap statement and its prerequisites
+are formulated abstractly. The physical interpretation of the mass gap requires
+Lorentzian signature and a Wightman QFT, but the algebraic content verified
+here (prerequisites, dimensional consistency) holds for any signature. -/

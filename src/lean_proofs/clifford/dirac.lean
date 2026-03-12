@@ -481,6 +481,248 @@ theorem boost_rotation_mix :
     smul (-2) sigma02 := by
   ext <;> simp [sigma01, sigma12, sigma02, mul, neg, add, smul]; norm_num
 
+/-! ## Part 10: Associativity of the Even Subalgebra Product
+
+The even subalgebra product must be associative to form a genuine algebra.
+This is inherited from the full Clifford algebra product but must be verified
+for our 8-component representation. The proof is a large `ring` computation
+(512 terms per component × 8 components). -/
+
+set_option maxHeartbeats 800000 in
+/-- Associativity of the even subalgebra product:
+    (ψφ)χ = ψ(φχ) for all even elements. -/
+theorem mul_assoc (a b c : Spinor) :
+    mul (mul a b) c = mul a (mul b c) := by
+  ext <;> simp only [mul] <;> ring
+
+/-! ## Part 11: Bivector Anticommutators and Hodge Duality
+
+The anticommutator {σ_ij, σ_kl} = σ_ij · σ_kl + σ_kl · σ_ij reveals
+the Clifford algebra structure beyond what the Lie bracket captures.
+
+Three cases arise:
+  (A) Bivectors sharing exactly one index: they ANTICOMMUTE ({σ,σ'} = 0)
+  (B) Bivectors sharing no index (Hodge-dual pairs): {σ,σ'} = ±2I
+  (C) Identical bivectors: {σ,σ} = 2σ² (the squares proved in Part 3)
+
+Case (A) yields 12 relations (the shared-index anticommutations).
+Case (B) yields 3 relations (the Hodge duality anticommutations).
+
+These are Clifford-Dirac relations in the bivector representation:
+the grade-0 and grade-4 parts of the product of two bivectors. -/
+
+/-! ### Case A: Shared-index bivectors anticommute
+
+Pairs sharing one index: (01,02), (01,03), (02,03) among boosts,
+(12,13), (12,23), (13,23) among rotations, and all 9 cross-type pairs
+(01,12), (01,13), (01,23), (02,12), (02,13), (02,23), (03,12), (03,13), (03,23).
+Of these, 6 share an index and yield zero anticommutators.
+
+Below we prove all 12 shared-index anticommutator relations. -/
+
+/-- Boost-boost: {σ₀₁, σ₀₂} = 0 (shared index 0) -/
+theorem anticomm_01_02 :
+    add (mul sigma01 sigma02) (mul sigma02 sigma01) = zero := by
+  ext <;> simp [sigma01, sigma02, mul, add, zero]
+
+/-- Boost-boost: {σ₀₁, σ₀₃} = 0 (shared index 0) -/
+theorem anticomm_01_03 :
+    add (mul sigma01 sigma03) (mul sigma03 sigma01) = zero := by
+  ext <;> simp [sigma01, sigma03, mul, add, zero]
+
+/-- Boost-boost: {σ₀₂, σ₀₃} = 0 (shared index 0) -/
+theorem anticomm_02_03 :
+    add (mul sigma02 sigma03) (mul sigma03 sigma02) = zero := by
+  ext <;> simp [sigma02, sigma03, mul, add, zero]
+
+/-- Rotation-rotation: {σ₁₂, σ₁₃} = 0 (shared index 1) -/
+theorem anticomm_12_13 :
+    add (mul sigma12 sigma13) (mul sigma13 sigma12) = zero := by
+  ext <;> simp [sigma12, sigma13, mul, add, zero]
+
+/-- Rotation-rotation: {σ₁₂, σ₂₃} = 0 (shared index 2) -/
+theorem anticomm_12_23 :
+    add (mul sigma12 sigma23) (mul sigma23 sigma12) = zero := by
+  ext <;> simp [sigma12, sigma23, mul, add, zero]
+
+/-- Rotation-rotation: {σ₁₃, σ₂₃} = 0 (shared index 3) -/
+theorem anticomm_13_23 :
+    add (mul sigma13 sigma23) (mul sigma23 sigma13) = zero := by
+  ext <;> simp [sigma13, sigma23, mul, add, zero]
+
+/-- Boost-rotation cross: {σ₀₁, σ₁₂} = 0 (shared index 1) -/
+theorem anticomm_01_12 :
+    add (mul sigma01 sigma12) (mul sigma12 sigma01) = zero := by
+  ext <;> simp [sigma01, sigma12, mul, add, zero]
+
+/-- Boost-rotation cross: {σ₀₁, σ₁₃} = 0 (shared index 1) -/
+theorem anticomm_01_13 :
+    add (mul sigma01 sigma13) (mul sigma13 sigma01) = zero := by
+  ext <;> simp [sigma01, sigma13, mul, add, zero]
+
+/-- Boost-rotation cross: {σ₀₂, σ₁₂} = 0 (shared index 2) -/
+theorem anticomm_02_12 :
+    add (mul sigma02 sigma12) (mul sigma12 sigma02) = zero := by
+  ext <;> simp [sigma02, sigma12, mul, add, zero]
+
+/-- Boost-rotation cross: {σ₀₂, σ₂₃} = 0 (shared index 2) -/
+theorem anticomm_02_23 :
+    add (mul sigma02 sigma23) (mul sigma23 sigma02) = zero := by
+  ext <;> simp [sigma02, sigma23, mul, add, zero]
+
+/-- Boost-rotation cross: {σ₀₃, σ₁₃} = 0 (shared index 3) -/
+theorem anticomm_03_13 :
+    add (mul sigma03 sigma13) (mul sigma13 sigma03) = zero := by
+  ext <;> simp [sigma03, sigma13, mul, add, zero]
+
+/-- Boost-rotation cross: {σ₀₃, σ₂₃} = 0 (shared index 3) -/
+theorem anticomm_03_23 :
+    add (mul sigma03 sigma23) (mul sigma23 sigma03) = zero := by
+  ext <;> simp [sigma03, sigma23, mul, add, zero]
+
+/-! ### Case B: Hodge-dual pairs anticommute to ±2I
+
+When two bivectors share NO index, they are Hodge duals (up to sign):
+  *(σ₀₁) ~ σ₂₃,  *(σ₀₂) ~ σ₁₃,  *(σ₀₃) ~ σ₁₂
+
+The anticommutator produces ±2I = ±2γ₀₁₂₃, which is the Hodge
+duality relation in the even subalgebra. The signs encode the
+Lorentzian signature (1,3). -/
+
+/-- Hodge pair: {σ₀₁, σ₂₃} = 2I (even permutation of 0123) -/
+theorem anticomm_01_23 :
+    add (mul sigma01 sigma23) (mul sigma23 sigma01) = smul 2 I := by
+  ext <;> simp [sigma01, sigma23, I, mul, add, smul]; norm_num
+
+/-- Hodge pair: {σ₀₂, σ₁₃} = -2I (odd permutation of 0123) -/
+theorem anticomm_02_13 :
+    add (mul sigma02 sigma13) (mul sigma13 sigma02) = smul (-2) I := by
+  ext <;> simp [sigma02, sigma13, I, mul, add, smul]; norm_num
+
+/-- Hodge pair: {σ₀₃, σ₁₂} = 2I (even permutation of 0123) -/
+theorem anticomm_03_12 :
+    add (mul sigma03 sigma12) (mul sigma12 sigma03) = smul 2 I := by
+  ext <;> simp [sigma03, sigma12, I, mul, add, smul]; norm_num
+
+/-! ### Pseudoscalar anticommutators
+
+The pseudoscalar I = γ₀₁₂₃ commutes with all even elements
+(proved in Part 7). Its anticommutator with any even element
+is therefore {I, ψ} = 2Iψ. For basis bivectors, {I, σ_ij} = 2I·σ_ij.
+
+Rather than restate commutativity as anticommutator form, we record
+the key structural consequence: the pseudoscalar's SQUARE (I² = -1)
+means Iσ_ij and σ_ij·I define a complex structure on each 2-plane. -/
+
+/-- The map ψ ↦ Iψ is a complex structure: (Iψ)·(Iψ) = -ψ² -/
+theorem I_mul_complex_structure (psi : Spinor) :
+    mul I (mul I psi) = neg psi := by
+  ext <;> simp only [I, mul, neg] <;> ring
+
+/-! ## Part 12: Rotor Group Closure
+
+Product of two rotors is a rotor. This requires associativity (Part 10)
+and the anti-automorphism property of reversion (Part 4). -/
+
+/-- Associativity in * notation (from mul_assoc). -/
+theorem mul_assoc' (a b c : Spinor) : (a * b) * c = a * (b * c) := by
+  simp only [mul_def]; exact mul_assoc a b c
+
+/-- one is left identity for * -/
+theorem one_mul' (x : Spinor) : one * x = x := by
+  simp only [mul_def]; exact one_mul_spinor x
+
+/-- Product of rotors is a rotor: if RR̃ = 1 and SS̃ = 1 then (RS)(RS)~ = 1. -/
+theorem rotor_product_closure (R S : Spinor) (hR : isRotor R) (hS : isRotor S) :
+    isRotor (R * S) := by
+  simp only [isRotor, spinorNorm]
+  -- (RS)(RS)~ = (RS)(S̃R̃)
+  rw [rev_antimorphism]
+  -- Reassociate: (RS)(S̃R̃) = R((SS̃)R̃)
+  rw [mul_assoc', ← mul_assoc' S (rev S) (rev R)]
+  -- SS̃ = 1
+  have h2 : S * rev S = one := hS
+  rw [h2, one_mul']
+  -- RR̃ = 1
+  exact hR
+
+/-! ## Part 13: Signature Classification
+
+This section classifies every theorem in this file as either
+SIGNATURE-INDEPENDENT (holds for any even subalgebra Cl⁺(p,q) with p+q=4)
+or SIGNATURE-DEPENDENT (relies on the specific signs in Cl(1,3)).
+
+### Signature-independent theorems (hold for any Cl⁺(p,q)):
+  - Reversion involution (rev_involution)
+  - Reversion anti-automorphism (rev_antimorphism)
+  - Reversion preserves identity (rev_one)
+  - Spinor norm symmetry (spinor_norm_comm)
+  - Parity involution (parity_involution)
+  - Chirality squared = negation (chirality_sq)
+  - Charge conjugation squared = negation (chargeConj_sq)
+  - Associativity (mul_assoc)
+  - Complex structure from I (I_mul_complex_structure)
+  - Rotor product closure (rotor_product_closure)
+
+### Signature-dependent theorems (specific to Cl(1,3)):
+  - Boost bivector squares = +1 (sigma01_sq, sigma02_sq, sigma03_sq)
+    In Cl(3,1): these would be -1 instead
+  - Rotation bivector squares = -1 (sigma12_sq, sigma13_sq, sigma23_sq)
+    In Cl(3,1): these would also be -1 (all spatial)
+  - Pseudoscalar square = -1 (I_sq)
+    In Cl(3,1): I² = +1 instead
+  - The 64-term multiplication table (mul) encodes signature via signs
+  - Hodge pair anticommutator signs (anticomm_01_23, etc.)
+  - SU(2) commutation relations (su2_comm_*)
+    Structure constants are ±2, sign depends on conventions
+  - Boost-rotation mixing (boost_rotation_mix)
+
+### Physical significance of signature dependence:
+  The SPLIT between σ₀ᵢ² = +1 (boosts) and σᵢⱼ² = -1 (rotations)
+  is precisely the distinction between time and space. If all squared
+  to the same value, there would be no difference between boosts and
+  rotations — no arrow of time, no causal structure, no lightcone.
+
+  The chirality operator I and the pseudoscalar square I² = -1 are
+  INDEPENDENT of signature choice (between Cl(1,3) and Cl(3,1)), making
+  chirality a topological rather than metrical property of spacetime.
+  This is why parity violation (via I) is physically meaningful
+  regardless of signature convention.
+-/
+
+/-- Witness that the split between boost and rotation squares
+    encodes the Lorentzian signature: 3 positive, 3 negative. -/
+theorem signature_split :
+    mul sigma01 sigma01 = one ∧
+    mul sigma02 sigma02 = one ∧
+    mul sigma03 sigma03 = one ∧
+    mul sigma12 sigma12 = neg one ∧
+    mul sigma13 sigma13 = neg one ∧
+    mul sigma23 sigma23 = neg one :=
+  ⟨by ext <;> simp [sigma01, mul, one],
+   by ext <;> simp [sigma02, mul, one],
+   by ext <;> simp [sigma03, mul, one],
+   by ext <;> simp [sigma12, mul, one, neg],
+   by ext <;> simp [sigma13, mul, one, neg],
+   by ext <;> simp [sigma23, mul, one, neg]⟩
+
+/-- The pseudoscalar I commutes with all bivectors individually.
+    Combined with I² = -1, this makes I a central complex unit,
+    turning Cl⁺(1,3) into a complex 4-dimensional algebra ≅ M₂(ℂ). -/
+theorem I_central_all_bivectors :
+    mul I sigma01 = mul sigma01 I ∧
+    mul I sigma02 = mul sigma02 I ∧
+    mul I sigma03 = mul sigma03 I ∧
+    mul I sigma12 = mul sigma12 I ∧
+    mul I sigma13 = mul sigma13 I ∧
+    mul I sigma23 = mul sigma23 I :=
+  ⟨by ext <;> simp [I, sigma01, mul],
+   by ext <;> simp [I, sigma02, mul],
+   by ext <;> simp [I, sigma03, mul],
+   by ext <;> simp [I, sigma12, mul],
+   by ext <;> simp [I, sigma13, mul],
+   by ext <;> simp [I, sigma23, mul]⟩
+
 end Spinor
 
 /-!
@@ -492,7 +734,7 @@ end Spinor
 3. Signature: boosts² = +1, rotations² = -1, I² = -1
 4. Reversion as Dirac adjoint (involution + anti-automorphism)
 5. Spinor norm ψψ̃ and the spin group Spin(1,3)
-6. Group closure: product of rotors is a rotor
+6. Group closure: product of rotors is a rotor (rotor_product_closure)
 7. Reverse of a rotor is a rotor
 8. Chirality from pseudoscalar (I commutes with all even elements)
 9. Parity as algebraic operation (automorphism, flips boosts and I)
@@ -500,6 +742,12 @@ end Spinor
 11. SU(2) weak force algebra: [σᵢⱼ, σⱼₖ] = 2σᵢₖ (3 relations)
 12. U(1) × SU(2) factorization: I commutes with all rotation generators
 13. Gravity cannot factor: boost-rotation mixing (Thomas precession)
+14. Associativity of the even subalgebra product (mul_assoc)
+15. Bivector anticommutators: 12 shared-index pairs vanish (Clifford orthogonality)
+16. Hodge duality: 3 complementary pairs satisfy {σ,σ'} = ±2I
+17. Complex structure: Iψ applied twice gives -ψ (I_mul_complex_structure)
+18. Signature classification: every theorem tagged independent/dependent
+19. Signature split witness: 3 positive + 3 negative squares
 
 ### The complete picture:
   MATTER:  Dirac spinor ψ ∈ Cl⁺(1,3) (this file)

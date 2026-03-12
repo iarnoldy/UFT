@@ -575,3 +575,12 @@ the theory is chiral."
 
 Machine-verified. 0 sorry. Soli Deo Gloria.
 -/
+
+/-! ## Signature Independence Note (F3 Audit)
+
+All theorems in this file are signature-independent, as noted in the file header.
+Root system analysis, representation dimensions (84 = C(9,3), 126 = C(9,4)),
+and the exterior power decomposition depend on combinatorial structure, not on
+the metric. The chirality analysis (even vs odd exterior powers) is a property
+of the representation theory of SU(9), which is signature-independent.
+The file already correctly identifies this in its header. -/

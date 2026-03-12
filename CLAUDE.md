@@ -1,7 +1,7 @@
 # Dollard Formal Verification
 
 Machine-verified algebraic scaffold from Dollard's versor algebra through Clifford algebras
-to SO(14) and E₈, built in Lean 4 with mathlib. 50 proof files, 2,108 verified
+to SO(14) and E₈, built in Lean 4 with mathlib. 56 proof files, 2,420 verified
 declarations, zero sorry gaps. See README.md for current file/declaration counts.
 Paper 1 submitted to CICM 2026. Paper 2 submitted to AACA.
 Paper 3 drafted for PRD. Paper 4 (three-generation Letter) drafted for LMP.
@@ -115,6 +115,7 @@ lake env lean src/lean_proofs/foundations/basic_operators.lean  # single file
 | Proof classification | `docs/PROOF_CLASSIFICATION.md` |
 | Signature analysis | `docs/SIGNATURE_ANALYSIS.md` |
 | Schur → Killing uniqueness | `src/lean_proofs/spectral/schur_killing_uniqueness.lean` |
+| Differential forms (d²=0 from mathlib) | `src/lean_proofs/dynamics/differential_forms.lean` |
 
 ## Paper Proofreading (MANDATORY)
 

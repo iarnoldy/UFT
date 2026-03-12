@@ -104,7 +104,7 @@ lake env lean src/lean_proofs/foundations/basic_operators.lean  # single file
 | SO(14) literature survey | `research/so14-gut-literature.md` |
 | SO(14) matter decomposition | `src/experiments/so14_matter_decomposition.py` |
 | RG coupling unification | `src/experiments/so14_rg_unification.py` |
-| Paper 1 (CICM 2026, submitted) | `paper/main.tex` |
+| Paper 1 (CICM 2026, submitted) | `paper/paper1.tex` |
 | Paper 2 (AACA, submitted) | `paper/paper2.tex` |
 | Paper 3 (PRD, drafted) | `paper/paper3.tex` |
 | Paper 4 (LMP, drafted) | `paper/paper4.tex` |

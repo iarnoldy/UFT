@@ -224,7 +224,7 @@ Four structural factors explain the absence of prior art:
 - [x] Identify citable Dollard sources — "Lone Pine Writings", "Four Quadrant Theory", "Versor Algebra", "Advanced Versor Algebra II-23" (self-published)
 - [x] Determine venue — CICM 2026 (Ljubljana, Sep 21-25). Abstract Mar 25, Paper Apr 1. 15pp + bib, LNCS. See `research/venue-research.md`
 - [x] Compile all Lean proofs against mathlib — DONE (3269 jobs, 0 errors, 0 sorry)
-- [x] Consider whether "alternative mathematical framework" needs a formal definition in the paper — YES, defined in Section 1 (line 95-100 of main.tex)
+- [x] Consider whether "alternative mathematical framework" needs a formal definition in the paper — YES, defined in Section 1 (line 95-100 of paper1.tex)
 - [x] Explore whether the ALGEBRAIC NECESSITY category has precedent in logic/philosophy of mathematics — YES: Lakatos duality (axioms too strong vs too weak), Fagin-Halpern implicit commitment, Banach-Tarski as canonical example. All cited in Section 5.
-- [x] Draft paper — `paper/main.tex` (LNCS format, complete first draft)
+- [x] Draft paper — `paper/paper1.tex` (LNCS format, complete first draft)
 - [x] Confirm Dollard's Psi/Phi definitions from primary sources — Psi=Coulombs (charge), Phi=Webers (flux), matches Lagrangian circuit theory exactly

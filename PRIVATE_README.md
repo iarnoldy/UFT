@@ -38,10 +38,12 @@ git push origin main      # -> PUBLIC (intentional only)
 
 ## Status
 
-- **56 proof files, 2,420 verified declarations, 0 sorry, 0 errors**
+- **59 proof files, ~2,537 verified declarations, 0 sorry, 0 errors**
+- First machine-verified so(10) spinor rep homomorphism in any ITP (1,980 bracket equations)
 - 4 Lie algebras have mathlib `LieRing` + `LieAlgebra ℝ` instances (Bivector, SL3, SL5, SO10)
 - Papers 1-2 submitted. Paper 3 blocked (arXiv endorsement). Paper 4 private draft.
-- Three-Frontier Parallel Attack COMPLETE: F1 dynamics, F2 representations, F3 signature
+- F2 Phase 2.1 (spinor rep) COMPLETE. F1 Phase 1.0 partially done. F2.0 + F3 remaining.
 - d²=0 is now a theorem (from mathlib), not an axiom
 - Clifford relation Cl(1,3) verified from 256-term multiplication table
 - Killing form computed, Lie bracket proved metric-independent
+- **ARCHITECTURAL DEBT**: 3 spinor rep files use different bases — needs Phase 2.1.5 unification

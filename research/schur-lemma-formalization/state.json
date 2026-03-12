@@ -1,0 +1,55 @@
+{
+  "query": "Schur's lemma formalization in proof assistants, mathlib gap analysis",
+  "notebook_path": "research/schur-lemma-formalization/",
+  "mode": "COMPREHENSIVE",
+  "created": "2026-03-11T23:30:00Z",
+  "current_phase": 7,
+  "phases_completed": ["ingestion", "deconstruction", "visualization", "bisociation", "falsification", "distillation", "synthesis"],
+  "tools_invoked": ["source-reading", "grep-analysis"],
+  "external_research": {
+    "web_searches_count": 0,
+    "primary_sources_read": [
+      "Mathlib/Algebra/Lie/Killing.lean",
+      "Mathlib/Algebra/Lie/Semisimple/Defs.lean",
+      "Mathlib/Algebra/Lie/InvariantForm.lean",
+      "Mathlib/Algebra/Lie/TraceForm.lean",
+      "Mathlib/Algebra/Lie/Basic.lean",
+      "Mathlib/Algebra/Lie/Ideal.lean",
+      "Mathlib/Algebra/Lie/Submodule.lean",
+      "Mathlib/Algebra/Lie/Weights/IsSimple.lean",
+      "Mathlib/Algebra/Lie/Weights/Basic.lean",
+      "Mathlib/Algebra/Lie/Derivation/AdjointAction.lean",
+      "Mathlib/CategoryTheory/Simple.lean",
+      "Mathlib/RingTheory/SimpleModule/Basic.lean",
+      "Mathlib/RepresentationTheory/Irreducible.lean",
+      "Mathlib/RepresentationTheory/AlgebraRepresentation/Basic.lean",
+      "Mathlib/LinearAlgebra/Eigenspace/Basic.lean",
+      "Mathlib/LinearAlgebra/Eigenspace/Triangularizable.lean"
+    ],
+    "codebase_analyzed": true
+  },
+  "quality_gates": {
+    "novice_proxy_passed": true,
+    "adversarial_survived": true,
+    "cross_domain_count": 5,
+    "user_checkpoint_phase2": false,
+    "user_checkpoint_phase5": false
+  },
+  "confidence_assessment": {
+    "established_findings": 5,
+    "probable_findings": 3,
+    "speculative_findings": 1
+  },
+  "completed": true,
+  "completion_timestamp": "2026-03-11T23:55:00Z",
+  "key_discoveries": [
+    "LieIdeal IS LieSubmodule R L L (abbrev) - Phase 2 is definitional",
+    "LieModuleHom.ker and .range exist as LieSubmodules - Phase 1 is 4 lines",
+    "Ring-module Schur is COMPLETE in mathlib (bijective_or_eq_zero)",
+    "Group representation Schur is COMPLETE (via monoid algebra k[G])",
+    "Categorical Schur exists but is NOT connected to Lie modules",
+    "exists_eigenvalue over IsAlgClosed is in mathlib",
+    "IsSimpleModule.algebraMap_end_bijective_of_isAlgClosed exists",
+    "No proof assistant has Lie algebra Schur formalized (probable)"
+  ]
+}

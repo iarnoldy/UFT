@@ -29,6 +29,13 @@ Status of KC-E3: BOUNDARY -> REFINED
   - The physical identification of "massive chirality" with a specific
     experimental observable remains [OP]
 
+NOTE ON SIGNATURE HONESTY: Parts 11-12 of this file explicitly address the
+signature question. Part 11 states honestly that the Z2 component is root
+LABELING, not Lie algebra grading. Part 12 proves that the volume element
+squares to -1 in compact signature (no chirality operator) but +1 in
+Lorentzian Cl(11,3) (chirality operator exists). The Lean proofs verify
+the arithmetic; the physical interpretation requires Lorentzian signature.
+
 References:
   - Wilson, R.A., arXiv:2407.18279 (2024) -- "the theory is chiral"
   - Distler, Garibaldi, CMP 298 (2010), Definition 2.3

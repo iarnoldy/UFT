@@ -29,6 +29,13 @@ the global self-conjugacy. But WITHIN each Z₃ sector, there IS chirality.
 Mathematical content: all theorems are arithmetic/combinatorial, proved by
 norm_num, omega, native_decide. 0 sorry.
 
+NOTE ON SIGNATURE INDEPENDENCE: All theorems in this file are statements about
+root systems and representation dimensions — properties of the ABSTRACT Lie
+algebra E₈, independent of real form or metric signature. Root counting
+(e.g., 240 roots, the A₈/D₈ overlap matrix) is a property of the root system,
+not of any particular real form. The chirality index (35 - 21 = 14) is
+equally valid for compact E₈, split E₈(8), or E₈(-24).
+
 References:
   - Wilson, R.A., "Uniqueness of an E8 model" arXiv:2407.18279 (2024)
   - Distler, Garibaldi, arXiv:0904.1447 (2010)

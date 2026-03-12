@@ -302,7 +302,16 @@ From Dollard's versor algebra to the unified field:
 
   LEVEL 8: so(14) ⊃ so(10) × so(1,3)
     File: THIS FILE
-    Physics: UNIFIED FIELD THEORY (gauge + gravity) -/
+    Physics: UNIFIED FIELD THEORY (gauge + gravity)
+
+NOTE ON SIGNATURE: This file works in compact signature Cl(14,0). The notation
+"so(1,3)" for the Lorentz algebra refers to the ABSTRACT 6-dimensional simple
+Lie algebra, which is isomorphic to so(4) ≅ su(2) × su(2) as a real Lie algebra.
+The distinction between so(1,3) (Lorentz) and so(4) (rotation) is a matter of
+which REAL FORM is chosen — this requires indefinite metric structure not present
+in the compact Clifford algebra. All proofs in this file are pure arithmetic on
+dimensions and combinatorics; they hold identically in so(14,0) and so(11,3).
+See docs/SIGNATURE_ANALYSIS.md for the full classification. -/
 
 /-- ★★★ The hierarchy of Clifford algebra dimensions:
     2¹ = 2, 2² = 4, 2⁴ = 16, 2⁸ = 256, 2¹⁴ = 16384. -/

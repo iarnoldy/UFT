@@ -6,7 +6,7 @@ Machine-verified algebraic scaffold from Dollard's versor algebra through Cliffo
 
 A research project that applies interactive theorem provers (Lean 4) to claims from alternative mathematical frameworks. Starting from Eric Dollard's "versor algebra," we extract formalizable claims, prove or disprove each one, and trace the algebraic path from the source claims through Clifford algebras to gauge unification.
 
-**49 proof files. 2,093 verified declarations. Zero `sorry` gaps. Zero build errors.**
+**50 proof files. 2,108 verified declarations. Zero `sorry` gaps. Zero build errors.**
 
 Four Lie algebras — so(1,3), sl(3), sl(5), so(10) — carry certified `LieRing` and `LieAlgebra ℝ` instances via `Mathlib.Algebra.Lie.Basic`, connecting the hand-built structures to mathlib's type system.
 
@@ -69,6 +69,7 @@ roots   decomp    algebra    algebra     Glashow   unified   unification generat
 | `odd_nine_all_chiral` | `massive_chirality_definition` | All exterior powers of C⁹ are chiral (9 is odd) |
 | `complete_chirality_factorization` | `chirality_factorization` | Chirality emerges from 4D×10D unification |
 | `lagrangian_uniqueness` | `lagrangian_uniqueness` | Yang-Mills Lagrangian form is unique (Killing) |
+| `killing_form_unique` | `schur_killing_uniqueness` | Schur's Lemma → Killing form uniqueness (Route A) |
 
 ## Publications
 
@@ -117,7 +118,7 @@ All proofs are in `src/lean_proofs/`:
 `yang_mills_energy`, `covariant_derivative`, `rg_running`, `bianchi_identity`, `yang_mills_equation`, `yukawa_couplings`, `lagrangian_uniqueness`
 
 **Spectral Theory**:
-`grade2_lie_algebra`, `casimir_eigenvalues`, `casimir_spectral_gap`, `block_tridiagonal`
+`grade2_lie_algebra`, `casimir_eigenvalues`, `casimir_spectral_gap`, `block_tridiagonal`, `schur_killing_uniqueness`
 
 **Quantum**:
 `hilbert_space`, `mass_gap`

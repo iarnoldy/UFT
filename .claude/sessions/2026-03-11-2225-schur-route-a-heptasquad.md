@@ -16,14 +16,15 @@ status: in_progress
 
 ## Goals
 
-- [ ] Deploy heptasquad for Route A research (Heptapod-B, Polymathic Researcher, Dollard Theorist, Explore)
-- [ ] Full Schur's lemma proof design — see it end to beginning (teleological)
-- [ ] Map exact mathlib infrastructure (what exists, what's missing, what bridges need building)
-- [ ] Derive complete mathematical chain with symbolic verification
-- [ ] Implement Route A in Lean 4 (~100-200 lines)
-- [ ] Upgrade lagrangian_uniqueness.lean from [SP] to [MV]
-- [ ] Commit + push all uncommitted changes (11 modified + 2 new files from last session)
-- [ ] Finish remaining plan items
+- [x] Deploy heptasquad for Route A research (Heptapod-B, Polymathic Researcher, Dollard Theorist, Explore)
+- [x] Full Schur's lemma proof design — see it end to beginning (teleological)
+- [x] Map exact mathlib infrastructure (what exists, what's missing, what bridges need building)
+- [x] Derive complete mathematical chain with symbolic verification
+- [x] Implement Route A in Lean 4 (290 lines, 15 declarations, 0 sorry)
+- [x] Upgrade lagrangian_uniqueness.lean from [SP] to [MV]
+- [x] Commit all changes
+- [ ] Push to remote
+- [ ] Update counts in README/CLAUDE.md
 
 ## Strategy
 
@@ -40,6 +41,27 @@ status: in_progress
 8. Update lagrangian_uniqueness.lean
 
 ## Progress Log
+
+### Update - 2026-03-12 04:00
+
+**Route A COMPLETE.** Full Schur's Lemma → Killing Form Uniqueness proof chain implemented and compiled clean.
+
+**File**: `src/lean_proofs/spectral/schur_killing_uniqueness.lean` (290 lines, 15 declarations, 0 sorry)
+
+**Proof chain**:
+1. Lie-Schur: nonzero LieModuleHom between irreducibles is bijective
+2. Invariant form nondegeneracy via simplicity (ker is ideal → trivial)
+3. Schur corollary: equivariant endomorphism = scalar (eigenspace → LieSubmodule promotion)
+4. Intertwiner κ⁻¹∘B via toDual isomorphism + equivariance calc chain
+5. Killing form uniqueness: B = c·κ for any Ad-invariant bilinear form
+
+**Key technical challenges solved**:
+- Eigenspace promotion to LieSubmodule (the mathematical crux of Part 3)
+- `Module.End.eigenspace` vs dot notation resolution
+- `LinearMap.BilinForm.*` namespace for toDual APIs
+- Bilinear form argument order in Part 2 (orthogonal direction swap)
+
+**Commits**: da77888 (feat: Schur's Lemma → Killing form uniqueness, file 50)
 
 ---
 *Use `/session-update` to add progress notes*

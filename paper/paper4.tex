@@ -361,9 +361,12 @@ $3 \times 16 = 48$ is signature-independent\MV.
 Distler and Garibaldi~\cite{distler2010} proved that no embedding of
 the Standard Model in any real form of $E_8$ can produce three
 \emph{massless chiral} generations from the adjoint.
-Wilson~\cite{wilson2024b} argues that $E_8(-24)$ is inherently massive
-(containing $\mathrm{SU}(2,2)$ rather than the Poincar\'e group),
-so the massless chirality assumption does not apply.
+Wilson~\cite{wilson2024b} argues that a compact gauge group is
+intrinsically massless, so for theories with explicitly non-zero
+masses---such as $E_8(-24)$, which contains $\mathrm{SU}(2,2)$ rather
+than the Poincar\'e group---the Distler--Garibaldi no-go theorem does
+not apply. The non-compact degrees of freedom serve as mass parameters
+rather than ghosts.
 Which definition of chirality is physically correct remains open\OP,
 but the \emph{algebraic} question can be resolved.
 
@@ -488,7 +491,8 @@ $E_8 \supset \mathrm{SU}(9) \supset \mathrm{SU}(5) \times
 \mathrm{SU}(3)_\mathrm{family} \times \mathrm{U}(1)$.
 
 The complete argument---9 proof files, over 575 verified declarations, zero
-\texttt{sorry} gaps---is publicly available~\cite{uft-github}.
+\texttt{sorry} gaps---is available from the corresponding
+author upon reasonable request~\cite{uft-github}.
 We propose that machine verification become standard methodology
 for GUT algebraic constructions, eliminating the class of errors
 that can persist undetected for decades.
@@ -497,11 +501,18 @@ that can persist undetected for decades.
 The machine verification was performed using Lean~4 and the mathlib
 library.  The author thanks the Lean and mathlib communities for
 providing the infrastructure that made this work possible.
+R.~A.~Wilson's work on discrete order-3 elements of $E_8$ and
+the $\mathrm{SU}(9)/\mathbb{Z}_3$ decomposition provided essential
+mathematical foundations; correspondence with Wilson clarified the
+chirality boundary.
+Proof engineering and manuscript preparation were assisted by Claude
+(Anthropic); all mathematical content, research direction, and
+physical interpretation are the sole responsibility of the author.
 \end{acknowledgments}
 
 \section*{Data Availability}
-The Lean~4 source code for all machine-verified proofs is publicly
-available~\cite{uft-github}.
+The Lean~4 source code for all machine-verified proofs is available
+from the corresponding author upon reasonable request~\cite{uft-github}.
 
 % ============================================================================
 % References

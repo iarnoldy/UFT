@@ -790,6 +790,140 @@ theorem comm_boost_rotation : commutator sigma01 sigma12 = smul (-2) sigma02 := 
 theorem comm_orthogonal : commutator sigma01 sigma23 = (0 : STA) := by
   ext <;> simp [commutator, sigma01, sigma23, mul, add, neg, zero]
 
+/-! ## Part 11: Clifford Relation Verification (F3 Signature Audit)
+
+The defining relation of a Clifford algebra Cl(p,q) is:
+    {gamma_i, gamma_j} := gamma_i * gamma_j + gamma_j * gamma_i = 2 * eta(i,j)
+
+For Cl(1,3) with signature (+,-,-,-):
+  Diagonal:   e_i * e_i = eta(i,i)     -- (+1 for timelike, -1 for spacelike)
+  Off-diagonal: e_i * e_j + e_j * e_i = 0  for i != j
+
+This section verifies these relations DIRECTLY from the 256-term multiplication
+table `STA.mul`, proving that the table is a correct implementation of Cl(1,3).
+-/
+
+/-! ### 11.1: Basis Vector Definitions -/
+
+/-- Timelike basis vector e0 = gamma0. -/
+def e0 : STA := ⟨0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩
+
+/-- Spacelike basis vector e1 = gamma1. -/
+def e1 : STA := ⟨0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩
+
+/-- Spacelike basis vector e2 = gamma2. -/
+def e2 : STA := ⟨0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩
+
+/-- Spacelike basis vector e3 = gamma3. -/
+def e3 : STA := ⟨0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩
+
+/-- e0 is the same as gamma0. -/
+theorem e0_eq_gamma0 : e0 = gamma0 := rfl
+
+/-- e1 is the same as gamma1. -/
+theorem e1_eq_gamma1 : e1 = gamma1 := rfl
+
+/-- e2 is the same as gamma2. -/
+theorem e2_eq_gamma2 : e2 = gamma2 := rfl
+
+/-- e3 is the same as gamma3. -/
+theorem e3_eq_gamma3 : e3 = gamma3 := rfl
+
+/-! ### 11.2: Diagonal Clifford Relation -- e_i * e_i = eta(i,i)
+
+These theorems verify that the 256-term multiplication table correctly
+produces the metric signature (+,-,-,-) when a basis vector multiplies itself. -/
+
+/-- e0 * e0 = +1 (timelike vector squares to +1). -/
+theorem e0_sq : mul e0 e0 = (1 : STA) := by
+  ext <;> simp [mul, e0, one]
+
+/-- e1 * e1 = -1 (spacelike vector squares to -1). -/
+theorem e1_sq : mul e1 e1 = -(1 : STA) := by
+  ext <;> simp [mul, e1, one, neg]
+
+/-- e2 * e2 = -1 (spacelike vector squares to -1). -/
+theorem e2_sq : mul e2 e2 = -(1 : STA) := by
+  ext <;> simp [mul, e2, one, neg]
+
+/-- e3 * e3 = -1 (spacelike vector squares to -1). -/
+theorem e3_sq : mul e3 e3 = -(1 : STA) := by
+  ext <;> simp [mul, e3, one, neg]
+
+/-! ### 11.3: Off-Diagonal Clifford Relation -- e_i * e_j + e_j * e_i = 0
+
+These theorems verify that distinct basis vectors anticommute under the
+full geometric product, as required by the Clifford algebra axioms.
+Six theorems, one for each pair (i,j) with i < j. -/
+
+/-- {e0, e1} = e0*e1 + e1*e0 = 0. -/
+theorem anticomm_e0_e1 : mul e0 e1 + mul e1 e0 = (0 : STA) := by
+  ext <;> simp [mul, e0, e1, add, zero]
+
+/-- {e0, e2} = e0*e2 + e2*e0 = 0. -/
+theorem anticomm_e0_e2 : mul e0 e2 + mul e2 e0 = (0 : STA) := by
+  ext <;> simp [mul, e0, e2, add, zero]
+
+/-- {e0, e3} = e0*e3 + e3*e0 = 0. -/
+theorem anticomm_e0_e3 : mul e0 e3 + mul e3 e0 = (0 : STA) := by
+  ext <;> simp [mul, e0, e3, add, zero]
+
+/-- {e1, e2} = e1*e2 + e2*e1 = 0. -/
+theorem anticomm_e1_e2 : mul e1 e2 + mul e2 e1 = (0 : STA) := by
+  ext <;> simp [mul, e1, e2, add, zero]
+
+/-- {e1, e3} = e1*e3 + e3*e1 = 0. -/
+theorem anticomm_e1_e3 : mul e1 e3 + mul e3 e1 = (0 : STA) := by
+  ext <;> simp [mul, e1, e3, add, zero]
+
+/-- {e2, e3} = e2*e3 + e3*e2 = 0. -/
+theorem anticomm_e2_e3 : mul e2 e3 + mul e3 e2 = (0 : STA) := by
+  ext <;> simp [mul, e2, e3, add, zero]
+
+/-! ### 11.4: Pseudoscalar Verification
+
+The pseudoscalar I = e0*e1*e2*e3 is the unique grade-4 element.
+We verify: (a) it equals I_pseudo, and (b) I^2 = -1. -/
+
+/-- The pseudoscalar is the product of all four basis vectors. -/
+theorem pseudoscalar_factorization :
+    mul (mul (mul e0 e1) e2) e3 = I_pseudo := by
+  ext <;> simp [mul, e0, e1, e2, e3, I_pseudo]
+
+/-- I^2 = -1, verified via basis vector definitions. -/
+theorem pseudoscalar_sq : mul I_pseudo I_pseudo = -(1 : STA) := by
+  ext <;> simp [mul, I_pseudo, one, neg]
+
+/-! ### 11.5: Signature Summary Theorem
+
+A single conjunction capturing the full Cl(1,3) Clifford relation:
+all four diagonal conditions and all six off-diagonal conditions. -/
+
+/-- The full Clifford relation for Cl(1,3):
+    - Diagonal: e0^2 = +1, e1^2 = e2^2 = e3^2 = -1
+    - Off-diagonal: all distinct pairs anticommute
+    - Pseudoscalar: I^2 = -1
+    This is the defining algebraic identity of the spacetime algebra. -/
+theorem clifford_relation_cl13 :
+    -- Diagonal (signature +---)
+    mul e0 e0 = (1 : STA)
+    ∧ mul e1 e1 = -(1 : STA)
+    ∧ mul e2 e2 = -(1 : STA)
+    ∧ mul e3 e3 = -(1 : STA)
+    -- Off-diagonal (anticommutation)
+    ∧ mul e0 e1 + mul e1 e0 = (0 : STA)
+    ∧ mul e0 e2 + mul e2 e0 = (0 : STA)
+    ∧ mul e0 e3 + mul e3 e0 = (0 : STA)
+    ∧ mul e1 e2 + mul e2 e1 = (0 : STA)
+    ∧ mul e1 e3 + mul e3 e1 = (0 : STA)
+    ∧ mul e2 e3 + mul e3 e2 = (0 : STA)
+    -- Pseudoscalar
+    ∧ mul I_pseudo I_pseudo = -(1 : STA) :=
+  ⟨e0_sq, e1_sq, e2_sq, e3_sq,
+   anticomm_e0_e1, anticomm_e0_e2, anticomm_e0_e3,
+   anticomm_e1_e2, anticomm_e1_e3, anticomm_e2_e3,
+   pseudoscalar_sq⟩
+
 end STA
 
 /-!

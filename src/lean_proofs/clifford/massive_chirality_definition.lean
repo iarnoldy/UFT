@@ -841,6 +841,123 @@ theorem complete_massive_chirality_skeleton :
   · norm_num                           -- (19) 0
   · norm_num                           -- (20) 6 != 0
 
+-- ============================================================================
+--   SIGNATURE AUDIT (F3)
+-- ============================================================================
+
+/-! ## Signature Audit (F3)
+
+### Classification of theorems in this file:
+
+**Signature-Independent** (~60 theorems):
+The vast majority of this file's content depends on representation theory over
+the complex numbers (exterior powers, conjugacy, binomial coefficients) and
+combinatorial root system data (overlap matrix counts, chirality indices).
+None of these depend on the metric signature.
+
+Parts 1-11 and 13-16 are entirely signature-independent:
+- Part 1: `is_chiral_exterior` -- the predicate 2k != n is pure number theory
+- Part 2: `matter_is_chiral`, `antimatter_is_chiral`, `matter_antimatter_conjugate`,
+  `matter_antimatter_same_dim`, `matter_antimatter_distinct` -- all follow from
+  2*3 != 9 and C(9,3) = C(9,6) = 84
+- Part 3: `su8_not_chiral`, `su10_not_chiral`, `su6_not_chiral`, `su4_not_chiral` --
+  non-chirality checks, pure arithmetic
+- Part 4: `nine_odd`, `chiral_wedge1` through `chiral_wedge8`, `odd_nine_all_chiral` --
+  all exterior powers of C^9 are chiral because 9 is odd
+- Part 5: `wilson_chirality` -- representation-theoretic chirality via non-self-conjugacy
+- Part 6: `dg_compatible_chirality` -- the pair 84 + 84-bar is real
+- Part 7: `z6_has_six_sectors`, `z3_grades_proper` -- sector operator is combinatorial
+- Part 8: overlap matrix theorems (`overlap_sector0` through `overlap_d8_total`) --
+  root counts are combinatorial data
+- Part 9: chirality index theorems (`chirality_index_sector0` through
+  `chirality_ratio`) -- integer arithmetic on root counts
+- Part 10: adjoint-spinor decomposition (`sector1_adj_spinor` through
+  `adjoint_equal_both_sectors`) -- dimension arithmetic
+- Part 11: honest downgrade (`z3_grading_consistent`, `z2_labeling_balanced`,
+  `definition_b_suffices`) -- representation theory
+- Part 13: generation content (`three_gen_content` through `sm_fits_in_spinor`) --
+  pure arithmetic
+- Part 14: `massive_chirality_definition` -- 12-part conjunction, all parts are
+  signature-independent (chirality predicate, Z3 grades, chirality indices,
+  generation counting, dimension arithmetic)
+- Part 15: `definition_a_vs_b`, `definition_d_quantification` --
+  representation-theoretic comparisons
+- Part 16: `kc_e3_resolution` -- 10-part conjunction, parts 1-7 are purely
+  signature-independent, parts 8-9 are signature-aware (see below)
+
+**Signature-Aware** (~6 theorems):
+These theorems compute Clifford algebra properties that take explicit signature
+parameters (p,q). They appear in Part 12 (Clifford reduction) and in the
+signature-aware conjuncts of Parts 16-17:
+- `cl14_volume_odd` -- 14*13/2 = 91 (volume element power in compact signature)
+- `ninety_one_odd` -- 91 is odd (hence omega^2 = -1 in Cl(14,0))
+- `cl11_3_volume_even` -- 14*13/2 + 3 = 94 (volume element power in Cl(11,3))
+- `ninety_four_even` -- 94 is even (hence omega^2 = +1 in Cl(11,3))
+- `volume_element_contrast` -- compact has no chirality operator, Lorentzian does
+- `cl11_3_majorana_weyl` -- (11-3) mod 8 = 0
+- `definition_c_compatible` -- Cl(11,3) Majorana-Weyl and volume element properties
+
+**20-part skeleton classification** (`complete_massive_chirality_skeleton`):
+- Parts 1-17: Signature-independent (chirality predicate, exterior power dimensions,
+  oddness of 9, conjugate pairing, Z3 grades, E8 decomposition, overlap matrix,
+  chirality indices, D-G compatibility, spinor split, chirality ratio, generation
+  counting)
+- Part 18: Signature-aware -- 2 | (14*13/2 + 3), Lorentzian chirality operator
+- Part 19: Signature-aware -- (11-3) mod 8 = 0, Majorana-Weyl in Cl(11,3)
+- Part 20: Signature-aware -- (14-0) mod 8 != (11-3) mod 8, compact != Lorentzian
+
+### Conclusion
+
+This file's central results -- the chirality predicate `is_chiral_exterior`, Wilson's
+argument, the D-G compatibility analysis, the overlap matrix, the chirality indices,
+and the generation counting -- are all signature-independent. They depend on
+representation dimensions of SU(9) (a complex Lie algebra property), exterior power
+combinatorics (binomial coefficients), and root system data (combinatorial).
+
+The 6 signature-aware theorems in Part 12 compute volume element properties for
+specific Clifford algebras Cl(14,0) and Cl(11,3). These are arithmetic on the
+parameters (p,q), establishing that a chirality operator EXISTS in Lorentzian
+signature but not in compact signature. This is the physical content: the algebraic
+chirality (Definitions B and D) is signature-independent, but the existence of a
+chirality OPERATOR in the Clifford algebra requires Lorentzian signature.
+
+The massive chirality definition itself (Parts 14 and 17) is signature-independent
+in 17 of its 20 conjuncts. The 3 signature-aware conjuncts (18-20) record
+Clifford periodicity facts that are needed for the physical interpretation but
+not for the algebraic chirality statement. -/
+
+/-- The massive chirality definition (Definition B: 2*3 != 9) and the chirality
+    index (Definition D: chi = 35 - 21 = 14) are both signature-independent.
+    Definition B depends on representation theory of SU(9) over C.
+    Definition D depends on root system combinatorics of E8.
+    Neither depends on the metric signature (p,q).
+    The Clifford reduction (Part 12) IS signature-aware: omega^2 = +1 requires
+    Lorentzian signature for the chirality operator to exist.
+    This theorem records the F3 audit finding. -/
+theorem massive_chirality_signature_audit :
+    -- Definition B is signature-independent: it depends only on 2*3 != 9
+    is_chiral_exterior 9 3 ∧
+    -- Definition D is signature-independent: chirality index is root combinatorics
+    (35 : Int) - 21 = 14 ∧
+    -- The dimension C(9,3) = 84 is a binomial coefficient (combinatorial)
+    Nat.choose 9 3 = 84 ∧
+    -- Generation count 3 x 16 = 48 is pure arithmetic
+    3 * ((10 : ℕ) + 5 + 1) = 48 ∧
+    -- Overlap matrix entries are combinatorial (28 + 35 + 21 = 84)
+    (28 : ℕ) + 35 + 21 = 84 ∧
+    -- The signature-aware fact: Lorentzian has chirality operator, compact does not
+    -- (omega^2 = +1 in Cl(11,3) because 91 + 3 = 94 is even)
+    2 ∣ (14 * 13 / 2 + 3 : ℕ) ∧
+    ¬ (2 ∣ (14 * 13 / 2 : ℕ)) := by
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · unfold is_chiral_exterior; omega
+  · norm_num
+  · native_decide
+  · norm_num
+  · norm_num
+  · omega
+  · omega
+
 /-!
 ## Summary
 

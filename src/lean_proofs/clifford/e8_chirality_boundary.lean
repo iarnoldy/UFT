@@ -459,6 +459,86 @@ theorem complete_chirality_audit :
   · norm_num   -- 168 = 168
   · norm_num   -- 248 = 248
 
+-- ============================================================================
+--   SIGNATURE AUDIT (F3)
+-- ============================================================================
+
+/-! ## Signature Audit (F3)
+
+### Classification of theorems in this file:
+
+**Signature-Independent** (~26 theorems):
+- `su9_dim`, `su72_dim`, `su5_dim`, `su4_dim`, `su22_dim`, `su3_dim` --
+  real form dimension equality: dim SU(p,q) = (p+q)^2 - 1 depends only on p+q
+- `real_form_dim_equality` -- all SU(p,q) with p+q=9 have dim 80
+- `wedge3_signature_independent` -- C(9,3) = 84 is a binomial coefficient
+- `so3_11_dim`, `so1_1_dim`, `coset_3_11`, `so4_12_dim` -- C(n,2) depends only on n = p+q
+- `spin3_11_embedding` -- 91 + 1 + 28 = 120 is arithmetic
+- `signature_addition` -- (3,11) + (1,1) = (4,12) is addition
+- `lorentzian_e8_chain` -- 91 <= 120 and 120 + 128 = 248
+- `adjoint_self_conjugate`, `complex_conjugate_pairing`, `su9_adjoint_real`,
+  `real_decomposition` -- representation reality is a property of the complexification
+- `e8_adjoint_real`, `dg_boundary` -- adjoint is real for any real form of E8
+- `matter_accounting` -- 10*3 + 5*3 + 1*3 = 48, pure arithmetic
+- `generation_count_algebraic` -- generation count depends on SU(3)_family
+- `so_dim_independence_14`, `so_dim_independence_16` -- explicitly verify
+  dimension independence across multiple signatures
+- `spinor_dim_independence` -- 2^(rank-1) depends only on rank
+- `e8_embedding_recap`, `generation_mechanism_recap`, `impossibility_recap` -- recaps
+
+**Signature-Aware** (~5 theorems):
+These compute Clifford periodicity values (p-q) mod 8 for SPECIFIC signatures.
+They are not "signature-dependent" in the sense of requiring a metric, but they
+take explicit (p,q) pairs as input and produce signature-specific results:
+- `cl14_0_periodicity` -- (14-0) mod 8 = 6
+- `cl11_3_periodicity` -- (11-3) mod 8 = 0
+- `cl12_4_periodicity` -- (12-4) mod 8 = 0
+- `cl3_11_periodicity_nat`, `cl4_12_periodicity_nat` -- ℕ periodicity computations
+- `periodicity_contrast` -- (14-0) mod 8 != (11-3) mod 8
+
+**Compound theorems** (contain both kinds):
+- `chirality_boundary` -- 8-part conjunction: parts 1-3, 5-8 are signature-independent;
+  part 4 (periodicity contrast) is signature-aware
+- `complete_chirality_audit` -- 12-part conjunction: parts 1-5 are signature-aware;
+  parts 6-12 are signature-independent
+
+### Conclusion
+
+This file's mathematical content is overwhelmingly signature-independent. The chirality
+boundary analysis depends on representation dimensions (C(9,3) = 84), real form dimension
+equality (dim SU(p,q) = (p+q)^2 - 1), and generation arithmetic (3 x 16 = 48) -- all
+combinatorial. The five signature-aware theorems compute Clifford periodicity (p-q) mod 8,
+which is arithmetic on the PARAMETERS p and q, not a property of the metric tensor.
+The physical interpretation (Majorana-Weyl vs real spinors) requires specifying a signature,
+but the algebraic content -- dimensions, embeddings, generation counting -- holds for any
+signature with the same total dimension. -/
+
+/-- All chirality boundary results in this file depend on representation dimensions
+    and combinatorial identities (binomial coefficients, exterior power dimensions),
+    not on the metric signature. The signature-aware results (Clifford periodicity)
+    are arithmetic on the parameters (p,q), not properties of a metric tensor.
+    This theorem records the F3 audit finding. -/
+theorem chirality_boundary_signature_audit :
+    -- The key dimension identities hold regardless of real form:
+    -- dim so(p,q) = C(p+q, 2) for any signature
+    Nat.choose (14 + 0) 2 = Nat.choose (3 + 11) 2 ∧
+    Nat.choose (16 + 0) 2 = Nat.choose (4 + 12) 2 ∧
+    -- dim SU(p,q) = (p+q)^2 - 1 for any real form
+    9 ^ 2 - 1 = (7 + 2) ^ 2 - 1 ∧
+    -- Exterior power dimension is a binomial coefficient (combinatorial)
+    Nat.choose 9 3 = 84 ∧
+    -- Generation count is pure arithmetic
+    3 * ((10 : ℕ) + 5 + 1) = 48 ∧
+    -- Semi-spinor dimension depends only on rank
+    (2 : ℕ) ^ (8 - 1) = 128 := by
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩
+  · native_decide
+  · native_decide
+  · norm_num
+  · native_decide
+  · norm_num
+  · norm_num
+
 /-!
 ## Summary
 
@@ -474,6 +554,7 @@ theorem complete_chirality_audit :
 8. **Adjoint self-conjugacy**: 84 + 84 = 168 (real pair), 80 + 168 = 248
 9. **Generation count**: 3 × 16 = 48 (algebraic, signature-independent)
 10. **D-G boundary**: all algebraic prerequisites verified
+11. **Signature audit (F3)**: ~26 signature-independent, ~5 signature-aware theorems
 
 ### What remains open (NOT proved, CANNOT be proved by algebra):
 

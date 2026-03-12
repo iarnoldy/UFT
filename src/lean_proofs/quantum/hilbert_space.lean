@@ -327,3 +327,11 @@ theorem coupling_dimensionless_4d : (4 : ℚ) - 4 = 0 := by norm_num
 ### Steps completed: 14/15
 Next: Step 15 — THE MASS GAP
 -/
+
+/-! ## Signature Independence Note (F3 Audit)
+
+All theorems in this file are signature-independent. The content consists of
+trivial arithmetic verified by `norm_num` and `rfl`. The Wightman axioms are
+STATED (not proved), and their physical validity requires Lorentzian signature.
+However, the Lean content — axiom structures and dimensional consistency — does
+not reference any metric. -/

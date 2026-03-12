@@ -278,3 +278,13 @@ unification has been machine-verified in a theorem prover.
 
 Machine-verified. 0 sorry.
 -/
+
+/-! ## Signature Independence Note (F3 Audit)
+
+All theorems in this file are signature-independent. The content is pure index
+arithmetic: `[so(1,3), so(10)] = 0` holds because the index sets {1,2,3,4} and
+{5,...,14} are disjoint. This is true for any metric signature on the combined
+space. The 91 = 45 + 6 + 40 decomposition is combinatorial (C(n,2) counting).
+The physical interpretation as gravity requires Lorentzian so(1,3), but the
+algebraic content verified here holds for so(4), so(2,2), or any so(p,q) with
+p+q = 4 embedded in so(14). -/

@@ -1,6 +1,6 @@
 # Formal Verification of Alternative Mathematical Frameworks
 
-Machine-verified algebraic scaffold from Dollard's versor algebra through Clifford algebras to SO(14), built in [Lean 4](https://lean-lang.org/) with mathlib.
+Machine-verified dimensional scaffold from Dollard's versor algebra through Clifford algebras to SO(14), built in [Lean 4](https://lean-lang.org/) with mathlib. One certified Lie algebra morphism (su(5) →ₗ⁅ℝ⁆ so(10)); remaining links are dimensional consistency checks with algebraic upgrades in progress.
 
 **62 proof files. ~2,800 verified declarations. Zero `sorry` gaps. Zero build errors.**
 
@@ -41,14 +41,17 @@ See `docs/PROOF_CLASSIFICATION.md` for per-file analysis and `docs/SIGNATURE_ANA
 | Ambiguous | 1 | h = sqrt(+1)^(1/2) notation |
 | Unfalsifiable | 5 | Physics/empirical claims |
 
-## Algebraic Hierarchy (all machine-verified)
+## Algebraic Hierarchy
 
 ```
-Z4 --> Cl(1,1) --> Cl(3,0) --> Cl(1,3) --> SU(5) --> SO(10) --> SO(14) --> E8
+Z4 ··> Cl(1,1) ··> Cl(3,0) ··> Cl(1,3) ··> SU(5) ==> SO(10) ··> SO(14) ··> E8
  |        |          |           |           |          |          |         |
 4th     Wave      Pauli      Spacetime   Georgi-   Grand     Full       Three
 roots   decomp    algebra    algebra     Glashow   unified   unification generations
                   F=E+IB    nabla F=J   15-plet   16-plet   91 gens    via SU(9)
+
+==>  Certified LieHom (bracket preservation proven)
+··>  Dimensional consistency verified (morphism upgrade in progress)
 ```
 
 ## Crown Jewel Theorems

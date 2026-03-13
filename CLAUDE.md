@@ -1,10 +1,11 @@
 # Dollard Formal Verification
 
-Machine-verified algebraic scaffold from Dollard's versor algebra through Clifford algebras
+Machine-verified dimensional scaffold from Dollard's versor algebra through Clifford algebras
 to SO(14) and E₈, built in Lean 4 with mathlib. 62 proof files, ~2,800 verified
-declarations, zero sorry gaps. See README.md for current file/declaration counts.
+declarations, zero sorry gaps. One certified LieHom (su(5) → so(10)); remaining chain
+links are dimensional consistency with algebraic upgrades in progress (see project_roadmap.md).
 Paper 1 submitted to CICM 2026. Paper 2 submitted to AACA.
-Paper 3 drafted for PRD. Paper 4 (three-generation Letter) drafted for LMP.
+Papers 3 & 4 held pending composable morphism chain (ADR-004).
 
 ## Research Tracks
 

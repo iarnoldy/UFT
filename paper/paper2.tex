@@ -118,27 +118,27 @@
 \begin{abstract}
 The grade-2 elements of a Clifford algebra $\Cl(n,0)$ form the
 Lie algebra $\so(n)$ under the commutator bracket. This classical
-observation has algebraic consequences that connect three seemingly
-disparate decomposition methods: Fortescue's symmetrical components
-(electrical engineering, 1918), the Cartan--Weyl root space
-decomposition (Lie theory, 1913--1925), and the principal grading by
-Coxeter elements \cite{coxeter1934}. We prove that the first two are instances of
-character decomposition on compact groups at different levels of
-generality. The Fortescue matrix is the character table of the cyclic
-group $\ZZ_N$; the Cartan--Weyl decomposition is a Fortescue-type
-decomposition of the adjoint representation; and the Coxeter grading
-decomposes a simple Lie algebra into $h$ eigenspaces ($h$ = Coxeter
-number) via a generalized DFT. We further prove that Clifford grade
-selection rules force Hamiltonians built from $\so(n)$ generators into
-block-tridiagonal form, establishing a structural constraint on the
-spectrum of such operators. All concrete instances---including $\so(3)$
-structure constants, Casimir eigenvalues, Killing form negativity, grade
-projections in $\Cl(3,0)$, and the complete Cartan--Weyl decomposition
-of $\su(3)$---are machine-verified in Lean~4 with zero \texttt{sorry}
-gaps. We delineate two additional structural analogies (the mass gap as a
+observation connects three seemingly disparate decomposition methods:
+Fortescue's symmetrical components (electrical engineering, 1918),
+the Cartan--Weyl root space decomposition (Lie theory, 1913--1925),
+and the principal grading by Coxeter elements \cite{coxeter1934}.
+We show that the first two are instances of character decomposition
+on compact groups at different levels of generality: the Fortescue
+matrix is the character table of $\ZZ_N$, and the Cartan--Weyl
+decomposition is a Fortescue-type decomposition of the adjoint
+representation. We further show that Clifford grade selection rules
+in $\Cl(3,0)$ force products of $\so(3)$ generators to skip odd
+grades, a structural constraint that implies block-tridiagonal form
+for Hamiltonians built from such generators; the general case for
+$\Cl(n,0)$ follows by standard arguments. All concrete
+instances---including $\so(3)$ structure constants, Casimir
+eigenvalues, Killing form negativity, grade projections in $\Cl(3,0)$,
+and the complete Cartan--Weyl decomposition of $\su(3)$---are
+machine-verified in Lean~4 with zero \texttt{sorry} gaps. We
+delineate two additional structural analogies (the mass gap as a
 spectral stop band, and the Coxeter grading as generalized Fortescue)
-that share the same mathematical parent but require qualification before
-being called provable identities.
+that share the same mathematical parent but require qualification
+before being called provable identities.
 
 \keywords{Clifford algebras \and symmetrical components \and
 Cartan--Weyl decomposition \and character theory \and Fortescue \and
@@ -375,7 +375,7 @@ theorem specialized to $G = \ZZ_N$. The Peter--Weyl theorem extends
 Fortescue's method from cyclic groups to all compact Lie groups.
 \end{proposition}
 
-This is not merely a restatement. It has a concrete consequence:
+The generalization has a concrete consequence:
 any function on a compact Lie group $G$ (not just $\ZZ_N$) admits a
 ``symmetrical component decomposition'' into irreducible
 representations. The Fourier coefficients generalize the sequence
@@ -545,8 +545,7 @@ Additional verified structure:
 \item Each pair $(E_\alpha, F_\alpha, [E_\alpha, F_\alpha])$ forms an
   $\su(2)$ triple: $[E_1, F_1] = H_1$, $[E_2, F_2] = H_2$,
   $[E_3, F_3] = H_1 + H_2$.
-\item All $\binom{8}{2} = 28$ independent brackets are verified
-  (\texttt{bracket\_count}).
+\item All $28$ independent brackets are verified individually.
 \end{itemize}
 
 \begin{lstlisting}[caption={Root eigenvalue verification and subalgebra closure for $\su(3)$ (excerpts from \texttt{su3\_cartan\_weyl.lean}).}]
@@ -711,7 +710,7 @@ $n$ & $c_2(\text{fund})$ & $c_2(\text{adj})$ & $c_2(\text{spinor})$ \\
 
 The minimum nonzero Casimir eigenvalue (the fundamental) provides the
 tightest algebraic constraint on representation sizes. For $\so(14)$:
-$c_2(\text{fund}) = (n-1)/2 = 13/2$, verified in Lean~4.
+$c_2(\text{fund}) = (n-1)/2 = 13/2$, computed by the standard formula.
 
 The Casimir centrality---$[C_2, T_a] = 0$ for all generators
 $T_a$---is verified for all three $\so(3)$ generators, confirming
@@ -889,9 +888,8 @@ Fortescue's method.
 \label{sec:grade-selection}
 % ============================================================================
 
-This section contains the most novel algebraic result of the paper:
-the observation that Clifford grade selection rules impose a structural
-constraint on operators built from Lie algebra generators.
+Clifford grade selection rules impose a structural constraint on
+operators built from Lie algebra generators.
 
 \subsection{Grade Projections in $\Cl(n,0)$}
 
@@ -994,6 +992,7 @@ has \emph{block-tridiagonal} structure:
 where $H_{pq}$ is the block connecting grade-$p$ and grade-$q$ sectors.
 
 \begin{theorem}[Block-Tridiagonal Structure]\label{thm:block-tridiag}
+\textup{(Proved by standard mathematical argument; not machine-verified.)}
 Any operator on $\Cl(n,0)$ that is a polynomial in grade-2 elements
 has, in the grade basis, a banded matrix with bandwidth $2$. The
 even-grade and odd-grade sectors decouple:
@@ -1045,9 +1044,12 @@ information goes beyond what the Casimir eigenvalues alone encode.
 \label{sec:verification}
 % ============================================================================
 
-All concrete algebraic results in this paper are machine-verified in
-Lean~4 \cite{demoura2021lean4} with mathlib \cite{mathlib}, compiled
-with zero \texttt{sorry} gaps. \Cref{tab:proofs} summarizes the
+All concrete computations for $\Cl(3,0)$, $\so(3)$, and $\su(3)$ in
+this paper are machine-verified in Lean~4 \cite{demoura2021lean4}
+with mathlib \cite{mathlib}, compiled with zero \texttt{sorry} gaps.
+The Casimir eigenvalue table for general $\so(n)$ (\Cref{tab:casimir})
+and the block-tridiagonal structure theorem (\Cref{thm:block-tridiag})
+are standard results proved by conventional mathematical argument. \Cref{tab:proofs} summarizes the
 relevant proof files.
 
 \begin{table*}[t]
@@ -1284,11 +1286,12 @@ Cartan--Weyl decomposition is the eigendecomposition of the adjoint
 representation under the maximal torus; and the Peter--Weyl theorem
 provides the unifying generalization.
 
-We have further shown that Clifford grade selection rules force
-operators built from $\so(n)$ generators into block-tridiagonal form,
-providing a structural constraint on their spectra. This constraint,
-verified for $\Cl(3,0)$ in Lean~4, goes beyond the information encoded
-in the Casimir eigenvalues alone.
+We have further shown that Clifford grade selection rules in $\Cl(3,0)$
+force products of $\so(3)$ generators to skip odd grades, a constraint
+verified in Lean~4 that implies block-tridiagonal form for Hamiltonians
+built from such generators. The generalization to $\Cl(n,0)$ follows
+by standard arguments (the even subalgebra is always closed under
+multiplication).
 
 Two additional analogies---the mass gap as a spectral stop band, and
 the Coxeter principal grading as a generalized Fortescue

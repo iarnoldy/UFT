@@ -48,9 +48,9 @@ with Phenomenological Predictions}
 \date{March 10, 2026}
 
 \begin{abstract}
-We present a candidate unified field theory based on $\mathrm{SO}(14)$, whose algebraic
-foundation has been machine-verified in Lean~4 with the mathlib library: 59 proof files
-containing over 2,537 verified declarations (theorems, definitions, and lemmas) with zero \texttt{sorry} gaps.  The $\mathrm{SO}(14)$
+We present a candidate unified field theory based on $\mathrm{SO}(14)$, supported by
+a machine-checked scaffold in Lean~4 with the mathlib library: 59 proof files
+containing over 2,537 verified declarations (theorems, definitions, and lemmas) with zero \texttt{sorry} gaps.  The scaffold includes structural results---the $A_4$ Cartan matrix of $\su(5) \subset \so(10)$ (48 bracket relations), the Jacobi identity for $\so(10)$, centralizer closure, and gauge-gravity commutativity---alongside dimensional consistency checks that verify prerequisites for representation-theoretic claims.  The $\mathrm{SO}(14)$
 Lie algebra has 91 generators, which decompose as $91 = 45 + 6 + 40$ under
 $\so(10) \oplus \so(4) \oplus \text{mixed}$, embedding both the Standard Model gauge
 group and a gravity sector in a single algebraic structure.  We construct the symmetry-breaking
@@ -58,17 +58,17 @@ chain $\mathrm{SO}(14) \to \mathrm{SO}(10) \times \mathrm{SO}(4) \to \mathrm{SU}
 \mathrm{U}(1) \to \mathrm{SU}(3) \times \mathrm{SU}(2) \times \mathrm{U}(1) \to
 \mathrm{U}(1)_\text{EM}$, identifying the symmetric traceless 104-dimensional
 representation as the Higgs field for the first step.  One-loop renormalization group
-analysis yields coupling unification at $M_\text{GUT} = 10^{16.98}\GeV$ with
+analysis [CO] yields coupling unification at $M_\text{GUT} = 10^{16.98}\GeV$ with
 $\alpha_\text{GUT}^{-1} = 47.03$ (0.88\% miss with threshold corrections from 177
-scalar components), a proton lifetime of $\tau_p \approx 10^{38.9}$~years (safely
-above the Super-Kamiokande bound of $10^{34.4}$~years), and asymptotic freedom
-for all non-abelian gauge factors at scales above the Standard Model.  We state open problems honestly: the three-generation
+scalar components), a proton lifetime [CO] of $\tau_p \approx 10^{38.9}$~years (safely
+above the Super-Kamiokande bound of $10^{34.4}$~years), and asymptotic freedom [CO]
+for all non-abelian gauge factors at scales above the Standard Model.  Three open problems remain: the three-generation
 problem is inherited from $\mathrm{SO}(10)$, the Distler ghost objection for the
 non-compact form $\mathrm{SO}(3,11)$ remains unresolved, and the mass gap is the
 Millennium Prize problem.  Machine verification is the unique methodological contribution:
 87\% of our theorems are signature-independent, holding for all real forms of $\so(14,\mathbb{C})$.
-To our knowledge, this is the first grand unified theory whose algebraic foundation
-has been formally verified by an interactive theorem prover.
+To our knowledge, this is the first grand unified theory to receive
+machine-checked algebraic scaffolding from an interactive theorem prover.
 \end{abstract}
 
 \pacs{11.15.-q, 12.10.-g, 02.10.Ud, 02.20.Sv}
@@ -84,7 +84,7 @@ The search for a unified description of the fundamental forces has been a centra
 program in theoretical physics since Einstein's attempts at a unified field
 theory~\cite{einstein1925}.  The Standard Model of particle physics, based on the
 gauge group $\mathrm{SU}(3) \times \mathrm{SU}(2) \times \mathrm{U}(1)$, provides
-a spectacularly successful description of the strong, weak, and electromagnetic
+an experimentally confirmed description of the strong, weak, and electromagnetic
 interactions~\cite{weinberg1967,glashow1961,salam1968}, but leaves gravity outside
 its framework and contains 19 free parameters that are not explained.
 
@@ -107,27 +107,20 @@ is $\mathrm{SO}(14)$, or more precisely its non-compact real form
 $\mathrm{SO}(3,11)$~\cite{krasnov2018,nesti2010}.
 
 In this paper we present a candidate $\mathrm{SO}(14)$ unified theory with
-a distinctive feature: the algebraic foundation has been machine-verified using
+a distinctive feature: the algebraic scaffold has been machine-checked using
 the Lean~4 interactive theorem prover~\cite{demoura2021lean4} and the
 mathlib library~\cite{mathlib}.  Specifically, 59 Lean~4 proof files
 containing over 2,537 verified declarations have been compiled with zero
-\texttt{sorry} gaps (unproved assertions).  This means that the algebraic
-structure---dimensions, embeddings, anomaly cancellation, representation
-decompositions, breaking chain, beta-function coefficients, and
-more---has been checked by computer with the same level of rigor as the
-proofs in the Flyspeck project~\cite{hales2017formal} or the liquid
-tensor experiment~\cite{commelin2022liquid}.
+\texttt{sorry} gaps (unproved assertions).  The scaffold includes genuine algebraic structure (the $A_4$ Cartan matrix of $\su(5)$, the Jacobi identity, centralizer closure, gauge-gravity commutativity) as well as dimensional consistency checks (anomaly prerequisites, Goldstone counts, beta-coefficient arithmetic).  Both tiers are checked with the same deductive rigor as
+the Flyspeck project~\cite{hales2017formal} or the liquid
+tensor experiment~\cite{commelin2022liquid}, but the two tiers differ in what they establish: structural proofs verify algebraic identities, while arithmetic checks verify that dimensions are consistent with representation-theoretic claims proved by standard methods.
 
 To our knowledge, this is the first grand unified theory to receive
-machine verification of its algebraic structure.  We emphasize from the
+machine-checked algebraic scaffolding.  We emphasize from the
 outset the distinction between what is proved and what is proposed:
 
 \begin{itemize}
-\item \textbf{Machine-verified} [MV]: Algebraic identities, dimensions,
-  embeddings, anomaly cancellation, Standard Model beta-function
-  coefficients, and Goldstone boson counting.  These are properties of
-  the complex Lie algebra $\so(14,\mathbb{C})$ and its representations,
-  holding for all real forms including $\mathrm{SO}(3,11)$.
+\item \textbf{Machine-verified} [MV]: Two tiers.  \emph{Structural} [MV-structural]: the $A_4$ Cartan matrix of $\su(5) \subset \so(10)$ (48 bracket relations), the $\so(10)$ Jacobi identity, centralizer closure, gauge-gravity commutativity, charge preservation of VEV.  \emph{Arithmetic} [MV-arithmetic]: dimensional consistency checks for anomaly prerequisites, Goldstone boson counts, beta-coefficient inputs, and representation dimensions.  Both tiers hold for the complex Lie algebra $\so(14,\mathbb{C})$ and all its real forms including $\mathrm{SO}(3,11)$.
 \item \textbf{Computed} [CO]: Renormalization group running, coupling
   unification, proton lifetime, breaking chain physics.
 \item \textbf{Candidate physics} [CP]: The proposal that $\mathrm{SO}(14)$
@@ -138,11 +131,9 @@ outset the distinction between what is proved and what is proposed:
 \end{itemize}
 
 Machine verification does not prove that $\mathrm{SO}(14)$ describes nature.
-It proves that the algebraic scaffold is internally consistent: the dimensions
-add up, the embeddings are valid Lie algebra homomorphisms (with the $A_4$
-root system of $\su(5)$ explicitly verified), the anomalies cancel,
-and the breaking chain produces the correct Standard Model gauge group with
-the correct particle content.  Whether this scaffold corresponds to physical
+It proves that specific algebraic identities hold (Cartan matrix, Jacobi, centralizer closure, gauge-gravity commutativity) and that dimensional prerequisites are consistent (dimensions add up, anomaly condition count is correct, Goldstone numbers match broken generators).  The embeddings are valid Lie algebra homomorphisms: the $A_4$
+root system of $\su(5)$ is explicitly verified by 48 bracket relations.  Anomaly cancellation itself follows from standard group theory for $\mathrm{SO}(N)$
+with $N \geq 7$; the machine verifies the dimensional prerequisites.  Whether this scaffold corresponds to physical
 reality is a separate question that only experiment can answer.
 
 The paper is organized as follows.  Section~\ref{sec:foundation} summarizes the
@@ -160,7 +151,7 @@ other unification proposals.  Section~\ref{sec:conclusion} concludes.
 
 \subsection{Lean 4 Proof Methodology}
 
-All algebraic results are formalized in Lean~4~\cite{demoura2021lean4},
+The algebraic scaffold is formalized in Lean~4~\cite{demoura2021lean4},
 a dependently-typed programming language and interactive theorem prover.
 Lean~4's type theory ensures that every theorem is deductively valid:
 the compiler rejects any proof containing logical gaps.  The mathlib
@@ -188,7 +179,7 @@ relevant to the $\mathrm{SO}(14)$ model.
 \begin{table*}[t]
 \centering
 \caption{Principal machine-verified results.  All proofs compile with
-  zero \texttt{sorry} gaps in Lean~4 with mathlib.}
+  zero \texttt{sorry} gaps in Lean~4 with mathlib.  Results range from structural (Cartan matrix, Jacobi identity, centralizer closure) to arithmetic (dimension checks via \texttt{norm\_num}).}
 \label{tab:mv}
 \small
 \begin{tabular}{@{}llll@{}}
@@ -198,29 +189,29 @@ relevant to the $\mathrm{SO}(14)$ model.
 $\dim \so(14) = \binom{14}{2} = 91$ %[MV]
   & \texttt{so14\_unification} & \texttt{so14\_dimension} & Dimension counting \\
 $91 = 45 + 6 + 40$ %[MV]
-  & \texttt{so14\_unification} & \texttt{unification\_decomposition} & Gauge + gravity + mixed \\
+  & \texttt{so14\_unification} & \texttt{unification\_decomposition} & Dimension arithmetic (\texttt{norm\_num}) \\
 $\mathrm{SU}(5) \subset \mathrm{SO}(10)$ via $[\mathfrak{g}, J] = 0$ %[MV]
   & \texttt{su5\_so10\_embedding} & \texttt{centralizer\_closed} & Complex structure embedding \\
 $A_4$ root system of $\su(5)$ %[MV]
   & \texttt{su5\_lie\_structure} & \texttt{H1\_R12}, \texttt{coroot\_1} & Lie algebra identification \\
-All 6 anomaly conditions %[MV]
-  & \texttt{so14\_anomalies} & \texttt{anomaly\_checklist} & SO(14) anomaly freedom \\
+Anomaly prerequisites ($N \geq 7$, etc.) %[MV]
+  & \texttt{so14\_anomalies} & \texttt{anomaly\_checklist} & Dimensional checks for anomaly freedom \\
 $Q = T_3 + Y/2$ preserves VEV %[MV]
   & \texttt{symmetry\_breaking} & \texttt{charge\_preserves\_vev} & Photon masslessness \\
 $16 = 1 + 10 + \overline{5}$ %[MV]
   & \texttt{spinor\_matter} & \texttt{spinor\_decomposition} & One generation per spinor \\
 Higgs: sym.\ traceless $\mathbf{104}$ %[MV]
   & \texttt{so14\_breaking\_chain} & \texttt{so14\_sym\_traceless\_dim} & Corrected Higgs rep \\
-$75$ massive $+ 16$ massless $= 91$ %[MV]
-  & \texttt{so14\_breaking\_chain} & \texttt{gauge\_boson\_conservation} & Mass spectrum accounting \\
+$75 + 16 = 91$ %[MV]
+  & \texttt{so14\_breaking\_chain} & \texttt{gauge\_boson\_conservation} & Dimension arithmetic (\texttt{norm\_num}) \\
 $[\so(1,3), \so(10)] = 0$ %[MV]
   & \texttt{unification\_gravity} & \texttt{gravity\_gauge\_commute} & Gravity-gauge decoupling \\
-SM beta coefficients %[MV]
-  & \texttt{rg\_running} & \texttt{beta1\_gut\_normalized} & $b_1, b_2, b_3$ from reps \\
+SM beta coefficient arithmetic %[MV]
+  & \texttt{rg\_running} & \texttt{beta1\_gut\_normalized} & Arithmetic from assumed Dynkin indices \\
 Jacobi identity for $\so(10)$ %[MV]
   & \texttt{so10\_grand} & \texttt{jacobi} & Lie algebra axiom \\
-$\nabla \cdot B = 0$ from Bianchi %[MV]
-  & \texttt{bianchi\_identity} & \texttt{gauss\_law\_magnetism} & Maxwell from algebra \\
+$\nabla \cdot B = 0$ from axiomatized Bianchi %[MV]
+  & \texttt{bianchi\_identity} & \texttt{gauss\_law\_magnetism} & Consequence of axiomatized Bianchi identity \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -244,7 +235,7 @@ This construction produces the chain %[MV]
     \hookrightarrow \so(10) \hookrightarrow \so(14),
 \end{equation}
 where $\so(6) \cong \su(4)$ (Pati-Salam), $\so(10)$ (Georgi-Glashow-Fritzsch),
-and $\so(14)$ (this work).
+and $\so(14)$ (this work).  Each level is formalized in a separate Lean file with its own matrix type; the embeddings are verified level-by-level, but a single composite embedding theorem connecting $\Cl(1,1)$ to $\Cl(14)$ has not been formalized.
 
 \subsection{Lie Algebra Identification: Beyond Dimension Counting}
 \label{sec:lie-identification}
@@ -337,12 +328,12 @@ where:
 \item The 6 generators of $\so(4) \cong \su(2) \times \su(2)$
   are identified with the Lorentz group in the non-compact form
   $\so(3,1)$.\CP
-\item The 40 generators in the $(\mathbf{10}, \mathbf{4})$
-  bifundamental representation mix gauge and gravitational
-  indices.\MV
+\item The $10 \times 4 = 40$ remaining generators mix gauge and gravitational
+  indices; the representation identification as the $(\mathbf{10}, \mathbf{4})$
+  bifundamental follows from standard branching rules\SP.
 \end{itemize}
 
-The crucial algebraic fact is that the gauge and gravity subalgebras
+The gauge and gravity subalgebras
 commute\MV:
 \begin{equation}\label{eq:commute}
   [\so(10), \so(4)] = 0 \quad \text{in } \so(14),
@@ -353,17 +344,15 @@ disjoint indices vanish, forcing the bracket to zero.  This result
 is signature-independent: it holds for $\so(14,\mathbb{C})$ and
 all its real forms.\MV
 
-The $\mathrm{SO}(14)$ algebra is anomaly-free.  All six standard
-anomaly conditions---including the quartic $d$-symbol trace
-$\binom{93}{3} = 129{,}766$---are machine-verified.\MV{}  Anomaly
-cancellation is a property of the complex Lie algebra and holds
+The $\mathrm{SO}(14)$ algebra is anomaly-free.  For $\mathrm{SO}(N)$ with $N \geq 7$, all gauge anomalies vanish by standard group theory (the relevant trace invariants are identically zero).  The machine verification checks the dimensional prerequisites for these conditions (e.g., $N = 14 \geq 7$); the vanishing itself follows from the representation theory of orthogonal groups\SP.  Anomaly
+freedom is a property of the complex Lie algebra and holds
 for all real forms, including $\mathrm{SO}(3,11)$.
 
 \subsection{Breaking Chain}
 \label{sec:breaking}
 
 The symmetry-breaking chain from $\mathrm{SO}(14)$ to the Standard
-Model proceeds in five steps\MV\CO:
+Model proceeds in five steps\CO{} (individual steps verified in separate Lean files; a single end-to-end composition theorem is not yet formalized):
 \begin{align}\label{eq:chain}
   &\mathrm{SO}(14)
     \xrightarrow{\;\mathbf{104}\;}
@@ -394,8 +383,8 @@ The 104 decomposes under $\mathrm{SO}(10) \times \mathrm{SO}(4)$ as\MV
   \mathbf{104} = (\mathbf{54}, \mathbf{1}) \oplus (\mathbf{1}, \mathbf{9})
     \oplus (\mathbf{10}, \mathbf{4}) \oplus (\mathbf{1}, \mathbf{1}).
 \end{equation}
-The $(\mathbf{10}, \mathbf{4}) = 40$ components are eaten as Goldstone
-bosons by the 40 broken gauge bosons.\MV{}  The remaining 64 components
+The $(\mathbf{10}, \mathbf{4})$ components (dimension $10 \times 4 = 40$, verified by arithmetic\MV) are eaten as Goldstone
+bosons by the 40 broken gauge bosons, by the Goldstone theorem\SP.  The remaining $104 - 40 = 64$ components
 become physical massive scalars.
 
 The Higgs potential for the symmetric traceless representation is %[CO]
@@ -433,7 +422,7 @@ Goldstone boson counting.
 \centering
 \caption{Symmetry-breaking chain.  ``Broken'' = number of broken generators
   = Goldstone bosons eaten.  ``Physical'' = remaining scalar components.
-  All dimension counts are machine-verified [MV].}
+  Dimension arithmetic is machine-verified [MV]; representation identifications follow from standard branching rules [SP].}
 \label{tab:breaking}
 \small
 \begin{tabular}{@{}llccc@{}}
@@ -499,7 +488,7 @@ that appears in the decomposition $\mathrm{SO}(14) \to \mathrm{SO}(10) \times
 semi-spinor branches as
 $\mathbf{64}_+ = (\mathbf{16}, (\mathbf{2},\mathbf{1})) \oplus
 (\overline{\mathbf{16}}, (\mathbf{1},\mathbf{2}))$\SP.
-However, we prove that no mechanism internal to $\mathrm{SO}(14)$ can produce a
+However, standard representation theory shows that no mechanism internal to $\mathrm{SO}(14)$ can produce a
 $3+1$ splitting of these four sectors\CO:
 \begin{itemize}
 \item \textbf{Lie algebra impossibility}\CO: any mass operator from
@@ -532,9 +521,9 @@ BenTov-Zee topological mechanism~\cite{bentov2016}.
 
 We emphasize that $\mathrm{SO}(14)$ neither solves nor worsens the
 three-generation problem relative to $\mathrm{SO}(10)$.  It inherits
-the same open question.  The impossibility theorem above---showing that
+the same open question.  The impossibility argument above---showing that
 the $\mathrm{SO}(4)$ family structure cannot produce $3+1$ from any Lie
-algebra element---is itself a genuine result that constrains future model
+algebra element\CO---constrains future model
 building.
 
 \subsection{Signature and Gravity}
@@ -628,7 +617,7 @@ respectively.\SP{}  The Dynkin indices use the convention
 $T(\text{fund SO}(N)) = 1$, $T(\text{fund SU}(N)) = 1/2$.\SP
 
 The Standard Model beta coefficients with GUT normalization
-($\alpha_1^\text{GUT} = \frac{5}{3} \alpha_Y$) are machine-verified in
+($\alpha_1^\text{GUT} = \frac{5}{3} \alpha_Y$) are computed from assumed Dynkin indices and group-theory factors; the arithmetic combining these inputs is machine-verified in
 \texttt{rg\_running.lean}\MV:
 \begin{equation}\label{eq:sm-betas}
   b_3 = -7, \quad b_2 = -\frac{19}{6}, \quad
@@ -679,7 +668,7 @@ content:
   semi-spinor fermions, symmetric traceless Higgs $S$ ($\mathbf{104}$,
   real).  $C_2(\text{adj}) = 24$, $T_f = 24$ (3 spinors),
   $T_\text{rs}(\mathbf{104}) = 16$.\CO{}  The resulting
-  $b_\text{SO(14)} = -208/3 < 0$ confirms asymptotic freedom.\CO
+  $b_\text{SO(14)} = -208/3 < 0$ indicates asymptotic freedom\CO
 \end{itemize}
 
 The Dynkin indices used are summarized in Table~\ref{tab:dynkin}.
@@ -865,12 +854,12 @@ $\mathrm{SO}(10)$ are:
 \begin{enumerate}
 \item \textbf{Gravity inclusion}: the $\mathrm{SO}(3,1)$ Lorentz group
   is embedded as a subgroup, with $[\so(10), \so(3,1)] = 0$\MV.
-\item \textbf{Machine verification}: the algebraic foundation has been
+\item \textbf{Machine verification}: structural algebraic identities and dimensional prerequisites have been
   formally checked by computer.
 \item \textbf{Four-sector spinor structure}: the $\mathrm{SO}(4)$ factor
   provides a four-sector decomposition $(\mathbf{2},\mathbf{1}) \oplus
-  (\mathbf{1},\mathbf{2})$ of the semi-spinor\MV, with a proved
-  impossibility theorem constraining future generation
+  (\mathbf{1},\mathbf{2})$ of the semi-spinor (dimension verified\MV), with an
+  impossibility argument constraining future generation
   mechanisms\CO---structural information not available to $\mathrm{SO}(10)$.
 \end{enumerate}
 
@@ -891,8 +880,7 @@ The principal disadvantages are:
 
 \subsection{What Is New Relative to SO(10)}
 
-The decomposition $91 = 45 + 6 + 40$ is the key structural
-fact\MV.  It shows that $\mathrm{SO}(14)$ is the minimal orthogonal
+The decomposition $91 = 45 + 6 + 40$ (dimensional arithmetic, verified by \texttt{norm\_num}\MV) reflects the subalgebra structure $\so(10) \oplus \so(4)$ inside $\so(14)$.  It shows that $\mathrm{SO}(14)$ is the minimal orthogonal
 group containing both the $\mathrm{SO}(10)$ GUT gauge group and a
 6-dimensional sector $\mathrm{SO}(4)$ (the Lorentz group $\mathrm{SO}(3,1)$ in the non-compact form).
 The 40 mixed generators are genuinely new: they have no analogue in
@@ -913,10 +901,10 @@ We state three principal open problems:
 
 \paragraph{1.\ Three generations\OP.}
 No simple Lie group is known to predict exactly three generations
-from representation theory alone.  We have proved that no mechanism
+from representation theory alone.  Standard representation-theoretic arguments show that no mechanism
 intrinsic to $\mathrm{SO}(14)$ can produce $3+1$ from the $\mathrm{SO}(4)$
 family structure (Sec.~\ref{sec:matter}): the Lie algebra impossibility
-theorem, the representation mismatch (spinorial $2+2$ vs.\ vectorial $3+1$),
+argument, the representation mismatch (spinorial $2+2$ vs.\ vectorial $3+1$),
 and the matter-mirror content collectively exclude all internal candidates\CO.
 More generally, the double-commutant theorem forces the family
 symmetry of \emph{any} $\mathrm{SO}(10) \times \mathrm{SO}(4)$
@@ -962,11 +950,11 @@ apply only to the compact form and do not resolve this question.
 \paragraph{3.\ Mass gap\OP.}
 The existence of a mass gap in four-dimensional Yang-Mills theory
 is the Clay Millennium Prize problem~\cite{jaffe2006}.  Our
-machine-verified mass gap statement applies to the compact form and
-assumes energy positivity.  The physically relevant non-compact
-theory requires a modified mass gap formulation.  We make no claim
-on the mass gap beyond stating it precisely and verifying the
-algebraic prerequisites.
+mass gap formalization axiomatizes the statement for the compact form,
+assuming energy positivity; the axioms are machine-checked but the mass gap itself is not proved (it is the Millennium Prize problem).  The physically relevant non-compact
+theory requires a modified formulation.  We make no claim
+on the mass gap beyond stating it precisely and checking the
+dimensional prerequisites.
 
 \subsection{Machine Verification as Methodology}
 
@@ -979,9 +967,7 @@ The main methodological advantages are:
   during formalization, when Lean rejected the claim that adjoint
   VEVs break $\mathrm{SO}(2n) \to \mathrm{SO}(2n_1) \times
   \mathrm{SO}(2n_2)$.
-\item \textbf{Completeness}: all 91 generators, all 6 anomaly
-  conditions, all Goldstone boson counts, all gauge boson masses are
-  individually verified, not just stated.
+\item \textbf{Completeness}: all 91 generators are defined, dimensional prerequisites for anomaly freedom are checked, Goldstone boson dimension counts are verified, and gauge boson mass spectrum accounting is confirmed.  Structural results (Cartan matrix, Jacobi identity, centralizer closure) go beyond arithmetic.
 \item \textbf{Reproducibility}: the codebase compiles deterministically.
   Any researcher with a Lean~4 installation can verify the results
   in minutes.
@@ -1038,25 +1024,23 @@ Several concrete research directions emerge:
 \label{sec:conclusion}
 % ============================================================================
 
-We have presented a candidate $\mathrm{SO}(14)$ unified field theory whose
-algebraic foundation---91 generators decomposing as $45 + 6 + 40$,
-anomaly cancellation, symmetry-breaking chain to the Standard Model with
-corrected Higgs representations, and matter content $3 \times \mathbf{64}$---has
-been machine-verified in Lean~4 with zero \texttt{sorry} gaps across
-59 proof files containing over 2,537 verified declarations.  One-loop renormalization group analysis yields coupling
+We have presented a candidate $\mathrm{SO}(14)$ unified field theory supported by
+a machine-checked algebraic scaffold: structural proofs (the $A_4$ Cartan matrix, Jacobi identity, centralizer closure, gauge-gravity commutativity) and dimensional consistency checks (91 generators decomposing as $45 + 6 + 40$,
+anomaly prerequisites, Goldstone counts, beta-coefficient arithmetic), verified in Lean~4 with zero \texttt{sorry} gaps across
+59 proof files containing over 2,537 verified declarations.  One-loop renormalization group analysis [CO] yields coupling
 unification at $M_\text{GUT} = 10^{16.98}\GeV$ (0.88\% miss with
-threshold corrections), a proton lifetime of $10^{38.9}$~years (safely above
-experimental bounds), and asymptotic freedom for all non-abelian gauge factors.
+threshold corrections), a proton lifetime [CO] of $10^{38.9}$~years (safely above
+experimental bounds), and asymptotic freedom [CO] for all non-abelian gauge factors.
 
 The theory inherits three open problems from the broader gauge unification
 program: three generations (universal to all GUTs), ghost states in the
 non-compact form (specific to gravity-gauge unification), and the mass gap
-(the Millennium Prize problem).  We have stated each problem honestly and
-identified the most promising resolution strategies.
+(the Millennium Prize problem).  Section~\ref{sec:discussion} discusses each
+and identifies the most promising resolution strategies.
 
 The methodological contribution---applying interactive theorem provers to
-GUT physics for the first time---provides a new standard for algebraic
-rigor in theoretical particle physics.  We advocate for machine verification
+GUT algebraic scaffolding for the first time---demonstrates that machine-checked
+verification of dimensional and structural prerequisites is feasible for GUT-scale theories.  We advocate for machine verification
 as standard practice in future GUT proposals.
 
 \begin{acknowledgments}

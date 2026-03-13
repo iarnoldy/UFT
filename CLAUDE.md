@@ -1,7 +1,7 @@
 # Dollard Formal Verification
 
 Machine-verified algebraic scaffold from Dollard's versor algebra through Clifford algebras
-to SO(14) and E₈, built in Lean 4 with mathlib. 59 proof files, ~2,537 verified
+to SO(14) and E₈, built in Lean 4 with mathlib. 62 proof files, ~2,800 verified
 declarations, zero sorry gaps. See README.md for current file/declaration counts.
 Paper 1 submitted to CICM 2026. Paper 2 submitted to AACA.
 Paper 3 drafted for PRD. Paper 4 (three-generation Letter) drafted for LMP.
@@ -72,8 +72,8 @@ lake env lean src/lean_proofs/foundations/basic_operators.lean  # single file
     explanation with a concrete mechanism, not hand-waving.
 11. **Mathlib typeclasses for new Lie algebras.** New Lie algebra constructions MUST include
     `LieRing` and `LieAlgebra ℝ` instances via `Mathlib.Algebra.Lie.Basic`. Use the pattern
-    in the `mathlib-lie-upgrade` skill. Existing algebras (Bivector, SL3, SL5, SO10) already
-    have these instances.
+    in the `mathlib-lie-upgrade` skill. Existing algebras (Bivector, SL3, SL5, SU5C, SO10) already
+    have these instances. SU5C has the project's first certified `LieHom` (→ SO10).
 
 ## Upstream (Evidence Source)
 
@@ -101,6 +101,8 @@ lake env lean src/lean_proofs/foundations/basic_operators.lean  # single file
 | N-Phase computational evidence | `source_materials/N_PHASE_EVIDENCE.md` |
 | Original claim inventory | `analysis/MATHEMATICAL_CLAIMS_EXTRACTION.md` |
 | Why construct a candidate theory? | `docs/decisions/ADR-002-candidate-theory-construction.md` |
+| Prose-proof coherence crisis | `docs/decisions/ADR-003-prose-proof-coherence-crisis.md` |
+| Paper & proof strategy (Berlinski) | `docs/decisions/ADR-004-berlinski-paper-strategy.md` |
 | SO(14) literature survey | `research/so14-gut-literature.md` |
 | SO(14) matter decomposition | `src/experiments/so14_matter_decomposition.py` |
 | RG coupling unification | `src/experiments/so14_rg_unification.py` |
@@ -116,11 +118,56 @@ lake env lean src/lean_proofs/foundations/basic_operators.lean  # single file
 | Signature analysis | `docs/SIGNATURE_ANALYSIS.md` |
 | Schur → Killing uniqueness | `src/lean_proofs/spectral/schur_killing_uniqueness.lean` |
 | Differential forms (d²=0 from mathlib) | `src/lean_proofs/dynamics/differential_forms.lean` |
+| SU(5) compact form (LieAlgebra ℝ) | `src/lean_proofs/clifford/su5c_compact.lean` |
+| SU(5) →ₗ⁅ℝ⁆ SO(10) LieHom | `src/lean_proofs/clifford/su5c_so10_liehom.lean` |
+| SU(5) as LieSubalgebra of SO(10) | `src/lean_proofs/clifford/su5_subalgebra.lean` |
+| SU5C bracket generator | `scripts/su5c_bracket_gen.py` |
 
-## Paper Proofreading (MANDATORY)
+## Project Agents and Skills
 
-**ALWAYS delegate to `paper-proofreader` agent for ANY paper proofread task.**
-Never proofread a paper inline. The agent runs the full five-gate protocol
-(`latex-paper-proofread` skill): compilation, mathematical correctness,
-internal consistency, bibliography, and submission readiness. ONE pass, COMPLETE report.
-The user should never need to ask "are you sure?" — the agent's report IS the certainty.
+These agents and skills are specifically built for this project. Use them.
+
+| Task | Agent/Skill | What it does |
+|------|-------------|-------------|
+| Audit paper claims vs proofs | `paper-integrity-auditor` agent | Maps prose claims to Lean theorems, classifies ACCURATE/OVERCLAIMED/etc. |
+| Rewrite paper after audit | `paper-rewrite-workflow` skill | 4-layer discipline: Lean speaks, minimal transitions, Ian writes motivation, Claude formats |
+| Final paper proofread | `paper-proofreader` agent | 5-gate protocol: compilation, math, consistency, bibliography, submission readiness |
+| Formal proof writing | `lean4-theorem-proving` skill | Lean 4 patterns, mathlib tactics, proof strategies |
+| Lie algebra upgrades | `mathlib-lie-upgrade` skill | Pattern for adding LieRing/LieAlgebra instances |
+| Dollard theory questions | `dollard-theorist` agent | PhD-level math: gradients, decomposition properties, versor algebra |
+| Clifford algebra construction | `clifford-unification-engineer` agent | so(10), E₈, Lie algebras in Lean 4, Jacobi identities |
+| SO(14) breaking chains | `so14-breaking-architect` agent | Symmetry breaking SO(14) → Standard Model |
+| SO(14) generations | `so14-generation-specialist` agent | Three-generation problem, spinor decomposition |
+| SO(14) Lagrangian | `so14-lagrangian-engineer` agent | Full Lagrangian construction, beta functions |
+| SO(14) predictions | `so14-phenomenologist` agent | Proton decay, coupling unification, testable predictions |
+| SO(14) signatures | `so14-signature-analyst` agent | Compact vs Lorentzian, Distler ghost objection |
+| SO(14) paper writing | `so14-paper-architect` agent | Paper 3 integration, claim tagging, honesty review |
+| Chirality problem | `massive-chirality-definition` skill | Open problem: chirality for massive fermions in E₈(-24) |
+| Research coordination | `research-orchestrator` agent | Multi-agent workflows, test coverage, git version control |
+
+**Routing rule**: For ANY paper work, follow the pipeline below. For Lean proof work,
+use the theorem-proving skill. For physics construction, use the SO(14) specialists.
+For cross-cutting coordination, use the research-orchestrator.
+
+## Paper Integrity Pipeline (MANDATORY)
+
+The full pipeline for paper quality is: **AUDIT → REWRITE → PROOFREAD**.
+
+### Step 1: Integrity Audit
+**Delegate to `paper-integrity-auditor` agent BEFORE any paper rewrite or submission.**
+The agent runs the `paper-integrity-audit` skill: maps every prose claim to its
+supporting Lean theorem, classifies as ACCURATE/OVERCLAIMED/TAUTOLOGICAL/UNSUPPORTED/
+SCOPE BLUR/CHAIN GAP/INFLATED/AI TELLTALE. Produces a coherence report + clean skeleton.
+
+### Step 2: Rewrite (if needed)
+Follow the `paper-rewrite-workflow` skill. Four layers:
+1. Lean proofs speak (theorem statements extracted accurately)
+2. Minimal mechanical transitions (one sentence, no adjectives)
+3. Ian writes motivation/introduction/conclusion in his voice
+4. Claude formats LaTeX, citations, structure only
+
+### Step 3: Proofread
+**Delegate to `paper-proofreader` agent for the final check.**
+Five-gate protocol (`latex-paper-proofread` skill): compilation, mathematical
+correctness, internal consistency, bibliography, submission readiness.
+ONE pass, COMPLETE report.

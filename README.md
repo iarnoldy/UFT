@@ -2,7 +2,7 @@
 
 Machine-verified algebraic scaffold from Dollard's versor algebra through Clifford algebras to SO(14), built in [Lean 4](https://lean-lang.org/) with mathlib.
 
-**59 proof files. ~2,537 verified declarations. Zero `sorry` gaps. Zero build errors.**
+**62 proof files. ~2,800 verified declarations. Zero `sorry` gaps. Zero build errors.**
 
 ## What This Is
 
@@ -10,7 +10,7 @@ A research project that applies interactive theorem provers (Lean 4) to claims f
 
 Includes the first machine-verified so(10) spinor representation homomorphism in any interactive theorem prover: 1,980 bracket equations verified by `native_decide` over exact rational arithmetic.
 
-Four Lie algebras — so(1,3), sl(3), sl(5), so(10) — carry certified `LieRing` and `LieAlgebra ℝ` instances via `Mathlib.Algebra.Lie.Basic`, connecting the hand-built structures to mathlib's type system.
+Five Lie algebras — so(1,3), sl(3), sl(5), su(5), so(10) — carry certified `LieRing` and `LieAlgebra ℝ` instances via `Mathlib.Algebra.Lie.Basic`, connecting the hand-built structures to mathlib's type system. Includes the project's first certified `LieHom`: su(5) →ₗ⁅ℝ⁆ so(10).
 
 ## What This Proves — And What It Doesn't
 
@@ -138,7 +138,7 @@ All proofs are in `src/lean_proofs/`. Entry points by interest:
 `cl11`, `cl30`, `cl31_maxwell`, `gauge_gravity`, `dirac`
 
 **Gauge Theory**:
-`su3_color`, `su3_cartan_weyl`, `su5_grand`, `su5_lie_structure`, `georgi_glashow`, `lie_bridge`, `so10_grand`, `su5_so10_embedding`
+`su3_color`, `su3_cartan_weyl`, `su5_grand`, `su5_lie_structure`, `su5c_compact` (compact form), `su5c_so10_liehom` (certified LieHom), `su5_subalgebra`, `georgi_glashow`, `lie_bridge`, `so10_grand`, `su5_so10_embedding`
 
 **Unification**:
 `unification`, `unification_gravity`, `spinor_matter`, `grand_unified_field`, `so14_unification`, `so14_anomalies`, `so14_breaking_chain`, `symmetry_breaking`

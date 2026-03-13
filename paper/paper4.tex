@@ -1,4 +1,4 @@
-% Target: Physical Review Letters
+% Target: Letters in Mathematical Physics
 % Format: REVTeX4-2, two-column, PRL style, 4 pages strict
 % Status: DRAFT (under review)
 % Companion papers:
@@ -37,8 +37,8 @@
 
 \preprint{UFT-2026-04}
 
-\title{Three Fermion Generations from $E_8$: A Machine-Verified
-Impossibility and Resolution}
+\title{Three Fermion Generations from $E_8$: Machine-Verified
+Dimensional Constraints}
 
 \author{Ian M.~Arnoldy}
 \affiliation{Independent Researcher}
@@ -46,25 +46,30 @@ Impossibility and Resolution}
 \date{March 10, 2026}
 
 \begin{abstract}
-We present the first machine-verified resolution of the three-generation
-problem in grand unified theories.  Using the Lean~4 theorem prover~\cite{demoura2021lean4}
-with the mathlib library~\cite{mathlib}, we prove two results across 9 proof files
+We machine-verify the dimensional arithmetic underlying two results
+about the three-generation problem in grand unified theories,
+using the Lean~4 theorem prover~\cite{demoura2021lean4}
+with the mathlib library~\cite{mathlib} across 9 proof files
 (over 575 verified declarations, zero \texttt{sorry} gaps).
-\emph{Impossibility}: the semi-spinor $\Delta^+(14)$ of $\mathrm{Spin}(14)$
+\emph{Obstruction}: assuming the standard spinor branching
+rule\SP, the semi-spinor $\Delta^+(14)$ of $\mathrm{Spin}(14)$
 decomposes under $\mathrm{SO}(10) \times \mathrm{SO}(4)$ as
 $(\mathbf{16},\mathbf{2}) \oplus (\overline{\mathbf{16}},\mathbf{2})$,
-giving multiplicity~2 for the $\mathbf{16}$.  Since $3 \nmid 2$, no
-intrinsic mechanism in any $\mathrm{SO}(10{+}2k)$ group can produce
-exactly three generations\MV.
-\emph{Resolution}: $E_8$ admits an $\mathrm{SU}(9)/\mathbb{Z}_3$
-decomposition where $248 = 80 + 84 + \overline{84}$ and
-$\Lambda^3(\mathbb{C}^9) = 84$ and its conjugate $\overline{84}$
-together contain exactly three Standard Model
-generations ($3 \times 16 = 48$ dimensions)\MV.  The number~3 arises as the dimension of the
-fundamental of $\mathrm{SU}(3)_{\mathrm{family}} \subset
-\mathrm{SU}(4) \subset \mathrm{SU}(9)$.
-Both decompositions coexist inside $E_8$, connected through a
-common $\mathrm{SU}(7) \times \mathrm{U}(1)$ subgroup.
+giving multiplicity~2 for the $\mathbf{16}$.  The arithmetic
+$3 \nmid 2$ is machine-verified\MV; the conclusion that no
+$\mathrm{SO}(10{+}2k)$ spinor decomposition produces exactly three
+generations follows from this arithmetic together with the
+branching rule\SP.
+\emph{Candidate resolution}\CP: $E_8$ admits an $\mathrm{SU}(9)/\mathbb{Z}_3$
+decomposition where $248 = 80 + 84 + \overline{84}$\MV\ and
+$\Lambda^3(\mathbb{C}^9) = 84$\MV.  The identification of
+$3 \times 16 = 48$ of these dimensions with three Standard Model
+generations requires the candidate-physics assumption that
+$\mathrm{SU}(3)_{\mathrm{family}} \subset
+\mathrm{SU}(4) \subset \mathrm{SU}(9)$ acts as a family
+symmetry\CP.
+The dimensional consistency of the two decompositions inside $E_8$
+is verified: $49 + 21 + 21 = 91$\MV.
 Every dimensional identity is verified by the Lean kernel;
 every physical interpretation is explicitly tagged.
 \end{abstract}
@@ -77,6 +82,14 @@ every physical interpretation is explicitly tagged.
 \section{Introduction}
 \label{sec:intro}
 % ============================================================================
+
+\emph{Scope note.}  The Lean~4 proofs in this Letter verify
+\emph{dimensional arithmetic}: identities such as
+$16 \times 2 + 16 \times 2 = 64$ and $\binom{9}{3} = 84$.
+The representation-theoretic branching rules that give these
+dimensions physical meaning are standard results\SP, cited from
+the literature, not themselves machine-verified.  We distinguish
+these levels throughout with explicit tags.
 
 The Standard Model of particle physics contains three generations
 of fermions---an empirical fact without theoretical explanation.
@@ -95,20 +108,22 @@ $\mathbf{16}$~\cite{wilczek1982,slansky1981}.  The mismatch
 $3 \nmid 2$ has been known since the 1980s~\cite{ida1980,ma1981,ramond1998}
 but was never formally verified, and the resolution remained open.
 
-We close this loop using interactive theorem proving.  In 9~Lean~4
-proof files containing over 575 verified declarations with zero \texttt{sorry} gaps,
-we establish:
+We machine-verify the dimensional arithmetic in both results
+using 9~Lean~4 proof files containing over 575 verified declarations
+with zero \texttt{sorry} gaps:
 \begin{enumerate}
-  \item A \emph{universal} impossibility: no $\mathrm{SO}(10{+}2k)$
-    gives three generations via spinor decomposition, because the
-    family multiplicity $2^{k-1}$ is never~3\MV.
-  \item A resolution via $E_8$: the $\mathrm{SU}(9)/\mathbb{Z}_3$
-    maximal subgroup provides exactly three generations through the
-    exterior algebra $\Lambda^3(\mathbb{C}^9)$\MV.
+  \item \emph{Obstruction}: assuming the standard spinor branching
+    rule\SP, the family multiplicity $2^{k-1}$ is never~3\MV,
+    so no $\mathrm{SO}(10{+}2k)$ gives three generations via
+    spinor decomposition.
+  \item \emph{Candidate resolution}\CP: the $\mathrm{SU}(9)/\mathbb{Z}_3$
+    maximal subgroup of $E_8$ yields $\Lambda^3(\mathbb{C}^9)$
+    with $\binom{9}{3} = 84$\MV, whose dimensional structure
+    is consistent with three generations.
 \end{enumerate}
-To our knowledge, this is the first machine-verified three-generation
-resolution for any GUT.  The methodology---Lean~4 with
-mathlib---was developed for this
+To our knowledge, this is the first machine-verified dimensional
+analysis of a three-generation mechanism in any GUT.  The
+methodology---Lean~4 with mathlib---was developed for this
 project~\cite{arnoldy2026cicm,arnoldy2026aaca,arnoldy2026prd}.
 
 % ============================================================================
@@ -142,20 +157,22 @@ the $\mathrm{SO}(4)$ spinor:
 \end{equation}
 This is verified as \texttt{multiplicity\_is\_two}\MV.
 
-The obstruction is now arithmetic.  We prove
-$3 \nmid 2$\MV\ (\texttt{three\_gen\_excluded}), which
-immediately implies that exactly three copies of the $\mathbf{16}$
-cannot be extracted from $\Delta^+(14)$ by any
+The obstruction is arithmetic: $3 \nmid 2$\MV\
+(\texttt{three\_gen\_excluded}).  Combined with the branching
+rule~\eqref{eq:branching}\SP, this excludes exactly three copies
+of the $\mathbf{16}$ from $\Delta^+(14)$ under any
 $\mathrm{SO}(10) \times \mathrm{SO}(4)$ decomposition.
 
 Two extensions strengthen the result:
 
 \emph{Universality.}  All embeddings $\mathrm{SO}(10) \times
 \mathrm{SO}(4) \hookrightarrow \mathrm{SO}(14)$ are conjugate
-under $\mathrm{SO}(14)$, because $\mathrm{SO}(14)$ acts
+under $\mathrm{SO}(14)$\SP, because $\mathrm{SO}(14)$ acts
 transitively on the Grassmannian $\mathrm{Gr}(10,14)$.
-The orbit-stabilizer theorem gives $\dim \mathrm{Gr}(10,14) =
-91 - 51 = 40$\MV\ (\texttt{orbit\_stabilizer\_check}).
+The orbit-stabilizer dimension $\dim \mathrm{Gr}(10,14) =
+91 - 51 = 40$ is arithmetically verified\MV\
+(\texttt{orbit\_stabilizer\_check}); the conjugacy itself is
+standard Lie theory\SP.
 No non-standard embedding escapes the obstruction.
 
 \emph{No orthogonal escape.}  For any $\mathrm{SO}(10{+}2k)$,
@@ -176,10 +193,11 @@ and dimension consistency---into a single conjunction:
   \label{eq:capstone-obs}
 \end{equation}
 
-The physical consequence is definitive: three fermion generations
-\emph{cannot} arise from any mechanism intrinsic to $\mathrm{SO}(14)$
-(or any $\mathrm{SO}(10{+}2k)$).  The generation mechanism must be
-extrinsic.
+Given the standard branching rule\SP, the dimensional arithmetic
+excludes three fermion generations from any
+$\mathrm{SO}(10{+}2k)$ spinor decomposition\MV.  If the
+generation mechanism exists, it must be extrinsic to the
+orthogonal series.
 
 % ============================================================================
 \section{Three Generations from $E_8$}
@@ -228,7 +246,7 @@ The 84 and $\overline{84}$ are conjugate under Hodge duality:
 $\binom{9}{3} = \binom{9}{6}$\MV.  The $\mathbb{Z}_3$
 quotient arises because the center $\mathbb{Z}_9$ of
 $\mathrm{SU}(9)$ acts by cube roots of unity on the three
-eigenspaces (80, 84, $\overline{84}$)\MV.
+eigenspaces (80, 84, $\overline{84}$)\SP.
 
 \subsection{Cauchy decomposition and the family triplet}
 
@@ -285,7 +303,7 @@ Similarly, $(\mathbf{5},\mathbf{6}) \to (\mathbf{5},\mathbf{3})
 \oplus (\mathbf{5},\overline{\mathbf{3}})$ and
 $(\mathbf{1},\overline{\mathbf{4}}) \to
 (\mathbf{1},\overline{\mathbf{3}}) \oplus (\mathbf{1},\mathbf{1})$.
-The conjugate $\overline{84}$ decomposes analogously; crucially,
+The conjugate $\overline{84}$ decomposes analogously;
 $(\overline{\mathbf{5}},\overline{\mathbf{3}})$ with dimension~15
 appears in the $\overline{84}$, providing $3 \times \overline{\mathbf{5}}$.
 Table~\ref{tab:84} collects the generation content from both sectors.
@@ -300,7 +318,7 @@ forming vector-like pairs that can acquire GUT-scale masses\CP.
 The eight-part capstone \texttt{e8\_three\_generation\_theorem}\MV\
 collects: $\binom{9}{3} = 84$, $10 \times 3 = 30$,
 $5 \times 3 = 15$, $10 + 5 + 1 = 16$, $3 \times 16 = 48$,
-$84 - 48 = 36$, $48 + 36 = 84$, and $\dim(\mathrm{fund.\ SU}(3)) = 3$.
+$84 - 48 = 36$, and $48 + 36 = 84$.
 The anomaly-free eigenspace theorem
 \texttt{j\_sector\_anomaly\_free}\MV\ additionally verifies
 $\Tr(Y) = 0$ for each $J$ eigenspace independently.
@@ -322,15 +340,15 @@ This is verified as \texttt{so14\_compatible\_split}\MV.
 Every generator of $\mathrm{SO}(14)$ is accounted for in
 both decompositions.
 
-The complete argument is collected in the seven-part
-\texttt{three\_generation\_theorem}\MV, which combines:
-(a)~impossibility at $\mathrm{SO}(14)$ ($3 \nmid 2$),
-(b)~embedding in $E_8$ ($91 + 1 + 28 + 64 + 64 = 248$),
-(c)~$\mathrm{SU}(9)$ decomposition ($80 + 84 + 84 = 248$),
-(d)~three generations ($3 \times 16 = 48 \leq 84$),
-(e)~exotics ($84 - 48 = 36$),
-(f)~compatibility ($49 + 21 + 21 = 91$), and
-(g)~the origin of~3 ($3 \mid 3$ and $3 \nmid 2$).
+The complete dimensional chain is collected in the seven-part
+\texttt{three\_generation\_theorem}\MV, which verifies the arithmetic:
+(a)~$3 \nmid 2$ (obstruction at $\mathrm{SO}(14)$),
+(b)~$91 + 1 + 28 + 64 + 64 = 248$ (embedding dimensions),
+(c)~$80 + 84 + 84 = 248$ ($\mathrm{SU}(9)$ decomposition),
+(d)~$3 \times 16 = 48 \leq 84$ (generation count),
+(e)~$84 - 48 = 36$ (exotics),
+(f)~$49 + 21 + 21 = 91$ (compatibility), and
+(g)~$3 \mid 3$ and $3 \nmid 2$ (origin of~3).
 
 % ============================================================================
 \section{Discussion}
@@ -352,7 +370,7 @@ $E_8$ breaking chain are open problems\OP.  We tag every claim
 explicitly.
 
 \emph{Chirality boundary.}
-The generation mechanism verified above is algebraic: it holds for
+The dimensional analysis above is algebraic: it holds for
 \emph{all} real forms of $E_8$, including the physically relevant
 $E_8(-24)$ containing $\mathrm{Spin}(3{,}11)$.  The Clifford periodicity
 distinguishes signatures---$\Cl(14,0)$ has $p{-}q \bmod 8 = 6$ while
@@ -386,10 +404,12 @@ is structurally robust.
 matrix---computed from the non-nested maximal-rank subalgebras
 $\mathrm{SU}(9)$ and $\mathrm{SO}(16)$ of $E_8$---quantifies
 the asymmetry\CO: the 84 roots of sector~1 split as $28 + 35 + 21$
-under $D_8 \supset D_7$ chirality (S$^+$ vs.\ S$^-$), giving a
+under $D_8 \supset D_7$ chirality (S$^+$ vs.\ S$^-$)\CO, giving a
 chirality index $\chi = 35 - 21 = 14$\MV\
-(\texttt{chirality\_index\_sector1}), while the total 248 remains
-balanced ($64^+ = 64^-$)\MV, consistent with Distler--Garibaldi.
+(\texttt{chirality\_index\_sector1})---the subtraction is
+machine-verified, while the root classification is computed\CO.
+The total 248 remains balanced ($64^+ = 64^-$)\MV, consistent
+with Distler--Garibaldi.
 The combined definition is collected in
 \texttt{massive\_chirality\_definition}\MV\ (12-part conjunction)
 and the full certificate \texttt{complete\_massive\_chirality\_skeleton}\MV\
@@ -408,7 +428,7 @@ $\mathrm{SU}(9)/\mathbb{Z}_3$ decomposition induces a complex structure
 $J = (2/\sqrt{3})(\sigma + \tfrac{1}{2}\mathrm{Id})|_V$ on the
 168-dimensional matter space $V = 84 \oplus \overline{84}$, with
 $J^2 = -\mathrm{Id}$\CO.
-Crucially, $J$ does \emph{not} reduce to the chirality operator $\gamma_5$\CO:
+$J$ does \emph{not} reduce to the chirality operator $\gamma_5$\CO:
 one Standard Model generation straddles both $J$ eigenspaces, with the
 $\mathbf{10} + \mathbf{1}$ (containing $Q_L, u^c, e^c, \nu^c$) in the
 $+i$ eigenspace and the $\overline{\mathbf{5}}$ (containing $d^c, L$) in
@@ -420,9 +440,10 @@ Each $J$ eigenspace is independently anomaly-free:
 $\Tr(Y) = 0$ for $\{\mathbf{10},\mathbf{1}\}$ and for
 $\{\overline{\mathbf{5}}\}$ separately\MV\
 (\texttt{j\_sector\_anomaly\_free}).
-This ``miraculous'' cancellation---previously an unexplained
-feature of the Standard Model---becomes a consequence of $\sigma$
-preserving the algebraic structure of $E_8$\CP.
+This cancellation---previously an unexplained
+feature of the Standard Model---becomes, in this framework,
+a consequence of $\sigma$ preserving the algebraic structure
+of $E_8$\CP.
 
 \emph{Why $E_8$ succeeds where $\mathrm{SO}(14)$ fails.}
 The root cause is algebraic: spinor representations of orthogonal
@@ -434,15 +455,17 @@ In particular, $\binom{3}{1} = 3$\MV, while no $2^k = 3$\MV\
 The transition from $\mathrm{SO}(14)$ to $E_8$ replaces the $\mathrm{SO}(4)$ family
 factor (spinor dim~2) with $\mathrm{SU}(3)_\text{family}$ (fundamental
 dim~3).  The extra structure has dimension $\dim \mathrm{SU}(4) -
-\dim \mathrm{SO}(4) = 15 - 6 = 9$\MV, housing exactly
-$\mathrm{SU}(3)$ ($\dim 8$) $+$ U(1) ($\dim 1$)\MV.
+\dim \mathrm{SO}(4) = 15 - 6 = 9$\MV, which is dimensionally
+consistent with $\mathrm{SU}(3) \times \mathrm{U}(1)$
+($8 + 1 = 9$\MV); the identification as a physical family
+symmetry is candidate physics\CP.
 
 \emph{Comparison with prior work.}
 Wilson~\cite{wilson2024,wilson2025} identified discrete order-3
 elements of $E_8$ whose centralizer is $\mathrm{SU}(9)/\mathbb{Z}_3$,
 providing a fundamentally discrete three-generation mechanism.
 Our contribution is to \emph{machine-verify} the complete dimensional
-chain from impossibility through resolution.
+chain from obstruction through candidate resolution.
 Our chirality boundary analysis, informed by
 Distler and Garibaldi~\cite{distler2010}, clarifies the precise
 scope of Wilson's escape: the algebraic prerequisites are verified,
@@ -469,26 +492,33 @@ typical of $E_8$ models~\cite{lisi2007}.
 \label{sec:conclusion}
 % ============================================================================
 
-We have proved, with machine verification, that three fermion
-generations cannot arise from any orthogonal group
-$\mathrm{SO}(10{+}2k)$ via spinor decomposition---a universal
-impossibility---and that $E_8$ resolves this obstruction through
-the $\mathrm{SU}(9)/\mathbb{Z}_3$ decomposition, where
-$\Lambda^3(\mathbb{C}^9)$ naturally contains $3 \times 16 = 48$
-dimensions of Standard Model matter.
+We have machine-verified the dimensional arithmetic showing that
+three fermion generations are excluded from any
+$\mathrm{SO}(10{+}2k)$ spinor decomposition (given the standard
+branching rule\SP), and that the $E_8$ decomposition under
+$\mathrm{SU}(9)/\mathbb{Z}_3$ is dimensionally consistent with
+three generations ($3 \times 16 = 48 \leq 84$\MV).
+Whether this dimensional consistency constitutes a physical
+resolution depends on the candidate-physics identification of
+$\mathrm{SU}(3)_\mathrm{family}$\CP.
 We further provide a two-level algebraic definition of chirality:
 non-self-conjugacy of $\Lambda^3(\mathbb{C}^9)$ (Definition~B\MV),
 quantified by a chirality index $\chi = 14$ per $\mathbb{Z}_3$
-sector (Definition~D\MV), compatible with the Distler--Garibaldi
-no-go theorem.  The physical observable corresponding to massive
+sector (Definition~D; root classification\CO, subtraction\MV),
+compatible with the Distler--Garibaldi no-go theorem.
+The physical observable corresponding to massive
 chirality remains open\OP.
 
-The number~3 is not put in by hand.  It is the dimension of the
-fundamental representation of $\mathrm{SU}(3)_\mathrm{family}$,
-which emerges from the chain
+The number~3 enters through the breaking chain
 $E_8 \supset \mathrm{SU}(9) \supset \mathrm{SU}(5) \times
 \mathrm{SU}(4) \supset \mathrm{SU}(5) \times
-\mathrm{SU}(3)_\mathrm{family} \times \mathrm{U}(1)$.
+\mathrm{SU}(3)_\mathrm{family} \times \mathrm{U}(1)$\CP,
+where 3 is the dimension of the fundamental of
+$\mathrm{SU}(3)_\mathrm{family}$.
+The Lean proof verifies the dimensional identity
+$\dim(\mathrm{fund.\ SU}(3)) = 3$ by definition;
+the claim that this $\mathrm{SU}(3)$ \emph{is} the family
+symmetry is candidate physics\CP, not a verified consequence.
 
 The complete argument---9 proof files, over 575 verified declarations, zero
 \texttt{sorry} gaps---is available from the corresponding

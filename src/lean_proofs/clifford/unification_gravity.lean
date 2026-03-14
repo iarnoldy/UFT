@@ -34,14 +34,18 @@ References:
 import Mathlib.Data.Real.Basic
 import Mathlib.Tactic
 
-/-! ## Part 1: The Gravity Subalgebra so(1,3)
+/-! ## Part 1: The Gravity Subalgebra so(4) (Compact Form)
 
-The Lorentz Lie algebra with 6 generators: 3 boosts + 3 rotations.
-Uses indices {1,2,3,4} in the unified so(14).
-Bracket computed from the universal so(n) formula. -/
+The compact rotation algebra with 6 generators, using indices {1,2,3,4} in so(14).
+Bracket computed from the compact so(n) formula [L_{ij}, L_{kl}] with Kronecker δ.
 
-/-- The Lorentz Lie algebra so(1,3), embedded in so(14) using indices 1-4.
-    K1,K2,K3 = boosts, J1,J2,J3 = rotations. -/
+NOTE: Despite the field names K1,K2,K3,J1,J2,J3, the structure constants here are
+those of so(4) ≅ su(2) ⊕ su(2) (COMPACT), not so(1,3) ≅ sl(2,ℝ) ⊕ sl(2,ℝ) (SPLIT).
+The bracket uses δ (all +1), not η (with -1). For so(1,3), see gauge_gravity.lean.
+For so(4) with LieAlgebra ℝ instance, see so4_gravity.lean. -/
+
+/-- The compact gravity algebra so(4), embedded in so(14) using indices {1,2,3,4}.
+    Field names K/J are historical; all generators are compact (rotation-like). -/
 @[ext]
 structure GravSO where
   k1 : ℝ   -- L_{12}: boost in direction 2
@@ -53,9 +57,9 @@ structure GravSO where
 
 namespace GravSO
 
-/-- The Lie bracket of so(1,3), computed from
-    [L_{ij}, L_{kl}] = d_{jk}L_{il} - d_{ik}L_{jl} - d_{jl}L_{ik} + d_{il}L_{jk}
-    restricted to indices {1,2,3,4}. -/
+/-- The Lie bracket of so(4) (compact), computed from
+    [L_{ij}, L_{kl}] = δ_{jk}L_{il} - δ_{ik}L_{jl} - δ_{jl}L_{ik} + δ_{il}L_{jk}
+    restricted to indices {1,2,3,4}. Uses Kronecker δ (compact metric). -/
 def comm (X Y : GravSO) : GravSO where
   k1 := X.j1 * Y.k2 - X.k2 * Y.j1 + X.j2 * Y.k3 - X.k3 * Y.j2
   k2 := -(X.j1 * Y.k1) + X.k1 * Y.j1 + X.j3 * Y.k3 - X.k3 * Y.j3

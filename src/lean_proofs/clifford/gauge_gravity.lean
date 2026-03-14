@@ -41,15 +41,18 @@ is what makes GTG possible, and it lives entirely in Cl(1,3).
 In the hierarchy:
   Z_4 → Cl(1,1) → Cl(3,0) → Cl(1,3) → **GTG** (this file)
 
-NOTE ON SIGNATURE: This file labels the algebra "so(1,3)" following the GTG
-convention. As a real Lie algebra, so(1,3) ≅ sl(2,C)_R ≅ so(4) (as abstract
-6-dimensional Lie algebras, they share the same structure constants). The
-distinction between so(1,3) and so(4) is physical: so(1,3) acts on Minkowski
-spacetime (indefinite metric), so(4) on Euclidean space (definite metric).
-The Lean proofs verify algebraic identities (Jacobi, self-dual/anti-self-dual
-decomposition) that hold in BOTH signatures. The physical interpretation as
-gravity requires the indefinite Lorentzian metric, which is not encoded in
-the algebraic structure verified here.
+NOTE ON SIGNATURE: The Bivector type implements so(1,3) (Lorentz algebra).
+As a REAL Lie algebra, so(1,3) ≅ sl(2,ℝ) ⊕ sl(2,ℝ) (SPLIT real form).
+This is NOT isomorphic to so(4) ≅ su(2) ⊕ su(2) (COMPACT real form).
+The two have different structure constants in the boost-rotation cross-terms:
+  so(1,3): [K_i, J_j] uses η_{00} = -1 (Lorentzian metric)
+  so(4):   [L_{1i}, L_{jk}] uses δ_{11} = +1 (Euclidean metric)
+
+Consequences:
+  - Bivector CANNOT embed in SO(14,0) via a LieHom (signature mismatch).
+  - The compact so(4) type (so4_gravity.lean) CAN embed in SO(14,0).
+  - Physical gravity requires so(11,3), not so(14,0).
+  See docs/SIGNATURE_ANALYSIS.md and so4_gravity.lean for details.
 
 References:
   - Lasenby, A., Doran, C., Gull, S. "Gravity, gauge theories and geometric

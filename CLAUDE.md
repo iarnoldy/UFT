@@ -144,7 +144,8 @@ These agents and skills are specifically built for this project. Use them.
 | Task | Agent/Skill | What it does |
 |------|-------------|-------------|
 | Audit paper claims vs proofs | `paper-integrity-auditor` agent | Maps prose claims to Lean theorems, classifies ACCURATE/OVERCLAIMED/etc. |
-| Rewrite paper after audit | `paper-rewrite-workflow` skill | 4-layer discipline: Lean speaks, minimal transitions, Ian writes motivation, Claude formats |
+| Verify citations against APIs | `citation-verifier` agent | Queries INSPIRE-HEP/Semantic Scholar/CrossRef, detects hallucinated/misattributed citations, populates DOIs |
+| Rewrite paper after audit | `paper-rewrite-workflow` skill | 5-layer discipline: Lean speaks, reasoning-as-prose, Ian writes narrative, citations verified, Claude formats |
 | Final paper proofread | `paper-proofreader` agent | 5-gate protocol: compilation, math, consistency, bibliography, submission readiness |
 | Formal proof writing | `lean4-theorem-proving` skill | Lean 4 patterns, mathlib tactics, proof strategies |
 | Lie algebra upgrades | `mathlib-lie-upgrade` skill | Pattern for adding LieRing/LieAlgebra instances |
@@ -165,22 +166,30 @@ For cross-cutting coordination, use the research-orchestrator.
 
 ## Paper Integrity Pipeline (MANDATORY)
 
-The full pipeline for paper quality is: **AUDIT → REWRITE → PROOFREAD**.
+The full pipeline for paper quality is: **AUDIT → CITE-VERIFY → REWRITE → PROOFREAD**.
 
 ### Step 1: Integrity Audit
 **Delegate to `paper-integrity-auditor` agent BEFORE any paper rewrite or submission.**
 The agent runs the `paper-integrity-audit` skill: maps every prose claim to its
 supporting Lean theorem, classifies as ACCURATE/OVERCLAIMED/TAUTOLOGICAL/UNSUPPORTED/
-SCOPE BLUR/CHAIN GAP/INFLATED/AI TELLTALE. Produces a coherence report + clean skeleton.
+SCOPE BLUR/CHAIN GAP/INFLATED/AI TELLTALE/HOLLOW REASONING. Produces a coherence
+report + clean skeleton.
 
-### Step 2: Rewrite (if needed)
-Follow the `paper-rewrite-workflow` skill. Four layers:
+### Step 2: Citation Verification
+**Delegate to `citation-verifier` agent to verify every citation against live APIs.**
+Queries INSPIRE-HEP, Semantic Scholar, CrossRef, arXiv. Classifies each citation as
+VERIFIED/METADATA_MISMATCH/NOT_FOUND/HALLUCINATED/MISATTRIBUTED/UNVERIFIABLE.
+Populates missing DOIs. Produces corrected .bib entries.
+
+### Step 3: Rewrite (if needed)
+Follow the `paper-rewrite-workflow` skill. Five layers:
 1. Lean proofs speak (theorem statements extracted accurately)
-2. Minimal mechanical transitions (one sentence, no adjectives)
-3. Ian writes motivation/introduction/conclusion in his voice
-4. Claude formats LaTeX, citations, structure only
+2. Physics-math reasoning stated plainly (passes Reasoning Test)
+3. Ian writes narrative/introduction/conclusion in his voice
+4. Citations back the reasoning (verified in Step 2)
+5. Claude formats LaTeX, structure only
 
-### Step 3: Proofread
+### Step 4: Proofread
 **Delegate to `paper-proofreader` agent for the final check.**
 Five-gate protocol (`latex-paper-proofread` skill): compilation, mathematical
 correctness, internal consistency, bibliography, submission readiness.

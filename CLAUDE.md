@@ -1,11 +1,13 @@
 # Dollard Formal Verification
 
 Machine-verified dimensional scaffold from Dollard's versor algebra through Clifford algebras
-to SO(14) and E₈, built in Lean 4 with mathlib. 62 proof files, ~2,800 verified
-declarations, zero sorry gaps. One certified LieHom (su(5) → so(10)); remaining chain
-links are dimensional consistency with algebraic upgrades in progress (see project_roadmap.md).
+to SO(16) and E₈, built in Lean 4 with mathlib. 69 proof files, ~2,750+ verified
+declarations, zero sorry gaps. Four certified LieHoms composing:
+SU(5) →ₗ⁅ℝ⁆ SO(10) →ₗ⁅ℝ⁆ SO(14) →ₗ⁅ℝ⁆ SO(16), plus SO(4) →ₗ⁅ℝ⁆ SO(14).
+Remaining chain link (E₈) is dimensional consistency with algebraic upgrade
+in progress (see `docs/PROJECT_ROADMAP.md`).
 Paper 1 submitted to CICM 2026. Paper 2 submitted to AACA.
-Papers 3 & 4 held pending composable morphism chain (ADR-004).
+Papers 3 & 4 held pending anomaly traces + E₈ chain (ADR-004).
 
 ## Research Tracks
 
@@ -103,6 +105,7 @@ lake env lean src/lean_proofs/foundations/basic_operators.lean  # single file
 | Original claim inventory | `analysis/MATHEMATICAL_CLAIMS_EXTRACTION.md` |
 | Why construct a candidate theory? | `docs/decisions/ADR-002-candidate-theory-construction.md` |
 | Prose-proof coherence crisis | `docs/decisions/ADR-003-prose-proof-coherence-crisis.md` |
+| **Physics-math friction catalog** | `docs/PHYSICS_MATH_FRICTION_CATALOG.md` |
 | Paper & proof strategy (Berlinski) | `docs/decisions/ADR-004-berlinski-paper-strategy.md` |
 | SO(14) literature survey | `research/so14-gut-literature.md` |
 | SO(14) matter decomposition | `src/experiments/so14_matter_decomposition.py` |
@@ -122,7 +125,17 @@ lake env lean src/lean_proofs/foundations/basic_operators.lean  # single file
 | SU(5) compact form (LieAlgebra ℝ) | `src/lean_proofs/clifford/su5c_compact.lean` |
 | SU(5) →ₗ⁅ℝ⁆ SO(10) LieHom | `src/lean_proofs/clifford/su5c_so10_liehom.lean` |
 | SU(5) as LieSubalgebra of SO(10) | `src/lean_proofs/clifford/su5_subalgebra.lean` |
+| **Project roadmap (Papers 3 & 4)** | `docs/PROJECT_ROADMAP.md` |
+| SO(14) as LieAlgebra ℝ | `src/lean_proofs/clifford/so14_grand.lean` |
+| SO(10) →ₗ⁅ℝ⁆ SO(14) LieHom | `src/lean_proofs/clifford/so10_so14_liehom.lean` |
+| SO(4) compact gravity type | `src/lean_proofs/clifford/so4_gravity.lean` |
+| SO(4) →ₗ⁅ℝ⁆ SO(14) LieHom | `src/lean_proofs/clifford/so4_so14_liehom.lean` |
+| SO(14) bracket generator | `scripts/so14_bracket_gen.py` |
 | SU5C bracket generator | `scripts/su5c_bracket_gen.py` |
+| Anomaly trace identity [MV] | `src/lean_proofs/clifford/anomaly_trace.lean` |
+| SO(16) as LieAlgebra ℝ (120 gens) | `src/lean_proofs/clifford/so16_grand.lean` |
+| SO(14) →ₗ⁅ℝ⁆ SO(16) LieHom | `src/lean_proofs/clifford/so14_so16_liehom.lean` |
+| SO(16) bracket generator | `scripts/so16_bracket_gen.py` |
 
 ## Project Agents and Skills
 

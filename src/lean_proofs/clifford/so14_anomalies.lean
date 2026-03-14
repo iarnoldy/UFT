@@ -92,17 +92,21 @@ theorem fundamental_anomaly_free : (14 : ℕ) ≥ 7 := by norm_num
 
 /-! ## Part 3: Spinor Anomaly
 
-For SO(2k), the spinor representation has dimension 2^(k-1).
-The anomaly coefficient for the spinor:
+For SO(2k), the two Weyl (chiral) spinor representations S+ and S- each have
+dimension 2^(k-1). Their anomaly indices satisfy A(S+) = -A(S-).
 
-  A(S) ∝ (2k - 8) for SO(2k) chiral spinors
+For k even: Weyl spinors are self-conjugate (real if k ≡ 0 mod 4, pseudoreal if
+k ≡ 2 mod 4). Each is individually anomaly-free.
 
-This vanishes when k = 4 (i.e., SO(8) — triality!).
-For k ≠ 4, we can still get anomaly cancellation by combining
-left and right spinors (Dirac spinor), which always works.
+For k odd (including k = 7, SO(14)): Weyl spinors S+ and S- are complex
+conjugates of each other (S+* ≅ S-), neither is individually anomaly-free.
+A(S+) = 2^(k-4) = 8 for SO(14). But the Dirac spinor S+ ⊕ S- (128-dim)
+is a real representation (self-conjugate), hence anomaly-free:
+  A(Dirac) = A(S+) + A(S-) = 8 + (-8) = 0.
 
-For SO(14): k = 7. We use the DIRAC spinor (128-dim),
-which is a real representation → automatically anomaly-free. -/
+NOTE: The arithmetic below verifies dimensions and indices, not the anomaly
+cancellation itself. For a genuine algebraic proof, see the antisymmetric trace
+identity approach planned in Milestone 2 of docs/PROJECT_ROADMAP.md. -/
 
 /-- SO(14) has k = 7. -/
 theorem so14_k_value : (14 : ℕ) / 2 = 7 := by norm_num

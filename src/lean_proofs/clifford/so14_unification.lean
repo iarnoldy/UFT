@@ -15,11 +15,15 @@ that form the Lie algebra so(14). And so(14) contains BOTH:
 as subalgebras, with 40 additional "mixed" generators that couple
 gauge interactions to gravity.
 
-The embedding: so(14) ⊃ so(10) × so(4) ⊃ so(10) × so(1,3)
+The embedding: so(14,0) ⊃ so(10) × so(4)
+  (Lorentzian version: so(11,3) ⊃ so(10) × so(1,3) — different real form)
 
 Dimension check: dim so(14) = C(14,2) = 91
-  = 45 (so(10)) + 6 (so(4)≅so(1,3) via Wick) + 40 (mixed)
+  = 45 (so(10)) + 6 (so(4), compact gravity sector) + 40 (mixed)
   = 91 ✓
+
+NOTE: so(4) ≅ su(2) ⊕ su(2) is NOT isomorphic to so(1,3) ≅ sl(2,ℝ) ⊕ sl(2,ℝ).
+Our proofs use compact signature. Physical gravity requires so(11,3).
 
 ONE gauge field on so(14) decomposes into:
 1. The Standard Model gauge fields (45 generators → after breaking: γ, W±, Z, 8g)

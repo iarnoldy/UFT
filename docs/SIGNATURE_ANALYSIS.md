@@ -92,6 +92,53 @@ that changes.
 The compact-only file (cl30.lean, 2%) is simply about a specific Clifford algebra
 Cl(3,0) and makes no claims about other signatures.
 
+## The so(1,3) vs so(4) Non-Isomorphism
+
+**Critical finding (March 2026):** so(1,3) and so(4) are NOT isomorphic as real
+Lie algebras, despite both being 6-dimensional:
+
+- **so(4) ≅ su(2) ⊕ su(2)** — compact real form (all generators square to -1)
+- **so(1,3) ≅ sl(2,ℝ) ⊕ sl(2,ℝ)** — split real form (boosts square to +1)
+
+The structure constants differ in boost-rotation cross-terms:
+- so(1,3): `[K₁, J₃] = -K₂` (Lorentzian metric η₁₁ = -1)
+- so(4):   `[L₁₂, L₂₃] = +L₁₃` (Euclidean metric δ₂₂ = +1)
+
+**Consequences for the project:**
+- The Bivector type (`gauge_gravity.lean`) implements so(1,3) structure constants
+- SO(14,0) (`so14_grand.lean`) has compact signature — its gravity sector is so(4)
+- **No LieHom Bivector → SO14 exists** (bracket mismatch in gravity sector)
+- `so4_gravity.lean` provides the compact so(4) type that DOES embed in SO(14,0)
+- `so4_so14_liehom.lean` certifies the embedding SO4 →ₗ⁅ℝ⁆ SO14
+- Physical gravity requires so(11,3), not so(14,0) — this is future work
+
+## Updated Classification (including new files)
+
+### New Signature-Independent Files
+| File | Why |
+|------|-----|
+| `so14_grand` | so(14) compact Lie algebra — Jacobi holds in all forms |
+| `so10_so14_liehom` | Block-diagonal embedding — algebraic |
+| `su5c_compact` | SU(5) compact form — algebraic |
+| `su5c_so10_liehom` | Certified LieHom — algebraic |
+| `spinor_rep` | Spinor representation — algebraic |
+| `spinor_rep_full` | Full spinor representation — algebraic |
+| `spinor_rep_homomorphism` | Representation homomorphism — algebraic |
+| `lagrangian_uniqueness` | Lagrangian structure — algebraic |
+| `schur_killing_uniqueness` | Killing form uniqueness — algebraic |
+| `differential_forms` | d²=0 — algebraic |
+| `wedge_product` | Wedge product — algebraic |
+| `gauge_connection` | Gauge connection — algebraic |
+| `bianchi_from_principles` | Bianchi identity — algebraic |
+| `yang_mills_variation` | Yang-Mills variation — algebraic |
+| `chirality_factorization` | Chirality structure — algebraic |
+
+### New Compact-Only Files
+| File | What Depends on Compact Signature |
+|------|----------------------------------|
+| `so4_gravity` | so(4) compact form — structure constants are compact-specific |
+| `so4_so14_liehom` | Embeds so(4) into so(14,0) — compact signature required |
+
 ## Implications for Physics
 
 For the SO(14) candidate theory:
@@ -99,7 +146,9 @@ For the SO(14) candidate theory:
 - The coupling unification is signature-independent (arithmetic)
 - The chirality definition requires care: Def B is signature-independent,
   Def D requires root classification that differs between signatures
-- The gravity sector (so(1,3)) is inherently signature-specific
+- The gravity sector requires so(1,3) for physics, but our proofs use so(4)
+- **The certified chain SU5C →ₗ⁅ℝ⁆ SO10 →ₗ⁅ℝ⁆ SO14 ←ₗ⁅ℝ⁆ SO4 uses compact signature**
+- Physical gravity in the unified theory needs so(11,3) — a different project
 
 For the E8 three-generation result:
 - The dimension counting (248=80+84+84, three copies of 16) is signature-independent

@@ -1,8 +1,8 @@
 # Formal Verification of Alternative Mathematical Frameworks
 
-Machine-verified dimensional scaffold from Dollard's versor algebra through Clifford algebras to SO(14), built in [Lean 4](https://lean-lang.org/) with mathlib. One certified Lie algebra morphism (su(5) →ₗ⁅ℝ⁆ so(10)); remaining links are dimensional consistency checks with algebraic upgrades in progress.
+Machine-verified dimensional scaffold from Dollard's versor algebra through Clifford algebras to SO(16), built in [Lean 4](https://lean-lang.org/) with mathlib. Four certified Lie algebra morphisms composing into a chain: SU(5) →ₗ⁅ℝ⁆ SO(10) →ₗ⁅ℝ⁆ SO(14) →ₗ⁅ℝ⁆ SO(16), with SO(4) →ₗ⁅ℝ⁆ SO(14) for the gravity sector. E₈ construction in progress.
 
-**62 proof files. ~2,800 verified declarations. Zero `sorry` gaps. Zero build errors.**
+**69 proof files. ~2,750+ verified declarations. Zero `sorry` gaps.**
 
 ## What This Is
 
@@ -10,7 +10,7 @@ A research project that applies interactive theorem provers (Lean 4) to claims f
 
 Includes the first machine-verified so(10) spinor representation homomorphism in any interactive theorem prover: 1,980 bracket equations verified by `native_decide` over exact rational arithmetic.
 
-Five Lie algebras — so(1,3), sl(3), sl(5), su(5), so(10) — carry certified `LieRing` and `LieAlgebra ℝ` instances via `Mathlib.Algebra.Lie.Basic`, connecting the hand-built structures to mathlib's type system. Includes the project's first certified `LieHom`: su(5) →ₗ⁅ℝ⁆ so(10).
+Eight Lie algebras — so(1,3), sl(3), sl(5), su(5), so(10), so(14), so(4), so(16) — carry certified `LieRing` and `LieAlgebra ℝ` instances via `Mathlib.Algebra.Lie.Basic`. Four certified `LieHom`s: su(5) →ₗ⁅ℝ⁆ so(10) →ₗ⁅ℝ⁆ so(14) →ₗ⁅ℝ⁆ so(16), plus so(4) →ₗ⁅ℝ⁆ so(14). The so(16) instance (120 generators, 400M heartbeats, ~46GB RAM) pushes Lean 4's elaborator beyond previous limits.
 
 ## What This Proves — And What It Doesn't
 
@@ -44,11 +44,11 @@ See `docs/PROOF_CLASSIFICATION.md` for per-file analysis and `docs/SIGNATURE_ANA
 ## Algebraic Hierarchy
 
 ```
-Z4 ··> Cl(1,1) ··> Cl(3,0) ··> Cl(1,3) ··> SU(5) ==> SO(10) ··> SO(14) ··> E8
- |        |          |           |           |          |          |         |
-4th     Wave      Pauli      Spacetime   Georgi-   Grand     Full       Three
-roots   decomp    algebra    algebra     Glashow   unified   unification generations
-                  F=E+IB    nabla F=J   15-plet   16-plet   91 gens    via SU(9)
+Z4 ··> Cl(1,1) ··> Cl(3,0) ··> Cl(1,3) ··> SU(5) ==> SO(10) ==> SO(14) ==> SO(16) ··> E8
+ |        |          |           |           |          |          |  ⬑       |        |
+4th     Wave      Pauli      Spacetime   Georgi-   Grand     Full  SO(4)    Max      Three
+roots   decomp    algebra    algebra     Glashow   unified   unif. gravity  sub-     gens
+                  F=E+IB    nabla F=J   15-plet   16-plet   91gen  6gen    120gen   via SU(9)
 
 ==>  Certified LieHom (bracket preservation proven)
 ··>  Dimensional consistency verified (morphism upgrade in progress)
@@ -60,16 +60,25 @@ The headline results — each a genuine theorem, not dimensional arithmetic:
 
 | Theorem | What It Proves |
 |---------|----------------|
+| `so10_SO14_LieHom` | so(10) →ₗ⁅ℝ⁆ so(14): gauge sector embeds with bracket preserved (91×90 component proof) |
+| `so4_SO14_LieHom` | so(4) →ₗ⁅ℝ⁆ so(14): gravity sector embeds with bracket preserved |
+| `so14_SO16_LieHom` | so(14) →ₗ⁅ℝ⁆ so(16): extends chain toward E₈ maximal subalgebra |
+| `anomaly_trace_identity` | Tr(A{B,C}) = 0 for antisymmetric matrices (anomaly cancellation) |
 | `spinor_rep_homomorphism` | [ρ(X),ρ(Y)] = ρ([X,Y]) for all 990 so(10) basis pairs |
 | `three_generation_theorem` | SO(14) impossibility + E₈ yields exactly 3 generations |
 | `killing_form_unique` | Schur's Lemma → Killing form uniqueness (first in any ITP) |
 | `complete_chirality_factorization` | Chirality emerges from 4D×10D unification |
 
 <details>
-<summary>Full theorem table (27 entries)</summary>
+<summary>Full theorem table (34 entries)</summary>
 
 | Theorem | File | What It Proves |
 |---------|------|----------------|
+| `so10_SO14_LieHom` | `so10_so14_liehom` | Certified so(10) →ₗ⁅ℝ⁆ so(14) (gauge sector embedding) |
+| `so4_SO14_LieHom` | `so4_so14_liehom` | Certified so(4) →ₗ⁅ℝ⁆ so(14) (gravity sector embedding) |
+| `so14_SO16_LieHom` | `so14_so16_liehom` | Certified so(14) →ₗ⁅ℝ⁆ so(16) (chain extension) |
+| `anomaly_trace_identity` | `anomaly_trace` | Tr(A{B,C}) = 0 for antisymmetric matrices |
+| `jacobi` | `so14_grand` | 91-generator so(14) Lie algebra satisfies Jacobi identity |
 | `so14_dimension` | `so14_unification` | dim so(14) = C(14,2) = 91 |
 | `unification_decomposition` | `so14_unification` | 91 = 45 (gauge) + 6 (gravity) + 40 (mixed) |
 | `centralizer_closed` | `su5_so10_embedding` | su(5) is Lie subalgebra of so(10) |
@@ -143,8 +152,8 @@ All proofs are in `src/lean_proofs/`. Entry points by interest:
 **Gauge Theory**:
 `su3_color`, `su3_cartan_weyl`, `su5_grand`, `su5_lie_structure`, `su5c_compact` (compact form), `su5c_so10_liehom` (certified LieHom), `su5_subalgebra`, `georgi_glashow`, `lie_bridge`, `so10_grand`, `su5_so10_embedding`
 
-**Unification**:
-`unification`, `unification_gravity`, `spinor_matter`, `grand_unified_field`, `so14_unification`, `so14_anomalies`, `so14_breaking_chain`, `symmetry_breaking`
+**Unification (SO(14) → SO(16) chain)**:
+`so14_grand` (91-gen type + LieRing/LieAlgebra), `so10_so14_liehom` (SO10 →ₗ⁅ℝ⁆ SO14), `so4_gravity` (compact SO4 type), `so4_so14_liehom` (SO4 →ₗ⁅ℝ⁆ SO14), `anomaly_trace` (Tr(A{B,C})=0), `so16_grand` (120-gen type + LieRing/LieAlgebra), `so14_so16_liehom` (SO14 →ₗ⁅ℝ⁆ SO16), `unification`, `unification_gravity`, `spinor_matter`, `grand_unified_field`, `so14_unification`, `so14_anomalies`, `so14_breaking_chain`, `symmetry_breaking`
 
 **Three-Generation Problem** (E₈ ⊃ SU(9)/Z₃):
 `spinor_parity_obstruction`, `e8_embedding`, `e8_su9_decomposition`, `e8_generation_mechanism`, `three_generation_theorem`, `e8_chirality_boundary`, `j_anomaly_free_eigenspaces`, `exterior_cube_chirality`, `massive_chirality_definition`, `chirality_factorization`

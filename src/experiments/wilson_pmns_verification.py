@@ -82,14 +82,14 @@ def main():
     all_roots = list(root_lattice.roots())
     print(f"  Positive roots: {len(positive_roots)}")
     print(f"  Total roots: {len(all_roots)}")
-    print(f"  Rank: {R.rank()}")
+    print(f"  Rank: {R.cartan_type().rank()}")
     assert len(positive_roots) == 120, f"Expected 120 positive roots, got {len(positive_roots)}"
     assert len(all_roots) == 240, f"Expected 240 roots, got {len(all_roots)}"
 
     results["e8_roots"] = {
         "positive": len(positive_roots),
         "total": len(all_roots),
-        "rank": int(R.rank()),
+        "rank": int(R.cartan_type().rank()),
     }
 
     # ── Step 2: Identify the Z₃ automorphism ──

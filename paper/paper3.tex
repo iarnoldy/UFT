@@ -52,7 +52,7 @@ $\mathrm{SO}(14)$ is the smallest orthogonal group that contains both the Standa
 gauge group $\mathrm{SO}(10)$ and a gravity sector $\mathrm{SO}(4)$.  Its 91 generators
 split as $45 + 6 + 40$: gauge, gravity, and the interactions between them.
 We build the algebraic scaffold for this theory and check every step with the
-Lean~4 theorem prover---87 proof files, over 2,900 verified declarations, zero
+Lean~4 theorem prover---88 proof files, over 2,900 verified declarations, zero
 \texttt{sorry} gaps.
 
 What the computer checks: five certified Lie algebra homomorphisms composing
@@ -67,7 +67,7 @@ The breaking chain runs $\mathrm{SO}(14) \to \mathrm{SO}(10) \times \mathrm{SO}(
 One-loop running [CO] gives coupling unification at $10^{16.98}\GeV$ with a 0.88\%
 miss, proton lifetime $10^{38.9}$ years (safe), and asymptotic freedom above the SM scale.
 Three open problems: three generations, Distler ghosts, and the mass gap.
-87\% of the algebraic results hold for all real forms of $\so(14,\mathbb{C})$.
+77\% of the algebraic results hold for all real forms of $\so(14,\mathbb{C})$.
 No grand unified theory has previously received machine-checked algebraic scaffolding.
 \end{abstract}
 
@@ -85,7 +85,8 @@ Grand unified theories try to fix this by embedding
 $\mathrm{SU}(3) \times \mathrm{SU}(2) \times \mathrm{U}(1)$ in a bigger
 group~\cite{georgi1974,fritzsch1975,georgi1975,weinberg1967,glashow1961,salam1968}.
 $\mathrm{SO}(10)$ is the workhorse: one 16-dimensional spinor holds a
-complete generation of fermions~\cite{fritzsch1975}.  But $\mathrm{SO}(10)$
+complete generation of fermions~\cite{fritzsch1975}; see
+Baez--Huerta~\cite{baez2010} for a modern review.  But $\mathrm{SO}(10)$
 says nothing about gravity.
 
 $\mathrm{SO}(14)$ is the smallest orthogonal group that fits both $\mathrm{SO}(10)$
@@ -94,7 +95,7 @@ Nesti, Percacci, and Krasnov developed the physics.
 What was missing: a check that the algebra actually works.
 
 That is what this paper provides.  We built the algebraic scaffold in
-Lean~4~\cite{demoura2021lean4} with mathlib~\cite{mathlib}: 87 proof files,
+Lean~4~\cite{demoura2021lean4} with mathlib~\cite{mathlib}: 88 proof files,
 over 2,900 verified declarations, zero \texttt{sorry} gaps.
 The proofs compile or they don't.  Ours compile.
 
@@ -110,9 +111,11 @@ coincidences.
 
 But there is also arithmetic.  Dimension counts, Goldstone boson numbers,
 beta-coefficient inputs---all checked by \texttt{norm\_num}.
-Both tiers are verified with the same deductive rigor as the
-Flyspeck project~\cite{hales2017formal} or the liquid tensor
-experiment~\cite{commelin2022liquid}.
+Both tiers use the same verification infrastructure---Lean~4 and
+mathlib---as the Flyspeck project~\cite{hales2017formal} and the
+liquid tensor experiment~\cite{commelin2022liquid}, though the
+mathematical depth of our proofs (primarily arithmetic and
+finite-dimensional linear algebra) is not comparable to those efforts.
 
 No grand unified theory has previously been machine-checked.
 From the outset, we distinguish what is proved from what is proposed:
@@ -191,8 +194,8 @@ $A_4$ root system of $\su(5)$ %[MV]
   & \texttt{su5\_lie\_structure} & \texttt{H1\_R12}, \texttt{coroot\_1} & Lie algebra identification \\
 $\Tr(A\{B,C\}) = 0$ for antisymmetric %[MV]
   & \texttt{anomaly\_trace} & \texttt{trace\_antisymm\_anticommutator} & Algebraic anomaly identity \\
-Anomaly prerequisites ($N \geq 7$, etc.) %[MV]
-  & \texttt{so14\_anomalies} & \texttt{anomaly\_checklist} & Dimensional checks for anomaly freedom \\
+$14 \geq 7$ anomaly threshold %[MV]
+  & \texttt{so14\_anomalies} & \texttt{anomaly\_checklist} & Arithmetic prerequisite (\texttt{norm\_num}) \\
 $Q = T_3 + Y/2$ preserves VEV %[MV]
   & \texttt{symmetry\_breaking} & \texttt{charge\_preserves\_vev} & Photon masslessness \\
 $16 = 1 + 10 + \overline{5}$ %[MV]
@@ -221,8 +224,6 @@ $\so(14)_M \hookrightarrow \so(16)_M$ LieHom %[MV]
   & \texttt{so16\_matrix} & \texttt{so14m\_embed\_block} & Block embedding \\
 $\mathrm{SU}(9) \subset E_8$ subalgebra closure %[MV]
   & \texttt{e8\_su9\_subalgebra} & \texttt{su9\_subalgebra\_e8} & 80 gens, \texttt{native\_decide} \\
-$\Tr(A\{B,C\}) = 0$ (antisymmetric) %[MV]
-  & \texttt{anomaly\_trace} & \texttt{trace\_anticomm\_zero} & Anomaly trace identity \\
 $\nabla \cdot B = 0$ from axiomatized Bianchi %[MV]
   & \texttt{bianchi\_identity} & \texttt{gauss\_law\_magnetism} & Consequence of axiomatized Bianchi identity \\
 \bottomrule
@@ -247,7 +248,7 @@ This construction produces the chain %[MV]
   \so(1,1) \hookrightarrow \so(1,3) \hookrightarrow \so(6)
     \hookrightarrow \so(10) \hookrightarrow \so(14),
 \end{equation}
-where $\so(6) \cong \su(4)$ (Pati-Salam), $\so(10)$ (Georgi-Glashow-Fritzsch),
+where $\so(6) \cong \su(4)$ (Pati-Salam~\cite{patisalam1974}), $\so(10)$ (Georgi-Glashow-Fritzsch),
 and $\so(14)$ (this work).  Five certified Lie algebra homomorphisms compose into a chain:
 $\su(5) \xrightarrow{\text{LieHom}} \so(10) \xrightarrow{\text{LieHom}} \so(14) \xrightarrow{\text{bridge}} \so(14)_M \xrightarrow{\text{LieHom}} \so(16)$,
 where $\so(14)_M$ denotes the mathlib matrix representation (the ``type bridge'' connecting the flat algebraic construction to mathlib's \texttt{LieSubalgebra} infrastructure).  Additionally, $\so(4) \xrightarrow{\text{LieHom}} \so(14)$ embeds the gravity sector.  The $E_8$ Lie algebra (248 dimensions) is independently verified via sparse Jacobi identity with \texttt{native\_decide}, and $\so(16) \subset E_8$ is verified as a subalgebra closure.
@@ -311,13 +312,12 @@ Machine verification does \emph{not} prove:
 \item That three generations arise naturally (open for all GUTs\OP).
 \end{enumerate}
 
-A signature audit of 46 of the 87 proof files~\cite{uft-github}
-classifies 87\% as \emph{signature-independent} (properties of
-$\so(14,\mathbb{C})$, holding for all real forms), 7\% as
-\emph{compact-only} (energy positivity results that fail for
-$\mathrm{SO}(3,11)$ above the breaking scale), and 7\% as
-\emph{needs-revision} (results stated for a specific signature
-with natural Lorentzian analogues). %[CO]
+A signature audit of 47 proof files~\cite{uft-github}
+classifies 77\% (36 files) as \emph{signature-independent} (properties of
+$\so(14,\mathbb{C})$, holding for all real forms), 2\% (1 file) as
+\emph{compact-only} (the Pauli algebra $\Cl(3,0)$), and 21\% (10 files) as
+\emph{signature-sensitive} (results whose physical interpretation
+depends on the choice of real form). %[CO]
 
 % ============================================================================
 \section{The SO(14) Model}
@@ -601,11 +601,11 @@ $\mathrm{SO}(3,11)$ is a feature, not a bug: it permits Majorana
 neutrino masses.
 
 \paragraph{Signature audit.}
-Of the 46 proof files audited for signature dependence: 40 files (87\%)
-are signature-independent, 3 files (7\%) are compact-only (energy
-positivity, Hilbert space positivity, mass gap), and 3 files (7\%)
-need revision for specific-signature results\CO.  The precise
-classification is documented in Ref.~\cite{uft-github}.
+Of the 47 proof files audited for signature dependence: 36 files (77\%)
+are signature-independent, 1 file (2\%) is compact-only (the Pauli
+algebra $\Cl(3,0)$), and 10 files (21\%) are signature-sensitive
+(physical interpretation depends on the choice of real form)\CO.
+The precise classification is documented in Ref.~\cite{uft-github}.
 
 % ============================================================================
 \section{Renormalization Group Analysis}
@@ -748,14 +748,14 @@ $M_1 = 10^{19.00}\GeV$), the best-fit coupling spread at $M_1$ is\CO
   \frac{\text{spread}}{\text{average}} = 0.88\%,
 \end{equation}
 well below any reasonable threshold for failure.
+This is a consistency check: three free scales are adjusted to minimize
+three coupling mismatches, so the small residual confirms internal
+consistency rather than constituting a prediction of unification\CO.
 
 The 0.88\% residual miss can plausibly be closed by threshold
 corrections from the rich Higgs sector ($\mathbf{104} + \mathbf{45}
 + \mathbf{24} + \mathbf{4} = 177$ real scalar components),
-two-loop corrections, or split multiplet spectra\CO.  This degree
-of unification approaches the MSSM prediction of near-exact
-unification~\cite{dimopoulos1981}, though our model is
-non-supersymmetric.
+two-loop corrections, or split multiplet spectra\CO.
 
 \subsection{Asymptotic Freedom}
 
@@ -837,6 +837,18 @@ to be directly produced, their virtual effects on precision
 observables (the $\rho$ parameter, flavor-changing neutral currents)
 could provide indirect signatures\CO.
 
+\paragraph{Scale inaccessibility.}
+The phenomenological predictions of $\mathrm{SO}(14)$ in the desert
+regime---coupling unification, proton decay, asymptotic freedom---are
+identical to those of minimal $\mathrm{SO}(10)$.  The
+$\mathrm{SO}(14)$-specific signatures (mixed gauge bosons, SO(4)
+sector physics) appear at $M_1 \sim 10^{19}\GeV$ and are currently
+inaccessible by many orders of magnitude.  The value of
+$\mathrm{SO}(14)$ relative to $\mathrm{SO}(10)$ is therefore
+structural---gravity inclusion and $E_8$ embedding---rather than
+phenomenological.  No currently planned experiment can distinguish
+$\mathrm{SO}(14)$ from $\mathrm{SO}(10)$\CO.
+
 \subsection{Comparison with Other Unification Proposals}
 
 Table~\ref{tab:comparison} compares $\mathrm{SO}(14)$ with
@@ -858,9 +870,10 @@ SU(5)~\cite{georgi1974} & 24 & $\overline{\mathbf{5}} + \mathbf{10}$ & Yes & No 
 SO(10)~\cite{fritzsch1975} & 45 & $\mathbf{16}$ & Yes & No & No & 3 by hand & $10^{35}$--$10^{39}$ \\
 E$_6$~\cite{gursey1976} & 78 & $\mathbf{27}$ & Yes & No & No & 3 by hand & model-dependent \\
 \textbf{SO(14)} [this work] & \textbf{91} & $\mathbf{64}$ & \textbf{Yes} & \textbf{Yes} & \textbf{Yes} & \textbf{3 by hand} & $\mathbf{10^{38.9}}$ \\
-E$_8$~\cite{lisi2007} & 248 & $\mathbf{248}$ & --- & Partial$^*$ & Yes & claimed & not computed \\
+E$_8$~\cite{lisi2007} & 248 & $\mathbf{248}$ & --- & Partial$^\dagger$ & Yes & claimed & not computed \\
 SO(18)~\cite{wilczek1982} & 153 & $\mathbf{256}$ & No & No & No & 8+8 mirror & killed \\
 \bottomrule
+\multicolumn{8}{@{}p{0.95\textwidth}}{\footnotesize $^\dagger$This work provides the first machine-verified $E_8$ Lie algebra (248 dims, Jacobi identity); Lisi's original proposal~\cite{lisi2007} contained no formal verification.}
 \end{tabular}
 \end{table*}
 
@@ -928,7 +941,7 @@ representations have minimum dimension~2.  Since $3 \nmid 2$, the
 $\mathbf{16}$ of $\mathrm{SO}(10)$ always appears with even
 multiplicity in any spinorial representation of $\mathrm{SO}(14)$---a
 \emph{spinor parity obstruction} that excludes all intrinsic
-mechanisms at once\CO.  The generation mechanism must therefore be
+mechanisms at once\MV.  The generation mechanism must therefore be
 external.  The most developed option is orbifold family
 unification~\cite{kawamura2010}, demonstrated for the
 $\mathrm{SO}(2N)$ series.  Alternatively, $\mathrm{Spin}(3,11)$
@@ -951,11 +964,14 @@ $\mathrm{SU}(9)$ (80 generators)---are verified as genuine Lie
 subalgebras of $E_8$ via bracket closure\MV, and
 each $J$ eigenspace of the $\mathbb{Z}_3$ automorphism is
 independently anomaly-free\MV.
+The $\mathrm{SO}(14)$-intrinsic generation problem remains open\OP;
+the $E_8$-level resolution is algebraically verified\MV\ but involves
+unresolved physics (chirality definition, signature dependence).
 The chirality question remains an open problem in mathematical
 physics\OP: Distler--Garibaldi~\cite{distler2010} proved that no
 embedding of the Standard Model in any real form of $E_8$ yields
 three \emph{massless chiral} generations from the adjoint, but
-Wilson~\cite{wilson2024b} argues that for theories with explicitly
+Wilson~\cite{wilson2022} argues that for theories with explicitly
 non-zero masses, this no-go theorem does not apply---the non-compact
 degrees of freedom serve as mass parameters rather than ghosts.
 
@@ -995,7 +1011,7 @@ The main methodological advantages are:
   Any researcher with a Lean~4 installation can verify the results
   in minutes.
 \item \textbf{Signature audit}: classifying proofs by signature
-  dependence (87\% independent, 7\% compact-only, 7\% needs-revision)
+  dependence (77\% independent, 2\% compact-only, 21\% signature-sensitive)
   provides a precise answer to the question ``which results transfer
   to $\mathrm{SO}(3,11)$?''
 \end{enumerate}
@@ -1049,7 +1065,7 @@ Several concrete research directions emerge:
 \label{sec:conclusion}
 % ============================================================================
 
-Here is what we built.  87 Lean~4 proof files. Over 2,900 verified
+Here is what we built.  88 Lean~4 proof files. Over 2,900 verified
 declarations. Zero \texttt{sorry} gaps.  Five Lie algebra homomorphisms
 chain $\su(5)$ through $\so(16)$.  $E_8$ is verified as a Lie algebra.
 Both $\mathrm{SO}(16)$ and $\mathrm{SU}(9)$ close as subalgebras inside it.
@@ -1162,6 +1178,17 @@ S.~Dimopoulos, S.~Raby, and F.~Wilczek,
 ``Supersymmetry and the scale of unification,''
 Phys.\ Rev.\ D \textbf{24}, 1681 (1981).
 
+\bibitem{patisalam1974}
+J.~C.~Pati and A.~Salam,
+``Lepton number as the fourth `color',''
+Phys.\ Rev.\ D \textbf{10}, 275 (1974).
+
+\bibitem{baez2010}
+J.~C.~Baez and J.~Huerta,
+``The algebra of grand unified theories,''
+Bull.\ Amer.\ Math.\ Soc.\ \textbf{47}, 483 (2010)
+[arXiv:0904.1556].
+
 % === SO(14) / Gravity-gauge ===
 
 \bibitem{nesti2007}
@@ -1229,12 +1256,12 @@ Phys.\ Rev.\ D \textbf{81}, 075011 (2010)
 \bibitem{wilson2024}
 R.~A.~Wilson,
 ``Uniqueness of an $\mathrm{E}_8$ model of elementary particles,''
-J.\ Math.\ Phys.\ \textbf{63}, 081703 (2022).
-
-\bibitem{wilson2024b}
-R.~A.~Wilson,
-``On the problem of interacting particles in theoretical physics,''
 arXiv:2407.18279 (2024).
+
+\bibitem{wilson2022}
+R.~A.~Wilson,
+``Chirality in an $\mathrm{E}_8$ model of elementary particles,''
+arXiv:2210.06029 (2022).
 
 \bibitem{bentov2016}
 Y.~BenTov and A.~Zee,

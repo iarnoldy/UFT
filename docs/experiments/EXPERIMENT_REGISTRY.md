@@ -235,7 +235,41 @@ physics question beyond dimensional analysis.
 **Phase 3 deliverables** (if Phase 2 passes):
 - `paper/so14_candidate_theory.tex` — candidate theory paper
 
-**Dependencies**: Experiments 0-3 (all complete), Lean scaffold (35 files, 878 theorems)
+**Phase 4: Yukawa Kill-Condition (M8)** — IN PROGRESS (2026-03-16):
+
+| Substep | Description | Status | Effort |
+|---------|-------------|--------|--------|
+| M8.1 | SU(9) CG via SageMath `WeylCharacterRing('A8')` | NOT STARTED | ~2-3 hrs |
+| M8.1a | Verify 84 × 84* ⊃ 80 (adjoint) — Schur uniqueness | NOT STARTED | part of M8.1 |
+| M8.1b | Branch 84 under SU(5) × SU(4): sector CG ratios | NOT STARTED | part of M8.1 |
+| M8.1c | Test CG factorization: (10,3) × (5̄,3̄) | NOT STARTED | part of M8.1 |
+| M8.2 | Yukawa texture extraction | NOT STARTED | ~1-2 days |
+| M8.2a | Triplet flavon → antisymmetric texture (rank 2) | NOT STARTED | part of M8.2 |
+| M8.2b | Adjoint flavon → Gell-Mann texture | NOT STARTED | part of M8.2 |
+| M8.2c | Sextet flavon → symmetric texture (rank 3) | NOT STARTED | part of M8.2 |
+| M8.3 | Compare to CKM/PMNS; evaluate kill condition | NOT STARTED | ~1 day |
+| M8.3b | Wilson PMNS independent verification (HIGHEST VALUE) | NOT STARTED | ~3-5 days |
+
+**Kill condition (refined 2026-03-16):** Three possible outcomes:
+- **Kill**: CG ratios produce texture immediately inconsistent with CKM (>3σ)
+- **Survive**: Genuine SU(9) constraints predict specific mixing angles
+- **Underdetermined**: SU(3)_family has free parameters → survives vacuously (Outcome C)
+
+**Key correction:** SU(3)-symmetric limit gives degenerate masses (δᵢⱼ), NOT democratic.
+
+**Wilson PMNS (M8.3b):** Claims θ₁₃=8.586° (exp: 8.54±0.12°), θ₂₃=49.077° (exp: 49.1±1.0°).
+Independent verification is the single highest-value physics test available.
+
+**Deliverables**:
+- `src/experiments/su9_yukawa_cg.py` — SageMath CG computation
+- `src/experiments/su9_yukawa_texture.py` — Yukawa texture extraction
+- `src/experiments/wilson_pmns_verification.py` — Wilson PMNS verification
+- `src/experiments/results/su9_cg_coefficients.json` — CG results
+- `src/experiments/results/yukawa_texture_analysis.json` — texture results
+- `src/experiments/results/wilson_pmns_verification.json` — PMNS results
+- `research/yukawa-kill-condition-results.md` — synthesis
+
+**Dependencies**: Experiments 0-3 (all complete), Lean scaffold (88 files, ~2,900 declarations)
 **Downstream impact**: Defines Track D research program
 
 ---

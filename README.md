@@ -2,7 +2,7 @@
 
 Machine-verified dimensional scaffold from Dollard's versor algebra through Clifford algebras to E₈, built in [Lean 4](https://lean-lang.org/) with mathlib. Five certified Lie algebra morphisms composing into a chain: SU(5) →ₗ⁅ℝ⁆ SO(10) →ₗ⁅ℝ⁆ SO(14) →ₗ⁅ℝ⁆ SO(14)M →ₗ⁅ℝ⁆ SO(16), with SO(4) →ₗ⁅ℝ⁆ SO(14) for the gravity sector. E₈ (248-dimensional) verified as a Lie algebra via sparse Jacobi identity — the first formalization of E₈ in any interactive theorem prover.
 
-**86 proof files. ~2,900 verified declarations. Zero `sorry` gaps.**
+**88 proof files. ~2,900 verified declarations. Zero `sorry` gaps.**
 
 ## What This Is
 

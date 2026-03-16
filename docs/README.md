@@ -21,6 +21,6 @@
 ## Research Tracks
 
 - **Track A**: Lean 4 methodology for alternative math verification (Paper 1 — submitted to CICM 2026)
-- **Track B**: Cross-domain mathematical identities (Paper 2 — in preparation for AACA)
+- **Track B**: Cross-domain mathematical identities (Paper 2 — submitted to AACA)
 - **Track C**: Physics claims (documented, not centered, requires extraordinary evidence)
 - **Track D**: SO(14) candidate theory construction (gated, kill-condition-first)

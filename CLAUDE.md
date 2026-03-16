@@ -1,7 +1,7 @@
 # Dollard Formal Verification
 
 Machine-verified dimensional scaffold from Dollard's versor algebra through Clifford algebras
-to E₈, built in Lean 4 with mathlib. 86 proof files, ~2,900 verified
+to E₈, built in Lean 4 with mathlib. 88 proof files, ~2,900 verified
 declarations, zero sorry gaps. Five certified LieHoms composing:
 SU(5) →ₗ⁅ℝ⁆ SO(10) →ₗ⁅ℝ⁆ SO(14) →ₗ⁅ℝ⁆ SO(14)M →ₗ⁅ℝ⁆ SO(16), plus SO(4) →ₗ⁅ℝ⁆ SO(14).
 SO(14) → SO(14)M bridge connects flat algebraic chain to mathlib matrix infrastructure.
@@ -9,7 +9,7 @@ E₈ (248-dim) verified as Lie algebra via sparse Jacobi — first formalization
 SO(16) → E₈ typed LieHom pending (step 4.3 — subalgebra closure verified, LieHom is bookkeeping).
 Three-generation mechanism: SU(9)/Z₃ decomposition, J-eigenspace anomaly freedom [MV].
 Paper 1 submitted to CICM 2026. Paper 2 submitted to AACA.
-Papers 3 & 4 updated, audited (Wilson/Berlinski PASS), ready for submission.
+Papers 3 & 4 updated, GPD peer-reviewed, Paper 3 revised.
 Next: arXiv endorsement + submit Papers 3 & 4, then Yukawa kill-condition (M8).
 
 ## Research Tracks
@@ -150,6 +150,14 @@ lake env lean src/lean_proofs/foundations/basic_operators.lean  # single file
 | E₈ SageMath oracle | `scripts/sage_e8_structure_constants.py` |
 | E₈ sparse Lean generator | `scripts/e8_sparse_gen.py` |
 | E₈ Jacobi (Python, 0/2.5M) | `scripts/sage_e8_full_jacobi.py` |
+| Mass gap kill conditions | `research/heptapod-b-mass-gap-reassessment.md` |
+| Yukawa teleological analysis | `research/heptapod-b-yukawa-vision.md` |
+| SU(9) Yukawa literature + analysis | `research/yukawa-kill-condition-research.md` |
+| Wilson vs us comparison | `research/wilson-three-generation-comparison.md` |
+| GPD peer review of Paper 3 | `.gpd/REFEREE-REPORT.md` |
+| SU(9) CG computation (M8.1) | `src/experiments/su9_yukawa_cg.py` |
+| Yukawa texture extraction (M8.2) | `src/experiments/su9_yukawa_texture.py` |
+| Wilson PMNS verification (M8.3b) | `src/experiments/wilson_pmns_verification.py` |
 
 ## Project Agents and Skills
 

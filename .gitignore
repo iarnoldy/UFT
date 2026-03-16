@@ -50,3 +50,17 @@ docs/HANDOFF_GROK_QUESTIONS.md
 .claude/sessions/.current-session
 .claude/sessions/.handoff.md
 .claude/worktrees/
+
+# GPD (Get Physics Done) artifacts
+.gpd/
+.mcp.json
+.claude/commands/gpd/
+.claude/agents/gpd/
+.claude/gpd-manifest.json
+.claude/hooks/statusline.py
+.claude/hooks/check_update.py
+.claude/hooks/notify.py
+.claude/bundles/
+.claude/references/
+.claude/templates/
+.claude/workflows/

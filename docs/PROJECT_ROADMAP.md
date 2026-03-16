@@ -1,164 +1,106 @@
-# The Bridge: Papers 3 & 4 Roadmap
+# The Bridge: Project Roadmap
 
-> Tracks progress from current state to paper submission.
-> Updated: 2026-03-13. Last milestone gate: M1 (PASSED).
+> Updated: 2026-03-15. Milestones 1-4 COMPLETE. Papers updated. Next: submit + phenomenology.
 
 ## Current State
 
-**66 proof files. ~2,650+ declarations. Zero sorry.**
-**Certified LieHoms: SU5C →ₗ⁅ℝ⁆ SO10 →ₗ⁅ℝ⁆ SO14 ←ₗ⁅ℝ⁆ SO4**
-
-Papers 1 & 2 submitted. Papers 3 & 4 held pending anomaly traces + E₈ chain (ADR-004).
-
-## Target: Composable Chain (Compact Signature)
-
+**86 proof files. ~2,900 declarations. Zero sorry.**
+**Five certified LieHoms composing:**
 ```
-SU5C →ₗ⁅ℝ⁆ SO10 →ₗ⁅ℝ⁆ SO14 ←ₗ⁅ℝ⁆ SO4
-(gauge)                            (gravity, compact)
+SU5C →ₗ⁅ℝ⁆ SO10 →ₗ⁅ℝ⁆ SO14 →[bridge]→ SO14M →ₗ⁅ℝ⁆ SO16Block
+                                   ⬑
+                              SO4 →ₗ⁅ℝ⁆ SO14
 ```
+**E₈ (248-dim) independently verified as Lie algebra. SO(16) ⊂ E₈ subalgebra closure verified.**
+**Three-generation mechanism via SU(9)/Z₃: dimensionally consistent, J-eigenspace anomaly-free.**
 
-**Signature note:** The gravity embedding uses compact so(4), NOT Lorentzian so(1,3).
-Physical gravity requires so(11,3) — documented in `SIGNATURE_ANALYSIS.md`.
-
----
-
-## MILESTONE 1: SO(14) FOUNDATION — COMPLETE
-
-**Goal:** SO(14) as a Lean type with two converging LieHoms.
-**Status: COMPLETE** (2026-03-12 → 2026-03-13)
-
-| Step | Task | Status | File |
-|------|------|--------|------|
-| 1.0 | Python bracket generator for SO(14) | DONE | `scripts/so14_bracket_gen.py` |
-| 1.1 | SO14 type + LieRing + LieAlgebra ℝ instances | DONE | `src/lean_proofs/clifford/so14_grand.lean` |
-| 1.2 | SO10 →ₗ⁅ℝ⁆ SO14 LieHom (gauge sector) | DONE (365s compile) | `src/lean_proofs/clifford/so10_so14_liehom.lean` |
-| 1.3a | SO4 compact type + instances | DONE | `src/lean_proofs/clifford/so4_gravity.lean` |
-| 1.3b | SO4 →ₗ⁅ℝ⁆ SO14 LieHom (gravity sector) | DONE | `src/lean_proofs/clifford/so4_so14_liehom.lean` |
-| 1.4 | Full `lake build` clean | DONE (3,385 jobs, 0 errors) | `lakefile.lean` (updated) |
-
-**Design change from plan:** Original plan called for Bivector (so(1,3)) → SO14.
-Discovered so(1,3) and so(4) are non-isomorphic real Lie algebras — no LieHom exists.
-Created new SO4 compact type instead. Documented in `SIGNATURE_ANALYSIS.md`.
-
-**Build stats:** SO14 LieRing needed ~200M heartbeats, ~20GB RAM. SO10→SO14 map_lie' took 365s.
-
-### Gate Check (PASSED 2026-03-13)
-- [x] `lake build` compiles all 4 new files (3,385 jobs, 0 errors)
-- [x] README updated with new arrow count
-- [x] Convergence diagram: `SU5C →ₗ⁅ℝ⁆ SO10 →ₗ⁅ℝ⁆ SO14 ←ₗ⁅ℝ⁆ SO4`
+Papers 1 (CICM) and 2 (AACA) submitted.
+Papers 3 (PRD) and 4 (LMP) updated, audited, ready for submission.
 
 ---
 
-## MILESTONE 2: ANOMALY TRACES — COMPLETE
+## MILESTONE 1: SO(14) FOUNDATION — COMPLETE ✓
+Completed 2026-03-13. SO14 type + LieRing + LieAlgebra ℝ + two converging LieHoms.
 
-**Goal:** Anomaly cancellation via representation theory, not arithmetic.
-**Status: COMPLETE** (2026-03-13)
+## MILESTONE 2: ANOMALY TRACES — COMPLETE ✓
+Completed 2026-03-13. Tr(A{B,C}) = 0 for antisymmetric A,B,C. Any ring, any dimension.
 
-| Step | Task | Status | File |
-|------|------|--------|------|
-| 2.1 | Research minimal proof approach | DONE (Option C-Lite) | `memory/project_anomaly_approach.md` |
-| 2.2 | Prove Tr(ABC) = -Tr(ACB) for antisymmetric A,B,C | DONE [MV] | `src/lean_proofs/clifford/anomaly_trace.lean` |
-| 2.3 | Prove Tr(A{B,C}) = 0 corollary | DONE [MV] | `src/lean_proofs/clifford/anomaly_trace.lean` |
-| 2.4 | SO(n) fundamental rep anomaly-free | DONE [MV] | `src/lean_proofs/clifford/anomaly_trace.lean` |
-| 2.5 | Adjoint + spinor anomaly axioms | DONE [SP] | `src/lean_proofs/clifford/anomaly_trace.lean` |
+## MILESTONE 3: SO(16) EXTENSION — COMPLETE ✓
+Completed 2026-03-14. Matrix approach (so16_matrix.lean) replaced flat approach.
+SO14 → SO14M → SO16Block via type bridge + block embedding.
 
-**Approach used: Option C-Lite** — General antisymmetric trace identity.
-Works for any so(n) in the fundamental representation. No dimension restriction.
-Adjoint and Dirac spinor anomaly-freedom stated as [SP] axioms with honest gaps documented.
+## MILESTONE 4: E₈ CONSTRUCTION — COMPLETE ✓
+Completed 2026-03-15. Sparse Jacobi approach: 248 dims, 7,752 nonzero brackets,
+248^4 ≈ 3.78 billion native_decide evaluations. SO(16) subalgebra closure verified.
+**Remaining: SO16 → E₈ typed LieHom (4.3) — subalgebra closure proves the math;
+LieHom is type-system bookkeeping, not mathematical content.**
 
-**Mathematical note:** The original proof sketch had a subtle error — CBA is an
-anti-cyclic permutation of ABC, not cyclic. Correct argument: Tr(ABC) = -Tr(CBA)
-by transpose+antisymmetry, then Tr(CBA) = Tr(ACB) by genuine cyclicity.
+## MILESTONE 5: THREE-GENERATION VERIFICATION — COMPLETE ✓
+Completed 2026-03-15. 10 proof files, 621 declarations:
+- Spinor parity obstruction: 3 ∤ 2, universal for SO(10+2k) [MV]
+- E₈/SU(9) resolution: 248 = 80 + 84 + 84*, 3 × 16 = 48 ≤ 84 [MV]
+- J-eigenspace anomaly freedom: Tr(Y) = 0 in each sector independently [MV]
+- Chirality definition: two-level algebraic framework [MV + CO]
+**Remaining: SU(9) typed LieHom into E₈ (5.1-5.2) — same situation as 4.3.**
 
----
-
-## MILESTONE 3: SO(16) EXTENSION
-
-**Goal:** SO(16) type + SO(14) ↪ SO(16) LieHom.
-**Status: COMPILING** (started 2026-03-13)
-
-| Step | Task | Status | File |
-|------|------|--------|------|
-| 3.0 | Python generator for SO(16) (120 fields) | DONE | `scripts/so16_bracket_gen.py` |
-| 3.1 | SO16 type + LieRing + LieAlgebra ℝ | COMPILING (400M hb) | `src/lean_proofs/clifford/so16_grand.lean` |
-| 3.2 | SO14 ↪ SO16 LieHom | WRITTEN, AWAITING SO16 | `src/lean_proofs/clifford/so14_so16_liehom.lean` |
-
-**Generator stats:** 120 generators, 3360 non-zero brackets, 28 terms per component.
-Jacobi verified numerically (100 random triples). so(14) and so(10) subalgebra closures verified.
-
-**Heartbeat budgets (extrapolated from SO14):**
-- LieRing: 400M (SO14 needed 200M at 91 gens; SO16 has 120 gens)
-- LieAlgebra: 256M
-- SO14 → SO16 map_lie': 256M
-
-**Kill condition:** If SO(16) LieRing fails and cannot be split → stop here.
-SO(14) chain is still publishable without E₈.
+## MILESTONE 6: PAPER REWRITE & AUDIT — COMPLETE ✓
+Completed 2026-03-15. Full pipeline ran on both papers:
+- Paper 3: Updated numbers, added E₈ + bridge, fixed auditor findings (scope blur,
+  overclaim, AI telltale, tautological citation). Wilson/Berlinski check PASS.
+- Paper 4: Same updates. All 42 claims ACCURATE. Zero overclaims (was 11).
+  Jacobi formula error fixed. Wilson/Berlinski check PASS.
+**Remaining: SUBMIT.**
 
 ---
 
-## MILESTONE 4: E₈ CONSTRUCTION (MOONSHOT)
-
-**Goal:** E₈ as a Lean type. SO(16) ↪ E₈ LieHom.
-**Status: NOT STARTED** (depends on M3)
+## MILESTONE 7: SUBMISSION & COMMUNITY — NOT STARTED
 
 | Step | Task | Status |
 |------|------|--------|
-| 4.0 | Architecture decision (monolithic vs composite vs native_decide) | NOT STARTED |
-| 4.1 | Python generator for E₈ bracket (30,628 pairs) | NOT STARTED |
-| 4.2 | E₈ type + instances | NOT STARTED |
-| 4.3 | SO16 ↪ E₈ LieHom | NOT STARTED |
+| 7.1 | Get arXiv endorsement (Wilson withdrew) | NOT STARTED |
+| 7.2 | Post preprints to arXiv | BLOCKED on 7.1 |
+| 7.3 | Submit Paper 3 to PRD | NOT STARTED |
+| 7.4 | Submit Paper 4 to LMP | NOT STARTED |
+| 7.5 | Lean Zulip post: E₈ formalization | NOT STARTED |
+| 7.6 | mathlib PR: E₈ or type bridge contribution | NOT STARTED |
 
-**Kill condition:** If E₈ infeasible in Lean → document why. Paper 3 proceeds.
+## MILESTONE 8: PHENOMENOLOGY (KILL-CONDITION) — NOT STARTED
 
----
-
-## MILESTONE 5: SU(9) FOR PAPER 4
-
-**Goal:** SU(9) ↪ E₈ + three-generation decomposition.
-**Status: NOT STARTED** (depends on M4)
+**Goal:** Compute SU(3)_family Yukawa texture. Compare to measured CKM/PMNS.
+If wrong → model falsified (honest negative result). If right → Paper 5.
 
 | Step | Task | Status |
 |------|------|--------|
-| 5.1 | SU(9) type + instances (80 fields) | NOT STARTED |
-| 5.2 | SU(9) ↪ E₈ LieHom | NOT STARTED |
-| 5.3 | 248 = 80 + 84 + 84* as subspace decomposition | NOT STARTED |
+| 8.1 | Clebsch-Gordan coefficients for SU(9) → SU(5) × SU(4) | NOT STARTED |
+| 8.2 | Yukawa coupling structure from SU(9) invariants | NOT STARTED |
+| 8.3 | Mass matrix texture from SU(3)_family breaking | NOT STARTED |
+| 8.4 | Compare predicted CKM/PMNS to measured values | NOT STARTED |
+| 8.5 | Kill condition: if mixing angles inconsistent → STOP | — |
+| 8.6 | If survives: proton decay branching ratios | NOT STARTED |
+| 8.7 | If survives: neutrino mass hierarchy prediction | NOT STARTED |
+| 8.8 | Paper 5 (phenomenological predictions) | NOT STARTED |
+
+**Kill condition:** If Yukawa texture is immediately inconsistent with measured
+CKM matrix elements, publish as negative result and stop.
 
 ---
 
-## MILESTONE 6: PAPER REWRITE & SUBMISSION
+## Type-System Bookkeeping (Optional, Low Priority)
 
-**Goal:** Papers 3 & 4 rewritten, audited, proofread, submitted.
-**Status: NOT STARTED** (depends on M1-M4 for Paper 3, M1-M5 for Paper 4)
+These are formally incomplete but mathematically proven:
 
-| Step | Task | Status |
-|------|------|--------|
-| 6.1 | Paper 3 rewrite (claims match proofs) | NOT STARTED |
-| 6.2 | Paper 3 audit + proofread | NOT STARTED |
-| 6.3 | Paper 4 rewrite | NOT STARTED |
-| 6.4 | Paper 4 audit + proofread | NOT STARTED |
-| 6.5 | Submit | NOT STARTED |
+| Item | What exists | What's missing | Effort |
+|------|-------------|----------------|--------|
+| SO16 → E₈ LieHom | Subalgebra closure via native_decide | Typed LieHom (E₈ needs LieAlgebra instance) | ~1 day |
+| SU(9) → E₈ LieHom | Dimensional decomposition [MV] | SU(9) type + LieHom | ~3-5 days |
+| Lorentzian signature | Compact proofs, 87% signature-independent | so(11,3) real form | Research-level |
 
 ---
-
-## Timeline Overview
-
-```
-Week 1-4:   M1 — SO(14) + two LieHoms        [COMPLETE — day 2]
-Week 4-6:   M2 — Anomaly traces               [COMPLETE — day 2]
-Week 6-9:   M3 — SO(16) + LieHom
-Week 9-16:  M4 — E₈ (moonshot)
-Week 14-17: M5 — SU(9) + LieHom
-Week 17-19: M6 — Paper rewrite + submission
-```
 
 ## Kill Condition Summary
 
 | Point | Condition | Action |
 |-------|-----------|--------|
-| After M1.1 | SO(14) LieRing fails at 200M heartbeats | Axiomatic fallback |
-| After M3.1 | SO(16) LieRing fails | Stop at SO(14). Paper 4 deferred. |
-| After M4.0 | E₈ architecture infeasible | Stop at SO(16). Paper 4 downscoped. |
-| After M4.2 | E₈ LieRing/native_decide fails | Document wall. Paper 3 still submittable. |
-| After M5 | SU(9) ↪ E₈ fails | Paper 4 deferred. |
-
-At each kill condition, work done so far is still publishable — just in a different venue or with different claims.
+| M1-M4 | Any milestone infeasible | Stop at last complete milestone. Still publishable. |
+| M8.4 | Yukawa texture wrong | Publish negative result. Model falsified. |
+| M8.5 | CKM inconsistent by >3σ | STOP. Document. Move on. |

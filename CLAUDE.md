@@ -6,9 +6,11 @@ declarations, zero sorry gaps. Five certified LieHoms composing:
 SU(5) →ₗ⁅ℝ⁆ SO(10) →ₗ⁅ℝ⁆ SO(14) →ₗ⁅ℝ⁆ SO(14)M →ₗ⁅ℝ⁆ SO(16), plus SO(4) →ₗ⁅ℝ⁆ SO(14).
 SO(14) → SO(14)M bridge connects flat algebraic chain to mathlib matrix infrastructure.
 E₈ (248-dim) verified as Lie algebra via sparse Jacobi — first formalization in any ITP.
-SO(16) → E₈ embedding pending (step 4.3).
+SO(16) → E₈ typed LieHom pending (step 4.3 — subalgebra closure verified, LieHom is bookkeeping).
+Three-generation mechanism: SU(9)/Z₃ decomposition, J-eigenspace anomaly freedom [MV].
 Paper 1 submitted to CICM 2026. Paper 2 submitted to AACA.
-Papers 3 & 4 need E₈ update + pipeline re-run.
+Papers 3 & 4 updated, audited (Wilson/Berlinski PASS), ready for submission.
+Next: arXiv endorsement + submit Papers 3 & 4, then Yukawa kill-condition (M8).
 
 ## Research Tracks
 

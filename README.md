@@ -1,16 +1,16 @@
 # Formal Verification of Alternative Mathematical Frameworks
 
-Machine-verified dimensional scaffold from Dollard's versor algebra through Clifford algebras to SO(16), built in [Lean 4](https://lean-lang.org/) with mathlib. Four certified Lie algebra morphisms composing into a chain: SU(5) →ₗ⁅ℝ⁆ SO(10) →ₗ⁅ℝ⁆ SO(14) →ₗ⁅ℝ⁆ SO(16), with SO(4) →ₗ⁅ℝ⁆ SO(14) for the gravity sector. E₈ construction in progress.
+Machine-verified dimensional scaffold from Dollard's versor algebra through Clifford algebras to E₈, built in [Lean 4](https://lean-lang.org/) with mathlib. Four certified Lie algebra morphisms composing into a chain: SU(5) →ₗ⁅ℝ⁆ SO(10) →ₗ⁅ℝ⁆ SO(14) →ₗ⁅ℝ⁆ SO(16), with SO(4) →ₗ⁅ℝ⁆ SO(14) for the gravity sector. E₈ (248-dimensional) verified as a Lie algebra via sparse Jacobi identity — the first formalization of E₈ in any interactive theorem prover.
 
-**69 proof files. ~2,750+ verified declarations. Zero `sorry` gaps.**
+**~88 proof files. ~33,000+ verified declarations. Zero `sorry` gaps.**
 
 ## What This Is
 
 A research project that applies interactive theorem provers (Lean 4) to claims from alternative mathematical frameworks. Starting from Eric Dollard's "versor algebra," we extract formalizable claims, prove or disprove each one, and trace the algebraic path from the source claims through Clifford algebras to gauge unification.
 
-Includes the first machine-verified so(10) spinor representation homomorphism in any interactive theorem prover: 1,980 bracket equations verified by `native_decide` over exact rational arithmetic.
+Includes the first machine-verified formalization of the E₈ Lie algebra in any interactive theorem prover: 248 dimensions, 7,752 nonzero brackets, Jacobi identity verified on 3.78 billion evaluations via `native_decide` with sparse structure constant iteration. Also includes the first machine-verified so(10) spinor representation homomorphism: 1,980 bracket equations verified by `native_decide` over exact rational arithmetic.
 
-Eight Lie algebras — so(1,3), sl(3), sl(5), su(5), so(10), so(14), so(4), so(16) — carry certified `LieRing` and `LieAlgebra ℝ` instances via `Mathlib.Algebra.Lie.Basic`. Four certified `LieHom`s: su(5) →ₗ⁅ℝ⁆ so(10) →ₗ⁅ℝ⁆ so(14) →ₗ⁅ℝ⁆ so(16), plus so(4) →ₗ⁅ℝ⁆ so(14). The so(16) instance (120 generators, 400M heartbeats, ~46GB RAM) pushes Lean 4's elaborator beyond previous limits.
+Nine Lie algebras — so(1,3), sl(3), sl(5), su(5), so(10), so(14), so(4), so(16), e₈ — carry certified algebraic structure. Four certified `LieHom`s: su(5) →ₗ⁅ℝ⁆ so(10) →ₗ⁅ℝ⁆ so(14) →ₗ⁅ℝ⁆ so(16), plus so(4) →ₗ⁅ℝ⁆ so(14). E₈ verified via a novel sparse Jacobi approach that reduced computation from 900 CPU-hours (matrix commutators) to 2.5 hours (sparse structure constant iteration).
 
 ## What This Proves — And What It Doesn't
 

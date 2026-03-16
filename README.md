@@ -1,8 +1,8 @@
 # Formal Verification of Alternative Mathematical Frameworks
 
-Machine-verified dimensional scaffold from Dollard's versor algebra through Clifford algebras to E₈, built in [Lean 4](https://lean-lang.org/) with mathlib. Four certified Lie algebra morphisms composing into a chain: SU(5) →ₗ⁅ℝ⁆ SO(10) →ₗ⁅ℝ⁆ SO(14) →ₗ⁅ℝ⁆ SO(16), with SO(4) →ₗ⁅ℝ⁆ SO(14) for the gravity sector. E₈ (248-dimensional) verified as a Lie algebra via sparse Jacobi identity — the first formalization of E₈ in any interactive theorem prover.
+Machine-verified dimensional scaffold from Dollard's versor algebra through Clifford algebras to E₈, built in [Lean 4](https://lean-lang.org/) with mathlib. Five certified Lie algebra morphisms composing into a chain: SU(5) →ₗ⁅ℝ⁆ SO(10) →ₗ⁅ℝ⁆ SO(14) →ₗ⁅ℝ⁆ SO(14)M →ₗ⁅ℝ⁆ SO(16), with SO(4) →ₗ⁅ℝ⁆ SO(14) for the gravity sector. E₈ (248-dimensional) verified as a Lie algebra via sparse Jacobi identity — the first formalization of E₈ in any interactive theorem prover.
 
-**~88 proof files. ~33,000+ verified declarations. Zero `sorry` gaps.**
+**86 proof files. ~2,900 verified declarations. Zero `sorry` gaps.**
 
 ## What This Is
 
@@ -10,17 +10,21 @@ A research project that applies interactive theorem provers (Lean 4) to claims f
 
 Includes the first machine-verified formalization of the E₈ Lie algebra in any interactive theorem prover: 248 dimensions, 7,752 nonzero brackets, Jacobi identity verified on 3.78 billion evaluations via `native_decide` with sparse structure constant iteration. Also includes the first machine-verified so(10) spinor representation homomorphism: 1,980 bracket equations verified by `native_decide` over exact rational arithmetic.
 
-Nine Lie algebras — so(1,3), sl(3), sl(5), su(5), so(10), so(14), so(4), so(16), e₈ — carry certified algebraic structure. Four certified `LieHom`s: su(5) →ₗ⁅ℝ⁆ so(10) →ₗ⁅ℝ⁆ so(14) →ₗ⁅ℝ⁆ so(16), plus so(4) →ₗ⁅ℝ⁆ so(14). E₈ verified via a novel sparse Jacobi approach that reduced computation from 900 CPU-hours (matrix commutators) to 2.5 hours (sparse structure constant iteration).
+Nine Lie algebras — so(1,3), sl(3), sl(5), su(5), so(10), so(14), so(4), so(16), e₈ — carry certified algebraic structure. Five certified `LieHom`s: su(5) →ₗ⁅ℝ⁆ so(10) →ₗ⁅ℝ⁆ so(14) →ₗ⁅ℝ⁆ so(14)M →ₗ⁅ℝ⁆ so(16), plus so(4) →ₗ⁅ℝ⁆ so(14). The so(14) → so(14)M bridge connects the flat algebraic chain to the mathlib matrix infrastructure. E₈ verified via a novel sparse Jacobi approach that reduced computation from 900 CPU-hours (matrix commutators) to 2.5 hours (sparse structure constant iteration).
 
 ## What This Proves — And What It Doesn't
 
 Lean's kernel guarantees that every declaration in this project type-checks against its stated type. What that means depends on the declaration:
 
-**Algebraic structure proofs (~250 declarations).** Jacobi identities, Lie bracket computations, subalgebra closures, embedding homomorphisms, and root system identifications. These are genuine algebraic theorems — the `ring` and `ext` tactics close them, but the *content* is mathematical: su(5) is a Lie subalgebra of so(10), the Lorentz algebra satisfies Jacobi, etc.
+**Algebraic structure proofs (~530 declarations).** Jacobi identities, Lie bracket computations, subalgebra closures, embedding homomorphisms, and root system identifications. These are genuine algebraic theorems — the `ring` and `ext` tactics close them, but the *content* is mathematical: su(5) is a Lie subalgebra of so(10), the Lorentz algebra satisfies Jacobi, etc.
 
-**Dimensional consistency checks (~1,500 declarations).** Verified arithmetic: dim so(14) = 91, the 16-plet decomposes as 1+5+10, anomaly traces sum to zero. These are correct and machine-verified, but mathematically straightforward — Lean confirms the arithmetic that a physicist would check by hand.
+**Dimensional consistency checks (~330 declarations).** Verified arithmetic: dim so(14) = 91, the 16-plet decomposes as 1+5+10, anomaly traces sum to zero. These are correct and machine-verified, but mathematically straightforward — Lean confirms the arithmetic that a physicist would check by hand.
 
-**Definitional infrastructure (~250 declarations).** Structure definitions, typeclass instances, and setup code. No theorems — just the scaffolding that lets the proofs compile.
+**Other theorems (~1,320 declarations).** Structure constant checks, spinor properties, spectral bounds, and E₈ Jacobi verification (248 `native_decide` theorems covering 3.78 billion evaluations).
+
+**Definitional infrastructure (~720 declarations).** Structure definitions, typeclass instances, abbreviations, and setup code. No theorems — just the scaffolding that lets the proofs compile.
+
+See `docs/DECLARATION_CLASSIFICATION.md` for the full breakdown and methodology.
 
 **What is NOT proved here:**
 - This is not a unified field theory. It is an algebraic scaffold that verifies the dimensional and structural consistency of a path toward unification.

@@ -1,9 +1,10 @@
 # Dollard Formal Verification
 
 Machine-verified dimensional scaffold from Dollard's versor algebra through Clifford algebras
-to E₈, built in Lean 4 with mathlib. ~88 proof files, ~33,000+ verified
-declarations, zero sorry gaps. Four certified LieHoms composing:
-SU(5) →ₗ⁅ℝ⁆ SO(10) →ₗ⁅ℝ⁆ SO(14) →ₗ⁅ℝ⁆ SO(16), plus SO(4) →ₗ⁅ℝ⁆ SO(14).
+to E₈, built in Lean 4 with mathlib. 86 proof files, ~2,900 verified
+declarations, zero sorry gaps. Five certified LieHoms composing:
+SU(5) →ₗ⁅ℝ⁆ SO(10) →ₗ⁅ℝ⁆ SO(14) →ₗ⁅ℝ⁆ SO(14)M →ₗ⁅ℝ⁆ SO(16), plus SO(4) →ₗ⁅ℝ⁆ SO(14).
+SO(14) → SO(14)M bridge connects flat algebraic chain to mathlib matrix infrastructure.
 E₈ (248-dim) verified as Lie algebra via sparse Jacobi — first formalization in any ITP.
 SO(16) → E₈ embedding pending (step 4.3).
 Paper 1 submitted to CICM 2026. Paper 2 submitted to AACA.
@@ -136,6 +137,10 @@ lake env lean src/lean_proofs/foundations/basic_operators.lean  # single file
 | SO(16) as LieAlgebra ℝ (120 gens) | `src/lean_proofs/clifford/so16_grand.lean` |
 | SO(14) →ₗ⁅ℝ⁆ SO(16) LieHom | `src/lean_proofs/clifford/so14_so16_liehom.lean` |
 | SO(16) bracket generator | `scripts/so16_bracket_gen.py` |
+| **SO(14) → SO(14)M type bridge** | `src/lean_proofs/clifford/so14_to_matrix.lean` |
+| SO(14) bridge generator | `scripts/so14_bridge_gen.py` |
+| Declaration count script | `scripts/count_declarations.py` |
+| **Declaration classification** | `docs/DECLARATION_CLASSIFICATION.md` |
 | **E₈ sparse Jacobi defs (bracket table)** | `src/lean_proofs/clifford/e8_sparse_defs.lean` |
 | **E₈ Jacobi verification (16 chunks)** | `src/lean_proofs/clifford/e8_sparse_jac_00..15.lean` |
 | **E₈ antisymmetry** | `src/lean_proofs/clifford/e8_sparse_antisymm.lean` |

@@ -49,7 +49,7 @@ with Phenomenological Predictions}
 
 \begin{abstract}
 We present a candidate unified field theory based on $\mathrm{SO}(14)$, supported by
-a machine-checked scaffold in Lean~4 with the mathlib library: 86 proof files
+a machine-checked scaffold in Lean~4 with the mathlib library: 87 proof files
 containing over 2,900 verified declarations (theorems, definitions, and lemmas) with zero \texttt{sorry} gaps.  The scaffold includes structural results---five certified Lie algebra homomorphisms composing into the chain $\su(5) \hookrightarrow \so(10) \hookrightarrow \so(14) \hookrightarrow \so(14)_M \hookrightarrow \so(16)$ (bracket preservation verified for each embedding), the Jacobi identity for nine Lie algebras including the 248-dimensional $E_8$, and anomaly trace identities---alongside dimensional consistency checks that verify prerequisites for representation-theoretic claims.  The $\mathrm{SO}(14)$
 Lie algebra has 91 generators, which decompose as $91 = 45 + 6 + 40$ under
 $\so(10) \oplus \so(4) \oplus \text{mixed}$, embedding both the Standard Model gauge
@@ -224,6 +224,8 @@ $\so(14) \to \so(14)_M$ type bridge %[MV]
   & \texttt{so14\_to\_matrix} & \texttt{so14\_bridge} & 196 matrix entries \\
 $\so(14)_M \hookrightarrow \so(16)_M$ LieHom %[MV]
   & \texttt{so16\_matrix} & \texttt{so14m\_embed\_block} & Block embedding \\
+$\mathrm{SU}(9) \subset E_8$ subalgebra closure %[MV]
+  & \texttt{e8\_su9\_subalgebra} & \texttt{su9\_subalgebra\_e8} & 80 gens, \texttt{native\_decide} \\
 $\Tr(A\{B,C\}) = 0$ (antisymmetric) %[MV]
   & \texttt{anomaly\_trace} & \texttt{trace\_anticomm\_zero} & Anomaly trace identity \\
 $\nabla \cdot B = 0$ from axiomatized Bianchi %[MV]
@@ -314,7 +316,7 @@ Machine verification does \emph{not} prove:
 \item That three generations arise naturally (open for all GUTs\OP).
 \end{enumerate}
 
-A signature audit of 46 of the 86 proof files~\cite{uft-github}
+A signature audit of 46 of the 87 proof files~\cite{uft-github}
 classifies 87\% as \emph{signature-independent} (properties of
 $\so(14,\mathbb{C})$, holding for all real forms), 7\% as
 \emph{compact-only} (energy positivity results that fail for
@@ -945,10 +947,13 @@ In a companion paper~\cite{arnoldy2026prl}, we prove this $E_8$
 resolution with full machine verification: the impossibility
 $3 \nmid 2$ in $\mathrm{SO}(14)$ and the resolution via
 $\Lambda^3(\mathbb{C}^9) = 84 \supset 3 \times 16 = 48$ in $E_8$
-are verified across 10 Lean~4 files with zero \texttt{sorry} gaps.
+are verified across 11 Lean~4 files with zero \texttt{sorry} gaps.
 $E_8$ itself is now machine-verified as a Lie algebra
 (248 dimensions, 7,752 nonzero brackets, Jacobi identity verified
-on 3.78 billion evaluations via \texttt{native\_decide}), and
+on 3.78 billion evaluations via \texttt{native\_decide}).
+Both maximal subgroups---$\mathrm{SO}(16)$ (120 generators) and
+$\mathrm{SU}(9)$ (80 generators)---are verified as genuine Lie
+subalgebras of $E_8$ via bracket closure\MV, and
 each $J$ eigenspace of the $\mathbb{Z}_3$ automorphism is
 independently anomaly-free\MV.
 The chirality question remains an open problem in mathematical
@@ -1052,7 +1057,7 @@ Several concrete research directions emerge:
 We have presented a candidate $\mathrm{SO}(14)$ unified field theory supported by
 a machine-checked algebraic scaffold: structural proofs (the $A_4$ Cartan matrix, Jacobi identity, centralizer closure, gauge-gravity commutativity) and dimensional consistency checks (91 generators decomposing as $45 + 6 + 40$,
 anomaly prerequisites, Goldstone counts, beta-coefficient arithmetic), verified in Lean~4 with zero \texttt{sorry} gaps across
-86 proof files containing over 2,900 verified declarations.  Five certified Lie algebra homomorphisms compose into a chain from $\su(5)$ to $\so(16)$, including a type bridge connecting flat algebraic types to mathlib's matrix infrastructure; $E_8$ is independently verified as a Lie algebra via sparse Jacobi identity.  One-loop renormalization group analysis [CO] yields coupling
+87 proof files containing over 2,900 verified declarations.  Five certified Lie algebra homomorphisms compose into a chain from $\su(5)$ to $\so(16)$, including a type bridge connecting flat algebraic types to mathlib's matrix infrastructure; $E_8$ is independently verified as a Lie algebra via sparse Jacobi identity.  One-loop renormalization group analysis [CO] yields coupling
 unification at $M_\text{GUT} = 10^{16.98}\GeV$ (0.88\% miss with
 threshold corrections), a proton lifetime [CO] of $10^{38.9}$~years (safely above
 experimental bounds), and asymptotic freedom [CO] for all non-abelian gauge factors.

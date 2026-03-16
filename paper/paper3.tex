@@ -49,8 +49,8 @@ with Phenomenological Predictions}
 
 \begin{abstract}
 We present a candidate unified field theory based on $\mathrm{SO}(14)$, supported by
-a machine-checked scaffold in Lean~4 with the mathlib library: 59 proof files
-containing over 2,537 verified declarations (theorems, definitions, and lemmas) with zero \texttt{sorry} gaps.  The scaffold includes structural results---the $A_4$ Cartan matrix of $\su(5) \subset \so(10)$ (48 bracket relations), the Jacobi identity for $\so(10)$, centralizer closure, and gauge-gravity commutativity---alongside dimensional consistency checks that verify prerequisites for representation-theoretic claims.  The $\mathrm{SO}(14)$
+a machine-checked scaffold in Lean~4 with the mathlib library: 86 proof files
+containing over 2,900 verified declarations (theorems, definitions, and lemmas) with zero \texttt{sorry} gaps.  The scaffold includes structural results---five certified Lie algebra homomorphisms composing into the chain $\su(5) \hookrightarrow \so(10) \hookrightarrow \so(14) \hookrightarrow \so(14)_M \hookrightarrow \so(16)$ (bracket preservation verified for each embedding), the Jacobi identity for nine Lie algebras including the 248-dimensional $E_8$, and anomaly trace identities---alongside dimensional consistency checks that verify prerequisites for representation-theoretic claims.  The $\mathrm{SO}(14)$
 Lie algebra has 91 generators, which decompose as $91 = 45 + 6 + 40$ under
 $\so(10) \oplus \so(4) \oplus \text{mixed}$, embedding both the Standard Model gauge
 group and a gravity sector in a single algebraic structure.  We construct the symmetry-breaking
@@ -109,9 +109,9 @@ $\mathrm{SO}(3,11)$~\cite{krasnov2018,nesti2010}.
 In this paper we present a candidate $\mathrm{SO}(14)$ unified theory with
 a distinctive feature: the algebraic scaffold has been machine-checked using
 the Lean~4 interactive theorem prover~\cite{demoura2021lean4} and the
-mathlib library~\cite{mathlib}.  Specifically, 59 Lean~4 proof files
-containing over 2,537 verified declarations have been compiled with zero
-\texttt{sorry} gaps (unproved assertions).  The scaffold includes genuine algebraic structure (the $A_4$ Cartan matrix of $\su(5)$, the Jacobi identity, centralizer closure, gauge-gravity commutativity) as well as dimensional consistency checks (anomaly prerequisites, Goldstone counts, beta-coefficient arithmetic).  Both tiers are checked with the same deductive rigor as
+mathlib library~\cite{mathlib}.  Specifically, 86 Lean~4 proof files
+containing over 2,900 verified declarations have been compiled with zero
+\texttt{sorry} gaps (unproved assertions).  The scaffold includes genuine algebraic structure---five certified Lie algebra homomorphisms ($\su(5) \hookrightarrow \so(10) \hookrightarrow \so(14) \to \so(14)_M \hookrightarrow \so(16)$, plus $\so(4) \hookrightarrow \so(14)$), Jacobi identities for nine Lie algebras (including $E_8$ at 248 dimensions via sparse structure constant iteration with \texttt{native\_decide}), the antisymmetric trace identity $\Tr(A\{B,C\}) = 0$, and the $\so(14) \to \so(14)_M$ type bridge connecting flat algebraic types to mathlib's matrix infrastructure---as well as dimensional consistency checks (anomaly prerequisites, Goldstone counts, beta-coefficient arithmetic).  Both tiers are checked with the same deductive rigor as
 the Flyspeck project~\cite{hales2017formal} or the liquid
 tensor experiment~\cite{commelin2022liquid}, but the two tiers differ in what they establish: structural proofs verify algebraic identities, while arithmetic checks verify that dimensions are consistent with representation-theoretic claims proved by standard methods.
 
@@ -120,7 +120,7 @@ machine-checked algebraic scaffolding.  We emphasize from the
 outset the distinction between what is proved and what is proposed:
 
 \begin{itemize}
-\item \textbf{Machine-verified} [MV]: Two tiers.  \emph{Structural} [MV-structural]: the $A_4$ Cartan matrix of $\su(5) \subset \so(10)$ (48 bracket relations), the $\so(10)$ Jacobi identity, centralizer closure, gauge-gravity commutativity, charge preservation of VEV.  \emph{Arithmetic} [MV-arithmetic]: dimensional consistency checks for anomaly prerequisites, Goldstone boson counts, beta-coefficient inputs, and representation dimensions.  Both tiers hold for the complex Lie algebra $\so(14,\mathbb{C})$ and all its real forms including $\mathrm{SO}(3,11)$.
+\item \textbf{Machine-verified} [MV]: Two tiers.  \emph{Structural} [MV-structural]: five certified Lie algebra homomorphisms ($\su(5) \hookrightarrow \so(10) \hookrightarrow \so(14) \to \so(14)_M \hookrightarrow \so(16)$, plus $\so(4) \hookrightarrow \so(14)$), the Jacobi identity for nine Lie algebras (including the 248-dimensional $E_8$ via 3.78 billion evaluations), the $A_4$ Cartan matrix of $\su(5) \subset \so(10)$ (48 bracket relations), centralizer closure, gauge-gravity commutativity, anomaly trace identities, and $\so(16) \subset E_8$ subalgebra closure.  \emph{Arithmetic} [MV-arithmetic]: dimensional consistency checks for anomaly prerequisites, Goldstone boson counts, beta-coefficient inputs, and representation dimensions.  Both tiers hold for the complex Lie algebra $\so(14,\mathbb{C})$ and all its real forms including $\mathrm{SO}(3,11)$.
 \item \textbf{Computed} [CO]: Renormalization group running, coupling
   unification, proton lifetime, breaking chain physics.
 \item \textbf{Candidate physics} [CP]: The proposal that $\mathrm{SO}(14)$
@@ -167,7 +167,7 @@ choice prioritizes computational transparency: proofs reduce to
 The complete methodology is described in the companion
 paper~\cite{arnoldy2026cicm}.
 
-The codebase compiles as a single Lean~4 project (over 3,300 build jobs,
+The codebase compiles as a single Lean~4 project (over 3,400 build jobs,
 zero errors, zero \texttt{sorry} gaps) and is available
 from the corresponding author upon reasonable request~\cite{uft-github}.
 
@@ -194,6 +194,8 @@ $\mathrm{SU}(5) \subset \mathrm{SO}(10)$ via $[\mathfrak{g}, J] = 0$ %[MV]
   & \texttt{su5\_so10\_embedding} & \texttt{centralizer\_closed} & Complex structure embedding \\
 $A_4$ root system of $\su(5)$ %[MV]
   & \texttt{su5\_lie\_structure} & \texttt{H1\_R12}, \texttt{coroot\_1} & Lie algebra identification \\
+$\Tr(A\{B,C\}) = 0$ for antisymmetric %[MV]
+  & \texttt{anomaly\_trace} & \texttt{trace\_antisymm\_anticommutator} & Algebraic anomaly identity \\
 Anomaly prerequisites ($N \geq 7$, etc.) %[MV]
   & \texttt{so14\_anomalies} & \texttt{anomaly\_checklist} & Dimensional checks for anomaly freedom \\
 $Q = T_3 + Y/2$ preserves VEV %[MV]
@@ -204,12 +206,26 @@ Higgs: sym.\ traceless $\mathbf{104}$ %[MV]
   & \texttt{so14\_breaking\_chain} & \texttt{so14\_sym\_traceless\_dim} & Corrected Higgs rep \\
 $75 + 16 = 91$ %[MV]
   & \texttt{so14\_breaking\_chain} & \texttt{gauge\_boson\_conservation} & Dimension arithmetic (\texttt{norm\_num}) \\
-$[\so(1,3), \so(10)] = 0$ %[MV]
-  & \texttt{unification\_gravity} & \texttt{gravity\_gauge\_commute} & Gravity-gauge decoupling \\
+$[\so(4), \so(10)] = 0$ in $\so(14)$ %[MV]
+  & \texttt{unification\_gravity} & \texttt{gravity\_gauge\_commute} & Disjoint index sets \\
 SM beta coefficient arithmetic %[MV]
   & \texttt{rg\_running} & \texttt{beta1\_gut\_normalized} & Arithmetic from assumed Dynkin indices \\
 Jacobi identity for $\so(10)$ %[MV]
   & \texttt{so10\_grand} & \texttt{jacobi} & Lie algebra axiom \\
+Jacobi identity for $\so(14)$ (91 gens) %[MV]
+  & \texttt{so14\_grand} & \texttt{jacobi} & Cubic polynomial, \texttt{ring} \\
+$E_8$ Jacobi (248 dims, 3.78B evals) %[MV]
+  & \texttt{e8\_sparse\_jac\_*} & \texttt{e8\_jacobi\_*} & Sparse \texttt{native\_decide} \\
+$\su(5) \hookrightarrow \so(10)$ LieHom %[MV]
+  & \texttt{su5c\_so10\_liehom} & \texttt{su5c\_embed} & 45 bracket equations \\
+$\so(10) \hookrightarrow \so(14)$ LieHom %[MV]
+  & \texttt{so10\_so14\_liehom} & \texttt{so10\_embed} & 91 bracket equations \\
+$\so(14) \to \so(14)_M$ type bridge %[MV]
+  & \texttt{so14\_to\_matrix} & \texttt{so14\_bridge} & 196 matrix entries \\
+$\so(14)_M \hookrightarrow \so(16)_M$ LieHom %[MV]
+  & \texttt{so16\_matrix} & \texttt{so14m\_embed\_block} & Block embedding \\
+$\Tr(A\{B,C\}) = 0$ (antisymmetric) %[MV]
+  & \texttt{anomaly\_trace} & \texttt{trace\_anticomm\_zero} & Anomaly trace identity \\
 $\nabla \cdot B = 0$ from axiomatized Bianchi %[MV]
   & \texttt{bianchi\_identity} & \texttt{gauss\_law\_magnetism} & Consequence of axiomatized Bianchi identity \\
 \bottomrule
@@ -235,7 +251,9 @@ This construction produces the chain %[MV]
     \hookrightarrow \so(10) \hookrightarrow \so(14),
 \end{equation}
 where $\so(6) \cong \su(4)$ (Pati-Salam), $\so(10)$ (Georgi-Glashow-Fritzsch),
-and $\so(14)$ (this work).  Each level is formalized in a separate Lean file with its own matrix type; the embeddings are verified level-by-level, but a single composite embedding theorem connecting $\Cl(1,1)$ to $\Cl(14)$ has not been formalized.
+and $\so(14)$ (this work).  Five certified Lie algebra homomorphisms compose into a chain:
+$\su(5) \xrightarrow{\text{LieHom}} \so(10) \xrightarrow{\text{LieHom}} \so(14) \xrightarrow{\text{bridge}} \so(14)_M \xrightarrow{\text{LieHom}} \so(16)$,
+where $\so(14)_M$ denotes the mathlib matrix representation (the ``type bridge'' connecting the flat algebraic construction to mathlib's \texttt{LieSubalgebra} infrastructure).  Additionally, $\so(4) \xrightarrow{\text{LieHom}} \so(14)$ embeds the gravity sector.  The $E_8$ Lie algebra (248 dimensions) is independently verified via sparse Jacobi identity with \texttt{native\_decide}, and $\so(16) \subset E_8$ is verified as a subalgebra closure.
 
 \subsection{Lie Algebra Identification: Beyond Dimension Counting}
 \label{sec:lie-identification}
@@ -296,7 +314,7 @@ Machine verification does \emph{not} prove:
 \item That three generations arise naturally (open for all GUTs\OP).
 \end{enumerate}
 
-A signature audit of 46 of the 59 proof files~\cite{uft-github}
+A signature audit of 46 of the 86 proof files~\cite{uft-github}
 classifies 87\% as \emph{signature-independent} (properties of
 $\so(14,\mathbb{C})$, holding for all real forms), 7\% as
 \emph{compact-only} (energy positivity results that fail for
@@ -400,10 +418,10 @@ to $\mathrm{SO}(7) \times \mathrm{SO}(7)$ or other patterns).
 The remaining steps are standard GUT
 technology~\cite{georgi1974,fritzsch1975}:
 $\mathrm{SO}(10) \to \mathrm{SU}(5) \times \mathrm{U}(1)_\chi$
-via an adjoint $\mathbf{45}$ VEV\MV;
+via an adjoint $\mathbf{45}$ VEV\SP\ (dimension $\dim\,\mathbf{45} = 45$\MV);
 $\mathrm{SU}(5) \to \mathrm{SU}(3) \times \mathrm{SU}(2) \times \mathrm{U}(1)_Y$
-via an adjoint $\mathbf{24}$ VEV\MV;
-electroweak breaking via a fundamental Higgs doublet\MV.
+via an adjoint $\mathbf{24}$ VEV\SP\ (dimension $\dim\,\mathbf{24} = 24$\MV);
+electroweak breaking via a fundamental Higgs doublet\SP\ (dimension $\dim\,\mathbf{4} = 4$\MV).
 
 \paragraph{Mass spectrum.}  The total number of broken generators across
 all steps is $40 + 20 + 12 + 3 = 75$\MV, producing 75 massive gauge
@@ -843,7 +861,7 @@ SU(5)~\cite{georgi1974} & 24 & $\overline{\mathbf{5}} + \mathbf{10}$ & Yes & No 
 SO(10)~\cite{fritzsch1975} & 45 & $\mathbf{16}$ & Yes & No & No & 3 by hand & $10^{35}$--$10^{39}$ \\
 E$_6$~\cite{gursey1976} & 78 & $\mathbf{27}$ & Yes & No & No & 3 by hand & model-dependent \\
 \textbf{SO(14)} [this work] & \textbf{91} & $\mathbf{64}$ & \textbf{Yes} & \textbf{Yes} & \textbf{Yes} & \textbf{3 by hand} & $\mathbf{10^{38.9}}$ \\
-E$_8$~\cite{lisi2007} & 248 & $\mathbf{248}$ & --- & No & Yes & claimed & not computed \\
+E$_8$~\cite{lisi2007} & 248 & $\mathbf{248}$ & --- & Partial$^*$ & Yes & claimed & not computed \\
 SO(18)~\cite{wilczek1982} & 153 & $\mathbf{256}$ & No & No & No & 8+8 mirror & killed \\
 \bottomrule
 \end{tabular}
@@ -853,7 +871,7 @@ The principal advantages of $\mathrm{SO}(14)$ relative to
 $\mathrm{SO}(10)$ are:
 \begin{enumerate}
 \item \textbf{Gravity inclusion}: the $\mathrm{SO}(3,1)$ Lorentz group
-  is embedded as a subgroup, with $[\so(10), \so(3,1)] = 0$\MV.
+  is embedded as a subgroup, with $[\so(10), \so(4)] = 0$\MV\ (proven for compact indices; the result is signature-independent and holds for $\so(1,3)$ in the Lorentzian real form).
 \item \textbf{Machine verification}: structural algebraic identities and dimensional prerequisites have been
   formally checked by computer.
 \item \textbf{Four-sector spinor structure}: the $\mathrm{SO}(4)$ factor
@@ -927,7 +945,12 @@ In a companion paper~\cite{arnoldy2026prl}, we prove this $E_8$
 resolution with full machine verification: the impossibility
 $3 \nmid 2$ in $\mathrm{SO}(14)$ and the resolution via
 $\Lambda^3(\mathbb{C}^9) = 84 \supset 3 \times 16 = 48$ in $E_8$
-are verified across 9 Lean~4 files with zero \texttt{sorry} gaps.
+are verified across 10 Lean~4 files with zero \texttt{sorry} gaps.
+Moreover, $E_8$ itself is now machine-verified as a Lie algebra
+(248 dimensions, 7,752 nonzero brackets, Jacobi identity verified
+on 3.78 billion evaluations via \texttt{native\_decide}), and
+each $J$ eigenspace of the $\mathbb{Z}_3$ automorphism is
+independently anomaly-free\MV.
 The chirality question remains an open problem in mathematical
 physics\OP: Distler--Garibaldi~\cite{distler2010} proved that no
 embedding of the Standard Model in any real form of $E_8$ yields
@@ -999,15 +1022,17 @@ Several concrete research directions emerge:
   $M^4 \times S^1/(\mathbb{Z}_2 \times \mathbb{Z}_2')$
   following Kawamura-Miura~\cite{kawamura2010}, specializing their
   $\mathrm{SO}(2N)$ framework to $N = 7$.
-\item \textbf{$\mathrm{E}_8$ generation mechanism}:
-  $\mathrm{Spin}(3,11) \subset \mathrm{Spin}(12,4) \subset
-  \mathrm{E}_{8(-24)}$.  Wilson~\cite{wilson2024} identifies
-  discrete order-3 elements (type~5 conjugacy class) whose centralizer
-  $\mathrm{SU}(9)/\mathbb{Z}_3$ provides a fundamentally discrete
-  $\mathbb{Z}_3$ generation symmetry acting on the $\mathbf{84}$
-  of $\mathrm{SU}(9)$.  Verifying this mechanism for the
-  $\mathrm{Spin}(3,11)$ real form and connecting it to the
-  machine-verified $\mathrm{SO}(14)$ scaffold is a natural next step.
+\item \textbf{$\mathrm{E}_8$ generation mechanism} (partially complete):
+  $E_8$ is now machine-verified as a Lie algebra (248 dimensions,
+  Jacobi on 3.78 billion evaluations\MV), $\mathrm{SO}(16) \subset E_8$
+  is verified as a subalgebra closure\MV, and the three-generation
+  mechanism via $\mathrm{SU}(9)/\mathbb{Z}_3$ is dimensionally
+  verified across 10 proof files~\cite{arnoldy2026prl}.  Each
+  $J$ eigenspace of the $\mathbb{Z}_3$ automorphism is independently
+  anomaly-free\MV.
+  Remaining: connecting the $\mathrm{Spin}(3,11)$ real form to the
+  verified compact scaffold, and resolving the chirality
+  definition for massive fermions in $E_{8(-24)}$.
 \item \textbf{Ghost resolution}: a rigorous treatment of ghost
   decoupling in the broken phase of $\mathrm{SO}(3,11)$, potentially
   following Krasnov's chiral approach.
@@ -1027,7 +1052,7 @@ Several concrete research directions emerge:
 We have presented a candidate $\mathrm{SO}(14)$ unified field theory supported by
 a machine-checked algebraic scaffold: structural proofs (the $A_4$ Cartan matrix, Jacobi identity, centralizer closure, gauge-gravity commutativity) and dimensional consistency checks (91 generators decomposing as $45 + 6 + 40$,
 anomaly prerequisites, Goldstone counts, beta-coefficient arithmetic), verified in Lean~4 with zero \texttt{sorry} gaps across
-59 proof files containing over 2,537 verified declarations.  One-loop renormalization group analysis [CO] yields coupling
+86 proof files containing over 2,900 verified declarations.  Five certified Lie algebra homomorphisms compose into a chain from $\su(5)$ to $\so(16)$, including a type bridge connecting flat algebraic types to mathlib's matrix infrastructure; $E_8$ is independently verified as a Lie algebra via sparse Jacobi identity.  One-loop renormalization group analysis [CO] yields coupling
 unification at $M_\text{GUT} = 10^{16.98}\GeV$ (0.88\% miss with
 threshold corrections), a proton lifetime [CO] of $10^{38.9}$~years (safely above
 experimental bounds), and asymptotic freedom [CO] for all non-abelian gauge factors.

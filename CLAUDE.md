@@ -1,13 +1,13 @@
 # Dollard Formal Verification
 
 Machine-verified dimensional scaffold from Dollard's versor algebra through Clifford algebras
-to SO(16) and E₈, built in Lean 4 with mathlib. 69 proof files, ~2,750+ verified
+to E₈, built in Lean 4 with mathlib. ~88 proof files, ~33,000+ verified
 declarations, zero sorry gaps. Four certified LieHoms composing:
 SU(5) →ₗ⁅ℝ⁆ SO(10) →ₗ⁅ℝ⁆ SO(14) →ₗ⁅ℝ⁆ SO(16), plus SO(4) →ₗ⁅ℝ⁆ SO(14).
-Remaining chain link (E₈) is dimensional consistency with algebraic upgrade
-in progress (see `docs/PROJECT_ROADMAP.md`).
+E₈ (248-dim) verified as Lie algebra via sparse Jacobi — first formalization in any ITP.
+SO(16) → E₈ embedding pending (step 4.3).
 Paper 1 submitted to CICM 2026. Paper 2 submitted to AACA.
-Papers 3 & 4 held pending anomaly traces + E₈ chain (ADR-004).
+Papers 3 & 4 need E₈ update + pipeline re-run.
 
 ## Research Tracks
 
@@ -136,6 +136,13 @@ lake env lean src/lean_proofs/foundations/basic_operators.lean  # single file
 | SO(16) as LieAlgebra ℝ (120 gens) | `src/lean_proofs/clifford/so16_grand.lean` |
 | SO(14) →ₗ⁅ℝ⁆ SO(16) LieHom | `src/lean_proofs/clifford/so14_so16_liehom.lean` |
 | SO(16) bracket generator | `scripts/so16_bracket_gen.py` |
+| **E₈ sparse Jacobi defs (bracket table)** | `src/lean_proofs/clifford/e8_sparse_defs.lean` |
+| **E₈ Jacobi verification (16 chunks)** | `src/lean_proofs/clifford/e8_sparse_jac_00..15.lean` |
+| **E₈ antisymmetry** | `src/lean_proofs/clifford/e8_sparse_antisymm.lean` |
+| E₈ structure constants (JSON) | `research/e8-construction/e8_structure_constants.json` |
+| E₈ SageMath oracle | `scripts/sage_e8_structure_constants.py` |
+| E₈ sparse Lean generator | `scripts/e8_sparse_gen.py` |
+| E₈ Jacobi (Python, 0/2.5M) | `scripts/sage_e8_full_jacobi.py` |
 
 ## Project Agents and Skills
 

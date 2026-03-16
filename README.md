@@ -29,7 +29,7 @@ See `docs/DECLARATION_CLASSIFICATION.md` for the full breakdown and methodology.
 **What is NOT proved here:**
 - This is not a unified field theory. It is an algebraic scaffold that verifies the dimensional and structural consistency of a path toward unification.
 - The Dollard starting point is historical and pedagogical. The mathematical content stands independently of Dollard's claims.
-- Steps 7-11 (dynamics) are axiomatized structures — properties are verified from axioms, not derived from first principles.
+- Steps 7-11 (dynamics) define physical fields as Lean structures, assuming the existence of gauge potentials, field strengths, and their derivatives. Properties (energy positivity, Bianchi identity, Yang-Mills equations) are then proved from these definitions. Some results originally axiomatized (d²=0) have been upgraded to theorems via mathlib's `extDeriv`.
 - Step 15 (mass gap) is stated, not proved. That's the Millennium Prize problem.
 - Physical identifications (which representations correspond to which particles) are axiomatized, not derived. This is standard in the field: no GUT formalization derives these identifications from first principles.
 

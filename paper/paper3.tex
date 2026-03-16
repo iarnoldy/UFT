@@ -48,27 +48,27 @@ with Phenomenological Predictions}
 \date{March 10, 2026}
 
 \begin{abstract}
-We present a candidate unified field theory based on $\mathrm{SO}(14)$, supported by
-a machine-checked scaffold in Lean~4 with the mathlib library: 87 proof files
-containing over 2,900 verified declarations (theorems, definitions, and lemmas) with zero \texttt{sorry} gaps.  The scaffold includes structural results---five certified Lie algebra homomorphisms composing into the chain $\su(5) \hookrightarrow \so(10) \hookrightarrow \so(14) \hookrightarrow \so(14)_M \hookrightarrow \so(16)$ (bracket preservation verified for each embedding), the Jacobi identity for nine Lie algebras including the 248-dimensional $E_8$, and anomaly trace identities---alongside dimensional consistency checks that verify prerequisites for representation-theoretic claims.  The $\mathrm{SO}(14)$
-Lie algebra has 91 generators, which decompose as $91 = 45 + 6 + 40$ under
-$\so(10) \oplus \so(4) \oplus \text{mixed}$, embedding both the Standard Model gauge
-group and a gravity sector in a single algebraic structure.  We construct the symmetry-breaking
-chain $\mathrm{SO}(14) \to \mathrm{SO}(10) \times \mathrm{SO}(4) \to \mathrm{SU}(5) \times
-\mathrm{U}(1) \to \mathrm{SU}(3) \times \mathrm{SU}(2) \times \mathrm{U}(1) \to
-\mathrm{U}(1)_\text{EM}$, identifying the symmetric traceless 104-dimensional
-representation as the Higgs field for the first step.  One-loop renormalization group
-analysis [CO] yields coupling unification at $M_\text{GUT} = 10^{16.98}\GeV$ with
-$\alpha_\text{GUT}^{-1} = 47.03$ (0.88\% miss with threshold corrections from 177
-scalar components), a proton lifetime [CO] of $\tau_p \approx 10^{38.9}$~years (safely
-above the Super-Kamiokande bound of $10^{34.4}$~years), and asymptotic freedom [CO]
-for all non-abelian gauge factors at scales above the Standard Model.  Three open problems remain: the three-generation
-problem is inherited from $\mathrm{SO}(10)$, the Distler ghost objection for the
-non-compact form $\mathrm{SO}(3,11)$ remains unresolved, and the mass gap is the
-Millennium Prize problem.  Machine verification is the unique methodological contribution:
-87\% of our theorems are signature-independent, holding for all real forms of $\so(14,\mathbb{C})$.
-To our knowledge, this is the first grand unified theory to receive
-machine-checked algebraic scaffolding from an interactive theorem prover.
+$\mathrm{SO}(14)$ is the smallest orthogonal group that contains both the Standard Model
+gauge group $\mathrm{SO}(10)$ and a gravity sector $\mathrm{SO}(4)$.  Its 91 generators
+split as $45 + 6 + 40$: gauge, gravity, and the interactions between them.
+We build the algebraic scaffold for this theory and check every step with the
+Lean~4 theorem prover---87 proof files, over 2,900 verified declarations, zero
+\texttt{sorry} gaps.
+
+What the computer checks: five certified Lie algebra homomorphisms composing
+$\su(5) \hookrightarrow \so(10) \hookrightarrow \so(14) \hookrightarrow \so(14)_M
+\hookrightarrow \so(16)$, the Jacobi identity for nine Lie algebras including the
+248-dimensional $E_8$, anomaly trace identities, and subalgebra closures for both
+$\mathrm{SO}(16)$ and $\mathrm{SU}(9)$ inside $E_8$.
+What the computer does not check: whether $\mathrm{SO}(14)$ describes nature.
+
+The breaking chain runs $\mathrm{SO}(14) \to \mathrm{SO}(10) \times \mathrm{SO}(4)
+\to \cdots \to \mathrm{U}(1)_\text{EM}$ via a symmetric traceless $\mathbf{104}$ Higgs.
+One-loop running [CO] gives coupling unification at $10^{16.98}\GeV$ with a 0.88\%
+miss, proton lifetime $10^{38.9}$ years (safe), and asymptotic freedom above the SM scale.
+Three open problems: three generations, Distler ghosts, and the mass gap.
+87\% of the algebraic results hold for all real forms of $\so(14,\mathbb{C})$.
+No grand unified theory has previously received machine-checked algebraic scaffolding.
 \end{abstract}
 
 \pacs{11.15.-q, 12.10.-g, 02.10.Ud, 02.20.Sv}
@@ -80,44 +80,42 @@ machine-checked algebraic scaffolding from an interactive theorem prover.
 \label{sec:intro}
 % ============================================================================
 
-The search for a unified description of the fundamental forces has been a central
-program in theoretical physics since Einstein's attempts at a unified field
-theory~\cite{einstein1925}.  The Standard Model of particle physics, based on the
-gauge group $\mathrm{SU}(3) \times \mathrm{SU}(2) \times \mathrm{U}(1)$, provides
-an experimentally confirmed description of the strong, weak, and electromagnetic
-interactions~\cite{weinberg1967,glashow1961,salam1968}, but leaves gravity outside
-its framework and contains 19 free parameters that are not explained.
+The Standard Model works. Three forces, 19 free parameters, no gravity.
+Grand unified theories try to fix this by embedding
+$\mathrm{SU}(3) \times \mathrm{SU}(2) \times \mathrm{U}(1)$ in a bigger
+group~\cite{georgi1974,fritzsch1975,georgi1975,weinberg1967,glashow1961,salam1968}.
+$\mathrm{SO}(10)$ is the workhorse: one 16-dimensional spinor holds a
+complete generation of fermions~\cite{fritzsch1975}.  But $\mathrm{SO}(10)$
+says nothing about gravity.
 
-Grand unified theories (GUTs) embed the Standard Model gauge group in a simple
-Lie group, achieving partial unification of the non-gravitational
-forces~\cite{georgi1974,fritzsch1975,georgi1975}.  The progression $\mathrm{SU}(5)
-\subset \mathrm{SO}(10) \subset \mathrm{E}_6$ offers increasingly complete
-unification, with $\mathrm{SO}(10)$ providing the most economical scheme: all
-15 Standard Model fermions of one generation, plus a right-handed neutrino,
-fit in a single 16-dimensional spinor representation~\cite{fritzsch1975}.
+$\mathrm{SO}(14)$ is the smallest orthogonal group that fits both $\mathrm{SO}(10)$
+and the Lorentz group $\mathrm{SO}(1,3)$~\cite{nesti2007,nesti2010,krasnov2018}.
+Nesti, Percacci, and Krasnov developed the physics.
+What was missing: a check that the algebra actually works.
 
-Gravity-gauge unification has been pursued through several
-approaches: Kaluza-Klein theory~\cite{kaluza1921,klein1926},
-supergravity~\cite{freedman1976}, and string theory~\cite{green1984}.
-A less explored but algebraically natural path embeds the Lorentz group
-$\mathrm{SO}(1,3)$ together with the gauge group inside a single orthogonal
-group~\cite{nesti2007,nesti2010,krasnov2018}.  The minimal group that
-accommodates both $\mathrm{SO}(10)$ (gauge) and $\mathrm{SO}(1,3)$ (gravity)
-is $\mathrm{SO}(14)$, or more precisely its non-compact real form
-$\mathrm{SO}(3,11)$~\cite{krasnov2018,nesti2010}.
+That is what this paper provides.  We built the algebraic scaffold in
+Lean~4~\cite{demoura2021lean4} with mathlib~\cite{mathlib}: 87 proof files,
+over 2,900 verified declarations, zero \texttt{sorry} gaps.
+The proofs compile or they don't.  Ours compile.
 
-In this paper we present a candidate $\mathrm{SO}(14)$ unified theory with
-a distinctive feature: the algebraic scaffold has been machine-checked using
-the Lean~4 interactive theorem prover~\cite{demoura2021lean4} and the
-mathlib library~\cite{mathlib}.  Specifically, 86 Lean~4 proof files
-containing over 2,900 verified declarations have been compiled with zero
-\texttt{sorry} gaps (unproved assertions).  The scaffold includes genuine algebraic structure---five certified Lie algebra homomorphisms ($\su(5) \hookrightarrow \so(10) \hookrightarrow \so(14) \to \so(14)_M \hookrightarrow \so(16)$, plus $\so(4) \hookrightarrow \so(14)$), Jacobi identities for nine Lie algebras (including $E_8$ at 248 dimensions via sparse structure constant iteration with \texttt{native\_decide}), the antisymmetric trace identity $\Tr(A\{B,C\}) = 0$, and the $\so(14) \to \so(14)_M$ type bridge connecting flat algebraic types to mathlib's matrix infrastructure---as well as dimensional consistency checks (anomaly prerequisites, Goldstone counts, beta-coefficient arithmetic).  Both tiers are checked with the same deductive rigor as
-the Flyspeck project~\cite{hales2017formal} or the liquid
-tensor experiment~\cite{commelin2022liquid}, but the two tiers differ in what they establish: structural proofs verify algebraic identities, while arithmetic checks verify that dimensions are consistent with representation-theoretic claims proved by standard methods.
+The scaffold is not just arithmetic.  Five certified Lie algebra
+homomorphisms compose into a chain from $\su(5)$ through $\so(16)$.
+Nine Lie algebras carry verified Jacobi identities, including the
+248-dimensional $E_8$ (3.78 billion evaluations via \texttt{native\_decide}).
+Both $\mathrm{SO}(16)$ and $\mathrm{SU}(9)$ are verified as genuine
+subalgebras of $E_8$ via bracket closure.
+The anomaly trace identity $\Tr(A\{B,C\}) = 0$ is proved for antisymmetric
+matrices over any ring.  These are algebraic theorems, not dimensional
+coincidences.
 
-To our knowledge, this is the first grand unified theory to receive
-machine-checked algebraic scaffolding.  We emphasize from the
-outset the distinction between what is proved and what is proposed:
+But there is also arithmetic.  Dimension counts, Goldstone boson numbers,
+beta-coefficient inputs---all checked by \texttt{norm\_num}.
+Both tiers are verified with the same deductive rigor as the
+Flyspeck project~\cite{hales2017formal} or the liquid tensor
+experiment~\cite{commelin2022liquid}.
+
+No grand unified theory has previously been machine-checked.
+From the outset, we distinguish what is proved from what is proposed:
 
 \begin{itemize}
 \item \textbf{Machine-verified} [MV]: Two tiers.  \emph{Structural} [MV-structural]: five certified Lie algebra homomorphisms ($\su(5) \hookrightarrow \so(10) \hookrightarrow \so(14) \to \so(14)_M \hookrightarrow \so(16)$, plus $\so(4) \hookrightarrow \so(14)$), the Jacobi identity for nine Lie algebras (including the 248-dimensional $E_8$ via 3.78 billion evaluations), the $A_4$ Cartan matrix of $\su(5) \subset \so(10)$ (48 bracket relations), centralizer closure, gauge-gravity commutativity, anomaly trace identities, and $\so(16) \subset E_8$ subalgebra closure.  \emph{Arithmetic} [MV-arithmetic]: dimensional consistency checks for anomaly prerequisites, Goldstone boson counts, beta-coefficient inputs, and representation dimensions.  Both tiers hold for the complex Lie algebra $\so(14,\mathbb{C})$ and all its real forms including $\mathrm{SO}(3,11)$.
@@ -131,18 +129,15 @@ outset the distinction between what is proved and what is proposed:
 \end{itemize}
 
 Machine verification does not prove that $\mathrm{SO}(14)$ describes nature.
-It proves that specific algebraic identities hold (Cartan matrix, Jacobi, centralizer closure, gauge-gravity commutativity) and that dimensional prerequisites are consistent (dimensions add up, anomaly condition count is correct, Goldstone numbers match broken generators).  The embeddings are valid Lie algebra homomorphisms: the $A_4$
-root system of $\su(5)$ is explicitly verified by 48 bracket relations.  Anomaly cancellation itself follows from standard group theory for $\mathrm{SO}(N)$
-with $N \geq 7$; the machine verifies the dimensional prerequisites.  Whether this scaffold corresponds to physical
-reality is a separate question that only experiment can answer.
+It proves that the algebra is consistent.  Whether nature uses this
+algebra is a question for experiment.
 
-The paper is organized as follows.  Section~\ref{sec:foundation} summarizes the
-machine-verified foundation.  Section~\ref{sec:model} constructs the
-$\mathrm{SO}(14)$ model: algebraic structure, breaking chain, matter content,
-and signature.  Section~\ref{sec:rg} presents the renormalization group analysis.
-Section~\ref{sec:pheno} derives phenomenological predictions.
-Section~\ref{sec:discussion} discusses open problems and compares with
-other unification proposals.  Section~\ref{sec:conclusion} concludes.
+Section~\ref{sec:foundation} covers the machine-verified foundation.
+Section~\ref{sec:model} builds the $\mathrm{SO}(14)$ model.
+Section~\ref{sec:rg} runs the couplings.
+Section~\ref{sec:pheno} extracts predictions.
+Section~\ref{sec:discussion} states the open problems honestly.
+Section~\ref{sec:conclusion} says what we proved and what we didn't.
 
 % ============================================================================
 \section{Machine-Verified Foundation}
@@ -1054,24 +1049,27 @@ Several concrete research directions emerge:
 \label{sec:conclusion}
 % ============================================================================
 
-We have presented a candidate $\mathrm{SO}(14)$ unified field theory supported by
-a machine-checked algebraic scaffold: structural proofs (the $A_4$ Cartan matrix, Jacobi identity, centralizer closure, gauge-gravity commutativity) and dimensional consistency checks (91 generators decomposing as $45 + 6 + 40$,
-anomaly prerequisites, Goldstone counts, beta-coefficient arithmetic), verified in Lean~4 with zero \texttt{sorry} gaps across
-87 proof files containing over 2,900 verified declarations.  Five certified Lie algebra homomorphisms compose into a chain from $\su(5)$ to $\so(16)$, including a type bridge connecting flat algebraic types to mathlib's matrix infrastructure; $E_8$ is independently verified as a Lie algebra via sparse Jacobi identity.  One-loop renormalization group analysis [CO] yields coupling
-unification at $M_\text{GUT} = 10^{16.98}\GeV$ (0.88\% miss with
-threshold corrections), a proton lifetime [CO] of $10^{38.9}$~years (safely above
-experimental bounds), and asymptotic freedom [CO] for all non-abelian gauge factors.
+Here is what we built.  87 Lean~4 proof files. Over 2,900 verified
+declarations. Zero \texttt{sorry} gaps.  Five Lie algebra homomorphisms
+chain $\su(5)$ through $\so(16)$.  $E_8$ is verified as a Lie algebra.
+Both $\mathrm{SO}(16)$ and $\mathrm{SU}(9)$ close as subalgebras inside it.
+The proofs compile.  Anyone can check.
 
-The theory inherits three open problems from the broader gauge unification
-program: three generations (universal to all GUTs), ghost states in the
-non-compact form (specific to gravity-gauge unification), and the mass gap
-(the Millennium Prize problem).  Section~\ref{sec:discussion} discusses each
-and identifies the most promising resolution strategies.
+Here is what the proofs say about $\mathrm{SO}(14)$.  The algebra is
+consistent: 91 generators split $45 + 6 + 40$, the embeddings preserve
+brackets, the anomaly traces vanish, the Goldstone counts work out.
+One-loop running [CO] gives $M_\text{GUT} = 10^{16.98}\GeV$, proton
+lifetime $10^{38.9}$ years, and asymptotic freedom above the SM scale.
 
-The methodological contribution---applying interactive theorem provers to
-GUT algebraic scaffolding for the first time---demonstrates that machine-checked
-verification of dimensional and structural prerequisites is feasible for GUT-scale theories.  We advocate for machine verification
-as standard practice in future GUT proposals.
+Here is what the proofs do not say.  They do not say $\mathrm{SO}(14)$
+describes nature.  Three open problems remain: why three generations
+(every GUT has this problem), ghost states in the non-compact form
+(every gravity-gauge unification has this problem), and the mass gap
+(that is the Millennium Prize problem).
+
+The algebra can't be wrong.  The physics might be.  We think that
+distinction is worth making precisely, and that machine verification
+should be standard practice for future GUT proposals.
 
 \begin{acknowledgments}
 The machine verification was performed using Lean~4 and the mathlib

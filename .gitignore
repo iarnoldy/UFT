@@ -51,6 +51,25 @@ docs/HANDOFF_GROK_QUESTIONS.md
 .claude/sessions/.handoff.md
 .claude/worktrees/
 
+# QPE — IP protected, do not push to public repo
+# Backup at: https://github.com/iarnoldy/qpe-research (private)
+src/experiments/qpe/
+src/experiments/results/qpe_*.json
+src/experiments/results/multiseed_run.log
+docs/experiments/E007-results-*
+
+# Sensitive files
+.wsl-credentials
+research/math-inc-application-draft.md
+
+# Build logs (regenerate on each build)
+e8_build*.log
+e8_sparse_build*.log
+
+# Accidental directory duplicates
+paper/paper/
+src/src/
+
 # GPD (Get Physics Done) artifacts
 .gpd/
 .mcp.json

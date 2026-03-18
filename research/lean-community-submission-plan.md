@@ -28,36 +28,59 @@ Copy-paste this EXACTLY (you can edit later if you want):
 
 ---
 
-**Topic title:** `E₈ (248-dim) Lie algebra verified in Lean 4 — sparse Jacobi approach`
+**Topic title:** `E₈ (248-dim) Lie algebra verified in Lean 4 — sparse Jacobi, scalability lessons`
 
 **Body:**
 
 ```
-Hi all — I've been working on formalizing Lie algebra structures in Lean 4 with mathlib, and wanted to share what's emerged.
+Hi all — I've been formalizing Lie algebra structures in Lean 4 with mathlib and wanted to share what came out of it, including some scalability lessons that might be useful to others working with large algebraic structures.
+
+**Disclosure:** This project was built in collaboration with Claude (Anthropic's AI). I'm an aviation electronics technician by background, not a mathematician — Claude served as an intellectual partner throughout, helping with proof strategy, mathlib API navigation, and code generation. Every proof compiles and is machine-verified, but I want to be upfront about how it was made. The mathematical direction and project decisions are mine; the Lean implementation was collaborative.
+
+**Context on the repo:** The repo name ("UFT") reflects the physics motivation — I started from Eric Dollard's electrical engineering work and built upward through standard Lie algebra embeddings to see how far formal verification could take it. The physics interpretation is speculative and clearly marked as such in the repo. What I'm sharing here is the pure mathematics and the Lean engineering — the proofs stand regardless of the physics framing.
 
 **What exists:**
-- 88 proof files, ~2,900 declarations, zero sorry
-- Five certified LieHoms composing: SU(5) →ₗ⁅ℝ⁆ SO(10) →ₗ⁅ℝ⁆ SO(14) →ₗ⁅ℝ⁆ SO(14)_matrix →ₗ⁅ℝ⁆ SO(16)
+- 88 compiled proof files (~2,975 declarations, zero sorry)
+- Five certified LieHoms: three composing into a chain SU(5) →ₗ⁅ℝ⁆ SO(10) →ₗ⁅ℝ⁆ SO(14) →ₗ⁅ℝ⁆ SO(16), plus SO(4) →ₗ⁅ℝ⁆ SO(14) and a separate SO(14) →ₗ⁅ℝ⁆ SO(14)_matrix type bridge
 - E₈ as a 248-dimensional Lie algebra verified via sparse Jacobi identity (7,752 nonzero brackets, native_decide over all 248³ triples)
 - SO(16) ⊂ E₈ subalgebra closure verified
+- Lie-Schur lemma and Killing form uniqueness (I couldn't find an existing formalization in Coq, Isabelle, or Mizar — but I haven't done an exhaustive search)
 - Lean v4.29.0-rc4, mathlib dependency
 
 **The sparse Jacobi approach:**
-Dense 248×248 matrix multiplication for Jacobi would be O(n⁵). Instead, we precompute only nonzero structure constants (7,752 out of 248² = 61,504) and check the Jacobi identity via direct lookup. This is 88× faster and O(n⁴). Each of the 16 verification chunks takes ~90 seconds.
+Dense 248×248 matrix multiplication for Jacobi would be O(n⁵). Instead, we precompute only nonzero structure constants (7,752 out of 248² = 61,504) and check the Jacobi identity via direct lookup — O(n⁴) instead of O(n⁵). At dimension 50, the sparse approach was 88× faster than dense in our benchmarks. Each of the 16 E₈ verification chunks takes ~40 minutes to compile (parallelizable via `lake build`).
+
+**Scalability lessons (hitting Lean's limits with E₈):**
+Getting E₈ to compile taught us a lot about what Lean can and can't handle at scale:
+- Our first attempt used dense 248×248 matrices. The generated .lean files were too large and compilation ran out of memory.
+- We moved to a sparse representation: only the 7,752 nonzero structure constants, stored as a lookup function. This cut file size dramatically.
+- Even sparse, the Jacobi verification over 248³ ≈ 15.3M triples had to be chunked into 16 separate files to stay within compilation limits. Each chunk handles a range of the first index.
+- `native_decide` was essential — `decide` alone couldn't handle the scale.
+- The .olean files are enormous: SO(16) is 2.1 GB, SO(14) is 1.1 GB, SO(10) is 198 MB, E₈ sparse defs is 32 MB. Incremental compilation is essential — a full rebuild is painful.
+- SageMath served as an oracle for structure constants (Chevalley basis), which were then hard-coded into Lean for verification.
+
+If anyone else is working with large finite algebraic structures in Lean, happy to share more details on what worked and what didn't.
 
 **The type bridge pattern:**
 We built Lie algebras by hand (flat structures with explicit brackets) and then proved LieHom into mathlib's matrix Lie algebra infrastructure. This "type bridge" pattern might be useful for anyone constructing new Lie algebras that need to interface with mathlib's typeclass hierarchy.
 
-**One thing I think fills a gap:**
-The Lie-Schur lemma (nonzero LieModuleHom between irreducible Lie modules is bijective) and its application to Killing form uniqueness. Mathlib has classical Schur for group representations but I couldn't find the Lie module version. Happy to extract this as a mathlib PR if useful.
+**Adding mathlib instances to hand-built algebras:**
+We developed a repeatable recipe for upgrading flat Lie algebra definitions to full mathlib `LieRing` + `LieAlgebra ℝ` instances. Tested on Bivector (6 gens), SL₃ (8), SL₅ (24), SU₅ (24), SO₁₀ (45), SO₁₄ (91), SO₁₆ (120). The pattern: define the bracket as a bilinear map, prove antisymmetry and Jacobi, then provide the instances. If there's interest I can write this up more formally.
+
+**Things I think fill gaps in mathlib:**
+1. **Lie-Schur lemma** — nonzero LieModuleHom between irreducible Lie modules is bijective. Mathlib has classical Schur for group representations but I couldn't find the Lie module version (I may have missed it — please correct me if it exists). Application: Killing form uniqueness (invariant bilinear form on simple Lie algebra is proportional to Killing form).
+2. **Antisymmetric trace identity** — Tr(A{B,C}) = 0 for antisymmetric matrices A, B, C in any ring. Small standalone lemma, useful for anomaly computations in gauge theory.
 
 Repo: https://github.com/iarnoldy/UFT
 Key files:
 - E₈ sparse defs: `src/lean_proofs/clifford/e8_sparse_defs.lean`
+- E₈ Jacobi chunks: `src/lean_proofs/clifford/e8_sparse_jac_00.lean` through `_15.lean`
 - Schur/Killing: `src/lean_proofs/spectral/schur_killing_uniqueness.lean`
 - Type bridge: `src/lean_proofs/clifford/so14_to_matrix.lean`
+- Anomaly trace: `src/lean_proofs/clifford/anomaly_trace.lean`
+- mathlib instance pattern: `src/lean_proofs/clifford/su5c_compact.lean`
 
-Happy to answer questions or extract pieces for mathlib contribution.
+Happy to answer questions, share the SageMath oracle scripts, or extract pieces for mathlib PRs.
 ```
 
 ---

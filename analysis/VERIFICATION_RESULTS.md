@@ -120,6 +120,53 @@ All former sorry gaps closed (2026-03-08):
 - `omega4_eq_I`: closed via `Complex.ext <;> simp` (cos/sin at π/2)
 - `omega_on_unit_circle`: closed via `Complex.norm_exp_ofReal_mul_I`
 
+## Track B Finding: Quaternary Notation as Gross/Net Diagnostic (2026-03-17)
+
+**Tag**: [OUR ANALYSIS] — derived from mod-4 subseries, not from Dollard's explicit text
+**Source**: `src/experiments/dollard/gross_net_frontier_research.py`
+**Full investigation**: `research/dollard-investigation/README.md`
+
+### The Finding
+
+Dollard's quaternary decomposition of e^t into four subseries u, x, v, y reveals:
+- **u + v = cosh(t)** — gross circulating energy (always well-conditioned)
+- **u - v = cos(t)** — net throughput energy (ill-conditioned near resonance)
+- **Gross/Net = cosh(t)/|cos(t)|** — diverges at resonance
+
+The closed-form identity connecting this to standard RF measurement:
+```
+Gross/Net = cosh(ln(SWR)) = (SWR + 1/SWR)/2 = (1 + |Γ|²)/(1 - |Γ|²)
+```
+
+This quantity IS known in standard EE (via Q factor and SWR separately). What's new is
+the UNIFIED notation through the quaternary framework and the extension to general N-phase
+via the mod-N Fortescue connection.
+
+### What This Proves About Dollard
+
+**The algebra is trivial (Z4). The notation is not.** Dollard's quaternary decomposition
+is algebraically equivalent to standard Euler/Fourier analysis — the Lean proofs and three
+research councils confirm this. But the four-quadrant notation naturally surfaces gross/net
+energy structure that standard notation compresses into single values (Q factor, SWR).
+
+This is the definitive Track B result: Dollard's contribution is PRESENTATIONAL and
+INTERPRETIVE, not algebraic. The notation reveals structure that exists in the math but
+that standard notation doesn't make visible.
+
+### What Does NOT Follow
+
+- This does NOT validate Dollard's physics claims (aether, over-unity, counterspace)
+- This does NOT mean the Z4 computation path is superior (standard rotation wins 979/1000)
+- This does NOT mean the quaternary expansion is "new math" (it's standard mod-4 subseries)
+- The computational investigation (zero-error finding) resolved as IEEE 754 coincidence
+
+### Implications
+
+1. **N-Phase patent**: Gross/net ratio as free monitoring feature (see N_PHASE_EVIDENCE.md)
+2. **Paper material**: Technical note on "Quaternary Expansion as Standing Wave Diagnostic"
+3. **Methodology**: The investigation itself is a case study for Paper 1's (CICM) thesis about
+   formal verification of alternative mathematical systems
+
 ## Known Gaps
 
 | Gap | Location | Status |

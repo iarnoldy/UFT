@@ -19,7 +19,43 @@
       "WebFetch(domain:link.springer.com)",
       "mcp__claude_ai_Gmail__gmail_search_messages",
       "mcp__claude_ai_Gmail__gmail_read_message",
-      "mcp__claude_ai_Gmail__gmail_read_thread"
+      "mcp__claude_ai_Gmail__gmail_read_thread",
+      "WebFetch(domain:www.psi.inc)",
+      "WebFetch(domain:scholar.google.com)",
+      "WebFetch(domain:theinnermostloop.substack.com)",
+      "WebFetch(domain:webspace.maths.qmul.ac.uk)",
+      "WebFetch(domain:robwilson1.wordpress.com)",
+      "WebFetch(domain:ncatlab.org)",
+      "WebFetch(domain:golem.ph.utexas.edu)",
+      "WebFetch(domain:www.nu-fit.org)",
+      "WebFetch(domain:en.wikipedia.org)",
+      "WebFetch(domain:pdg.lbl.gov)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:doc.sagemath.org)",
+      "WebFetch(domain:www.frontiersin.org)",
+      "mcp__gpd-arxiv__search_papers",
+      "mcp__gpd-arxiv__read_paper",
+      "mcp__gpd-arxiv__download_paper",
+      "WebFetch(domain:pubs.aip.org)",
+      "WebFetch(domain:www.semanticscholar.org)",
+      "WebFetch(domain:inspirehep.net)",
+      "WebFetch(domain:homepage.physics.uiowa.edu)",
+      "WebFetch(domain:www.sciencedirect.com)",
+      "WebFetch(domain:repository.lsu.edu)",
+      "WebFetch(domain:www.math.inc)",
+      "WebFetch(domain:argos.vu)",
+      "WebFetch(domain:www.johndcook.com)",
+      "WebFetch(domain:www.aetherforce.energy)"
     ]
-  }
+  },
+  "enabledMcpjsonServers": [
+    "gpd-conventions",
+    "gpd-errors",
+    "gpd-patterns",
+    "gpd-protocols",
+    "gpd-skills",
+    "gpd-state",
+    "gpd-verification",
+    "gpd-arxiv"
+  ]
 }

@@ -158,6 +158,17 @@ lake env lean src/lean_proofs/foundations/basic_operators.lean  # single file
 | SU(9) CG computation (M8.1) | `src/experiments/su9_yukawa_cg.py` |
 | Yukawa texture extraction (M8.2) | `src/experiments/su9_yukawa_texture.py` |
 | Wilson PMNS verification (M8.3b) | `src/experiments/wilson_pmns_verification.py` |
+| **Dollard investigation (RESOLVED)** | `research/dollard-investigation/README.md` — full context |
+| Dollard investigation status | `research/dollard-investigation/INVESTIGATION_STATUS.md` |
+| What we got wrong (three councils) | `research/dollard-investigation/WHAT_WE_GOT_WRONG.md` |
+| Z4 verdict (council, CORRECT) | `research/dollard-investigation/council/dollard-pure-construction/VERDICT.md` |
+| Gross/net frontier research | `src/experiments/dollard/gross_net_frontier_research.py` |
+| Tesla coil four-quadrant | `src/experiments/dollard/tesla_coil_four_quadrant.py` |
+| Dollard vs standard comparison | `src/experiments/dollard/dollard_vs_standard_comparison.py` |
+| Exact construction (FP investigation) | `src/experiments/dollard/dollard_exact_construction.py` |
+| Dollard lens binding (skill) | `~/.claude/skills/dollard-lens/SKILL.md` |
+| Cross-instance channel | `../CROSS_INSTANCE_CHANNEL.md` |
+| Sibling repo (canonical, private) | `../dollard-exact-construction/` |
 
 ## Project Agents and Skills
 

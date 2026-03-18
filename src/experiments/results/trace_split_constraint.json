@@ -1,0 +1,83 @@
+{
+  "experiment": "Council-R4-Task4",
+  "description": "Trace split constraint analysis from SU(9) CG structure",
+  "claim_tag": "[CO]",
+  "cg_verification": {
+    "adjoint_multiplicity": 1,
+    "trivial_multiplicity": 1,
+    "computed": false,
+    "source": "M8.1 computation"
+  },
+  "fermion_sectors": {
+    "up_quarks": {
+      "from_84": "(10, 4)",
+      "from_84_conj": "(10-bar, 4-bar)",
+      "higgs_channel": "(1, 15) or (1, 1) in the 80",
+      "su4_contraction": "4 x 4-bar -> 15 + 1",
+      "generation_matrix": "3x3 from SU(4) -> SU(3)_fam: 4 -> 3 + 1"
+    },
+    "down_quarks": {
+      "from_84": "(10, 4)",
+      "from_84_conj": "(5-bar, 6)",
+      "higgs_channel": "(5-bar, 4) in the 80",
+      "su4_contraction": "4 x 6 -> CG needed"
+    },
+    "leptons": {
+      "from_84": "(5, 6)",
+      "from_84_conj": "(1, 4)",
+      "higgs_channel": "(5, 4-bar) in the 80",
+      "su4_contraction": "6 x 4 -> CG needed"
+    }
+  },
+  "trace_analysis": {
+    "coupling_constant": "ONE Yukawa coupling g_Y for 84 x 84* x 80 -> 1 under SU(9) (since adjoint appears with multiplicity 1).",
+    "higgs_vevs": "Different sectors couple to DIFFERENT 80-plet components: up quarks to (1,15)+(1,1), down quarks to (5-bar,4), leptons to (5,4-bar). These VEVs are independent.",
+    "conclusion": "Tr(M_u), Tr(M_d), Tr(M_l) are NOT constrained by SU(9). They depend on the Higgs VEV profile, determined by the scalar potential -- not by gauge structure.",
+    "trace_split_is_free": true,
+    "singh_1_2_3_status": "FREE ASSUMPTION (not derivable from E8 or SU(9))"
+  },
+  "su4_adj_branching": {
+    "result": "A2(1,1,0) + A2(1,1,1) + A2(2,1,0) + A2(2,1,1)",
+    "computed": true
+  },
+  "su4_fund_branching": {
+    "result": "A2(0,0,0) + A2(1,0,0)",
+    "computed": true
+  },
+  "su4_6_branching": {
+    "result": "A2(1,0,0) + A2(1,1,0)",
+    "computed": true
+  },
+  "su4_adj_analysis": {
+    "su4_15_branching": "15 -> 8(0) + 3(+2) + 3*(-2) + 1(0) under SU(3)xU(1)",
+    "su3_preserving_vev": "A VEV in the 1(0) preserves SU(3)_fam -> degenerate masses (M = m*I3)",
+    "su3_breaking_vev": "A VEV in the 8(0) breaks SU(3)_fam -> non-degenerate masses. VEV direction determines texture -- this is additional input.",
+    "conclusion": "Mass matrix texture is determined by flavon VEV direction, which is a FREE parameter from the scalar potential."
+  },
+  "predictions": {
+    "can_predict": [
+      "Number of generation slots: 3 (from SU(4) -> SU(3) + 1)",
+      "Mass matrix is 3x3 Hermitian in generation space",
+      "One overall Yukawa coupling (SU(9) CG multiplicity 1)",
+      "SU(5) quantum numbers of each generation (standard GUT content)"
+    ],
+    "cannot_predict": [
+      "Trace split Tr(M_l) : Tr(M_u) : Tr(M_d) (depends on Higgs VEVs)",
+      "Mass ratios within a sector (depends on SU(3)_fam breaking)",
+      "Mixing angles (depend on up-down mass matrix misalignment)",
+      "CP phases (depend on complex phases in mass matrices)"
+    ]
+  },
+  "scalar_analysis": {
+    "answer": "In principle yes, but this is a DERIVED result, not algebraic.",
+    "details": "V(phi_80) has SU(9)-invariant terms: Tr(phi^2), Tr(phi^3), Tr(phi^4), etc. For specific coupling constants, the minimum COULD give 1:2:3 VEV profile. But this shifts free parameters from trace split to potential couplings.",
+    "free_parameter_count": "SU(9)-invariant quartic potential for 80-plet: at least 4 terms."
+  },
+  "summary": {
+    "trace_split_constrained": false,
+    "reason": "Different fermion sectors couple to different 80-plet Higgs components. VEVs are independent free parameters from scalar potential.",
+    "singh_status": "Singh's 1:2:3 trace split is FREE ASSUMPTION (confirmed).",
+    "m8_1_consistency": "Consistent with M8.1 Outcome C (underdetermined survival)."
+  },
+  "runtime_seconds": 0.3
+}

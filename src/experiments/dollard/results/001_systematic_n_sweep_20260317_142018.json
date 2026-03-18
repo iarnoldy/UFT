@@ -1,0 +1,47 @@
+{
+  "experiment": "001-systematic-n-sweep",
+  "timestamp": "2026-03-17T14:20:18.652443",
+  "parameters": {
+    "theta": 0.031415926535897934,
+    "theta_description": "pi/100",
+    "N_MAX": 1000,
+    "mpmath_digits": 50,
+    "taylor_terms": 40
+  },
+  "summary": {
+    "zero_error_ns_dollard": [
+      400,
+      500,
+      600,
+      1000
+    ],
+    "zero_error_ns_standard": [
+      1,
+      56
+    ],
+    "dollard_better_count": 19,
+    "standard_better_count": 979,
+    "tied_count": 2,
+    "non_trivial_zeros": []
+  },
+  "data": [
+    {
+      "n": 1,
+      "total_angle_pi": 0.01,
+      "dollard_error": 1.1102230246251565e-16,
+      "standard_error": 0.0,
+      "dollard_cos": 0.9995065603657315,
+      "standard_cos": 0.9995065603657316,
+      "exact_cos": 0.9995065603657316,
+      "u": 1.0000000405871212,
+      "x": 0.03141592679091434,
+      "nu": 0.0004934802213897307,
+      "y": 5.167712786042617e-06,
+      "u_minus_nu": 0.9995065603657315,
+      "x_minus_y": 0.03141075907812829,
+      "u_plus_nu": 1.000493520808511,
+      "x_plus_y": 0.031421094503700384,
+      "is_half_int_pi": false,
+      "is_int_pi": false,
+      "dollard_zero_error": false,
+      "standard_zero_error": 

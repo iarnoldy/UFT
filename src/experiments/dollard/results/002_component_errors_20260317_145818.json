@@ -1,0 +1,27 @@
+{
+  "experiment": "002-component-error-analysis",
+  "timestamp": "2026-03-17T14:58:18.143354",
+  "findings": {
+    "zeros_pi100": [
+      400,
+      500,
+      600,
+      1000
+    ],
+    "zeros_pi50": [
+      28,
+      29,
+      250
+    ],
+    "zeros_pi200": [
+      1,
+      21,
+      27
+    ],
+    "zeros_pi1000": [
+      1,
+      2,
+      560
+    ]
+  }
+}

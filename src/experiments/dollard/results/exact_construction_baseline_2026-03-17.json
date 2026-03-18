@@ -1,0 +1,30 @@
+{
+  "description": "Baseline results from Dollard's exact Z4 construction, first run 2026-03-17",
+  "script": "src/dollard_exact_construction.py",
+  "method": "Z4 cyclic convolution with operators preserved (eq 18-82)",
+  "tag": "[CO] Computational Observation",
+  "departure_note": "Chaining is OUR APPLICATION of Dollard's algebra, not from his text",
+  "theta": "pi/100 = 0.031416",
+  "reference": "mpmath 50-digit precision",
+  "python_version": "3.14",
+  "results": {
+    "n=1": {"dollard_error": 1.11e-16, "standard_error": 0.0, "ratio": "inf", "cos_exact": 0.9995065604},
+    "n=10": {"dollard_error": 4.44e-16, "standard_error": 3.33e-16, "ratio": 1.3, "cos_exact": 0.9510565163},
+    "n=50": {"dollard_error": 2.83e-16, "standard_error": 5.70e-16, "ratio": 0.5, "cos_exact": 0.0},
+    "n=100": {"dollard_error": 1.07e-14, "standard_error": 4.66e-15, "ratio": 2.3, "cos_exact": -1.0},
+    "n=200": {"dollard_error": 1.42e-13, "standard_error": 8.66e-15, "ratio": 16.4, "cos_exact": 1.0},
+    "n=500": {"dollard_error": 0.0, "standard_error": 2.15e-14, "ratio": 0.0, "cos_exact": -1.0},
+    "n=1000": {"dollard_error": 0.0, "standard_error": 4.04e-14, "ratio": 0.0, "cos_exact": 1.0}
+  },
+  "observation": "Zero error at n=500 (cos=-1) and n=1000 (cos=1). u,nu ~ 11 trillion yet u-nu = 1.0 exactly.",
+  "scalar_parts_at_n1000": {
+    "u": 11007876465157.789,
+    "x": 11007876465157.289,
+    "nu": 11007876465156.789,
+    "y": 11007876465157.281,
+    "u_minus_nu": 1.0,
+    "all_positive": true
+  },
+  "status": "UNEXPLAINED",
+  "next": "Systematic n-sweep (all n 1-1000) per docs/experiments/001-systematic-n-sweep.md"
+}

@@ -1,0 +1,82 @@
+{
+  "experiment": "M8.2",
+  "description": "Yukawa texture extraction under SU(3)_family breaking",
+  "claim_tag": "[CO]",
+  "key_correction": "SU(3)-symmetric limit gives degenerate masses (\u03b4_{ij}), NOT democratic mixing matrix. This was corrected from initial analysis per polymathic research (2026-03-16).",
+  "scenario_a_triplet": {
+    "description": "Triplet flavon breaks SU(3) \u2192 SU(2), rank-2 Yukawa",
+    "best_fit": {
+      "params": {
+        "a": 0.1,
+        "b": 0.5,
+        "c": 0.5
+      },
+      "angles": {
+        "theta_12": 13.02,
+        "theta_23": 0.0,
+        "theta_13": 0.0
+      },
+      "mass_ratios_u": [
+        0.630276,
+        0.873945,
+        1.0
+      ],
+      "mass_ratios_d": [
+        0.906783,
+        0.945593,
+        1.0
+      ],
+      "V_us": 0.2252
+    },
+    "num_free_params": 3,
+    "note": "3 free parameters (a, b, c) can always fit 3 mixing angles \u2014 underdetermined"
+  },
+  "scenario_b_adjoint": {
+    "description": "Adjoint (octet) flavon, Gell-Mann texture",
+    "vev_diagonal": {
+      "direction": "\u03bb\u2083",
+      "eigenvalues": [
+        1.0,
+        -1.0,
+        0.0
+      ],
+      "note": "Two nonzero masses, one massless \u2014 ruled out for quarks"
+    },
+    "vev_su2": {
+      "direction": "\u03bb\u2088",
+      "eigenvalues": [
+        -1.1547,
+        0.5774,
+        0.5774
+      ],
+      "note": "Two degenerate, one different \u2014 ruled out for quarks"
+    },
+    "vev_general": {
+      "direction": "\u03bb\u2083 + \u03bb\u2088 mix",
+      "eigenvalues": [
+        -1.0613,
+        0.1367,
+        0.9246
+      ],
+      "note": "All different \u2014 viable but requires fine-tuning"
+    },
+    "num_free_params_per_sector": 1,
+    "note": "Single adjoint VEV gives diagonal Yukawa (zero mixing). Mixing requires two sectors with different VEVs."
+  },
+  "scenario_c_sextet": {
+    "description": "Sextet flavon, general symmetric texture (rank 3)",
+    "example_mass_ratios": [
+      0.001202,
+      0.041335,
+      1.0
+    ],
+    "num_free_params_after_rotation": 2,
+    "note": "After SU(3) rotation and removing scale: 2 free mass ratios per sector. CKM mixing requires two sextets (up + down), giving more parameters."
+  },
+  "assessment": {
+    "outcome": "C (underdetermined survival)",
+    "explanation": "The SU(9) embedding provides the group-theoretic framework, but the physical predictions depend entirely on the flavon sector (representation, VEV direction, number of flavons), which is not determined by the SU(9) structure alone. The framework is GENERIC: it does not select a unique flavon scenario, and individual scenarios range from structurally incapable (adjoint alone: no mixing) to underdetermined (triplet: 3 params for 3 angles).",
+    "comparison_to_standard_su5": "The Yukawa coupling factorizes as SU(5) \u00d7 SU(4), so the SU(5) part gives the standard GUT Yukawa relations (m_b = m_\u03c4 at GUT scale, etc.), while the SU(4) \u2248 SU(3)_family part is a generic family symmetry with no SU(9)-specific constraint.",
+    "kill_condition_status": "NOT KILLED: the framework is consistent but underdetermined. The SU(9) CG coefficients do not produce a unique Yukawa texture. This is Outcome C from the pre-registered kill condition."
+  }
+}

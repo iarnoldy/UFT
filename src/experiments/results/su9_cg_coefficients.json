@@ -1,0 +1,148 @@
+{
+  "experiment": "M8.1",
+  "description": "SU(9) Clebsch-Gordan coefficients for Yukawa kill-condition",
+  "claim_tag": "[CO]",
+  "lambda3_dim": 84,
+  "lambda3_conj_dim": 84,
+  "m8_1a": {
+    "contains_adjoint_80": true,
+    "adjoint_multiplicity": 1,
+    "contains_singlet": true,
+    "decomposition": {
+      "dim_5760_(1, 1, 1, 0, 0, 0, -1, -1, -1)": {
+        "dim": "5760",
+        "multiplicity": 1,
+        "dynkin": "(1, 1, 1, 0, 0, 0, -1, -1, -1)"
+      },
+      "dim_1215_(1, 1, 0, 0, 0, 0, 0, -1, -1)": {
+        "dim": "1215",
+        "multiplicity": 1,
+        "dynkin": "(1, 1, 0, 0, 0, 0, 0, -1, -1)"
+      },
+      "dim_80_(1, 0, 0, 0, 0, 0, 0, 0, -1)": {
+        "dim": "80",
+        "multiplicity": 1,
+        "dynkin": "(1, 0, 0, 0, 0, 0, 0, 0, -1)"
+      },
+      "dim_1_(0, 0, 0, 0, 0, 0, 0, 0, 0)": {
+        "dim": "1",
+        "multiplicity": 1,
+        "dynkin": "(0, 0, 0, 0, 0, 0, 0, 0, 0)"
+      }
+    },
+    "total_dim_check": "7056",
+    "expected_total": 7056
+  },
+  "m8_1b": {
+    "branching_84": {
+      "(10,1)": {
+        "su5_dim": 10,
+        "su4_dim": 1,
+        "total": 10
+      },
+      "(10,4)": {
+        "su5_dim": 10,
+        "su4_dim": 4,
+        "total": 40
+      },
+      "(5,6)": {
+        "su5_dim": 5,
+        "su4_dim": 6,
+        "total": 30
+      },
+      "(1,4-bar)": {
+        "su5_dim": 1,
+        "su4_dim": 4,
+        "total": 4
+      }
+    },
+    "branching_84_conj": {
+      "(10-bar,1)": {
+        "su5_dim": 10,
+        "su4_dim": 1,
+        "total": 10
+      },
+      "(10-bar,4-bar)": {
+        "su5_dim": 10,
+        "su4_dim": 4,
+        "total": 40
+      },
+      "(5-bar,6)": {
+        "su5_dim": 5,
+        "su4_dim": 6,
+        "total": 30
+      },
+      "(1,4)": {
+        "su5_dim": 1,
+        "su4_dim": 4,
+        "total": 4
+      }
+    },
+    "dim_check": 84
+  },
+  "m8_1c": {
+    "branching_80": {
+      "(24,1)": {
+        "su5_dim": 24,
+        "su4_dim": 1,
+        "total": 24,
+        "note": "SU(5) adjoint"
+      },
+      "(1,15)": {
+        "su5_dim": 1,
+        "su4_dim": 15,
+        "total": 15,
+        "note": "SU(4) adjoint"
+      },
+      "(5,4-bar)": {
+        "su5_dim": 5,
+        "su4_dim": 4,
+        "total": 20,
+        "note": "bifundamental"
+      },
+      "(5-bar,4)": {
+        "su5_dim": 5,
+        "su4_dim": 4,
+        "total": 20,
+        "note": "conjugate bifundamental"
+      },
+      "(1,1)": {
+        "su5_dim": 1,
+        "su4_dim": 1,
+        "total": 1,
+        "note": "relative U(1)"
+      }
+    },
+    "factorization_channels": {
+      "channel_1": {
+        "from_84": "(10,4)",
+        "from_84_conj": "(10-bar,4-bar)",
+        "from_80": "(1,1)",
+        "su5_contraction": "10 \u00d7 10-bar \u2192 1 (trivial)",
+        "su4_contraction": "4 \u00d7 4-bar \u2192 1 (trivial)",
+        "factorizes": true,
+        "note": "Diagonal channel \u2014 always factorizes"
+      },
+      "channel_2": {
+        "from_84": "(10,4)",
+        "from_84_conj": "(5-bar,6)",
+        "from_80": "(5-bar,4)",
+        "su5_contraction": "10 \u00d7 5-bar \u00d7 5-bar \u2192 check",
+        "su4_contraction": "4 \u00d7 6 \u00d7 4 \u2192 check",
+        "factorizes": "depends on CG details",
+        "note": "Cross channel \u2014 needs explicit CG computation"
+      },
+      "channel_3": {
+        "from_84": "(5,6)",
+        "from_84_conj": "(10-bar,4-bar)",
+        "from_80": "(5,4-bar)",
+        "su5_contraction": "5 \u00d7 10-bar \u00d7 5 \u2192 check",
+        "su4_contraction": "6 \u00d7 4-bar \u00d7 4-bar \u2192 check",
+        "factorizes": "depends on CG details",
+        "note": "Cross channel \u2014 needs explicit CG computation"
+      }
+    },
+    "conclusion": "The SU(9) Yukawa coupling factorizes into SU(5) \u00d7 SU(4) parts for the diagonal channel. The SU(4) contribution to the physical Yukawa is the identity matrix \u03b4_{ij} in the SU(3)-symmetric limit, giving degenerate masses. Non-trivial Yukawa textures require SU(3)_family breaking via a flavon VEV. The specific texture depends on the flavon representation and VEV direction, NOT on the SU(9) CG coefficients. This is Outcome C (underdetermined survival): the framework has free parameters and makes no unique prediction."
+  },
+  "runtime_seconds": "0.5"
+}

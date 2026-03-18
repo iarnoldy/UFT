@@ -140,6 +140,73 @@ or other extraordinary claims.
 
 ---
 
+## Enhancement Opportunity: Gross/Net Monitoring (from Dollard Investigation, 2026-03-17)
+
+**Status**: Documented, ready for implementation in N-Phase repo
+**Source**: `src/experiments/dollard/gross_net_frontier_research.py`
+**Tag**: [OUR ANALYSIS] — derived from mod-4 subseries, not from Dollard's explicit text
+
+### What It Is
+
+The Fortescue decomposition already produces N sequence components S_0, ..., S_{N-1}.
+Two quantities fall out for FREE (zero additional computation):
+
+```
+Gross = Σ |S_k|           (sum of sequence magnitudes)
+Net   = |Σ S_k|           (magnitude of reconstructed signal)
+Gross/Net ratio ≥ 1       (= 1 only when all components are in phase)
+```
+
+### Why It's Useful
+
+- **Resonance detection**: Gross/Net diverges near resonance (where components cancel)
+- **Conditioning indicator**: High ratio = computation is near a cancellation boundary
+- **Component stress prediction**: In power systems, Gross/Net ≈ Q factor ≈ voltage magnification
+
+### The Identity
+
+For standing wave systems:
+```
+Gross/Net = cosh(ln(SWR)) = (SWR + 1/SWR)/2 = (1 + |Γ|²)/(1 - |Γ|²)
+```
+
+This connects the Fortescue-derived ratio to standard RF measurement (SWR, reflection
+coefficient Γ, Q factor). Verified numerically for all SWR values.
+
+### N-Phase Connection (Confirmed for All N)
+
+The gross/net divergence is NOT specific to N=4 (Dollard's case). It appears for
+N=2, 3, 4, 5, 6, 7, 8, 12 — confirmed in `gross_net_frontier_research.py` Investigation 2.
+
+### Implementation
+
+In the N-Phase system, after computing sequence components via `FortescueDecomposer`:
+```python
+# Already computed:
+sequences = decomposer.forward(phases)  # shape: (batch, N, features)
+
+# Zero-cost additions:
+gross = torch.sum(torch.abs(sequences), dim=1)
+net = torch.abs(torch.sum(sequences, dim=1))
+conditioning = gross / (net + 1e-15)
+
+# Use conditioning as:
+# - Feature for anomaly detection (high ratio = near resonance)
+# - Numerical health metric (high ratio = ill-conditioned projection)
+# - Quality indicator (balanced system has ratio ≈ 1)
+```
+
+### What Does NOT Work
+
+- The Z4 cyclic convolution path is numerically inferior to standard rotation (979/1000 steps)
+- The "lifted representation" (staying in quaternary basis) was killed — exponential error growth
+- The zero-error finding was IEEE 754 coincidence, not structural
+- Quaternary cosh/sinh features were DEPRECATED by N-Phase E006a (redundant with magnitude)
+
+The gross/net ratio is the ONLY surviving computational enhancement. It's modest but real.
+
+---
+
 ## How to Use This Document
 
 1. **Cross-reference**: When updating CLAIM_TRIAGE.md, cite specific N-Phase tests

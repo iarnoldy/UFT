@@ -1,0 +1,83 @@
+{
+  "experiment": "Council-R4-Task3",
+  "description": "Triality reps through SM branching chain",
+  "claim_tag": "[CO]",
+  "so8_reps": {
+    "8v": 8,
+    "8s": 8,
+    "8c": 8
+  },
+  "so8_to_g2": {
+    "8v": "G2(0,0,0) + G2(1,0,-1)",
+    "8s": "G2(0,0,0) + G2(1,0,-1)",
+    "8c": "G2(0,0,0) + G2(1,0,-1)",
+    "all_identical": true,
+    "computed": true
+  },
+  "g2_to_su3": {
+    "7": "3 + 3* + 1",
+    "computed": false,
+    "error": "Incompatible ranks"
+  },
+  "e8_to_e6_su3": {
+    "decomposition": "248 = (78,1) + (1,8) + (27,3) + (27-bar,3-bar)",
+    "dim_check": 248,
+    "consistent": true
+  },
+  "generation_argument": {
+    "representation": "(27,3) of E6 x SU(3) in the 248 of E8",
+    "key_property": "In a tensor product V tensor W, the V quantum numbers are identical for all components in W. The three copies of 27 indexed by SU(3) have IDENTICAL E6 quantum numbers by construction.",
+    "conclusion": "The three copies of the 27 in (27,3) carry IDENTICAL SM quantum numbers. This resolves the 'types vs copies' question FOR THIS SPECIFIC CHAIN: E8 -> E6 x SU(3) -> three identical 27s of E6.",
+    "caveat_1": "This does NOT use triality. The three copies come from the SU(3) factor in E8 -> E6 x SU(3), not from D4 triality.",
+    "caveat_2": "The SU(3) that indexes generations is a GAUGE symmetry (part of E8), not a global family symmetry. It must be broken to distinguish generations."
+  },
+  "e6_27_to_so10": {
+    "branching": "D5(0,0,0,0,0) + D5(1/2,1/2,1/2,1/2,1/2) + D5(1,0,0,0,0)",
+    "computed": true
+  },
+  "so10_to_su5": {
+    "16_branching": "A4(-1/2,-1/2,-1/2,-1/2,-1/2) + A4(1/2,1/2,-1/2,-1/2,-1/2) + A4(1/2,1/2,1/2,1/2,-1/2)",
+    "10_branching": "A4(1,0,0,0,0) + A4(0,0,0,0,-1)",
+    "computed": true
+  },
+  "su5_to_gsm": {
+    "10": {
+      "(3,2,+1/6)": "Q_L",
+      "(3-bar,1,-2/3)": "u_R^c",
+      "(1,1,+1)": "e_R^c"
+    },
+    "5-bar": {
+      "(3-bar,1,+1/3)": "d_R^c",
+      "(1,2,-1/2)": "L_L"
+    },
+    "1": {
+      "(1,1,0)": "nu_R^c"
+    }
+  },
+  "chains_comparison": {
+    "chain_e6_su3": {
+      "decomposition": "E8 -> E6 x SU(3)",
+      "source_of_3": "SU(3) fundamental representation",
+      "types_or_copies": "COPIES (by tensor product structure)",
+      "status": "RESOLVED"
+    },
+    "chain_d4_triality": {
+      "decomposition": "E8 -> SO(16) -> SO(8) x SO(8), then D4 triality",
+      "source_of_3": "S3 = Out(D4)",
+      "types_or_copies": "TYPES (8v, 8s, 8c are different representations)",
+      "status": "UNRESOLVED (collapse under G2, but full SM chain not done)"
+    },
+    "chain_su9": {
+      "decomposition": "E8 -> SU(9)/Z3",
+      "source_of_3": "Z3 center of SU(9)",
+      "types_or_copies": "MIXED -- 80,84,84* are types; within 84, 3 gens are copies",
+      "status": "PARTIALLY RESOLVED"
+    }
+  },
+  "summary": {
+    "mechanism_b_result": "The 'types vs copies' gap is RESOLVED for E8 -> E6 x SU(3). Three copies of 27 arise from tensor product (27,3), carrying IDENTICAL SM quantum numbers by construction.",
+    "triality_status": "D4 triality argument remains UNRESOLVED. 8v, 8s, 8c are different reps. They become identical under G2 (all -> 7+1), but full SM chain not done.",
+    "implication": "E8 -> E6 x SU(3) naturally provides three generations with identical gauge quantum numbers. However: (1) this subgroup choice is not unique, (2) SU(3)_family must be broken with additional input."
+  },
+  "runtime_seconds": 0.32
+}

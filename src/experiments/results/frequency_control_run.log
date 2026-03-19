@@ -1,0 +1,82 @@
+======================================================================
+QPE Frequency Control: 32-freq Standard PE (interleaved zero-pad)
+Started: 2026-03-18T19:56:42.870079
+Device: cuda
+Frequencies: 32 geometric [0.0001, 0.02]
+Layout: [sin, cos, 0, 0] x 32 = 128 dims
+Seeds: [42, 123, 456, 789, 2024]
+======================================================================
+
+  [1/5] seed 42
+    [SEED 42] Epoch  1/20 | val_ppl=812.94 | 260.5s
+    [SEED 42] Epoch  2/20 | val_ppl=1243.56 | 223.7s
+    [SEED 42] Epoch  3/20 | val_ppl=1830.72 | 207.5s
+    [SEED 42] Epoch  4/20 | val_ppl=2245.94 | 201.9s
+    [SEED 42] Epoch  5/20 | val_ppl=2814.55 | 208.3s
+    [SEED 42] Epoch  6/20 | val_ppl=3583.51 | 205.3s
+    [SEED 42] Early stop at epoch 6
+  Result: completed | best_ppl=812.94
+
+  [2/5] seed 123
+    [SEED 123] Epoch  1/20 | val_ppl=765.91 | 211.8s
+    [SEED 123] Epoch  2/20 | val_ppl=1047.39 | 238.7s
+    [SEED 123] Epoch  3/20 | val_ppl=1432.57 | 210.6s
+    [SEED 123] Epoch  4/20 | val_ppl=1807.88 | 196.9s
+    [SEED 123] Epoch  5/20 | val_ppl=2687.03 | 197.8s
+    [SEED 123] Epoch  6/20 | val_ppl=2944.64 | 187.0s
+    [SEED 123] Early stop at epoch 6
+  Result: completed | best_ppl=765.91
+
+  [3/5] seed 456
+    [SEED 456] Epoch  1/20 | val_ppl=849.98 | 180.1s
+    [SEED 456] Epoch  2/20 | val_ppl=1232.37 | 186.3s
+    [SEED 456] Epoch  3/20 | val_ppl=1906.08 | 179.9s
+    [SEED 456] Epoch  4/20 | val_ppl=2358.38 | 179.4s
+    [SEED 456] Epoch  5/20 | val_ppl=3160.55 | 180.6s
+    [SEED 456] Epoch  6/20 | val_ppl=3567.32 | 174.3s
+    [SEED 456] Early stop at epoch 6
+  Result: completed | best_ppl=849.98
+
+  [4/5] seed 789
+    [SEED 789] Epoch  1/20 | val_ppl=829.09 | 174.3s
+    [SEED 789] Epoch  2/20 | val_ppl=1166.34 | 179.3s
+    [SEED 789] Epoch  3/20 | val_ppl=1815.70 | 175.8s
+    [SEED 789] Epoch  4/20 | val_ppl=2407.81 | 173.6s
+    [SEED 789] Epoch  5/20 | val_ppl=2900.94 | 173.8s
+    [SEED 789] Epoch  6/20 | val_ppl=3440.77 | 180.7s
+    [SEED 789] Early stop at epoch 6
+  Result: completed | best_ppl=829.09
+
+  [5/5] seed 2024
+    [SEED 2024] Epoch  1/20 | val_ppl=780.50 | 174.0s
+    [SEED 2024] Epoch  2/20 | val_ppl=1050.03 | 174.2s
+    [SEED 2024] Epoch  3/20 | val_ppl=1264.32 | 180.7s
+    [SEED 2024] Epoch  4/20 | val_ppl=1042.76 | 204.0s
+    [SEED 2024] Epoch  5/20 | val_ppl=1215.24 | 186.5s
+    [SEED 2024] Epoch  6/20 | val_ppl=1394.48 | 178.2s
+    [SEED 2024] Early stop at epoch 6
+  Result: completed | best_ppl=780.50
+
+======================================================================
+FREQUENCY CONTROL RESULTS
+======================================================================
+
+Standard PE 32-freq (interleaved zero-pad):
+  Completed: 5/5 seeds
+  Mean PPL: 807.68 ± 34.49
+  Min: 765.91, Max: 849.98
+  All PPLs: ['812.94', '765.91', '849.98', '829.09', '780.50']
+
+--- COMPARISON (reference from multi-seed run) ---
+  Standard PE 64-freq (Vaswani):   896.37 ± 72.46
+  Standard PE 64-freq (geometric): 790.82 ± 63.18
+  QPE 32-freq (geometric):         614.05 ± 221.16
+  THIS: Standard 32-freq (geo):    807.68 ± 34.49
+
+--- INTERPRETATION ---
+  Closer to Standard-64 (17 vs 194)
+  -> Frequency count does NOT explain QPE's advantage
+  -> QPE encoding (cosh/sinh channels) provides genuine benefit
+
+Results saved to: C:\Users\ianar\Documents\CODING\UFT\dollard-formal-verification\src\experiments\qpe\..\results\qpe_frequency_control.json
+Finished: 2026-03-18T21:33:11.920328

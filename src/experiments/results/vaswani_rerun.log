@@ -1,0 +1,57 @@
+======================================================================
+QPE Vaswani Rerun — Overflow Fix Verification
+Started: 2026-03-18T18:22:04.217267
+Device: cuda
+======================================================================
+
+============================================================
+VARIANT: QPE (Vaswani freqs) [control, expect NaN]
+============================================================
+
+  [1/10] QPE (Vaswani freqs) [control, expect NaN] — seed 42
+    [SEED 42] NaN at epoch 1
+  Result: nan_diverged | best_ppl=nan
+
+  [2/10] QPE (Vaswani freqs) [control, expect NaN] — seed 123
+    [SEED 123] NaN at epoch 1
+  Result: nan_diverged | best_ppl=nan
+
+  [3/10] QPE (Vaswani freqs) [control, expect NaN] — seed 456
+    [SEED 456] NaN at epoch 1
+  Result: nan_diverged | best_ppl=nan
+
+  [4/10] QPE (Vaswani freqs) [control, expect NaN] — seed 789
+    [SEED 789] NaN at epoch 1
+  Result: nan_diverged | best_ppl=nan
+
+  [5/10] QPE (Vaswani freqs) [control, expect NaN] — seed 2024
+    [SEED 2024] NaN at epoch 1
+  Result: nan_diverged | best_ppl=nan
+
+============================================================
+VARIANT: QPE log_scale (Vaswani freqs) [overflow fix]
+============================================================
+
+  [6/10] QPE log_scale (Vaswani freqs) [overflow fix] — seed 42
+    [SEED 42] Epoch  1/20 | val_ppl=1368.79 | 192.3s
+    [SEED 42] Epoch  2/20 | val_ppl=2286.86 | 190.2s
+    [SEED 42] Epoch  3/20 | val_ppl=2841.97 | 191.2s
+    [SEED 42] Epoch  4/20 | val_ppl=3107.38 | 190.5s
+    [SEED 42] Epoch  5/20 | val_ppl=3677.91 | 191.7s
+    [SEED 42] Epoch  6/20 | val_ppl=4063.01 | 191.7s
+    [SEED 42] Early stop at epoch 6
+  Result: completed | best_ppl=1368.79
+
+  [7/10] QPE log_scale (Vaswani freqs) [overflow fix] — seed 123
+    [SEED 123] Epoch  1/20 | val_ppl=1507.04 | 186.2s
+    [SEED 123] Epoch  2/20 | val_ppl=2304.53 | 191.6s
+    [SEED 123] Epoch  3/20 | val_ppl=2567.56 | 189.8s
+    [SEED 123] Epoch  4/20 | val_ppl=3202.04 | 211.5s
+    [SEED 123] Epoch  5/20 | val_ppl=3477.69 | 190.2s
+    [SEED 123] Epoch  6/20 | val_ppl=3905.16 | 192.7s
+    [SEED 123] Early stop at epoch 6
+  Result: completed | best_ppl=1507.04
+
+  [8/10] QPE log_scale (Vaswani freqs) [overflow fix] — seed 456
+    [SEED 456] Epoch  1/20 | val_ppl=1403.46 | 189.9s
+    [SEED 456] Epoch  2/20 | val_ppl=2300.03 | 193.0s

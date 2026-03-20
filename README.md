@@ -1,16 +1,16 @@
-# Formal Verification of Alternative Mathematical Frameworks
+# Machine-Verified Lie Algebra Chain: Clifford Algebras to E₈
 
-Machine-verified dimensional scaffold from Dollard's versor algebra through Clifford algebras to E₈, built in [Lean 4](https://lean-lang.org/) with mathlib. Five certified Lie algebra morphisms: three composing into a chain SU(5) →ₗ⁅ℝ⁆ SO(10) →ₗ⁅ℝ⁆ SO(14) →ₗ⁅ℝ⁆ SO(16), plus SO(4) →ₗ⁅ℝ⁆ SO(14) and a separate SO(14) →ₗ⁅ℝ⁆ SO(14)\_matrix type bridge. E₈ (248-dimensional) verified as a Lie algebra via sparse Jacobi identity — to our knowledge, the first formalization of E₈ in any interactive theorem prover.
+Lean 4 + mathlib project verifying the algebraic structure of Lie algebra embeddings from Clifford algebras through the grand unification chain to E₈. Five certified `LieHom`s composing into SU(5) →ₗ⁅ℝ⁆ SO(10) →ₗ⁅ℝ⁆ SO(14) →ₗ⁅ℝ⁆ SO(16), plus SO(4) →ₗ⁅ℝ⁆ SO(14) and a type bridge SO(14) →ₗ⁅ℝ⁆ SO(14)\_matrix. E₈ (248-dimensional) verified as a Lie algebra via sparse Jacobi identity — a concrete Chevalley basis with integer structure constants from SageMath, all 3.78 billion Jacobi evaluations checked by `native_decide`.
 
 **88 compiled proof files. ~2,975 verified declarations. Zero `sorry` gaps.**
 
 ## What This Is
 
-A research project that applies interactive theorem provers (Lean 4) to claims from alternative mathematical frameworks. Starting from Eric Dollard's "versor algebra," we extract formalizable claims, prove or disprove each one, and trace the algebraic path from the source claims through Clifford algebras to gauge unification.
+A Lean 4 formalization project verifying Lie algebra embeddings along the chain Cl(1,3) → SU(5) → SO(10) → SO(14) → SO(16) → E₈. The project originated from investigating Eric Dollard's "versor algebra" — extracting formalizable claims, proving or disproving each, and tracing the algebraic path through Clifford algebras. The mathematical content stands independently of its historical starting point.
 
-Includes what is, to our knowledge, the first machine-verified formalization of the E₈ Lie algebra in any interactive theorem prover: 248 dimensions, 7,752 nonzero brackets, Jacobi identity verified across 3.78 billion evaluations (248⁴) via `native_decide` with sparse structure constant iteration. Also includes what we believe to be the first machine-verified so(10) spinor representation homomorphism: 1,980 bracket equations verified by `native_decide` over exact rational arithmetic.
+The E₈ formalization uses a concrete Chevalley basis (248 generators, 7,752 nonzero brackets, integer structure constants from SageMath) with Jacobi identity verified across 3.78 billion evaluations via `native_decide` and sparse structure constant iteration. We are not aware of a prior E₈ formalization in an interactive theorem prover, but welcome corrections. The so(10) spinor representation homomorphism (1,980 bracket equations, `native_decide` over exact rationals) is also included.
 
-Eight Lie algebras — so(1,3), sl(3), sl(5), su(5), so(10), so(14), so(4), so(16) — carry certified `LieRing` + `LieAlgebra ℝ` instances. E₈ has Jacobi verified via `native_decide` but not yet upgraded to mathlib typeclasses. Five certified `LieHom`s: three forming a chain su(5) →ₗ⁅ℝ⁆ so(10) →ₗ⁅ℝ⁆ so(14) →ₗ⁅ℝ⁆ so(16), plus so(4) →ₗ⁅ℝ⁆ so(14). A separate so(14) →ₗ⁅ℝ⁆ so(14)\_matrix bridge connects the flat algebraic chain to the mathlib matrix infrastructure. E₈ verified via a novel sparse Jacobi approach that reduced computation from an estimated ~900 CPU-hours (dense matrix commutators) to ~2.4 hours (sparse structure constant iteration, parallel compilation).
+Eight Lie algebras — so(1,3), sl(3), sl(5), su(5), so(10), so(14), so(4), so(16) — carry certified `LieRing` + `LieAlgebra ℝ` instances. E₈ has Jacobi verified but is not yet upgraded to mathlib typeclasses. Five certified `LieHom`s form the chain su(5) →ₗ⁅ℝ⁆ so(10) →ₗ⁅ℝ⁆ so(14) →ₗ⁅ℝ⁆ so(16), plus so(4) →ₗ⁅ℝ⁆ so(14). A type bridge so(14) →ₗ⁅ℝ⁆ so(14)\_matrix connects the flat algebraic chain to mathlib's matrix Lie algebra infrastructure.
 
 ## What This Proves — And What It Doesn't
 
@@ -74,7 +74,7 @@ The headline results — each a genuine theorem, not dimensional arithmetic:
 | `anomaly_trace_identity` | Tr(A{B,C}) = 0 for antisymmetric matrices (anomaly cancellation) |
 | `spinor_rep_homomorphism` | [ρ(X),ρ(Y)] = ρ([X,Y]) for all 990 so(10) basis pairs |
 | `three_generation_theorem` | SO(14) impossibility + E₈ yields exactly 3 generations |
-| `killing_form_unique` | Schur's Lemma → Killing form uniqueness (to our knowledge, first in any ITP) |
+| `killing_form_unique` | Schur's Lemma → Killing form uniqueness |
 | `complete_chirality_factorization` | Chirality emerges from 4D×10D unification |
 
 <details>
@@ -103,7 +103,7 @@ The headline results — each a genuine theorem, not dimensional arithmetic:
 | `odd_nine_all_chiral` | `massive_chirality_definition` | All exterior powers of C⁹ are chiral (9 is odd) |
 | `complete_chirality_factorization` | `chirality_factorization` | Chirality emerges from 4D×10D unification |
 | `lagrangian_uniqueness` | `lagrangian_uniqueness` | Yang-Mills Lagrangian form is unique (Killing) |
-| `killing_form_unique` | `schur_killing_uniqueness` | Schur's Lemma → Killing form uniqueness (to our knowledge, first in any ITP) |
+| `killing_form_unique` | `schur_killing_uniqueness` | Schur's Lemma → Killing form uniqueness |
 | `spinor_rep_homomorphism_real/imag` | `spinor_rep_homomorphism` | [ρ(X),ρ(Y)] = ρ([X,Y]) for all 990 so(10) basis pairs |
 | `d_squared_zero` | `differential_forms` | d²=0 from mathlib's extDeriv (replaces axiom) |
 | `clifford_relation_cl13` | `cl31_maxwell` | Full Cl(1,3) Clifford relation verified from 256-term mul table |

@@ -192,9 +192,14 @@ These agents and skills are specifically built for this project. Use them.
 | SO(14) paper writing | `so14-paper-architect` agent | Paper 3 integration, claim tagging, honesty review |
 | Chirality problem | `massive-chirality-definition` skill | Open problem: chirality for massive fermions in E₈(-24) |
 | Research coordination | `research-orchestrator` agent | Multi-agent workflows, test coverage, git version control |
+| Mathlib PR generation | `mathlib-pr-engineer` agent | Reformats proven Lean code to mathlib review standards (ocfnash-approved) |
+| Mathlib conventions | `mathlib-pr-engineer` skill | Complete knowledge base: naming, linting, style, generality, PR patterns |
+| Lean proof pipeline | `lean-proof-pipeline` skill | End-to-end: generate→build→QA→fix loop + knowledge gleaning |
 
 **Routing rule**: For ANY paper work, follow the pipeline below. For Lean proof work,
-use the theorem-proving skill. For physics construction, use the SO(14) specialists.
+use the theorem-proving skill. For mathlib PR preparation, use the lean-proof-pipeline
+skill (full loop) or mathlib-pr-engineer (QA only).
+For physics construction, use the SO(14) specialists.
 For cross-cutting coordination, use the research-orchestrator.
 
 ## Paper Integrity Pipeline (MANDATORY)

@@ -131,8 +131,8 @@ lake env lean src/lean_proofs/foundations/basic_operators.lean  # single file
 | **Project roadmap (Papers 3 & 4)** | `docs/PROJECT_ROADMAP.md` |
 | SO(14) as LieAlgebra ℝ | `src/lean_proofs/clifford/so14_grand.lean` |
 | SO(10) →ₗ⁅ℝ⁆ SO(14) LieHom | `src/lean_proofs/clifford/so10_so14_liehom.lean` |
-| SO(4) compact gravity type | `src/lean_proofs/clifford/so4_gravity.lean` |
-| SO(4) →ₗ⁅ℝ⁆ SO(14) LieHom | `src/lean_proofs/clifford/so4_so14_liehom.lean` |
+| SO(4) compact gravity (CommRing R) | `src/lean_proofs/clifford/so4_gravity.lean` |
+| SO(4) ℝ →ₗ⁅ℝ⁆ SO(14) LieHom | `src/lean_proofs/clifford/so4_so14_liehom.lean` |
 | SO(14) bracket generator | `scripts/so14_bracket_gen.py` |
 | SU5C bracket generator | `scripts/su5c_bracket_gen.py` |
 | Anomaly trace identity [MV] | `src/lean_proofs/clifford/anomaly_trace.lean` |
@@ -174,27 +174,46 @@ lake env lean src/lean_proofs/foundations/basic_operators.lean  # single file
 
 These agents and skills are specifically built for this project. Use them.
 
+### Paper Pipeline
 | Task | Agent/Skill | What it does |
 |------|-------------|-------------|
-| Audit paper claims vs proofs | `paper-integrity-auditor` agent | Maps prose claims to Lean theorems, classifies ACCURATE/OVERCLAIMED/etc. |
-| Verify citations against APIs | `citation-verifier` agent | Queries INSPIRE-HEP/Semantic Scholar/CrossRef, detects hallucinated/misattributed citations, populates DOIs |
-| Rewrite paper after audit | `paper-rewrite-workflow` skill | 5-layer discipline: Lean speaks, reasoning-as-prose, Ian writes narrative, citations verified, Claude formats |
-| Final paper proofread | `paper-proofreader` agent | 5-gate protocol: compilation, math, consistency, bibliography, submission readiness |
+| Audit paper claims vs proofs | `paper-integrity-auditor` agent | Maps prose claims to Lean theorems, classifies accuracy |
+| Audit experimental claims | `paper-integrity-audit-experimental` skill | Same protocol adapted for numerical results |
+| Verify citations against APIs | `citation-verifier` agent + `citation-verification` skill | INSPIRE-HEP/Semantic Scholar/CrossRef verification |
+| Rewrite paper after audit | `paper-rewrite-workflow` skill | 5-layer: Lean speaks, reasoning, Ian's voice, citations, formatting |
+| Final paper proofread | `paper-proofreader` agent + `latex-paper-proofread` skill | 5-gate protocol |
+| Paper 3 integration | `so14-paper-architect` agent | Claim tagging, honesty review |
+
+### Lean & Mathlib
+| Task | Agent/Skill | What it does |
+|------|-------------|-------------|
 | Formal proof writing | `lean4-theorem-proving` skill | Lean 4 patterns, mathlib tactics, proof strategies |
 | Lie algebra upgrades | `mathlib-lie-upgrade` skill | Pattern for adding LieRing/LieAlgebra instances |
-| Dollard theory questions | `dollard-theorist` agent | PhD-level math: gradients, decomposition properties, versor algebra |
-| Clifford algebra construction | `clifford-unification-engineer` agent | so(10), E₈, Lie algebras in Lean 4, Jacobi identities |
-| SO(14) breaking chains | `so14-breaking-architect` agent | Symmetry breaking SO(14) → Standard Model |
-| SO(14) generations | `so14-generation-specialist` agent | Three-generation problem, spinor decomposition |
-| SO(14) Lagrangian | `so14-lagrangian-engineer` agent | Full Lagrangian construction, beta functions |
-| SO(14) predictions | `so14-phenomenologist` agent | Proton decay, coupling unification, testable predictions |
-| SO(14) signatures | `so14-signature-analyst` agent | Compact vs Lorentzian, Distler ghost objection |
-| SO(14) paper writing | `so14-paper-architect` agent | Paper 3 integration, claim tagging, honesty review |
-| Chirality problem | `massive-chirality-definition` skill | Open problem: chirality for massive fermions in E₈(-24) |
-| Research coordination | `research-orchestrator` agent | Multi-agent workflows, test coverage, git version control |
-| Mathlib PR generation | `mathlib-pr-engineer` agent | Reformats proven Lean code to mathlib review standards (ocfnash-approved) |
-| Mathlib conventions | `mathlib-pr-engineer` skill | Complete knowledge base: naming, linting, style, generality, PR patterns |
+| Mathlib PR generation | `mathlib-pr-engineer` agent + skill | Reformats to mathlib standards (ocfnash-approved) |
 | Lean proof pipeline | `lean-proof-pipeline` skill | End-to-end: generate→build→QA→fix loop + knowledge gleaning |
+
+### Physics Construction (SO(14)/E₈)
+| Task | Agent/Skill | What it does |
+|------|-------------|-------------|
+| SO(14) breaking chains | `so14-breaking-architect` agent + `so14-breaking-chains` skill | Symmetry breaking SO(14) → SM |
+| SO(14) generations | `so14-generation-specialist` agent + `so14-representation-theory` skill | Three-gen problem, spinor decomposition |
+| SO(14) Lagrangian | `so14-lagrangian-engineer` agent + `so14-lagrangian-toolkit` skill (v2.1) | Higgs potential, quartic invariants, Yukawa |
+| SO(14) predictions | `so14-phenomenologist` agent + `so14-gut-phenomenology` skill (v2.0) | Proton decay, coupling unification, Yukawa pipeline |
+| SO(14) signatures | `so14-signature-analyst` agent + `so14-signature-forms` skill | Compact vs Lorentzian, Distler ghost objection |
+| Ghost/unitarity | `ghost-resolution-specialist` agent + `ghost-resolution-physics` skill | BRST, Krasnov, fakeon prescription |
+| Three-generation mechanism | `three-generation-mechanics` skill (v1.1) | SU(9)/Z₃, CG coefficients, Wilson's construction, kill conditions |
+| Chirality problem | `massive-chirality-definition` skill | Open problem: chirality for massive fermions in E₈(-24) |
+
+### Foundational Reference
+| Task | Agent/Skill | What it does |
+|------|-------------|-------------|
+| Clifford algebra construction | `clifford-unification-engineer` agent | so(10), E₈, Lie algebras in Lean 4, Jacobi identities |
+| Clifford algebra reference | `clifford-algebra-reference` skill | Basis blades, products, Cl(p,q,r) specifications |
+| Clifford → E₈ roadmap | `clifford-unification-reference` skill | Algebraic roadmap from Dollard to E₈ |
+| Dollard theory | `dollard-theorist` agent + `dollard-lens` skill | Versor algebra, source text compliance |
+| Dollard operators | `dollard-versor-operators` skill | j, h, k operators with historical context |
+| Research coordination | `research-orchestrator` agent | Multi-agent workflows, test coverage, git |
+| Polymathic research | `polymathic-researcher` agent + skill | Deep cross-domain investigation |
 
 **Routing rule**: For ANY paper work, follow the pipeline below. For Lean proof work,
 use the theorem-proving skill. For mathlib PR preparation, use the lean-proof-pipeline

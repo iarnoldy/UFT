@@ -4,8 +4,13 @@ UFT Formal Verification - SO(4) Compact Gravity Algebra
 
 THE COMPACT so(4) LIE ALGEBRA (GRAVITY SECTOR)
 
-This file defines so(4) as a 6-dimensional Lie algebra with certified
-LieRing and LieAlgebra ℝ instances.
+This file defines so(4) as a 6-dimensional Lie algebra parametric over any
+CommRing R, with certified LieRing and LieAlgebra R instances.
+
+Generality: by working over CommRing R rather than ℝ, the algebraic identities
+(Jacobi, antisymmetry, structure constants) hold for ANY commutative ring.
+Instantiate at ℝ for physics, at ℚ for exact computation, at ℤ for integrality.
+This is Phase 2 of the signature-independence chain.
 
 so(4) is the COMPACT form of the rotation algebra in 4 dimensions.
 It appears as the gravity sector of so(14) when using compact signature
@@ -42,44 +47,48 @@ import Mathlib.Algebra.Lie.Basic
 
 /-! ## Part 1: The so(4) Compact Lie Algebra
 
-6 generators corresponding to antisymmetric 4×4 matrices. -/
+6 generators corresponding to antisymmetric 4×4 matrices,
+parametric over any commutative ring R. -/
 
-/-- The compact Lie algebra so(4), with 6 generators L_{ij} (i < j).
-    Isomorphic to su(2) ⊕ su(2). NOT isomorphic to so(1,3). -/
+/-- The compact Lie algebra so(4), with 6 generators L_{ij} (i < j),
+    over a commutative ring R. Isomorphic to su(2) ⊕ su(2) over ℝ.
+    NOT isomorphic to so(1,3) over ℝ. -/
 @[ext]
-structure SO4 where
-  l12 : ℝ  -- L_{1,2}
-  l13 : ℝ  -- L_{1,3}
-  l14 : ℝ  -- L_{1,4}
-  l23 : ℝ  -- L_{2,3}
-  l24 : ℝ  -- L_{2,4}
-  l34 : ℝ  -- L_{3,4}
+structure SO4 (R : Type*) [CommRing R] where
+  l12 : R  -- L_{1,2}
+  l13 : R  -- L_{1,3}
+  l14 : R  -- L_{1,4}
+  l23 : R  -- L_{2,3}
+  l24 : R  -- L_{2,4}
+  l34 : R  -- L_{3,4}
 
 namespace SO4
 
+variable {R : Type*} [CommRing R]
+
 /-! ## Part 2: Basic Operations -/
 
-def zero : SO4 := ⟨0, 0, 0, 0, 0, 0⟩
+def zero : SO4 R := ⟨0, 0, 0, 0, 0, 0⟩
 
-def neg (x : SO4) : SO4 := ⟨-x.l12, -x.l13, -x.l14, -x.l23, -x.l24, -x.l34⟩
+def neg (x : SO4 R) : SO4 R := ⟨-x.l12, -x.l13, -x.l14, -x.l23, -x.l24, -x.l34⟩
 
-def add (x y : SO4) : SO4 :=
+def add (x y : SO4 R) : SO4 R :=
   ⟨x.l12+y.l12, x.l13+y.l13, x.l14+y.l14, x.l23+y.l23, x.l24+y.l24, x.l34+y.l34⟩
 
-def smul (r : ℝ) (x : SO4) : SO4 :=
+def smul (r : R) (x : SO4 R) : SO4 R :=
   ⟨r*x.l12, r*x.l13, r*x.l14, r*x.l23, r*x.l24, r*x.l34⟩
 
-instance : Add SO4 := ⟨add⟩
-instance : Neg SO4 := ⟨neg⟩
-instance : Zero SO4 := ⟨zero⟩
-instance : Sub SO4 := ⟨fun a b => add a (neg b)⟩
-instance : SMul ℝ SO4 := ⟨smul⟩
+instance : Add (SO4 R) := ⟨add⟩
+instance : Neg (SO4 R) := ⟨neg⟩
+instance : Zero (SO4 R) := ⟨zero⟩
+instance : Sub (SO4 R) := ⟨fun a b => add a (neg b)⟩
+instance : SMul R (SO4 R) := ⟨smul⟩
 
-@[simp] lemma add_def (a b : SO4) : a + b = add a b := rfl
-@[simp] lemma neg_def (a : SO4) : -a = neg a := rfl
-@[simp] lemma zero_val : (0 : SO4) = zero := rfl
-@[simp] lemma sub_def' (a b : SO4) : a - b = add a (neg b) := rfl
-@[simp] lemma smul_def' (r : ℝ) (a : SO4) : r • a = smul r a := rfl
+@[simp] lemma add_def (a b : SO4 R) : a + b = add a b := rfl
+@[simp] lemma neg_def (a : SO4 R) : -a = neg a := rfl
+@[simp] lemma zero_val : (0 : SO4 R) = zero := rfl
+@[simp] lemma sub_def' (a b : SO4 R) : a - b = add a (neg b) := rfl
+@[simp] lemma smul_def' (r : R) (a : SO4 R) : r • a = smul r a := rfl
 
 /-! ## Part 3: The Lie Bracket
 
@@ -87,7 +96,7 @@ instance : SMul ℝ SO4 := ⟨smul⟩
 with compact (Euclidean) metric. All 36 brackets computed. -/
 
 /-- The Lie bracket of two so(4) elements (compact metric). -/
-def comm (X Y : SO4) : SO4 where
+def comm (X Y : SO4 R) : SO4 R where
   -- [*, *] → l12 component: contributions from (13,23), (14,24) and reverses
   l12 := -(X.l13 * Y.l23) - (X.l14 * Y.l24) + X.l23 * Y.l13 + X.l24 * Y.l14
   -- [*, *] → l13 component: contributions from (12,23), (14,34) and reverses
@@ -104,17 +113,17 @@ def comm (X Y : SO4) : SO4 where
 /-! ## Part 4: Lie Algebra Verification -/
 
 /-- Antisymmetry: [X, Y] = -[Y, X]. -/
-theorem comm_antisymm (X Y : SO4) : comm X Y = neg (comm Y X) := by
+theorem comm_antisymm (X Y : SO4 R) : comm X Y = neg (comm Y X) := by
   ext <;> simp [comm, neg] <;> ring
 
 /-- The Jacobi identity for so(4). -/
-theorem jacobi (A B C : SO4) :
+theorem jacobi (A B C : SO4 R) :
     comm A (comm B C) + comm B (comm C A) + comm C (comm A B) = zero := by
   ext <;> simp [comm, add, zero] <;> ring
 
 /-! ## Part 5: Mathlib LieRing and LieAlgebra Instances -/
 
-instance : AddCommGroup SO4 where
+instance : AddCommGroup (SO4 R) where
   add_assoc := by intros; ext <;> simp [add] <;> ring
   zero_add := by intros; ext <;> simp [add, zero]
   add_zero := by intros; ext <;> simp [add, zero]
@@ -124,7 +133,7 @@ instance : AddCommGroup SO4 where
   nsmul := nsmulRec
   zsmul := zsmulRec
 
-instance : Module ℝ SO4 where
+instance : Module R (SO4 R) where
   one_smul := by intros; ext <;> simp [smul]
   mul_smul := by intros; ext <;> simp [smul] <;> ring
   smul_zero := by intros; ext <;> simp [smul, zero]
@@ -132,38 +141,38 @@ instance : Module ℝ SO4 where
   add_smul := by intros; ext <;> simp [smul, add] <;> ring
   zero_smul := by intros; ext <;> simp [smul, zero]
 
-instance : Bracket SO4 SO4 := ⟨comm⟩
+instance : Bracket (SO4 R) (SO4 R) := ⟨comm⟩
 
-@[simp] lemma bracket_def' (a b : SO4) : ⁅a, b⁆ = comm a b := rfl
+@[simp] lemma bracket_def' (a b : SO4 R) : ⁅a, b⁆ = comm a b := rfl
 
-instance : LieRing SO4 where
+instance : LieRing (SO4 R) where
   add_lie := by intros; ext <;> simp [comm, add] <;> ring
   lie_add := by intros; ext <;> simp [comm, add] <;> ring
   lie_self := by intro x; ext <;> simp [comm, zero] <;> ring
   leibniz_lie := by intros; ext <;> simp [comm, add] <;> ring
 
-instance : LieAlgebra ℝ SO4 where
+instance : LieAlgebra R (SO4 R) where
   lie_smul := by intros; ext <;> simp [comm, smul] <;> ring
 
 /-! ## Part 6: Basis Generators -/
 
-def L12 : SO4 := ⟨1, 0, 0, 0, 0, 0⟩
-def L13 : SO4 := ⟨0, 1, 0, 0, 0, 0⟩
-def L14 : SO4 := ⟨0, 0, 1, 0, 0, 0⟩
-def L23 : SO4 := ⟨0, 0, 0, 1, 0, 0⟩
-def L24 : SO4 := ⟨0, 0, 0, 0, 1, 0⟩
-def L34 : SO4 := ⟨0, 0, 0, 0, 0, 1⟩
+def L12 : SO4 R := ⟨1, 0, 0, 0, 0, 0⟩
+def L13 : SO4 R := ⟨0, 1, 0, 0, 0, 0⟩
+def L14 : SO4 R := ⟨0, 0, 1, 0, 0, 0⟩
+def L23 : SO4 R := ⟨0, 0, 0, 1, 0, 0⟩
+def L24 : SO4 R := ⟨0, 0, 0, 0, 1, 0⟩
+def L34 : SO4 R := ⟨0, 0, 0, 0, 0, 1⟩
 
 /-- [L12, L23] = L13. Two rotations compose. -/
-theorem bracket_L12_L23 : comm L12 L23 = L13 := by
+theorem bracket_L12_L23 : comm (R := R) L12 L23 = L13 := by
   ext <;> simp [comm, L12, L23, L13]
 
 /-- [L12, L13] = neg L23. -/
-theorem bracket_L12_L13 : comm L12 L13 = neg L23 := by
+theorem bracket_L12_L13 : comm (R := R) L12 L13 = neg L23 := by
   ext <;> simp [comm, L12, L13, neg, L23]
 
 /-- [L12, L34] = 0. Orthogonal rotations commute. -/
-theorem bracket_L12_L34 : comm L12 L34 = zero := by
+theorem bracket_L12_L34 : comm (R := R) L12 L34 = zero := by
   ext <;> simp [comm, L12, L34, zero]
 
 /-! ## Part 7: Comparison with Bivector (so(1,3))
@@ -184,15 +193,19 @@ end SO4
 /-! ## Summary
 
 ### What this file proves:
-1. so(4) compact Lie algebra with 6 generators (Part 1-3)
-2. Jacobi identity (Part 4)
-3. Certified LieRing and LieAlgebra ℝ instances (Part 5)
+1. so(4) compact Lie algebra with 6 generators, parametric over CommRing R (Part 1-3)
+2. Jacobi identity over any CommRing (Part 4)
+3. Certified LieRing and LieAlgebra R instances (Part 5)
 4. Structure constant verification (Part 6)
+
+### Generality:
+All algebraic identities hold over any CommRing R, not just ℝ.
+Instantiate SO4 ℝ for physics applications.
 
 ### Relationship to other files:
 - **gauge_gravity.lean**: Bivector = so(1,3), different algebra
 - **so14_grand.lean**: SO14 contains so(4) as gravity sector (indices 11-14)
-- **so4_so14_liehom.lean**: embeds this SO4 into SO14
+- **so4_so14_liehom.lean**: embeds SO4 ℝ into SO14
 
 ### Signature:
 This is the COMPACT form so(4) ≅ su(2) ⊕ su(2).

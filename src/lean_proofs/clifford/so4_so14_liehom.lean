@@ -7,6 +7,10 @@ CERTIFIED LIE ALGEBRA EMBEDDING: COMPACT so(4) INTO so(14)
 This file constructs a LieHom from the compact so(4) (defined in
 so4_gravity.lean) to so(14) (defined in so14_grand.lean).
 
+Since so4_gravity.lean now defines SO4 parametrically over CommRing R,
+this file uses the instantiation SO4 ℝ for the embedding into SO14
+(which remains over ℝ).
+
 The embedding maps so(4) generators (indices 1-4) to the gravity
 sector of so(14) (indices 11-14):
   SO4.L_{ij} → SO14.L_{i+10,j+10}
@@ -28,7 +32,7 @@ be embedded in so(14,0) via a LieHom. Physical gravity requires
 so(11,3) — see docs/SIGNATURE_ANALYSIS.md.
 
 References:
-  - so4_gravity.lean: SO4 type with LieAlgebra ℝ instance
+  - so4_gravity.lean: SO4 R type with LieAlgebra R instance
   - so14_grand.lean: SO14 type with LieAlgebra ℝ instance
   - su5c_so10_liehom.lean: pattern source
 -/
@@ -44,7 +48,7 @@ import clifford.so14_grand
 
     6 of the 91 SO14 slots receive SO4 data.
     85 slots are zero (gauge + mixed directions). -/
-def so4_toSO14 (x : SO4) : SO14 where
+def so4_toSO14 (x : SO4 ℝ) : SO14 where
   l12 := 0
   l13 := 0
   l14 := 0
@@ -139,13 +143,13 @@ def so4_toSO14 (x : SO4) : SO14 where
 
 /-! ## Part 2: Linearity Proofs -/
 
-theorem so4_toSO14_add (a b : SO4) :
+theorem so4_toSO14_add (a b : SO4 ℝ) :
     so4_toSO14 (a + b) = so4_toSO14 a + so4_toSO14 b := by
-  ext <;> simp [so4_toSO14, SO4.add, SO14.add, SO4.add_def, SO14.add_def] <;> ring
+  ext <;> simp [so4_toSO14, SO4.add, SO14.add, SO4.add_def, SO14.add_def]
 
-theorem so4_toSO14_smul (r : ℝ) (a : SO4) :
+theorem so4_toSO14_smul (r : ℝ) (a : SO4 ℝ) :
     so4_toSO14 (r • a) = r • so4_toSO14 a := by
-  ext <;> simp [so4_toSO14, SO4.smul, SO14.smul, SO4.smul_def', SO14.smul_def'] <;> ring
+  ext <;> simp [so4_toSO14, SO4.smul, SO14.smul, SO4.smul_def', SO14.smul_def']
 
 /-! ## Part 3: Bracket Preservation (The Main Theorem) -/
 
@@ -159,21 +163,21 @@ set_option maxHeartbeats 8000000 in
     12 input variables (6 per argument) × 91 output goals × polynomial ring.
     Most output goals are trivially 0 = 0 (85 zero fields on both sides).
     Budget: 8M heartbeats (small — only 12 input vars). -/
-theorem so4_toSO14_lie (x y : SO4) :
+theorem so4_toSO14_lie (x y : SO4 ℝ) :
     so4_toSO14 ⁅x, y⁆ = ⁅so4_toSO14 x, so4_toSO14 y⁆ := by
-  ext <;> simp [so4_toSO14, SO4.comm, SO14.comm, SO4.bracket_def', SO14.bracket_def'] <;> ring
+  ext <;> simp [so4_toSO14, SO4.comm, SO14.comm, SO4.bracket_def', SO14.bracket_def']
 
 /-! ## Part 4: The Certified LieHom -/
 
-/-- The certified Lie algebra homomorphism SO4 →ₗ⁅ℝ⁆ SO14.
+/-- The certified Lie algebra homomorphism SO4 ℝ →ₗ⁅ℝ⁆ SO14.
     This is the gravity-sector embedding:
     so(4) sits inside so(14) at indices {11,12,13,14}.
 
     Combined with so10_embed : SO10 →ₗ⁅ℝ⁆ SO14, this gives
     the gauge-gravity convergence diagram (in compact signature):
-      SO10 →ₗ⁅ℝ⁆ SO14 ←ₗ⁅ℝ⁆ SO4
+      SO10 →ₗ⁅ℝ⁆ SO14 ←ₗ⁅ℝ⁆ SO4 ℝ
     (gauge)              (gravity) -/
-def so4_embed : SO4 →ₗ⁅ℝ⁆ SO14 :=
+def so4_embed : SO4 ℝ →ₗ⁅ℝ⁆ SO14 :=
   { toLinearMap := {
       toFun := so4_toSO14
       map_add' := so4_toSO14_add
@@ -184,16 +188,16 @@ def so4_embed : SO4 →ₗ⁅ℝ⁆ SO14 :=
 /-! ## Summary
 
 ### What this file proves:
-1. Linear embedding so4_toSO14 : SO4 → SO14 (Part 1)
+1. Linear embedding so4_toSO14 : SO4 ℝ → SO14 (Part 1)
 2. Linearity: preserves addition and scalar multiplication (Part 2)
 3. Bracket preservation: embed([X,Y]) = [embed(X), embed(Y)] (Part 3)
-4. Certified LieHom: SO4 →ₗ⁅ℝ⁆ SO14 (Part 4)
+4. Certified LieHom: SO4 ℝ →ₗ⁅ℝ⁆ SO14 (Part 4)
 
 ### What this enables:
-- **Convergence diagram**: SO10 →ₗ⁅ℝ⁆ SO14 ←ₗ⁅ℝ⁆ SO4
+- **Convergence diagram**: SO10 →ₗ⁅ℝ⁆ SO14 ←ₗ⁅ℝ⁆ SO4 ℝ
   Both gauge and gravity sectors embed with certified morphisms.
 - **Paper 3**: honest claim about gauge-gravity unification in compact signature.
-- **Composable chain**: SU5C →ₗ⁅ℝ⁆ SO10 →ₗ⁅ℝ⁆ SO14 ←ₗ⁅ℝ⁆ SO4
+- **Composable chain**: SU5C →ₗ⁅ℝ⁆ SO10 →ₗ⁅ℝ⁆ SO14 ←ₗ⁅ℝ⁆ SO4 ℝ
 
 ### What this does NOT prove:
 - so(1,3) (Lorentz) does NOT embed in so(14,0) (compact).

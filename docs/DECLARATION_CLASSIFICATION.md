@@ -55,11 +55,15 @@ Feasibility tests, scale experiments, and prototype files from the E₈ developm
 These were stepping stones to the working sparse Jacobi approach but are not part of
 the final verified codebase.
 
-### Non-root files still in `src/lean_proofs/clifford/` (4 files)
-- `so14_so16_liehom.lean` — Imports the broken flat SO16; replaced by matrix approach
+### Non-root files still in `src/lean_proofs/` (3 files)
+- `so14_so16_liehom.lean` — **Cannot compile**: imports flat `so16_grand` whose 2.2 GB `.olean` exceeds 32-bit `stat()`. Source has 0 `sorry` but is not machine-verified. Remediation: rewrite to use `so16_matrix.lean`. See [ADR-006](decisions/ADR-006-so14-so16-liehom-compilation-gap.md).
 - `su5_lie_structure.lean` — Earlier SU(5) formulation; superseded by `su5c_compact.lean`
-- `su5_subalgebra.lean` — SU(5) as LieSubalgebra; reference, not in current build
-- `weyl_character.lean` — Weyl character formula; reference, not in current build
+- `mathlib_pr/Bivector.lean` — Mathlib PR candidate (#36917); intentionally separate from main build
+
+### Recently promoted to compiled roots (2026-03-22)
+- `su5_subalgebra.lean` — SU(5) as LieSubalgebra of SO(10); 29 declarations
+- `weyl_character.lean` — D₅ weight system, Weyl dimension, anomaly cancellation; 58 declarations
+- `quaternary_identities.lean` — Dollard's four-quadrant energy identities; 13 declarations
 
 ## How to Verify
 

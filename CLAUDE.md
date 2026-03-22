@@ -1,9 +1,10 @@
 # Dollard Formal Verification
 
 Machine-verified dimensional scaffold from Dollard's versor algebra through Clifford algebras
-to E₈, built in Lean 4 with mathlib. 88 proof files, ~2,900 verified
-declarations, zero sorry gaps. Five certified LieHoms composing:
-SU(5) →ₗ⁅ℝ⁆ SO(10) →ₗ⁅ℝ⁆ SO(14) →ₗ⁅ℝ⁆ SO(14)M →ₗ⁅ℝ⁆ SO(16), plus SO(4) →ₗ⁅ℝ⁆ SO(14).
+to E₈, built in Lean 4 with mathlib. 91 compiled proof files, 3,076 verified
+declarations, zero sorry gaps. Four certified LieHoms composing:
+SU(5) →ₗ⁅ℝ⁆ SO(10) →ₗ⁅ℝ⁆ SO(14), plus SO(4) →ₗ⁅ℝ⁆ SO(14) and type bridge SO(14) →ₗ⁅ℝ⁆ SO(14)M.
+SO(14) →ₗ⁅ℝ⁆ SO(16) exists as source but does not compile (ADR-006).
 SO(14) → SO(14)M bridge connects flat algebraic chain to mathlib matrix infrastructure.
 E₈ (248-dim) verified as Lie algebra via sparse Jacobi — first formalization in any ITP.
 SO(16) → E₈ typed LieHom pending (step 4.3 — subalgebra closure verified, LieHom is bookkeeping).

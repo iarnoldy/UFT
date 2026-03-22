@@ -40,8 +40,8 @@ Hi all — I've been formalizing Lie algebra structures in Lean 4 with mathlib a
 **Context on the repo:** The repo name ("UFT") reflects the physics motivation — I started from Eric Dollard's electrical engineering work and built upward through standard Lie algebra embeddings to see how far formal verification could take it. The physics interpretation is speculative and clearly marked as such in the repo. What I'm sharing here is the pure mathematics and the Lean engineering — the proofs stand regardless of the physics framing.
 
 **What exists:**
-- 88 compiled proof files (~2,975 declarations, zero sorry)
-- Five certified LieHoms: three composing into a chain SU(5) →ₗ⁅ℝ⁆ SO(10) →ₗ⁅ℝ⁆ SO(14) →ₗ⁅ℝ⁆ SO(16), plus SO(4) →ₗ⁅ℝ⁆ SO(14) and a separate SO(14) →ₗ⁅ℝ⁆ SO(14)_matrix type bridge
+- 91 compiled proof files (3,076 declarations, zero sorry)
+- Four certified LieHoms: SU(5) →ₗ⁅ℝ⁆ SO(10) →ₗ⁅ℝ⁆ SO(14), plus SO(4) →ₗ⁅ℝ⁆ SO(14) and a type bridge SO(14) →ₗ⁅ℝ⁆ SO(14)_matrix. SO(14) → SO(16) exists as source but does not compile (ADR-006)
 - E₈ as a 248-dimensional Lie algebra verified via sparse Jacobi identity (7,752 nonzero brackets, native_decide over all 248³ triples)
 - SO(16) ⊂ E₈ subalgebra closure verified
 - Lie-Schur lemma and Killing form uniqueness (I couldn't find an existing formalization in Coq, Isabelle, or Mizar — but I haven't done an exhaustive search)

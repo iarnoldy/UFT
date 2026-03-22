@@ -1,8 +1,8 @@
 # Machine-Verified Lie Algebra Chain: Clifford Algebras to E₈
 
-Lean 4 + mathlib project verifying the algebraic structure of Lie algebra embeddings from Clifford algebras through the grand unification chain to E₈. Five certified `LieHom`s composing into SU(5) →ₗ⁅ℝ⁆ SO(10) →ₗ⁅ℝ⁆ SO(14) →ₗ⁅ℝ⁆ SO(16), plus SO(4) →ₗ⁅ℝ⁆ SO(14) and a type bridge SO(14) →ₗ⁅ℝ⁆ SO(14)\_matrix. E₈ (248-dimensional) verified as a Lie algebra via sparse Jacobi identity — a concrete Chevalley basis with integer structure constants from SageMath, all 3.78 billion Jacobi evaluations checked by `native_decide`.
+Lean 4 + mathlib project verifying the algebraic structure of Lie algebra embeddings from Clifford algebras through the grand unification chain to E₈. Four certified `LieHom`s: SU(5) →ₗ⁅ℝ⁆ SO(10) →ₗ⁅ℝ⁆ SO(14), plus SO(4) →ₗ⁅ℝ⁆ SO(14) and a type bridge SO(14) →ₗ⁅ℝ⁆ SO(14)\_matrix. E₈ (248-dimensional) verified as a Lie algebra via sparse Jacobi identity — a concrete Chevalley basis with integer structure constants from SageMath, all 3.78 billion Jacobi evaluations checked by `native_decide`. SO(14) → SO(16) LieHom exists as source but does not currently compile (see [ADR-006](docs/decisions/ADR-006-so14-so16-liehom-compilation-gap.md)).
 
-**88 compiled proof files. ~2,975 verified declarations. Zero `sorry` gaps.**
+**91 compiled proof files. 3,076 verified declarations. Zero `sorry` gaps.**
 
 ## What This Is
 
@@ -10,19 +10,19 @@ A Lean 4 formalization project verifying Lie algebra embeddings along the chain 
 
 The E₈ formalization uses a concrete Chevalley basis (248 generators, 7,752 nonzero brackets, integer structure constants from SageMath) with Jacobi identity verified across 3.78 billion evaluations via `native_decide` and sparse structure constant iteration. We are not aware of a prior E₈ formalization in an interactive theorem prover, but welcome corrections. The so(10) spinor representation homomorphism (1,980 bracket equations, `native_decide` over exact rationals) is also included.
 
-Eight Lie algebras — so(1,3), sl(3), sl(5), su(5), so(10), so(14), so(4), so(16) — carry certified `LieRing` + `LieAlgebra ℝ` instances. E₈ has Jacobi verified but is not yet upgraded to mathlib typeclasses. Five certified `LieHom`s form the chain su(5) →ₗ⁅ℝ⁆ so(10) →ₗ⁅ℝ⁆ so(14) →ₗ⁅ℝ⁆ so(16), plus so(4) →ₗ⁅ℝ⁆ so(14). A type bridge so(14) →ₗ⁅ℝ⁆ so(14)\_matrix connects the flat algebraic chain to mathlib's matrix Lie algebra infrastructure.
+Eight Lie algebras — so(1,3), sl(3), sl(5), su(5), so(10), so(14), so(4), so(16) — carry certified `LieRing` + `LieAlgebra ℝ` instances. E₈ has Jacobi verified but is not yet upgraded to mathlib typeclasses. Four certified `LieHom`s form the chain su(5) →ₗ⁅ℝ⁆ so(10) →ₗ⁅ℝ⁆ so(14), plus so(4) →ₗ⁅ℝ⁆ so(14). A type bridge so(14) →ₗ⁅ℝ⁆ so(14)\_matrix connects the flat algebraic chain to mathlib's matrix Lie algebra infrastructure. The so(14) →ₗ⁅ℝ⁆ so(16) step exists as uncompiled source (the flat so(16) `.olean` exceeds 32-bit file stat limits; see [ADR-006](docs/decisions/ADR-006-so14-so16-liehom-compilation-gap.md)).
 
 ## What This Proves — And What It Doesn't
 
 Lean's kernel guarantees that every declaration in this project type-checks against its stated type. What that means depends on the declaration:
 
-**Algebraic structure proofs (~530 declarations).** Jacobi identities, Lie bracket computations, subalgebra closures, embedding homomorphisms, and root system identifications. These are genuine algebraic theorems — the `ring` and `ext` tactics close them, but the *content* is mathematical: su(5) is a Lie subalgebra of so(10), the Lorentz algebra satisfies Jacobi, etc.
+**Algebraic structure proofs (~540 declarations).** Jacobi identities, Lie bracket computations, subalgebra closures, embedding homomorphisms, and root system identifications. These are genuine algebraic theorems — the `ring` and `ext` tactics close them, but the *content* is mathematical: su(5) is a Lie subalgebra of so(10), the Lorentz algebra satisfies Jacobi, etc.
 
-**Dimensional consistency checks (~330 declarations).** Verified arithmetic: dim so(14) = 91, the 16-plet decomposes as 1+5+10, anomaly traces sum to zero. These are correct and machine-verified, but mathematically straightforward — Lean confirms the arithmetic that a physicist would check by hand.
+**Dimensional consistency checks (~340 declarations).** Verified arithmetic: dim so(14) = 91, the 16-plet decomposes as 1+5+10, anomaly traces sum to zero. These are correct and machine-verified, but mathematically straightforward — Lean confirms the arithmetic that a physicist would check by hand.
 
-**Other theorems (~1,320 declarations).** Structure constant checks, spinor properties, spectral bounds, and E₈ Jacobi verification (248 `native_decide` theorems covering 3.78 billion evaluations).
+**Other theorems (~1,430 declarations).** Structure constant checks, spinor properties, spectral bounds, weight system enumeration, quaternary identities, and E₈ Jacobi verification (248 `native_decide` theorems covering 3.78 billion evaluations).
 
-**Definitional infrastructure (~720 declarations).** Structure definitions, typeclass instances, abbreviations, and setup code. No theorems — just the scaffolding that lets the proofs compile.
+**Definitional infrastructure (~760 declarations).** Structure definitions, typeclass instances, abbreviations, and setup code. No theorems — just the scaffolding that lets the proofs compile.
 
 See `docs/DECLARATION_CLASSIFICATION.md` for the full breakdown and methodology.
 
@@ -48,7 +48,7 @@ See `docs/PROOF_CLASSIFICATION.md` for per-file analysis and `docs/SIGNATURE_ANA
 ## Algebraic Hierarchy
 
 ```
-Z4 ··> Cl(1,1) ··> Cl(3,0) ··> Cl(1,3) ··> SU(5) ==> SO(10) ==> SO(14) ==> SO(16) -⊂- E8
+Z4 ··> Cl(1,1) ··> Cl(3,0) ··> Cl(1,3) ··> SU(5) ==> SO(10) ==> SO(14) -?- SO(16) -⊂- E8
  |        |          |           |           |          |       |    ⬑       |          |
 4th     Wave      Pauli      Spacetime   Georgi-   Grand   Full  SO(4)    Max        Three
 roots   decomp    algebra    algebra     Glashow   unified unif. gravity  sub-       gens
@@ -60,6 +60,7 @@ roots   decomp    algebra    algebra     Glashow   unified unif. gravity  sub-  
 ==>  Certified LieHom (bracket preservation proven)
 ··>  Dimensional consistency verified
 -⊂-  Subalgebra closure verified (typed LieHom pending)
+-?-  Source exists, not compiled (ADR-006)
 ```
 
 ## Crown Jewel Theorems
@@ -70,7 +71,7 @@ The headline results — each a genuine theorem, not dimensional arithmetic:
 |---------|----------------|
 | `so10_SO14_LieHom` | so(10) →ₗ⁅ℝ⁆ so(14): gauge sector embeds with bracket preserved (91×90 component proof) |
 | `so4_SO14_LieHom` | so(4) →ₗ⁅ℝ⁆ so(14): gravity sector embeds with bracket preserved |
-| `so14_SO16_LieHom` | so(14) →ₗ⁅ℝ⁆ so(16): extends chain toward E₈ maximal subalgebra |
+| `so14_SO16_LieHom` | so(14) →ₗ⁅ℝ⁆ so(16): source exists, **not compiled** ([ADR-006](docs/decisions/ADR-006-so14-so16-liehom-compilation-gap.md)) |
 | `anomaly_trace_identity` | Tr(A{B,C}) = 0 for antisymmetric matrices (anomaly cancellation) |
 | `spinor_rep_homomorphism` | [ρ(X),ρ(Y)] = ρ([X,Y]) for all 990 so(10) basis pairs |
 | `three_generation_theorem` | SO(14) impossibility + E₈ yields exactly 3 generations |
@@ -84,7 +85,7 @@ The headline results — each a genuine theorem, not dimensional arithmetic:
 |---------|------|----------------|
 | `so10_SO14_LieHom` | `so10_so14_liehom` | Certified so(10) →ₗ⁅ℝ⁆ so(14) (gauge sector embedding) |
 | `so4_SO14_LieHom` | `so4_so14_liehom` | Certified so(4) →ₗ⁅ℝ⁆ so(14) (gravity sector embedding) |
-| `so14_SO16_LieHom` | `so14_so16_liehom` | Certified so(14) →ₗ⁅ℝ⁆ so(16) (chain extension) |
+| `so14_SO16_LieHom` | `so14_so16_liehom` | so(14) →ₗ⁅ℝ⁆ so(16) — source exists, **not compiled** ([ADR-006](docs/decisions/ADR-006-so14-so16-liehom-compilation-gap.md)) |
 | `anomaly_trace_identity` | `anomaly_trace` | Tr(A{B,C}) = 0 for antisymmetric matrices |
 | `jacobi` | `so14_grand` | 91-generator so(14) Lie algebra satisfies Jacobi identity |
 | `so14_dimension` | `so14_unification` | dim so(14) = C(14,2) = 91 |
@@ -149,7 +150,7 @@ All proofs are in `src/lean_proofs/`. Entry points by interest:
 <summary>Full file listing by category</summary>
 
 **Foundations** (Dollard verification):
-`basic_operators`, `algebraic_necessity`
+`basic_operators`, `algebraic_necessity`, `quaternary_identities` (u-v=cos, x-y=sin, u+v=cosh, x+y=sinh)
 
 **Polyphase/Telegraph**:
 `polyphase_formula`, `telegraph_equation`
@@ -161,13 +162,13 @@ All proofs are in `src/lean_proofs/`. Entry points by interest:
 `su3_color`, `su3_cartan_weyl`, `su5_grand`, `su5_lie_structure`, `su5c_compact` (compact form), `su5c_so10_liehom` (certified LieHom), `su5_subalgebra`, `georgi_glashow`, `lie_bridge`, `so10_grand`, `su5_so10_embedding`
 
 **Unification (SO(14) → SO(16) chain)**:
-`so14_grand` (91-gen type + LieRing/LieAlgebra), `so10_so14_liehom` (SO10 →ₗ⁅ℝ⁆ SO14), `so4_gravity` (compact SO4 type), `so4_so14_liehom` (SO4 →ₗ⁅ℝ⁆ SO14), `anomaly_trace` (Tr(A{B,C})=0), `so16_grand` (120-gen type + LieRing/LieAlgebra), `so14_so16_liehom` (SO14 →ₗ⁅ℝ⁆ SO16), `unification`, `unification_gravity`, `spinor_matter`, `grand_unified_field`, `so14_unification`, `so14_anomalies`, `so14_breaking_chain`, `symmetry_breaking`
+`so14_grand` (91-gen type + LieRing/LieAlgebra), `so10_so14_liehom` (SO10 →ₗ⁅ℝ⁆ SO14), `so4_gravity` (compact SO4 type), `so4_so14_liehom` (SO4 →ₗ⁅ℝ⁆ SO14), `anomaly_trace` (Tr(A{B,C})=0), `so16_grand` (120-gen type + LieRing/LieAlgebra), `so14_so16_liehom` (SO14 →ₗ⁅ℝ⁆ SO16, **not compiled** — ADR-006), `su5_subalgebra` (SU(5) as LieSubalgebra of SO(10)), `unification`, `unification_gravity`, `spinor_matter`, `grand_unified_field`, `so14_unification`, `so14_anomalies`, `so14_breaking_chain`, `symmetry_breaking`
 
 **Three-Generation Problem** (E₈ ⊃ SU(9)/Z₃):
 `spinor_parity_obstruction`, `e8_embedding`, `e8_su9_decomposition`, `e8_generation_mechanism`, `three_generation_theorem`, `e8_chirality_boundary`, `j_anomaly_free_eigenspaces`, `exterior_cube_chirality`, `massive_chirality_definition`, `chirality_factorization`
 
 **Representations**:
-`spinor_rep` (Cartan eigenvalues, chirality, traces), `spinor_rep_full` (all 45 generators as 16×16 matrices), `spinor_rep_homomorphism` (990-bracket homomorphism proof via native_decide)
+`spinor_rep` (Cartan eigenvalues, chirality, traces), `spinor_rep_full` (all 45 generators as 16×16 matrices), `spinor_rep_homomorphism` (990-bracket homomorphism proof via native_decide), `weyl_character` (D₅ weight system, Weyl dimension, anomaly cancellation)
 
 **Dynamics**:
 `yang_mills_energy`, `covariant_derivative`, `rg_running`, `bianchi_identity`, `yang_mills_equation`, `yukawa_couplings`, `lagrangian_uniqueness`, `differential_forms`, `wedge_product` (axiomatized exterior product), `gauge_connection` (Lie-valued forms, F=dA+[A,A]), `bianchi_from_principles`, `yang_mills_variation`

@@ -4,10 +4,10 @@
 
 ## Current State
 
-**88 proof files. ~2,900 declarations. Zero sorry.**
-**Five certified LieHoms composing:**
+**91 compiled proof files. 3,076 declarations. Zero sorry.**
+**Four certified LieHoms + 1 type bridge:**
 ```
-SU5C →ₗ⁅ℝ⁆ SO10 →ₗ⁅ℝ⁆ SO14 →[bridge]→ SO14M →ₗ⁅ℝ⁆ SO16Block
+SU5C →ₗ⁅ℝ⁆ SO10 →ₗ⁅ℝ⁆ SO14 →[bridge]→ SO14M    SO14 -?- SO16 (ADR-006: not compiled)
                                    ⬑
                               SO4 →ₗ⁅ℝ⁆ SO14
 ```
